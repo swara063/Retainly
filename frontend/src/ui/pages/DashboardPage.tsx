@@ -115,6 +115,7 @@ export default function DashboardPage() {
   }
 
   const results = s.results || {};
+  const modelTrust = results.model_trust || s.modelTrust || {};
   const exec = results.executive_summary || {};
   const topRiskSegments = Array.isArray(results.risk_segments) ? [...results.risk_segments].sort((a, b) => Number(b.average_predicted_risk || 0) - Number(a.average_predicted_risk || 0)) : [];
   const topRisk = topRiskSegments[0];
@@ -139,6 +140,21 @@ export default function DashboardPage() {
         <div className="heroAside card">
           <b>Workflow</b>
           <AgentTimeline items={s.hrTimeline.length ? s.hrTimeline : [{ step: 'Project Manager Agent', status: 'waiting', message: 'Run analysis to begin.' }]} />
+        </div>
+</section>
+
+      <section id="trust">
+        <div className="card">
+          <b>Prediction Reliability</b>
+          <div className="panelHint" style={{ marginTop: 12 }}>
+            <div><b>Status:</b> {modelTrust.status || 'Review recommended'}</div>
+            <div><b>Model basis:</b> {modelTrust.model_basis || 'Pretrained attrition-risk model'}</div>
+            <div><b>Training source:</b> {modelTrust.training_source || 'Benchmark attrition datasets configured in research_datasets/'}</div>
+            <div><b>Suitable use:</b> {modelTrust.suitable_use || 'Retention prioritization and HR planning'}</div>
+            <div><b>Not suitable for:</b> {modelTrust.not_suitable_for || 'Automatic firing, punitive decisions, or final employment decisions'}</div>
+            <div><b>Validation note:</b> {modelTrust.validation_note || 'Detailed validation is available in the research notebook.'}</div>
+          </div>
+          {modelTrust.validation_summary_available ? <div className="panelHint" style={{ marginTop: 10 }}>Benchmark validation completed. Detailed metrics are available in the research notebook.</div> : null}
         </div>
       </section>
 
@@ -168,7 +184,6 @@ export default function DashboardPage() {
               <StatCard label="Highest-risk role" value={topRisk ? String(topRisk.segment_name === 'JobRole' ? topRisk.group : (topRiskSegments.find((r: any) => r.segment_name === 'JobRole')?.group || '—')) : '—'} tone="warn" />
               <StatCard label="Top risk driver" value={String((results.explainability?.top_features || [])[0]?.feature || '—')} />
               <StatCard label="Data quality score" value={String(results.data_quality?.data_quality_score ?? '—')} />
-              <StatCard label="Responsible-use status" value={String(exec.model_reliability_label || 'Directional')} tone="good" />
             </div>
             <div className="panelHint" style={{ marginTop: 12 }}>{results.dataset_mode === 'unlabeled_scoring' ? 'This dataset does not include actual attrition outcomes, so evaluation metrics cannot be calculated for this upload. Retainly is using the pretrained attrition model to estimate risk.' : (results.confidence_summary?.plain_english || 'Run analysis to view your retention dashboard.')}</div>
           </div>

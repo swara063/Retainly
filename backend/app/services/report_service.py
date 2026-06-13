@@ -193,7 +193,7 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
     employees_analyzed = exec_sum.get("rows_analyzed") or (results.get("dataset_profile") or {}).get("rows") or "—"
     columns_analyzed = exec_sum.get("columns_analyzed") or (results.get("dataset_profile") or {}).get("columns") or "—"
     attr_rate = exec_sum.get("attrition_rate")
-    selected_model = exec_sum.get("selected_model") or model.get("selected_model") or "—"
+    model_trust = results.get("model_trust") or {}
 
     recall = metrics.get("recall")
     f1 = metrics.get("f1")
@@ -210,7 +210,7 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
 
     retention_plan = results.get("retention_plan") or []
     dq = results.get("data_quality") or {}
-    leaderboard = model.get("leaderboard") or []
+    leaderboard = []
 
     story: list[Any] = []
 
@@ -235,9 +235,9 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
     story.append(section_rule)
     story.append(_p("Executive Summary", h1))
     if can_evaluate_model:
-        story.append(_kv_table([("Employees analyzed", employees_analyzed),("Columns analyzed", columns_analyzed),("Attrition rate (observed)", _fmt_pct(attr_rate)),("High-risk employees", (exec_sum.get("high_risk_employees") or results.get("employee_risk_high_count") or "—")),("Selected model", selected_model),("Accuracy / Precision / Recall / F1 / ROC-AUC / PR-AUC", f"{_fmt_num(metrics.get("accuracy"))} / {_fmt_num(metrics.get("precision"))} / {_fmt_num(recall)} / {_fmt_num(f1)} / {_fmt_num(roc_auc)} / {_fmt_num(pr_auc)}"),("Top 20% risk capture", _fmt_num(metrics.get("recall_at_top_20_percent"))),("Attrition rate in top 20%", _fmt_pct(metrics.get("attrition_rate_in_top_20_percent"))),("Model reliability label", reliability),("Fairness review", fairness_risk)], col_widths=[2.3 * inch, 3.9 * inch]))
+        story.append(_kv_table([("Employees analyzed", employees_analyzed),("Columns analyzed", columns_analyzed),("High-risk employees", (exec_sum.get("high_risk_employees") or results.get("employee_risk_high_count") or "—")),("Prediction reliability", reliability),("Model basis", model_trust.get("model_basis") or "Pretrained attrition-risk model"),("Training source", model_trust.get("training_source") or "Benchmark attrition datasets configured in research_datasets/"),("Suitable use", model_trust.get("suitable_use") or "Retention prioritization and HR planning"),("Not suitable for", model_trust.get("not_suitable_for") or "Automatic firing, punitive decisions, or final employment decisions"),("Fairness review", fairness_risk)], col_widths=[2.3 * inch, 3.9 * inch]))
     else:
-        story.append(_kv_table([("Dataset mode", dataset_mode),("Employees analyzed", employees_analyzed),("Columns analyzed", columns_analyzed),("Selected model", selected_model),("High-risk employees", (exec_sum.get("high_risk_employees") or results.get("employee_risk_high_count") or "—")),("Fairness review", fairness_risk)], col_widths=[2.3 * inch, 3.9 * inch]))
+        story.append(_kv_table([("Dataset mode", dataset_mode),("Employees analyzed", employees_analyzed),("Columns analyzed", columns_analyzed),("High-risk employees", (exec_sum.get("high_risk_employees") or results.get("employee_risk_high_count") or "—")),("Prediction reliability", reliability),("Fairness review", fairness_risk)], col_widths=[2.3 * inch, 3.9 * inch]))
     story.append(Spacer(1, 10))
     story.append(_p(f"<b>Recommended use:</b> {recommended_use}", body))
 

@@ -23,6 +23,7 @@ export type AppState = {
   hrTimeline: HRTimelineEntry[];
   developerDiagnostics: DeveloperDiagnostic[];
   results: any | null;
+  modelTrust: any | null;
   loading: boolean;
   uploadPct: number;
   phase: 'idle' | 'uploading' | 'analyzing';
@@ -40,6 +41,7 @@ const initialState: AppState = {
   hrTimeline: [],
   developerDiagnostics: [],
   results: null,
+  modelTrust: null,
   loading: false,
   uploadPct: 0,
   phase: 'idle',
@@ -60,6 +62,7 @@ function loadInitialState(): AppState {
       hrTimeline: Array.isArray(saved.hrTimeline) ? saved.hrTimeline : [],
       developerDiagnostics: Array.isArray(saved.developerDiagnostics) ? saved.developerDiagnostics : [],
       results: saved.results || null,
+      modelTrust: saved.modelTrust || saved.results?.model_trust || null,
       progress: saved.progress || null,
     };
   } catch {
@@ -96,6 +99,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
         hrTimeline: state.hrTimeline,
         developerDiagnostics: state.developerDiagnostics,
         results: compactResults,
+        modelTrust: state.modelTrust,
         progress: state.progress,
       }));
     } catch {
@@ -116,6 +120,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
         setState((p) => ({
           ...p,
           results,
+          modelTrust: (results as any)?.model_trust || p.modelTrust,
           hrTimeline: Array.isArray((logs as any).hr_timeline) ? (logs as any).hr_timeline : p.hrTimeline,
           developerDiagnostics: Array.isArray((logs as any).developer_diagnostics) ? (logs as any).developer_diagnostics : p.developerDiagnostics,
         }));

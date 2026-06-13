@@ -37,7 +37,6 @@ export default function OverviewPage() {
             <Metric label="Highest-risk group" value={topRisk ? `${topRisk.segment_name}: ${topRisk.group}` : '—'} />
             <Metric label="Top risk driver" value={String((s.results.explainability?.top_features || [])[0]?.feature || '—')} />
             <Metric label="Data quality score" value={String(s.results.data_quality?.data_quality_score ?? '—')} />
-            <Metric label="Responsible-use status" value={String(exec.model_reliability_label || 'Directional')} />
           </div>
           <div className="panelHint">Top risk groups: {hotspots.map((r: any) => r.group).filter(Boolean).join(', ') || '—'}</div>
         </div>
