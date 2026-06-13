@@ -33,6 +33,10 @@ def report_path(dataset_id: str) -> Path:
     return settings.REPORT_DIR / f"{dataset_id}.pdf"
 
 
+def progress_path(dataset_id: str) -> Path:
+    return settings.RESULT_DIR / f"{dataset_id}.progress.json"
+
+
 def save_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, default=str), encoding="utf-8")

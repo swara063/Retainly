@@ -15,7 +15,7 @@ from app.services.result_enrichment import (
     build_retention_plan,
     build_risk_segments,
 )
-from app.storage.local_store import dataset_path, mapping_path, result_path, save_json, load_json
+from app.storage.local_store import dataset_path, mapping_path, result_path, progress_path, save_json, load_json
 
 class AttritionPipeline:
     def __init__(self, dataset_id: str):
@@ -40,9 +40,38 @@ class AttritionPipeline:
 
     def run(self) -> dict:
         self.logger.add("Pipeline", "started", "End-to-end analysis pipeline started.")
+        steps = [
+            ("Project Manager Agent", "planning workflow"),
+            ("Smart Column Mapper", "detecting dataset mode, target, and features"),
+            ("Data Analyst Agent", "cleaning and exploring the data"),
+            ("ML Engineer Agent", "training or scoring risk models"),
+            ("Explainability Agent", "building feature importance"),
+            ("Fairness Auditor Agent", "reviewing fairness signals"),
+            ("Insights Agent", "generating HR guidance"),
+            ("Report Agent", "exporting PDF and results"),
+        ]
+
+        def write_progress(index: int, status: str, message: str = ""):
+            total = len(steps)
+            current = steps[min(index, total - 1)] if total else ("Pipeline", "")
+            payload = {
+                "dataset_id": self.dataset_id,
+                "status": status,
+                "percent": int(round((index / max(total, 1)) * 100)),
+                "current_agent": current[0],
+                "current_step": message or current[1],
+                "elapsed_seconds": 0,
+                "estimated_total_seconds": 0,
+                "estimated_remaining_seconds": 0,
+                "steps": [{"name": name, "status": "completed" if i < index else ("running" if i == index and status == "running" else "pending"), "percent": int(round(((i + 1) / total) * 100))} for i, (name, _) in enumerate(steps)],
+            }
+            save_json(progress_path(self.dataset_id), payload)
+
+        write_progress(0, "running")
         context = {"dataset_id": self.dataset_id, "dataset_path": dataset_path(self.dataset_id)}
         try:
-            for agent in self.agents:
+            for idx, agent in enumerate(self.agents):
+                write_progress(idx, "running", steps[idx][1])
                 context = agent.run(context)
                 if isinstance(agent, ProjectManagerAgent) and self.user_mapping:
                     # Inject user-confirmed mapping right after dataframe is loaded.
@@ -67,6 +96,11 @@ class AttritionPipeline:
             raw_logs = self.logger.all()
             results["hr_timeline"] = build_hr_timeline(raw_logs)
             results["developer_diagnostics"] = build_developer_diagnostics(raw_logs)
+            results["dataset_mode"] = (context.get("column_mapping") or {}).get("dataset_mode") or ("labeled_training" if (context.get("column_mapping") or {}).get("target") else "unlabeled_scoring")
+            results["target_column"] = (context.get("column_mapping") or {}).get("target")
+            results["can_evaluate_model"] = bool(results["dataset_mode"] == "labeled_training")
+            results["pretrained_model_used"] = bool(results["dataset_mode"] == "unlabeled_scoring" and context.get("model", {}).get("selected_model"))
+            write_progress(len(self.agents), "completed", "Analysis completed")
 
             # Enriched, HR-useful outputs (keeps existing keys intact)
             df = context.get("dataframe")
@@ -155,6 +189,7 @@ class AttritionPipeline:
             return results
         except Exception as exc:
             self.logger.add("Pipeline", "failed", str(exc))
+            write_progress(len(self.agents), "failed", str(exc))
             failure = {"dataset_id": self.dataset_id, "status": "failed", "error": str(exc)}
             save_json(result_path(self.dataset_id), failure)
             raise

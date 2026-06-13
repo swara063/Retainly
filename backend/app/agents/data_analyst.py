@@ -8,7 +8,7 @@ class DataAnalystAgent(BaseAgent):
         self.log("running", "Generating EDA summary, missing-value profile, distributions, and correlations.")
         df = context["dataframe"].copy()
         mapping = context["column_mapping"]
-        target = mapping["target"]
+        target = mapping.get("target")
         missing = df.isna().sum().sort_values(ascending=False).to_dict()
         missing_pct = (df.isna().mean() * 100).round(2).sort_values(ascending=False).to_dict()
         numeric_cols = mapping["numeric_features"]
@@ -18,7 +18,7 @@ class DataAnalystAgent(BaseAgent):
         correlation = {}
         if len(numeric_cols) >= 2:
             correlation = df[numeric_cols].corr(numeric_only=True).round(3).replace({np.nan: None}).to_dict()
-        target_distribution = df[target].astype(str).value_counts(dropna=False).to_dict()
+        target_distribution = df[target].astype(str).value_counts(dropna=False).to_dict() if target and target in df.columns else {}
         context["eda"] = {
             "missing_values": missing,
             "missing_percentage": missing_pct,

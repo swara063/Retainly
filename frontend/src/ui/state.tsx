@@ -11,6 +11,8 @@ export type DatasetMapping = {
   categorical_features: string[];
 };
 
+export type AnalysisProgress = { dataset_id?: string; status?: string; percent?: number; current_agent?: string; current_step?: string; elapsed_seconds?: number; estimated_total_seconds?: number; estimated_remaining_seconds?: number; steps?: Array<{ name: string; status: string; percent: number }> };
+
 export type AppState = {
   file: File | null;
   datasetId: string;
@@ -25,6 +27,7 @@ export type AppState = {
   uploadPct: number;
   phase: 'idle' | 'uploading' | 'analyzing';
   error: string;
+  progress: AnalysisProgress | null;
 };
 
 const initialState: AppState = {
@@ -41,6 +44,7 @@ const initialState: AppState = {
   uploadPct: 0,
   phase: 'idle',
   error: '',
+  progress: null,
 };
 
 function loadInitialState(): AppState {
@@ -56,6 +60,7 @@ function loadInitialState(): AppState {
       hrTimeline: Array.isArray(saved.hrTimeline) ? saved.hrTimeline : [],
       developerDiagnostics: Array.isArray(saved.developerDiagnostics) ? saved.developerDiagnostics : [],
       results: saved.results || null,
+      progress: saved.progress || null,
     };
   } catch {
     return initialState;
@@ -91,11 +96,12 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
         hrTimeline: state.hrTimeline,
         developerDiagnostics: state.developerDiagnostics,
         results: compactResults,
+        progress: state.progress,
       }));
     } catch {
       // Local storage can fill up; the app can still work from in-memory state.
     }
-  }, [state.datasetId, state.columns, state.rows, state.hrTimeline, state.developerDiagnostics, state.results]);
+  }, [state.datasetId, state.columns, state.rows, state.hrTimeline, state.developerDiagnostics, state.results, state.progress]);
 
   React.useEffect(() => {
     let cancelled = false;

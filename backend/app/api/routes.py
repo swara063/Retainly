@@ -4,7 +4,7 @@ from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks
 from fastapi.responses import FileResponse
 from app.models.schemas import UploadResponse, RunAnalysisResponse
 from app.models.chat_schemas import ChatRequest, ChatResponse
-from app.storage.local_store import dataset_path, mapping_path, metadata_path, result_path, log_path, report_path, save_json, load_json
+from app.storage.local_store import dataset_path, mapping_path, metadata_path, result_path, log_path, report_path, progress_path, save_json, load_json
 from app.services.result_enrichment import detect_employee_identity_columns
 from app.services.logging_service import build_developer_diagnostics, build_hr_timeline
 from app.services.pipeline import AttritionPipeline
@@ -59,6 +59,24 @@ def get_results(dataset_id: str):
     path = result_path(dataset_id)
     if not path.exists():
         raise HTTPException(status_code=404, detail="Results not found. Run analysis first.")
+    return load_json(path)
+
+
+@router.get("/analysis/{dataset_id}/progress")
+def get_progress(dataset_id: str):
+    path = progress_path(dataset_id)
+    if not path.exists():
+        return {
+            "dataset_id": dataset_id,
+            "status": "queued",
+            "percent": 0,
+            "current_agent": "Project Manager Agent",
+            "current_step": "waiting",
+            "elapsed_seconds": 0,
+            "estimated_total_seconds": 0,
+            "estimated_remaining_seconds": 0,
+            "steps": [],
+        }
     return load_json(path)
 
 

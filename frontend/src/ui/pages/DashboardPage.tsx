@@ -26,6 +26,7 @@ export default function DashboardPage() {
   const [employeeLoading, setEmployeeLoading] = React.useState(false);
   const [selectedEmployee, setSelectedEmployee] = React.useState<any | null>(null);
   const [selectedEmployeeDetail, setSelectedEmployeeDetail] = React.useState<any | null>(null);
+  const progress = s.progress || { percent: 0, status: 'idle', current_agent: '', current_step: '' };
 
   React.useEffect(() => {
     if (!s.datasetId) return;
@@ -89,6 +90,8 @@ export default function DashboardPage() {
       await fetchJson(`${API_BASE}/analysis/${id}/run?async_mode=true`, { method: 'POST' });
       const startedAt = Date.now();
       while (Date.now() - startedAt < 1000 * 60 * 8) {
+        const progressRes = await fetchJson(`${API_BASE}/analysis/${id}/progress`).catch(() => null);
+        if (progressRes) set((p) => ({ ...p, progress: progressRes }));
         const [logsRes, resultsRes] = await Promise.allSettled([
           fetchJson(`${API_BASE}/analysis/${id}/logs`).catch(() => ({ hr_timeline: [], developer_diagnostics: [] })),
           fetch(`${API_BASE}/analysis/${id}/results`),
@@ -153,6 +156,7 @@ export default function DashboardPage() {
               <button className="primary" onClick={() => void analyze()} disabled={!s.file || s.loading}>Run Retention Analysis</button>
               <button onClick={() => void uploadOnly()} disabled={!s.file || s.loading}>Re-upload</button>
             </div>
+            {progress && progress.status && progress.status !== 'idle' ? (<div style={{ marginTop: 12 }}><ProgressBar pct={Number(progress.percent || 0)} label={`${progress.current_agent || 'Running'} • ${progress.current_step || progress.status}`}/></div>) : null}
             {s.error ? <div className="panelError"><AlertTriangle size={16} /> {s.error}</div> : null}
           </div>
           <div className="card">
@@ -166,7 +170,7 @@ export default function DashboardPage() {
               <StatCard label="Data quality score" value={String(results.data_quality?.data_quality_score ?? '—')} />
               <StatCard label="Responsible-use status" value={String(exec.model_reliability_label || 'Directional')} tone="good" />
             </div>
-            <div className="panelHint" style={{ marginTop: 12 }}>{results.confidence_summary?.plain_english || 'Run analysis to view your retention dashboard.'}</div>
+            <div className="panelHint" style={{ marginTop: 12 }}>{results.dataset_mode === 'unlabeled_scoring' ? 'This dataset does not include actual attrition outcomes, so evaluation metrics cannot be calculated for this upload. Retainly is using the pretrained attrition model to estimate risk.' : (results.confidence_summary?.plain_english || 'Run analysis to view your retention dashboard.')}</div>
           </div>
         </div>
       </section>

@@ -20,8 +20,7 @@ class ColumnMapperAgent(BaseAgent):
                 target = col
                 break
         if target is None:
-            target = df.columns[-1]
-            self.log("warning", f"No obvious attrition column found. Using last column as target: {target}.")
+            self.log("warning", "No obvious attrition column found. Retainly will run in unlabeled scoring mode.")
 
         numeric = [c for c in df.select_dtypes(include="number").columns if c != target]
         categorical = [c for c in df.columns if c not in numeric and c != target]
@@ -31,6 +30,7 @@ class ColumnMapperAgent(BaseAgent):
             "numeric_features": numeric,
             "categorical_features": categorical,
             "sensitive_attributes": sensitive,
+            "dataset_mode": "labeled_training" if target else "unlabeled_scoring",
         }
         context["column_mapping"] = mapping
         self.log("completed", f"Target mapped to '{target}'. Sensitive columns detected: {sensitive or 'none'}.")

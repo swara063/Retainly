@@ -185,6 +185,8 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
     exec_sum = results.get("executive_summary") or {}
     model = results.get("model") or {}
     metrics = (model.get("metrics") or {}) if isinstance(model, dict) else {}
+    dataset_mode = results.get("dataset_mode") or "labeled_training"
+    can_evaluate_model = bool(results.get("can_evaluate_model"))
     fairness = results.get("fairness") or {}
     explain = results.get("explainability") or {}
 
@@ -232,24 +234,10 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
     # 2) Executive Summary
     story.append(section_rule)
     story.append(_p("Executive Summary", h1))
-    story.append(
-        _kv_table(
-            [
-                ("Employees analyzed", employees_analyzed),
-                ("Columns analyzed", columns_analyzed),
-                ("Attrition rate (observed)", _fmt_pct(attr_rate)),
-                ("High-risk employees", (exec_sum.get("high_risk_employees") or results.get("employee_risk_high_count") or "—")),
-                ("Selected model", selected_model),
-                ("Risk capture / F1 balance / Ranking quality", f"{_fmt_num(recall)} / {_fmt_num(f1)} / {_fmt_num(roc_auc)}"),
-                ("Attrition detection quality", _fmt_num(pr_auc)),
-                ("Top 20% risk capture", _fmt_num(metrics.get("recall_at_top_20_percent"))),
-                ("Attrition rate in top 20%", _fmt_pct(metrics.get("attrition_rate_in_top_20_percent"))),
-                ("Model reliability label", reliability),
-                ("Fairness risk", fairness_risk),
-            ],
-            col_widths=[2.3 * inch, 3.9 * inch],
-        )
-    )
+    if can_evaluate_model:
+        story.append(_kv_table([("Employees analyzed", employees_analyzed),("Columns analyzed", columns_analyzed),("Attrition rate (observed)", _fmt_pct(attr_rate)),("High-risk employees", (exec_sum.get("high_risk_employees") or results.get("employee_risk_high_count") or "—")),("Selected model", selected_model),("Accuracy / Precision / Recall / F1 / ROC-AUC / PR-AUC", f"{_fmt_num(metrics.get("accuracy"))} / {_fmt_num(metrics.get("precision"))} / {_fmt_num(recall)} / {_fmt_num(f1)} / {_fmt_num(roc_auc)} / {_fmt_num(pr_auc)}"),("Top 20% risk capture", _fmt_num(metrics.get("recall_at_top_20_percent"))),("Attrition rate in top 20%", _fmt_pct(metrics.get("attrition_rate_in_top_20_percent"))),("Model reliability label", reliability),("Fairness review", fairness_risk)], col_widths=[2.3 * inch, 3.9 * inch]))
+    else:
+        story.append(_kv_table([("Dataset mode", dataset_mode),("Employees analyzed", employees_analyzed),("Columns analyzed", columns_analyzed),("Selected model", selected_model),("High-risk employees", (exec_sum.get("high_risk_employees") or results.get("employee_risk_high_count") or "—")),("Fairness review", fairness_risk)], col_widths=[2.3 * inch, 3.9 * inch]))
     story.append(Spacer(1, 10))
     story.append(_p(f"<b>Recommended use:</b> {recommended_use}", body))
 

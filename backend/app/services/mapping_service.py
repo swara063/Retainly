@@ -19,7 +19,7 @@ def infer_mapping(df: pd.DataFrame) -> dict[str, Any]:
             target = col
             break
     if target is None and len(df.columns):
-        target = df.columns[-1]
+        target = None
 
     numeric = [c for c in df.select_dtypes(include="number").columns if c != target]
     categorical = [c for c in df.columns if c not in numeric and c != target]
@@ -37,12 +37,12 @@ def build_preview_payload(df: pd.DataFrame) -> dict[str, Any]:
     target = mapping.get("target")
 
     warnings: list[str] = []
-    if target not in df.columns:
-        warnings.append("Inferred target column not found. Please select the correct target.")
-    else:
+    if target and target in df.columns:
         uniq = df[target].dropna().astype(str).str.lower().unique().tolist()[:20]
         if len(uniq) > 10:
             warnings.append("Target column has many unique values; ensure it is a binary attrition label.")
+    else:
+        warnings.append("No attrition target detected. Retainly will use unlabeled scoring mode.")
 
     if not mapping.get("sensitive_attributes"):
         warnings.append("No sensitive attributes inferred. Add attributes (e.g., Gender, Age) to enable fairness auditing.")
@@ -55,9 +55,9 @@ def build_preview_payload(df: pd.DataFrame) -> dict[str, Any]:
         "columns": list(df.columns),
         "first_rows": preview,
         "inferred_target_column": mapping.get("target"),
+        "dataset_mode": "labeled_training" if mapping.get("target") else "unlabeled_scoring",
         "inferred_numeric_columns": mapping.get("numeric_features") or [],
         "inferred_categorical_columns": mapping.get("categorical_features") or [],
         "inferred_sensitive_attributes": mapping.get("sensitive_attributes") or [],
         "warnings": warnings,
     }
-
