@@ -1,0 +1,11 @@
+.venv/
+.conda/
+backend/.conda/
+.pytest_cache/
+__pycache__/
+*.pyc
+node_modules/
+dist/
+backend/storage/
+.env
+.DS_Store

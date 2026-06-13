@@ -1,0 +1,1501 @@
+EmployeeID,Age,Gender,Department,JobRole,MonthlyIncome,YearsAtCompany,YearsInCurrentRole,OverTime,JobSatisfaction,WorkLifeBalance,PerformanceRating,DistanceFromHome,TrainingTimesLastYear,EnvironmentSatisfaction,ManagerRating,PromotionLast2Years,SalaryHikePercent,AbsenteeismDays,Attrition
+100001,37,Female,R&D,Research Scientist,110827,7.0,7.0,No,4,4,3,5,0,4,4,0,12.1,2,No
+100002,26,Male,Customer Support,Customer Success Manager,89174,5.1,0.0,Yes,3,3,4,19,0,3,3,1,12.6,1,No
+100003,41,Male,Operations,Operations Manager,92806,4.7,3.1,Yes,4,2,3,5,2,2,2,0,8.1,3,No
+100004,42,Male,R&D,Research Scientist,78203,4.5,3.3,No,3,4,3,22,1,2,3,0,11.7,11,No
+100005,19,Male,IT,Systems Administrator,91943,3.9,3.0,No,2,2,3,17,2,4,5,0,10.1,3,No
+100006,24,Male,Customer Support,Customer Success Manager,72969,1.5,0.0,No,3,3,5,19,1,3,5,0,16.6,3,No
+100007,36,Male,R&D,Lab Technician,89607,5.8,4.9,No,4,3,3,12,2,2,4,0,11.0,6,No
+100008,32,Female,Finance,Financial Analyst,87787,2.6,2.1,No,3,4,4,3,3,4,2,0,15.1,1,Yes
+100009,34,Male,Customer Support,Support Specialist,79687,3.5,2.5,No,2,4,3,5,2,4,3,0,9.0,4,No
+100010,28,Male,R&D,Product Engineer,99622,7.3,3.0,No,2,3,3,10,5,4,3,0,11.9,2,Yes
+100011,42,Male,Operations,Operations Manager,93247,3.9,0.8,No,4,4,3,6,1,1,4,0,16.6,2,No
+100012,41,Male,Sales,Sales Executive,63789,3.7,2.7,No,4,4,4,7,1,4,5,0,13.5,0,No
+100013,35,Male,Finance,Finance Manager,102300,4.5,0.0,No,1,3,4,11,3,1,4,0,12.1,0,No
+100014,44,Male,Operations,Supply Chain Specialist,67037,3.2,1.8,Yes,3,2,3,7,1,3,3,0,9.0,6,No
+100015,38,Male,Finance,Finance Manager,132046,13.5,12.8,No,3,4,2,4,3,2,5,0,11.9,1,Yes
+100016,27,Female,HR,Recruiter,103557,12.3,10.3,No,3,2,3,13,2,2,3,0,16.9,1,No
+100017,38,Female,Finance,Financial Analyst,107926,12.1,7.3,No,3,3,2,11,3,3,3,0,7.2,7,No
+100018,27,Male,Sales,Sales Executive,80554,5.1,1.0,Yes,2,3,4,7,2,1,4,0,13.8,3,No
+100019,42,Female,Sales,Sales Manager,80954,2.5,1.8,No,3,3,3,12,1,3,3,0,6.0,4,No
+100020,34,Female,R&D,Data Scientist,112377,7.4,7.0,No,2,4,3,9,2,4,3,0,10.6,2,No
+100021,33,Female,Finance,Financial Analyst,91741,3.2,2.1,No,2,3,3,17,1,2,3,0,12.9,3,No
+100022,29,Female,R&D,Product Engineer,99474,7.9,5.6,No,4,3,3,9,1,2,5,0,6.5,0,No
+100023,45,Female,R&D,Product Engineer,80542,2.4,0.0,No,2,3,4,17,4,3,5,0,12.4,7,No
+100024,33,Female,Operations,Operations Analyst,77582,5.4,1.7,No,3,4,3,3,2,3,3,0,13.0,3,No
+100025,31,Female,R&D,Data Scientist,132720,8.6,6.9,No,3,3,4,11,4,3,3,0,14.5,1,No
+100026,32,Male,R&D,Data Scientist,105635,3.4,1.6,No,2,4,3,7,3,2,3,0,13.2,6,Yes
+100027,39,Male,R&D,Lab Technician,96125,3.4,1.7,No,4,4,3,5,1,4,3,1,11.1,0,No
+100028,37,Male,Sales,Sales Representative,53408,1.1,0.0,Yes,2,2,3,15,3,4,3,0,13.0,8,No
+100029,38,Male,IT,Systems Administrator,85805,2.5,0.0,No,2,2,3,13,2,2,3,0,9.9,10,No
+100030,38,Male,R&D,Product Engineer,92139,5.0,4.3,Yes,2,3,3,3,0,2,4,0,14.5,4,Yes
+100031,52,Male,Sales,Sales Representative,77863,5.6,3.0,No,2,3,2,12,1,3,3,0,4.0,5,No
+100032,31,Female,Customer Support,Support Lead,78220,6.1,2.9,Yes,2,3,4,11,2,2,3,0,13.0,1,No
+100033,30,Male,Operations,Operations Manager,76085,0.8,0.0,Yes,3,1,3,5,1,3,3,0,12.3,4,No
+100034,28,Female,IT,Systems Administrator,78888,3.2,1.3,No,3,3,3,5,4,4,3,0,16.7,3,No
+100035,40,Male,Operations,Operations Manager,94775,1.3,0.0,Yes,2,1,3,3,4,3,3,0,12.3,6,No
+100036,44,Male,Customer Support,Support Specialist,75728,4.9,3.5,No,2,3,3,7,2,2,4,0,12.7,4,Yes
+100037,34,Female,R&D,Research Scientist,88161,0.9,0.0,No,4,3,3,7,3,3,2,0,13.3,3,No
+100038,28,Female,Finance,Financial Analyst,76063,1.6,0.0,No,3,2,3,13,2,3,5,0,16.4,5,No
+100039,28,Female,Finance,Finance Manager,127942,6.9,5.3,Yes,3,2,3,9,1,3,4,0,10.7,1,No
+100040,40,Female,R&D,Lab Technician,76725,2.7,1.9,Yes,4,1,3,5,1,4,4,0,7.1,3,No
+100041,41,Female,R&D,Product Engineer,91587,9.7,7.7,No,3,2,3,9,2,4,4,0,6.4,6,No
+100042,39,Male,Sales,Sales Executive,69342,6.2,3.4,No,4,4,4,7,3,3,3,0,16.3,2,No
+100043,29,Male,Finance,Financial Analyst,91643,3.4,0.1,No,4,3,3,5,1,3,3,0,12.8,2,No
+100044,36,Male,Operations,Supply Chain Specialist,74544,7.6,7.1,Yes,4,1,4,3,6,4,3,0,13.1,10,No
+100045,35,Female,Operations,Operations Analyst,58291,3.6,0.0,No,4,3,3,12,5,4,3,0,9.9,1,No
+100046,36,Female,R&D,Research Scientist,79955,6.7,4.0,No,3,2,4,10,3,4,4,0,14.6,5,No
+100047,42,Male,Sales,Sales Manager,88303,2.4,0.0,No,3,4,4,11,1,3,3,0,14.7,1,No
+100048,36,Male,R&D,Research Scientist,86252,7.9,7.6,Yes,3,2,3,5,4,2,4,1,16.2,3,No
+100049,40,Male,HR,Recruiter,64141,1.0,0.0,No,1,3,3,9,3,4,2,0,8.1,0,No
+100050,35,Male,Customer Support,Customer Success Manager,74167,1.6,1.1,No,4,3,2,4,1,3,3,0,5.8,0,No
+100051,37,Male,Operations,Operations Manager,81145,1.9,0.7,Yes,2,3,3,5,4,3,4,0,8.8,3,No
+100052,40,Male,Customer Support,Customer Success Manager,71331,2.6,0.0,Yes,4,1,3,8,4,3,3,0,7.3,3,Yes
+100053,23,Female,Operations,Operations Manager,100497,5.2,4.7,Yes,3,2,3,9,4,2,3,0,7.1,1,No
+100054,32,Male,Customer Support,Customer Success Manager,78333,4.1,3.2,No,4,4,4,3,3,4,3,0,19.5,5,No
+100055,31,Female,R&D,Product Engineer,95395,6.7,6.4,No,2,2,3,5,1,4,1,0,4.1,9,No
+100056,29,Female,Sales,Sales Executive,83453,8.7,6.0,No,2,2,4,7,1,3,3,1,18.1,7,Yes
+100057,32,Male,Sales,Account Manager,82394,0.9,0.2,Yes,1,2,3,14,0,3,4,0,15.2,5,Yes
+100058,47,Male,R&D,Research Scientist,112489,9.4,7.9,No,3,4,2,5,3,2,3,0,15.5,0,No
+100059,27,Female,R&D,Software Engineer,86683,3.5,1.4,No,2,3,2,9,0,1,3,0,13.0,3,No
+100060,42,Male,Sales,Sales Executive,80949,12.0,10.0,No,2,3,3,9,2,2,2,0,16.6,6,No
+100061,21,Female,Customer Support,Support Lead,61552,2.3,0.5,Yes,3,3,3,7,4,2,2,0,18.2,2,Yes
+100062,32,Male,Sales,Sales Executive,60146,0.7,0.0,No,3,2,3,9,0,2,4,0,10.9,3,No
+100063,36,Female,Customer Support,Support Lead,68526,6.3,5.9,No,2,3,2,4,2,3,4,0,13.6,4,No
+100064,39,Female,Operations,Operations Manager,98609,6.0,4.8,No,4,2,3,6,3,4,2,0,16.5,2,Yes
+100065,40,Male,Finance,Finance Manager,119717,1.7,0.0,No,3,3,4,18,2,3,3,0,11.0,2,No
+100066,41,Male,IT,IT Support,62123,1.8,0.2,No,2,3,3,19,3,4,3,0,11.1,3,Yes
+100067,32,Female,R&D,Software Engineer,100843,7.0,5.6,No,2,4,4,13,1,2,2,0,11.8,9,No
+100068,31,Male,Finance,Finance Manager,118374,5.3,4.5,No,3,2,3,15,2,3,2,0,13.6,4,No
+100069,42,Male,Sales,Account Manager,81489,3.3,1.4,No,3,3,3,3,2,3,3,0,5.4,5,No
+100070,33,Male,Customer Support,Support Specialist,66723,5.7,3.5,No,4,2,2,5,2,4,4,0,17.0,3,No
+100071,24,Male,R&D,Software Engineer,86387,5.0,4.0,No,3,3,4,7,2,3,4,0,15.9,3,No
+100072,25,Female,R&D,Research Scientist,80402,2.0,0.0,No,4,4,3,31,2,3,4,0,14.1,2,No
+100073,27,Female,IT,Systems Administrator,99775,7.4,2.9,No,3,3,3,7,2,2,2,0,4.0,3,Yes
+100074,39,Male,Finance,Accountant,89016,6.5,4.9,No,3,2,4,12,3,2,3,0,10.4,7,No
+100075,36,Female,R&D,Lab Technician,115435,4.2,3.5,Yes,4,1,4,10,2,4,3,1,21.7,3,No
+100076,40,Male,Finance,Accountant,88325,7.0,6.6,No,4,2,4,10,3,1,3,0,13.4,6,No
+100077,31,Male,Sales,Sales Executive,105678,12.9,11.7,No,4,2,4,8,2,4,3,0,8.0,2,No
+100078,36,Female,IT,Systems Administrator,78655,1.8,0.3,No,3,4,3,4,1,4,3,0,12.8,0,No
+100079,40,Female,R&D,Lab Technician,85856,3.4,3.0,Yes,2,1,4,2,1,2,1,1,18.9,8,Yes
+100080,32,Male,R&D,Research Scientist,98437,3.5,2.4,No,1,3,3,17,3,2,4,0,13.9,4,No
+100081,38,Male,Sales,Account Manager,81679,6.9,3.8,No,3,3,4,6,7,4,4,0,13.5,1,No
+100082,29,Male,R&D,Software Engineer,86147,2.6,2.5,No,4,3,3,3,1,4,2,0,16.0,2,No
+100083,32,Female,R&D,Data Scientist,106993,6.7,5.0,No,4,3,2,10,0,3,4,0,9.5,2,No
+100084,31,Male,R&D,Research Scientist,79036,2.8,1.9,No,3,2,3,10,2,3,3,0,13.9,4,No
+100085,25,Male,Sales,Sales Executive,52773,1.6,0.1,Yes,4,3,4,12,3,3,3,0,14.5,3,No
+100086,38,Female,Sales,Account Manager,79086,4.3,0.0,Yes,3,1,3,15,4,3,3,0,11.5,6,No
+100087,31,Male,HR,HR Business Partner,49767,2.7,1.3,No,2,3,4,5,0,2,4,0,12.7,0,No
+100088,35,Male,Sales,Account Manager,92219,4.6,3.3,No,3,3,2,5,1,3,3,0,10.8,4,No
+100089,38,Male,IT,IT Support,84687,5.4,2.8,No,2,4,3,7,2,4,3,0,12.1,3,No
+100090,38,Male,Customer Support,Customer Success Manager,72495,1.0,0.0,Yes,4,2,3,13,2,3,4,0,11.0,3,Yes
+100091,40,Male,R&D,Product Engineer,90433,3.0,1.3,Yes,3,1,3,3,1,2,3,0,14.6,0,No
+100092,34,Female,Customer Support,Support Specialist,67827,4.3,2.3,No,4,3,3,9,2,2,3,0,10.1,3,No
+100093,31,Female,Sales,Account Manager,94318,7.1,3.3,Yes,2,1,4,14,2,3,4,0,19.5,6,Yes
+100094,34,Female,Sales,Sales Executive,100258,6.5,3.5,No,3,3,3,13,2,2,3,0,10.0,5,No
+100095,21,Female,IT,Systems Administrator,83882,2.1,0.9,No,1,3,3,12,3,3,3,0,15.2,3,No
+100096,23,Male,Operations,Supply Chain Specialist,93523,3.6,0.0,Yes,3,2,3,15,4,2,4,0,15.4,1,No
+100097,24,Male,Operations,Operations Manager,96185,5.6,4.6,Yes,2,2,4,2,3,4,2,0,14.6,5,No
+100098,26,Female,Sales,Account Manager,87447,3.5,1.8,Yes,1,3,3,20,0,2,4,0,12.3,0,No
+100099,38,Male,Operations,Supply Chain Specialist,56216,2.3,0.5,No,3,2,4,10,2,3,3,0,11.4,8,No
+100100,27,Female,R&D,Software Engineer,83826,4.0,2.9,No,3,2,3,17,0,3,4,1,12.7,3,No
+100101,31,Female,R&D,Lab Technician,85704,5.3,1.1,No,4,3,4,4,0,4,4,1,17.3,0,No
+100102,45,Male,Sales,Sales Manager,107360,2.0,0.9,Yes,1,1,3,3,3,3,4,0,11.8,8,No
+100103,32,Male,Customer Support,Customer Success Manager,84968,6.0,4.6,Yes,2,2,4,22,1,4,2,0,18.1,9,No
+100104,41,Male,Sales,Sales Executive,64294,4.5,1.2,Yes,2,3,4,5,1,4,3,0,12.4,2,No
+100105,27,Male,Operations,Supply Chain Specialist,66757,6.2,5.2,Yes,3,1,4,7,1,4,2,1,15.1,2,No
+100106,33,Male,Finance,Finance Manager,109284,3.9,3.5,No,3,3,3,11,3,3,3,0,6.2,2,No
+100107,27,Male,IT,IT Support,97338,11.7,10.0,No,3,3,4,12,0,3,2,0,16.3,3,No
+100108,32,Female,IT,IT Support,92907,5.2,4.6,Yes,3,3,3,15,2,4,2,0,13.9,3,No
+100109,41,Female,Operations,Supply Chain Specialist,65345,6.7,6.2,No,3,3,3,9,1,4,4,0,15.4,1,Yes
+100110,20,Female,Sales,Sales Executive,70105,6.0,5.9,No,3,3,3,5,2,4,4,0,15.6,5,No
+100111,38,Male,Sales,Sales Manager,68908,3.6,3.5,No,4,2,3,12,1,3,3,0,14.8,3,No
+100112,36,Male,Finance,Finance Manager,103265,4.9,4.7,No,3,3,3,12,3,3,3,0,14.9,3,No
+100113,30,Male,R&D,Product Engineer,79735,2.6,0.0,Yes,2,2,3,3,1,4,3,0,14.1,8,No
+100114,23,Male,Sales,Sales Executive,82449,11.2,11.0,No,3,2,3,18,2,4,4,0,14.7,6,No
+100115,35,Female,Sales,Account Manager,87418,5.6,5.1,Yes,2,3,3,2,2,3,3,0,5.6,0,No
+100116,30,Male,R&D,Lab Technician,89781,2.2,0.8,No,4,3,3,14,3,2,5,0,8.2,0,No
+100117,36,Male,Sales,Account Manager,124290,9.6,7.1,Yes,2,3,4,6,3,2,3,0,9.6,5,No
+100118,35,Female,Sales,Sales Executive,66894,3.7,1.0,No,3,3,3,12,3,4,3,0,16.4,0,No
+100119,48,Male,Customer Support,Customer Success Manager,87620,7.3,6.6,No,3,3,3,11,3,2,2,0,9.3,5,No
+100120,33,Male,R&D,Lab Technician,77777,1.0,0.0,No,2,3,3,8,1,4,3,0,9.8,9,No
+100121,26,Male,Customer Support,Customer Success Manager,96012,8.5,7.2,Yes,1,3,4,10,1,4,4,0,14.0,9,Yes
+100122,36,Female,Customer Support,Support Specialist,75285,5.4,3.8,No,2,3,3,8,1,3,3,0,7.6,5,No
+100123,36,Female,Sales,Sales Representative,61311,2.1,0.4,No,4,3,3,12,3,4,3,0,13.3,2,No
+100124,46,Male,IT,IT Support,71080,5.4,3.3,No,1,3,4,27,1,2,4,0,6.5,1,Yes
+100125,41,Female,Finance,Financial Analyst,113481,10.5,9.6,No,4,3,4,4,2,4,5,0,9.9,5,No
+100126,37,Female,IT,Systems Administrator,85342,2.7,1.6,Yes,1,2,3,1,2,3,4,0,12.7,7,No
+100127,46,Female,Sales,Sales Representative,73775,2.6,0.0,Yes,4,3,4,6,1,1,4,0,9.7,1,No
+100128,25,Male,Sales,Sales Executive,58872,3.6,2.7,No,1,2,4,6,0,4,4,0,18.5,6,No
+100129,29,Male,Sales,Sales Manager,90469,4.3,2.6,No,3,3,3,7,1,4,4,0,12.2,0,No
+100130,27,Female,Finance,Financial Analyst,83657,7.6,6.3,No,4,3,3,5,2,3,3,1,18.5,1,No
+100131,31,Male,Customer Support,Support Specialist,67779,5.7,4.1,No,4,3,3,13,1,2,3,0,13.3,2,No
+100132,23,Female,IT,IT Support,83093,3.6,0.2,No,3,2,4,4,4,2,3,0,14.0,3,No
+100133,40,Female,IT,Systems Administrator,78275,5.0,3.7,No,1,2,4,10,5,4,4,0,10.5,7,Yes
+100134,33,Male,Customer Support,Support Specialist,90201,11.6,11.1,No,2,2,2,12,1,2,4,1,17.8,5,No
+100135,22,Female,IT,Systems Administrator,89672,6.3,5.4,No,4,3,4,10,1,2,4,0,15.5,0,No
+100136,26,Female,Sales,Sales Executive,60111,3.8,2.5,Yes,2,1,4,11,3,3,4,0,21.3,1,No
+100137,37,Female,Operations,Supply Chain Specialist,83777,3.5,1.7,No,3,3,3,14,3,2,3,0,14.9,4,No
+100138,41,Male,R&D,Lab Technician,87250,4.8,4.1,No,3,2,5,8,3,2,4,0,12.6,8,No
+100139,51,Female,Sales,Sales Representative,77196,7.5,6.7,No,2,3,4,7,6,4,4,0,15.0,6,No
+100140,58,Male,HR,Recruiter,50478,2.4,0.6,No,3,2,4,11,0,4,4,0,15.5,9,Yes
+100141,38,Female,Customer Support,Support Specialist,76753,6.9,5.0,No,3,4,4,11,6,3,4,0,18.1,1,No
+100142,26,Female,R&D,Software Engineer,81868,3.8,0.8,No,3,3,2,13,1,3,4,0,16.6,4,No
+100143,18,Female,HR,HR Generalist,78055,4.2,3.3,No,3,3,4,3,3,3,3,0,13.4,2,No
+100144,37,Male,Sales,Sales Manager,117880,17.4,15.1,No,2,3,3,7,2,3,4,0,7.7,7,No
+100145,28,Male,Sales,Sales Executive,76356,6.4,5.1,Yes,3,1,4,5,4,2,4,1,10.0,5,No
+100146,31,Male,Sales,Sales Manager,63321,2.8,1.8,Yes,4,2,4,11,1,3,2,0,10.0,9,No
+100147,29,Male,IT,Security Analyst,90823,5.4,4.0,No,3,2,4,12,2,3,4,0,11.9,4,No
+100148,33,Male,Operations,Operations Manager,105387,7.8,6.2,No,3,3,4,7,1,2,2,0,19.3,2,No
+100149,43,Female,Sales,Sales Executive,76394,6.5,6.1,Yes,3,2,4,5,0,4,3,0,19.3,3,No
+100150,36,Male,R&D,Lab Technician,70519,0.6,0.2,No,3,3,3,11,1,4,3,0,15.4,4,No
+100151,33,Female,Sales,Sales Representative,56576,4.1,1.5,No,3,4,3,8,4,2,3,0,16.3,0,No
+100152,26,Female,Sales,Sales Executive,66009,5.6,4.5,No,3,3,3,18,0,2,3,0,9.5,2,No
+100153,21,Male,HR,Recruiter,74688,5.3,3.5,No,4,3,4,22,2,3,3,0,8.7,5,No
+100154,31,Female,IT,IT Support,82789,3.0,0.5,No,3,4,3,14,2,4,3,0,8.5,2,No
+100155,34,Female,Finance,Accountant,93855,6.6,5.2,Yes,3,2,3,9,1,2,4,0,4.9,2,Yes
+100156,49,Male,R&D,Research Scientist,92769,8.5,6.2,No,2,3,3,22,1,3,3,0,8.1,1,No
+100157,36,Male,HR,Recruiter,75739,1.0,0.0,Yes,4,3,3,9,2,3,5,0,10.2,0,No
+100158,43,Female,Sales,Account Manager,79875,0.9,0.0,Yes,1,2,3,6,1,3,3,0,12.6,2,Yes
+100159,30,Female,Sales,Account Manager,85679,5.4,1.8,Yes,2,2,5,6,2,3,2,0,14.5,5,No
+100160,25,Female,Customer Support,Customer Success Manager,97898,6.9,5.6,No,4,2,4,6,2,4,3,1,14.1,3,No
+100161,27,Female,Operations,Operations Analyst,70944,2.7,0.1,No,4,4,3,8,3,4,4,0,14.0,3,No
+100162,29,Female,Customer Support,Support Lead,50342,0.6,0.3,Yes,3,2,4,11,3,4,3,0,11.7,0,No
+100163,52,Male,Customer Support,Support Specialist,60485,4.1,2.4,No,3,3,3,4,1,4,2,0,12.0,1,No
+100164,28,Female,Finance,Financial Analyst,96144,5.4,1.1,No,4,4,3,6,2,4,4,0,8.1,2,No
+100165,41,Male,Customer Support,Support Specialist,76431,3.4,0.0,No,3,4,3,9,5,4,3,0,15.8,0,No
+100166,27,Female,R&D,Product Engineer,80956,7.9,7.6,No,3,3,4,12,3,4,4,0,14.1,0,No
+100167,42,Male,Sales,Sales Manager,101395,5.1,4.0,Yes,3,3,2,8,2,4,4,0,14.4,0,No
+100168,38,Male,Sales,Sales Manager,82179,2.5,1.9,No,3,3,3,9,2,4,4,0,7.7,4,No
+100169,33,Female,Sales,Account Manager,84770,2.7,1.4,No,3,3,3,4,1,2,5,0,12.6,1,No
+100170,34,Male,Sales,Account Manager,99605,4.2,1.3,No,2,2,3,5,0,4,2,0,14.0,6,No
+100171,29,Female,R&D,Data Scientist,78347,3.2,0.0,No,4,4,3,8,1,4,3,0,4.8,3,Yes
+100172,38,Male,IT,Systems Administrator,78213,0.9,0.0,No,3,2,3,11,3,4,3,0,16.1,3,Yes
+100173,31,Female,Operations,Supply Chain Specialist,86902,4.8,4.5,No,4,3,4,9,2,2,5,0,9.6,0,No
+100174,24,Female,Finance,Financial Analyst,72442,2.7,1.2,No,2,2,3,5,3,4,5,0,12.7,12,No
+100175,24,Male,Sales,Sales Representative,49374,3.1,2.3,No,3,3,3,7,2,2,4,0,18.3,0,No
+100176,36,Female,IT,IT Support,88519,1.8,0.6,Yes,2,2,2,19,2,4,3,0,15.3,8,No
+100177,47,Male,R&D,Product Engineer,92432,10.7,9.7,Yes,4,2,3,11,2,3,3,0,6.8,6,No
+100178,36,Female,Sales,Sales Manager,97608,6.2,5.9,Yes,2,2,4,7,0,4,3,0,13.4,4,Yes
+100179,34,Female,R&D,Product Engineer,122568,12.3,8.6,No,3,2,3,5,4,2,3,0,16.3,4,No
+100180,37,Female,R&D,Data Scientist,106129,3.3,2.6,No,3,3,3,6,3,4,5,0,9.1,1,No
+100181,45,Male,R&D,Lab Technician,99562,6.4,5.5,No,2,4,4,8,4,3,3,0,12.7,5,No
+100182,36,Male,Operations,Operations Manager,95295,4.9,0.6,Yes,3,1,4,10,4,3,3,0,12.6,3,No
+100183,31,Female,IT,Systems Administrator,80164,2.5,2.2,No,2,2,3,11,1,4,4,0,14.0,5,Yes
+100184,44,Female,IT,Systems Administrator,72184,3.3,1.2,No,3,4,3,10,5,3,2,0,6.6,4,No
+100185,38,Male,Sales,Account Manager,88629,6.2,3.0,No,3,3,4,7,1,3,3,0,16.2,4,No
+100186,47,Male,Operations,Operations Analyst,66080,1.8,0.0,No,4,3,4,6,1,3,3,0,11.8,1,No
+100187,36,Male,IT,Security Analyst,79741,8.0,6.0,No,3,4,4,25,3,3,3,0,14.0,1,No
+100188,24,Female,Sales,Sales Manager,93913,4.6,2.0,No,3,2,3,6,4,4,3,1,13.7,8,No
+100189,23,Male,Finance,Finance Manager,93033,7.3,4.1,No,3,3,4,4,2,3,3,0,16.1,4,No
+100190,48,Male,HR,Recruiter,76545,5.4,4.1,No,1,3,3,3,5,3,4,0,11.9,4,No
+100191,49,Female,R&D,Product Engineer,81312,1.0,0.4,No,2,3,3,7,1,4,4,0,17.0,4,No
+100192,33,Male,Sales,Sales Executive,57969,4.1,0.0,Yes,3,3,4,14,2,3,3,0,17.5,1,Yes
+100193,31,Female,HR,HR Generalist,70814,8.1,5.7,No,2,2,4,6,2,2,4,0,11.2,6,No
+100194,46,Male,Sales,Sales Representative,63046,4.6,3.1,Yes,1,1,2,18,4,2,3,0,16.8,5,No
+100195,25,Female,Sales,Account Manager,93197,4.2,3.8,No,4,2,3,8,2,2,4,1,15.6,8,No
+100196,27,Female,Sales,Sales Executive,69831,4.6,4.5,Yes,2,3,4,15,2,1,3,0,14.6,2,No
+100197,40,Female,Customer Support,Customer Success Manager,64556,0.8,0.0,Yes,3,2,3,5,3,3,3,0,15.0,4,Yes
+100198,31,Male,R&D,Software Engineer,102471,8.6,8.5,Yes,2,2,3,5,2,3,3,0,8.4,4,No
+100199,34,Male,R&D,Research Scientist,77638,0.4,0.0,No,3,2,3,9,1,4,3,0,7.2,5,No
+100200,33,Female,R&D,Product Engineer,107336,9.8,9.0,No,3,3,3,11,1,4,5,0,12.1,3,No
+100201,37,Male,Operations,Operations Analyst,61361,3.2,2.2,Yes,3,3,4,7,1,4,3,0,11.9,0,Yes
+100202,46,Male,Finance,Accountant,89321,5.6,1.8,No,3,3,3,10,3,2,2,0,19.3,1,No
+100203,35,Male,Customer Support,Support Lead,60500,0.7,0.0,Yes,1,2,3,11,2,4,4,0,9.3,3,No
+100204,40,Female,R&D,Software Engineer,100913,6.9,5.3,No,3,2,4,4,0,4,3,0,14.1,4,No
+100205,18,Female,Sales,Sales Executive,75223,6.1,5.3,Yes,4,2,2,7,3,3,4,0,12.7,3,Yes
+100206,34,Female,HR,HR Generalist,89664,5.9,4.0,Yes,4,2,3,6,3,3,3,0,16.3,3,No
+100207,28,Female,R&D,Data Scientist,95750,0.7,0.0,No,4,2,3,6,3,2,4,0,8.5,6,No
+100208,25,Male,Operations,Operations Analyst,59783,2.3,0.8,No,3,3,4,10,5,4,3,0,8.4,3,No
+100209,27,Male,Operations,Supply Chain Specialist,69731,5.4,2.2,No,3,4,4,6,3,4,5,0,18.9,2,No
+100210,32,Male,R&D,Research Scientist,102784,8.5,8.2,No,3,3,4,3,2,3,3,0,14.3,3,No
+100211,42,Female,Customer Support,Support Specialist,43462,2.0,1.8,No,1,4,3,7,2,3,3,0,14.8,1,Yes
+100212,24,Male,HR,Recruiter,59601,2.0,1.6,No,2,3,4,5,2,3,5,0,17.0,6,No
+100213,35,Female,R&D,Lab Technician,94818,5.2,3.5,No,3,4,3,11,1,3,4,0,15.6,0,No
+100214,31,Female,HR,HR Business Partner,119340,16.5,14.3,No,3,4,3,13,0,3,5,0,10.7,4,No
+100215,32,Male,Sales,Sales Manager,68424,2.6,0.4,Yes,3,1,3,2,0,4,3,0,9.7,4,No
+100216,43,Female,Operations,Operations Analyst,70812,3.1,2.0,No,4,4,3,5,0,3,4,0,5.0,3,No
+100217,39,Male,Sales,Sales Representative,60346,2.8,0.0,Yes,1,3,3,10,1,4,5,0,8.5,5,Yes
+100218,45,Female,R&D,Software Engineer,86498,3.8,1.8,No,4,2,3,4,1,3,2,0,12.2,3,Yes
+100219,33,Female,Finance,Accountant,99754,8.9,4.6,Yes,3,2,4,13,1,2,2,0,11.5,0,No
+100220,29,Female,Sales,Sales Executive,64195,3.9,0.2,No,4,3,5,15,3,3,3,0,10.0,1,No
+100221,33,Male,Sales,Sales Executive,120210,17.4,16.3,No,4,3,3,7,2,3,4,0,12.2,2,No
+100222,36,Male,IT,Systems Administrator,93596,4.5,1.6,Yes,4,2,4,5,0,3,2,0,18.7,3,No
+100223,36,Male,Sales,Sales Representative,101370,9.4,8.3,Yes,3,2,4,2,1,4,4,0,13.8,0,No
+100224,26,Male,R&D,Research Scientist,84465,3.3,0.0,No,4,4,3,13,1,4,4,0,8.0,1,No
+100225,35,Male,R&D,Lab Technician,75104,1.5,0.3,Yes,1,1,4,25,3,4,5,0,18.5,3,No
+100226,36,Male,R&D,Data Scientist,95770,3.9,1.6,No,4,2,4,22,1,3,4,1,13.8,4,No
+100227,55,Female,Sales,Account Manager,88205,5.9,0.2,No,3,4,3,7,1,2,4,1,19.7,1,No
+100228,50,Male,Operations,Supply Chain Specialist,73791,2.3,0.0,Yes,3,2,3,4,2,3,4,0,11.1,4,Yes
+100229,28,Male,Customer Support,Support Specialist,85017,8.5,7.5,No,1,2,3,13,2,2,4,0,12.4,7,No
+100230,32,Female,Sales,Sales Manager,89360,2.9,2.5,No,3,3,4,8,0,4,3,0,19.5,4,No
+100231,22,Female,Customer Support,Customer Success Manager,71780,1.8,1.5,Yes,3,3,3,11,2,2,2,0,7.3,3,No
+100232,30,Female,Finance,Financial Analyst,113348,15.4,13.2,No,3,3,2,10,0,3,3,0,8.3,1,No
+100233,37,Female,Finance,Financial Analyst,94648,2.2,0.8,No,4,2,3,9,2,2,3,0,10.9,4,No
+100234,44,Female,IT,Security Analyst,69472,2.8,2.4,No,3,4,3,14,2,3,4,0,11.5,3,Yes
+100235,29,Female,IT,IT Support,101869,6.6,3.9,No,4,4,3,15,3,4,2,0,21.2,0,Yes
+100236,29,Male,Operations,Operations Manager,95881,3.2,0.6,No,3,2,4,6,0,4,3,1,13.4,4,No
+100237,18,Female,HR,HR Business Partner,55167,1.8,0.4,No,2,3,3,5,4,3,3,0,7.4,6,Yes
+100238,33,Male,HR,HR Business Partner,53660,2.6,0.0,No,3,4,4,2,0,4,4,0,10.7,3,No
+100239,26,Male,R&D,Research Scientist,108760,12.8,12.6,No,4,3,3,7,1,3,5,0,12.8,5,No
+100240,30,Male,Sales,Sales Manager,97279,6.1,5.1,No,3,2,3,4,1,3,4,0,13.7,4,Yes
+100241,27,Male,IT,IT Support,81893,6.9,4.6,No,3,3,3,10,2,4,3,0,9.5,1,No
+100242,34,Female,Sales,Account Manager,103990,5.0,4.5,No,4,2,3,7,2,3,2,0,12.1,1,No
+100243,20,Male,R&D,Software Engineer,90049,5.6,2.7,No,4,2,4,7,4,3,4,1,23.3,2,No
+100244,22,Male,Sales,Account Manager,90224,3.1,0.0,No,4,2,4,13,2,3,3,0,14.1,2,No
+100245,52,Male,Sales,Sales Executive,72297,4.6,4.6,No,3,4,3,10,2,4,4,0,13.1,2,No
+100246,24,Female,Finance,Financial Analyst,86517,0.6,0.0,No,4,2,4,8,2,2,5,0,20.6,4,No
+100247,26,Male,Finance,Accountant,90698,7.7,5.5,No,4,3,4,21,0,2,2,0,11.6,3,No
+100248,50,Female,R&D,Data Scientist,102555,3.0,2.1,No,1,3,3,12,2,4,4,0,9.3,11,No
+100249,58,Female,Sales,Sales Manager,66507,1.6,1.3,No,3,3,3,6,2,3,4,0,10.4,0,No
+100250,25,Male,R&D,Research Scientist,89968,4.7,1.5,No,3,3,4,7,5,2,4,0,12.2,2,No
+100251,31,Female,R&D,Product Engineer,95780,3.6,3.2,No,3,3,4,13,0,4,2,0,7.6,2,Yes
+100252,37,Male,IT,IT Support,94295,7.6,5.4,No,3,3,3,9,2,2,3,1,15.0,2,No
+100253,49,Male,Finance,Financial Analyst,103614,4.0,3.6,No,2,2,3,4,3,3,2,0,12.8,7,No
+100254,26,Female,HR,HR Generalist,68997,2.6,1.1,No,1,2,3,13,6,3,4,0,11.3,10,No
+100255,32,Female,HR,Recruiter,64256,4.1,1.0,No,4,3,3,16,1,3,4,0,12.9,2,No
+100256,41,Male,Customer Support,Customer Success Manager,108422,10.1,9.2,No,3,3,3,16,3,2,1,0,12.9,0,No
+100257,38,Female,IT,Systems Administrator,79469,7.7,3.2,No,1,3,3,19,1,4,3,1,9.9,7,Yes
+100258,31,Male,HR,Recruiter,68329,6.1,3.7,No,3,4,3,25,1,3,4,1,15.5,3,No
+100259,33,Male,R&D,Product Engineer,88327,7.9,7.4,No,4,3,3,21,3,4,4,0,14.0,1,No
+100260,23,Female,Sales,Sales Executive,72625,6.4,6.1,Yes,3,1,3,10,3,3,4,0,6.4,1,No
+100261,33,Female,Customer Support,Support Lead,56175,2.1,1.4,No,4,1,3,7,0,4,3,0,17.1,3,No
+100262,32,Female,R&D,Product Engineer,106926,6.9,5.5,No,4,2,3,3,1,1,3,0,7.7,6,No
+100263,36,Male,R&D,Research Scientist,100628,8.6,3.8,No,2,2,4,8,5,2,3,0,10.0,6,No
+100264,30,Female,Customer Support,Support Specialist,69457,8.9,3.4,No,3,2,4,11,5,4,3,0,14.7,3,No
+100265,38,Female,IT,IT Support,87474,1.7,0.8,No,3,3,3,8,3,4,4,0,13.9,0,No
+100266,43,Female,Sales,Sales Executive,34778,2.9,2.0,Yes,2,2,4,3,1,3,4,0,16.7,6,No
+100267,36,Male,Sales,Sales Manager,82346,2.5,0.0,No,2,4,4,7,3,3,3,0,16.0,6,No
+100268,37,Male,Sales,Sales Manager,86518,3.3,0.6,No,2,3,3,12,6,4,4,0,10.2,2,No
+100269,35,Male,Finance,Accountant,88147,5.7,1.7,No,2,4,5,5,3,3,3,0,14.4,4,No
+100270,35,Male,Sales,Sales Executive,71541,4.7,0.7,Yes,2,3,3,9,3,2,2,0,10.9,4,Yes
+100271,29,Male,Customer Support,Support Specialist,66036,4.7,4.1,Yes,4,3,3,10,2,4,4,0,12.6,2,No
+100272,37,Male,Customer Support,Customer Success Manager,80657,1.3,1.1,Yes,2,2,4,15,2,4,4,0,14.2,9,Yes
+100273,34,Female,HR,Recruiter,59540,2.8,0.4,No,4,2,3,21,2,4,4,0,10.2,6,No
+100274,52,Male,Finance,Financial Analyst,86629,9.3,7.5,Yes,2,2,3,7,1,4,2,0,10.8,7,No
+100275,47,Female,R&D,Data Scientist,118783,8.5,8.3,No,4,3,2,9,1,3,5,0,5.5,2,No
+100276,38,Male,Sales,Account Manager,77561,4.0,1.7,No,3,3,3,9,3,2,4,0,14.9,4,No
+100277,28,Female,IT,IT Support,83523,6.9,5.6,No,3,2,3,12,2,4,3,0,13.0,4,No
+100278,25,Male,Sales,Sales Representative,79413,5.3,2.9,No,4,3,3,11,1,2,3,0,4.0,0,No
+100279,44,Male,Sales,Sales Executive,89702,7.4,6.9,No,1,2,4,18,4,3,4,0,16.8,8,No
+100280,37,Female,R&D,Product Engineer,107004,7.1,4.6,Yes,1,1,3,2,2,3,3,0,11.8,10,Yes
+100281,38,Female,Sales,Sales Executive,74056,4.2,2.2,No,3,2,4,10,3,3,5,0,10.7,7,No
+100282,20,Male,R&D,Research Scientist,94060,6.1,3.4,No,3,3,2,11,1,4,3,0,8.4,0,No
+100283,42,Male,IT,IT Support,95059,5.6,4.6,No,2,2,3,7,2,3,5,0,9.6,9,No
+100284,38,Female,Operations,Operations Analyst,76961,4.3,3.5,No,2,3,4,2,3,4,3,0,10.7,7,No
+100285,25,Female,Finance,Accountant,99047,3.6,3.3,Yes,1,2,3,8,4,2,5,0,9.2,4,Yes
+100286,31,Male,Operations,Operations Manager,111177,11.7,10.6,No,4,3,3,6,5,3,3,1,20.5,7,No
+100287,37,Male,R&D,Lab Technician,93813,4.3,0.9,Yes,4,2,4,21,2,2,3,0,15.3,0,Yes
+100288,35,Male,Operations,Supply Chain Specialist,70061,6.7,2.5,No,4,2,3,10,2,3,4,0,19.1,3,No
+100289,32,Female,HR,Recruiter,97945,11.2,10.8,No,2,3,2,5,2,3,4,0,12.8,4,No
+100290,34,Male,R&D,Data Scientist,96048,6.1,4.7,No,2,3,4,3,1,4,4,0,16.0,3,No
+100291,32,Male,Customer Support,Customer Success Manager,79958,5.9,1.1,Yes,2,3,3,11,1,3,3,0,8.9,9,No
+100292,36,Female,R&D,Lab Technician,76216,4.3,0.0,No,4,3,3,12,4,1,3,0,11.4,4,No
+100293,47,Male,Sales,Sales Executive,72189,5.6,4.5,Yes,2,3,3,7,4,4,4,0,11.7,5,No
+100294,18,Male,R&D,Software Engineer,88071,3.4,0.0,No,3,4,3,11,1,4,3,1,16.7,2,No
+100295,33,Male,R&D,Product Engineer,156214,18.8,15.6,No,3,3,3,7,2,3,4,0,11.8,0,No
+100296,36,Male,R&D,Data Scientist,95658,1.4,0.0,No,3,4,3,15,2,3,3,0,13.2,1,No
+100297,37,Male,HR,Recruiter,75113,3.8,3.6,No,2,3,3,14,2,2,4,0,13.1,3,No
+100298,31,Male,Operations,Supply Chain Specialist,81288,6.2,5.4,No,3,4,4,3,2,4,3,0,12.9,5,No
+100299,20,Female,R&D,Software Engineer,99080,5.9,4.6,No,3,4,4,4,3,3,3,0,12.6,1,No
+100300,37,Female,HR,HR Generalist,68173,3.4,2.1,No,2,2,3,25,1,2,3,0,9.7,5,Yes
+100301,49,Male,R&D,Product Engineer,86777,0.9,0.0,No,3,2,3,14,3,3,4,0,15.8,2,No
+100302,22,Female,Operations,Operations Manager,77646,1.6,0.0,Yes,2,1,3,4,2,4,3,0,10.9,4,No
+100303,42,Male,Sales,Sales Representative,45653,4.9,3.8,Yes,2,1,4,3,1,3,5,0,15.2,4,No
+100304,32,Female,Sales,Sales Representative,57997,0.7,0.0,Yes,3,3,3,9,1,2,4,0,11.5,0,Yes
+100305,34,Male,HR,HR Business Partner,60234,6.4,4.4,No,4,4,4,4,1,2,4,0,17.7,4,No
+100306,26,Female,IT,Security Analyst,108606,9.0,7.6,No,3,3,3,7,3,2,3,0,5.0,3,No
+100307,32,Male,Operations,Operations Manager,100107,7.2,6.7,No,2,4,4,8,2,4,3,0,15.1,5,No
+100308,45,Female,Finance,Accountant,86576,8.1,6.5,No,3,4,4,8,0,3,5,0,9.6,2,No
+100309,39,Male,Operations,Operations Analyst,86545,0.7,0.6,Yes,2,2,2,15,2,2,3,0,13.4,4,Yes
+100310,49,Female,R&D,Research Scientist,85034,3.5,1.3,No,3,3,3,22,2,3,3,0,11.5,3,No
+100311,44,Male,Sales,Sales Representative,56189,1.9,1.8,Yes,3,2,3,6,3,3,4,0,6.8,2,No
+100312,38,Female,Sales,Sales Executive,62252,1.1,0.0,Yes,2,2,3,4,0,3,3,0,13.2,5,Yes
+100313,49,Male,Sales,Sales Manager,90939,3.0,2.2,Yes,3,3,4,10,3,2,3,0,14.8,2,Yes
+100314,38,Female,R&D,Lab Technician,119452,11.0,10.5,Yes,2,2,3,20,1,2,3,0,11.2,4,Yes
+100315,41,Female,HR,HR Business Partner,85283,12.9,10.2,No,3,3,3,7,2,4,3,0,11.6,4,No
+100316,32,Female,R&D,Data Scientist,103545,2.1,1.1,No,3,3,4,13,4,3,3,0,14.6,2,No
+100317,35,Male,Finance,Financial Analyst,81761,4.5,3.0,No,4,2,5,5,0,4,4,0,18.1,3,No
+100318,29,Male,HR,HR Generalist,65631,5.6,5.4,No,3,4,2,8,2,3,3,0,10.9,2,No
+100319,43,Male,IT,Security Analyst,79633,3.5,0.0,No,4,2,4,4,2,3,3,0,17.5,2,No
+100320,25,Male,IT,IT Support,81779,9.4,7.7,No,2,3,3,8,3,3,3,0,11.9,1,No
+100321,41,Female,R&D,Lab Technician,91906,3.0,1.3,No,3,4,3,8,3,3,4,0,16.5,0,No
+100322,33,Female,R&D,Research Scientist,80024,2.7,0.4,Yes,1,1,3,11,3,4,3,0,11.2,6,No
+100323,44,Female,Finance,Accountant,72742,2.2,2.2,No,4,3,3,22,3,4,4,0,9.7,2,No
+100324,41,Male,Finance,Financial Analyst,79961,3.5,0.0,Yes,1,3,2,7,1,2,2,0,8.2,3,No
+100325,49,Female,R&D,Software Engineer,73452,0.3,0.0,No,3,3,3,3,1,3,4,0,11.9,6,No
+100326,40,Female,R&D,Product Engineer,95786,3.6,0.0,No,3,2,3,7,1,4,3,0,9.2,5,No
+100327,22,Female,IT,Security Analyst,73179,4.7,3.7,No,2,4,4,10,1,4,3,0,18.9,3,No
+100328,34,Male,Finance,Financial Analyst,82240,4.9,4.1,No,3,2,3,9,0,4,3,0,9.0,3,No
+100329,25,Male,Sales,Account Manager,77811,1.8,0.0,Yes,2,1,4,7,1,2,2,0,11.6,9,Yes
+100330,30,Female,R&D,Lab Technician,79774,4.8,0.0,Yes,3,2,3,19,3,4,2,0,14.0,3,Yes
+100331,47,Male,Operations,Operations Analyst,76474,4.7,1.0,No,1,2,3,9,0,3,3,0,16.2,4,No
+100332,40,Male,Sales,Sales Manager,82845,4.8,2.5,Yes,3,2,2,8,3,4,4,1,17.1,2,No
+100333,29,Female,Operations,Operations Manager,92721,7.3,5.2,Yes,4,1,3,5,1,4,3,0,15.7,7,Yes
+100334,26,Female,Sales,Sales Executive,62496,1.8,0.2,Yes,3,3,3,3,1,2,2,0,11.7,1,Yes
+100335,35,Female,HR,Recruiter,81445,3.6,0.0,No,4,3,4,10,1,4,3,0,13.8,0,No
+100336,25,Female,R&D,Software Engineer,77316,0.9,0.0,No,2,1,3,9,1,4,3,0,19.0,8,Yes
+100337,29,Male,Sales,Account Manager,95150,6.9,6.6,No,4,3,4,5,2,3,3,0,19.9,1,No
+100338,37,Male,Customer Support,Support Lead,55280,2.0,1.5,No,3,3,4,8,5,3,3,0,16.5,4,No
+100339,44,Male,R&D,Data Scientist,112956,8.0,5.6,Yes,4,3,4,8,1,2,4,0,17.9,3,Yes
+100340,39,Female,Customer Support,Customer Success Manager,108771,8.2,7.8,No,3,3,3,6,3,4,4,0,15.0,0,No
+100341,18,Male,R&D,Research Scientist,87006,3.8,2.1,Yes,1,3,4,5,2,3,5,0,9.8,5,Yes
+100342,37,Female,Operations,Operations Manager,74232,3.7,0.7,No,4,2,3,10,3,2,2,0,11.9,1,Yes
+100343,35,Male,Customer Support,Customer Success Manager,86951,1.3,0.0,Yes,2,1,3,7,2,3,3,0,17.2,6,Yes
+100344,38,Female,HR,Recruiter,78665,4.4,4.0,No,3,3,4,6,2,3,4,0,16.5,1,No
+100345,48,Male,Sales,Sales Manager,102454,7.2,6.6,No,2,3,3,5,0,3,3,0,11.8,5,No
+100346,18,Male,IT,IT Support,59841,5.2,3.0,No,4,4,4,8,2,3,4,0,19.3,5,No
+100347,30,Male,HR,HR Business Partner,88293,10.1,4.0,No,3,3,3,14,3,2,4,1,15.8,0,No
+100348,39,Male,Customer Support,Support Specialist,68601,3.3,1.9,Yes,3,1,4,9,2,4,5,0,16.6,2,No
+100349,22,Female,R&D,Product Engineer,87975,3.3,0.2,No,3,2,4,7,0,3,4,1,17.8,2,No
+100350,47,Male,R&D,Research Scientist,82566,2.1,0.0,No,2,4,3,10,1,2,4,0,13.9,2,No
+100351,38,Male,Sales,Sales Executive,106140,14.4,13.6,Yes,3,2,2,17,3,1,3,0,14.1,4,No
+100352,41,Female,IT,Systems Administrator,73094,1.2,0.0,No,3,3,3,11,4,4,3,0,16.5,3,No
+100353,30,Male,Customer Support,Support Specialist,82913,6.9,6.7,No,3,4,4,9,0,4,3,0,19.0,2,No
+100354,41,Male,Sales,Sales Executive,76816,7.3,4.4,No,2,2,3,12,3,3,2,0,10.4,9,Yes
+100355,43,Male,IT,IT Support,91460,7.1,4.8,No,3,1,4,7,2,4,5,0,15.2,4,No
+100356,36,Male,Customer Support,Support Lead,65392,2.3,1.4,Yes,3,1,3,9,5,4,4,0,16.4,5,Yes
+100357,36,Female,Sales,Sales Executive,60573,3.8,3.3,No,2,3,3,6,2,3,3,0,11.5,0,No
+100358,37,Male,Sales,Sales Executive,62285,6.3,5.4,Yes,2,2,4,3,1,3,4,0,9.4,7,No
+100359,27,Male,IT,Systems Administrator,76674,2.7,2.0,No,3,2,4,10,0,3,3,0,10.8,6,No
+100360,33,Male,Finance,Finance Manager,108193,3.4,2.2,No,3,4,3,10,3,3,2,0,9.1,0,No
+100361,33,Female,Sales,Sales Representative,68968,2.7,1.7,Yes,3,2,2,7,3,4,4,0,10.4,2,No
+100362,38,Male,Operations,Operations Analyst,83098,4.6,3.7,Yes,2,2,4,14,2,3,2,0,11.4,6,No
+100363,43,Female,HR,HR Business Partner,69462,4.4,4.2,No,2,3,4,5,2,4,3,0,17.6,4,No
+100364,26,Male,Customer Support,Support Specialist,84618,11.3,10.9,No,4,2,3,3,1,3,4,1,13.5,4,No
+100365,33,Female,Operations,Supply Chain Specialist,75151,6.4,2.9,No,3,3,3,6,5,3,4,0,16.4,2,No
+100366,47,Male,Operations,Operations Manager,89049,1.5,0.6,No,3,4,3,3,1,4,4,0,8.0,1,No
+100367,28,Male,HR,Recruiter,46350,1.6,0.4,No,3,4,3,10,1,4,4,0,10.8,3,Yes
+100368,28,Male,R&D,Lab Technician,96605,7.0,6.0,Yes,2,3,3,5,3,4,4,0,12.4,6,Yes
+100369,36,Female,HR,HR Business Partner,95727,4.4,0.0,No,3,3,3,14,4,2,3,0,14.8,3,No
+100370,41,Female,Sales,Sales Executive,82945,13.9,13.2,No,4,2,4,14,1,4,4,0,18.0,4,Yes
+100371,35,Male,Finance,Finance Manager,137892,13.9,13.2,Yes,2,2,3,5,1,3,2,0,10.1,11,Yes
+100372,45,Male,Sales,Sales Executive,62121,2.1,0.0,Yes,3,1,4,5,4,3,5,0,17.5,1,No
+100373,42,Female,HR,HR Business Partner,77518,5.3,3.5,No,4,4,3,11,2,1,2,1,8.6,0,No
+100374,41,Male,Sales,Account Manager,70740,1.7,0.0,No,3,4,3,14,3,3,3,1,17.5,2,No
+100375,39,Male,R&D,Software Engineer,100720,6.9,4.6,No,3,2,3,3,2,2,2,0,7.3,6,No
+100376,54,Male,R&D,Research Scientist,108549,12.3,9.1,No,4,3,3,10,0,3,3,0,13.6,0,No
+100377,33,Female,Finance,Accountant,72512,4.8,4.5,No,2,3,4,2,5,2,3,0,18.0,6,Yes
+100378,18,Female,Operations,Operations Analyst,78808,3.2,1.1,No,4,4,4,6,2,4,3,0,17.1,1,Yes
+100379,48,Female,Sales,Sales Executive,76222,5.7,5.0,Yes,2,1,4,15,3,4,4,0,8.3,5,No
+100380,31,Female,Operations,Supply Chain Specialist,76581,7.9,7.8,Yes,3,1,4,43,4,4,4,0,12.4,4,No
+100381,35,Male,Operations,Operations Analyst,80386,7.9,5.7,No,2,3,4,7,2,2,3,0,16.5,3,No
+100382,45,Male,R&D,Lab Technician,79020,3.2,1.1,No,2,1,4,4,2,4,3,0,16.4,9,No
+100383,21,Male,Finance,Finance Manager,85528,2.6,1.1,No,4,3,3,6,1,1,4,0,13.0,3,No
+100384,24,Male,R&D,Research Scientist,97182,5.1,1.9,No,4,3,4,8,3,3,4,1,8.8,4,No
+100385,21,Male,Sales,Sales Executive,70079,3.4,2.7,No,3,4,3,6,1,3,2,0,16.2,5,No
+100386,28,Male,HR,HR Business Partner,83087,9.4,6.8,No,3,3,3,5,1,3,3,1,19.3,1,Yes
+100387,38,Male,Sales,Account Manager,84307,3.3,2.0,No,3,3,4,6,4,3,4,0,14.6,1,No
+100388,39,Female,Operations,Supply Chain Specialist,75752,4.6,3.2,Yes,3,2,4,10,2,2,4,0,14.8,3,No
+100389,37,Male,Customer Support,Customer Success Manager,92120,5.6,5.5,No,4,2,3,7,1,2,3,0,13.8,4,No
+100390,23,Male,Operations,Operations Analyst,52032,1.3,0.0,No,4,4,4,5,0,3,4,0,19.1,1,No
+100391,18,Female,Finance,Accountant,83356,2.8,0.7,No,3,3,2,6,1,3,3,1,15.4,1,No
+100392,35,Female,HR,HR Generalist,88620,13.5,11.0,No,3,3,4,7,6,4,4,0,13.3,2,No
+100393,31,Female,Customer Support,Support Lead,80452,7.6,7.0,No,4,3,4,5,3,3,4,0,15.3,6,No
+100394,38,Female,R&D,Research Scientist,74976,3.3,1.4,Yes,2,2,3,6,2,4,2,0,12.0,3,No
+100395,40,Female,Sales,Sales Executive,62379,6.9,5.6,No,2,4,4,12,2,2,3,0,14.0,3,Yes
+100396,36,Male,Finance,Financial Analyst,99508,9.3,7.1,Yes,2,2,4,7,2,3,3,0,7.8,5,No
+100397,41,Male,R&D,Software Engineer,85385,3.7,1.9,No,4,3,4,3,3,4,4,0,15.8,2,No
+100398,36,Female,R&D,Lab Technician,98614,7.4,2.3,No,4,3,4,14,3,3,3,1,20.6,3,No
+100399,39,Male,Sales,Sales Executive,65405,6.7,2.7,Yes,2,1,3,10,1,2,2,0,15.6,8,Yes
+100400,29,Male,Finance,Finance Manager,99265,1.7,0.5,No,3,3,3,4,4,4,2,0,15.3,2,No
+100401,33,Male,R&D,Product Engineer,88513,3.7,1.5,Yes,4,1,3,7,3,3,4,0,11.8,1,No
+100402,36,Male,Sales,Sales Executive,99291,11.5,10.4,No,2,4,3,5,2,2,4,0,12.5,2,No
+100403,41,Male,Sales,Sales Executive,96225,13.3,10.2,No,3,3,3,12,2,4,3,0,16.2,4,Yes
+100404,31,Male,R&D,Lab Technician,93245,7.7,6.4,No,4,2,3,7,3,3,4,0,15.0,4,No
+100405,39,Female,Operations,Operations Manager,78516,2.7,1.8,No,3,3,3,8,3,3,3,1,19.7,2,No
+100406,32,Female,R&D,Lab Technician,61828,0.5,0.0,Yes,1,1,4,7,3,3,4,0,11.6,5,Yes
+100407,34,Male,IT,Security Analyst,78907,2.5,0.0,No,3,2,4,4,1,2,5,0,11.6,5,Yes
+100408,41,Female,IT,Security Analyst,79939,1.5,0.0,No,4,3,4,18,1,3,4,0,12.8,3,No
+100409,18,Male,R&D,Lab Technician,104388,12.0,11.0,No,1,3,3,12,2,4,3,0,8.7,3,Yes
+100410,24,Female,Operations,Operations Manager,87177,0.9,0.0,Yes,3,2,3,5,1,3,3,0,7.4,6,No
+100411,22,Female,IT,Systems Administrator,71872,1.7,1.1,No,3,3,3,9,1,4,1,0,13.6,4,No
+100412,18,Male,HR,HR Business Partner,78464,5.0,4.2,No,2,4,3,14,1,4,4,0,13.4,1,No
+100413,29,Female,Sales,Sales Representative,73555,4.3,1.3,No,3,2,3,8,1,3,4,0,12.9,6,No
+100414,41,Female,Sales,Sales Executive,67124,11.1,11.0,No,3,3,3,19,2,2,3,0,13.2,0,No
+100415,32,Female,Customer Support,Support Lead,80089,6.5,5.0,Yes,2,3,4,41,3,2,2,0,8.9,2,Yes
+100416,36,Female,Operations,Supply Chain Specialist,74750,3.9,2.7,Yes,3,1,3,8,2,2,2,0,10.3,3,No
+100417,43,Male,Customer Support,Support Specialist,75618,9.5,4.5,No,2,3,4,6,1,2,4,0,13.0,3,No
+100418,45,Male,Customer Support,Support Specialist,55709,3.2,2.7,No,2,2,4,5,0,4,3,0,14.2,11,Yes
+100419,34,Female,Sales,Sales Executive,89726,11.7,11.1,Yes,2,2,4,2,0,4,4,0,8.9,4,Yes
+100420,46,Female,Operations,Operations Analyst,62506,2.2,0.0,Yes,4,2,3,16,3,4,3,0,8.8,3,No
+100421,35,Female,R&D,Research Scientist,79007,4.2,3.0,No,3,3,3,7,0,2,4,1,13.0,1,No
+100422,28,Male,Operations,Supply Chain Specialist,55550,0.6,0.0,No,3,3,4,13,3,4,4,0,17.7,0,Yes
+100423,30,Female,Sales,Sales Manager,90239,8.0,7.0,No,2,2,3,15,1,4,4,0,12.9,10,Yes
+100424,22,Male,R&D,Research Scientist,101479,4.8,4.0,No,3,3,3,5,1,3,2,0,15.6,1,No
+100425,27,Female,IT,Systems Administrator,105943,11.7,7.9,Yes,3,2,4,5,1,4,2,0,13.6,2,No
+100426,32,Male,Operations,Operations Manager,113796,3.6,0.0,No,3,4,4,21,5,4,3,0,14.0,0,No
+100427,41,Female,Finance,Accountant,77500,1.3,0.0,No,3,4,4,8,4,3,4,0,15.7,1,No
+100428,49,Female,R&D,Software Engineer,98180,5.9,5.0,Yes,1,3,3,6,5,3,5,0,11.4,3,No
+100429,23,Male,R&D,Lab Technician,73726,2.9,1.4,No,2,2,3,5,2,3,3,0,9.8,3,No
+100430,38,Male,Customer Support,Support Lead,71076,7.2,6.6,No,3,3,4,8,3,1,3,0,8.8,1,No
+100431,26,Male,R&D,Lab Technician,81694,2.2,1.5,No,2,3,3,19,1,3,2,0,9.9,6,No
+100432,38,Female,R&D,Data Scientist,119545,10.4,9.7,No,3,3,3,12,0,2,4,0,14.9,2,No
+100433,33,Female,HR,Recruiter,66537,4.6,3.6,No,4,3,2,9,2,2,3,0,16.4,4,Yes
+100434,19,Male,R&D,Lab Technician,90261,3.9,2.2,No,3,1,3,20,1,3,5,0,9.3,5,No
+100435,42,Male,HR,HR Generalist,91958,10.0,8.5,Yes,3,2,3,18,1,2,3,0,5.9,2,No
+100436,30,Male,R&D,Research Scientist,87567,8.0,5.3,No,2,3,4,10,1,4,5,0,17.2,3,Yes
+100437,30,Male,Operations,Operations Analyst,70554,2.5,0.7,Yes,2,2,3,38,8,4,4,0,12.2,5,No
+100438,26,Female,Customer Support,Support Lead,80257,7.9,5.4,No,1,4,3,7,2,3,3,0,7.3,4,No
+100439,29,Female,Customer Support,Support Specialist,66448,6.8,4.0,No,3,2,4,15,5,3,4,1,5.6,5,No
+100440,38,Male,Finance,Accountant,76893,4.1,3.1,No,2,3,4,7,1,2,4,1,13.1,4,No
+100441,33,Female,R&D,Product Engineer,101973,7.5,6.2,No,4,4,3,13,0,4,3,0,10.4,3,No
+100442,37,Male,IT,Security Analyst,78122,10.4,0.0,No,3,3,4,7,1,3,4,0,10.0,2,No
+100443,37,Female,Operations,Operations Manager,95459,4.2,3.3,Yes,3,1,3,11,3,3,4,0,14.4,3,Yes
+100444,45,Male,Finance,Accountant,98150,4.2,1.6,No,3,4,3,30,4,4,4,0,9.2,2,Yes
+100445,32,Female,IT,IT Support,57433,4.0,3.6,No,2,3,3,14,3,3,3,0,12.0,3,No
+100446,22,Female,IT,Systems Administrator,83086,2.4,0.0,Yes,1,2,3,11,2,2,2,0,20.3,8,No
+100447,43,Male,IT,IT Support,86020,4.1,3.4,No,3,3,4,5,2,4,3,0,14.4,0,No
+100448,32,Female,IT,Security Analyst,67217,3.8,2.2,No,4,3,4,9,3,4,4,0,13.6,4,No
+100449,44,Female,Sales,Sales Manager,90524,3.7,2.3,No,3,2,2,5,1,3,2,0,11.7,4,No
+100450,38,Male,HR,HR Business Partner,76533,3.6,2.1,Yes,2,2,3,13,3,3,4,0,14.3,5,No
+100451,33,Male,Finance,Financial Analyst,64850,1.7,0.4,No,3,3,5,13,1,4,3,0,15.9,1,No
+100452,37,Female,Sales,Sales Executive,73155,8.6,6.4,No,3,4,3,7,1,4,2,0,8.5,1,Yes
+100453,50,Male,Operations,Supply Chain Specialist,69195,2.8,0.0,No,4,3,3,20,4,3,3,0,10.6,1,No
+100454,52,Male,Finance,Finance Manager,135359,10.8,10.2,No,4,4,3,19,2,2,3,0,9.7,1,No
+100455,35,Male,Sales,Sales Executive,53530,2.0,0.7,No,3,3,3,9,7,2,5,0,11.0,0,No
+100456,36,Female,Operations,Operations Manager,120981,12.3,12.1,Yes,2,1,3,11,4,3,4,0,18.4,4,Yes
+100457,43,Male,IT,Systems Administrator,72896,3.4,1.7,No,3,2,3,6,4,4,4,0,14.2,5,No
+100458,28,Male,IT,Systems Administrator,93501,7.9,7.4,No,3,4,3,7,2,2,3,0,11.7,2,No
+100459,37,Female,R&D,Lab Technician,98780,4.8,3.3,Yes,3,2,3,5,3,3,2,0,16.4,2,Yes
+100460,34,Male,Operations,Operations Analyst,65753,1.5,0.0,Yes,1,1,3,6,3,3,4,0,12.7,5,Yes
+100461,37,Female,R&D,Product Engineer,75903,1.6,1.4,No,4,4,2,8,2,3,3,0,6.3,2,No
+100462,28,Male,Finance,Accountant,78025,2.6,0.6,No,3,4,2,3,2,3,3,0,17.8,0,No
+100463,21,Female,Sales,Sales Representative,55034,3.2,0.0,No,4,2,3,11,3,2,3,0,11.5,1,No
+100464,18,Female,Finance,Accountant,74810,4.3,1.9,No,4,2,4,14,3,4,3,0,6.1,4,No
+100465,25,Male,IT,Systems Administrator,96431,5.5,4.9,No,3,3,4,8,0,3,4,0,8.4,5,No
+100466,31,Female,Finance,Financial Analyst,97219,3.9,2.5,No,3,2,3,2,4,4,4,0,15.9,3,Yes
+100467,32,Male,HR,HR Business Partner,56836,5.3,3.7,No,4,3,3,7,0,2,5,0,6.5,1,No
+100468,50,Male,Operations,Operations Manager,106119,5.9,4.6,No,3,4,3,4,3,4,5,0,16.7,4,No
+100469,44,Male,IT,IT Support,87570,3.7,3.3,No,2,2,3,6,3,4,2,0,12.3,6,No
+100470,27,Female,R&D,Lab Technician,84855,6.8,6.1,No,3,3,4,18,2,3,2,0,16.5,2,No
+100471,37,Male,Customer Support,Customer Success Manager,92714,7.8,6.6,Yes,3,3,5,2,2,3,2,0,13.1,0,No
+100472,31,Male,IT,IT Support,82007,6.0,4.2,No,2,3,3,5,2,2,4,0,13.8,1,No
+100473,32,Male,Customer Support,Support Specialist,87269,6.3,5.4,Yes,1,2,3,13,0,2,3,0,13.1,5,No
+100474,36,Male,Customer Support,Support Lead,80872,5.0,4.9,No,4,2,3,6,2,3,3,0,11.9,1,No
+100475,40,Male,Customer Support,Support Lead,70509,9.0,8.1,No,3,4,3,5,2,3,3,0,8.3,3,No
+100476,32,Male,IT,Security Analyst,68627,4.3,0.0,Yes,2,1,3,25,4,2,4,0,13.3,6,Yes
+100477,43,Male,Finance,Finance Manager,107597,2.7,0.6,No,4,3,3,10,0,4,2,0,5.6,2,No
+100478,25,Male,Sales,Sales Manager,92976,4.4,2.7,Yes,1,2,2,14,0,3,2,0,15.3,10,Yes
+100479,35,Female,HR,Recruiter,71996,1.5,0.8,No,2,4,4,11,2,3,3,0,14.7,2,No
+100480,56,Male,Operations,Operations Manager,76948,1.4,0.4,No,2,3,3,9,6,3,4,0,13.6,7,No
+100481,36,Female,HR,Recruiter,87472,7.8,7.7,No,3,3,3,16,2,3,3,0,4.0,1,No
+100482,46,Male,Operations,Operations Analyst,88294,10.9,10.3,No,3,2,5,23,2,3,3,0,10.1,6,No
+100483,35,Male,Sales,Sales Manager,90488,3.4,1.4,Yes,1,2,4,3,2,3,2,0,12.2,5,No
+100484,39,Male,R&D,Software Engineer,98946,7.9,6.1,No,2,3,3,8,1,3,4,0,14.4,4,No
+100485,34,Male,HR,Recruiter,75666,0.8,0.0,No,3,2,5,8,2,4,3,0,10.7,5,No
+100486,33,Male,R&D,Data Scientist,115547,6.1,4.8,Yes,4,1,4,6,3,3,2,0,22.9,4,No
+100487,28,Female,Sales,Sales Executive,62934,4.3,2.8,No,2,3,3,14,2,4,2,0,11.1,7,Yes
+100488,38,Male,Sales,Sales Executive,91641,12.0,11.2,Yes,1,1,3,9,1,3,2,0,8.4,1,No
+100489,28,Male,Operations,Operations Analyst,71575,3.9,1.7,No,2,2,3,24,2,3,3,0,11.3,8,No
+100490,40,Female,HR,HR Generalist,51690,1.9,0.2,Yes,3,3,3,15,1,3,3,0,8.7,3,No
+100491,43,Male,Sales,Sales Representative,73164,1.2,0.2,No,3,3,4,17,2,4,2,0,9.9,3,Yes
+100492,38,Male,Sales,Sales Manager,102468,4.4,4.0,Yes,3,3,3,4,4,3,4,0,15.5,0,No
+100493,32,Male,R&D,Research Scientist,88413,5.0,4.1,Yes,2,2,3,5,0,3,3,0,13.8,5,No
+100494,38,Male,Sales,Sales Manager,92459,3.8,2.9,No,3,3,3,5,3,3,5,0,13.8,3,No
+100495,32,Male,IT,IT Support,112063,8.0,7.2,No,4,3,4,17,2,3,2,0,18.5,1,No
+100496,42,Female,Operations,Supply Chain Specialist,103452,10.1,9.9,Yes,3,3,3,5,3,3,4,0,13.7,6,No
+100497,19,Female,R&D,Product Engineer,82113,3.4,0.0,No,3,4,2,5,5,3,4,0,8.3,3,No
+100498,32,Male,Finance,Financial Analyst,72088,0.9,0.0,No,4,4,3,4,5,3,3,0,14.5,2,No
+100499,18,Female,Sales,Sales Executive,53822,5.4,4.1,No,3,3,3,37,1,4,3,0,8.1,1,Yes
+100500,22,Female,R&D,Research Scientist,110413,9.2,7.4,No,3,2,3,8,2,4,4,0,10.3,4,No
+100501,46,Male,Operations,Operations Analyst,82066,3.4,1.3,No,3,4,3,11,1,4,3,0,11.8,4,No
+100502,42,Female,HR,HR Business Partner,87407,6.3,5.0,No,3,4,3,4,2,3,5,0,11.5,2,No
+100503,29,Female,Operations,Operations Manager,94069,1.8,0.0,Yes,4,3,3,14,1,4,2,0,5.7,2,Yes
+100504,22,Female,R&D,Data Scientist,112131,5.3,2.9,No,2,3,3,3,4,1,3,0,8.6,5,No
+100505,18,Female,R&D,Research Scientist,85500,6.4,4.7,No,4,4,3,5,0,4,5,0,11.9,0,No
+100506,30,Male,R&D,Software Engineer,94157,5.4,2.7,No,3,4,4,5,2,2,4,0,11.9,1,No
+100507,54,Male,HR,HR Generalist,95115,14.0,13.2,No,4,3,3,9,4,2,4,0,15.9,0,No
+100508,38,Male,Customer Support,Support Specialist,89287,10.8,9.4,Yes,2,2,3,5,2,3,4,0,16.5,5,No
+100509,30,Male,Sales,Sales Representative,67525,7.0,0.0,No,3,3,3,19,4,3,2,0,8.1,2,Yes
+100510,38,Male,Operations,Supply Chain Specialist,92189,8.6,5.4,No,4,2,2,11,0,2,4,0,12.2,2,No
+100511,22,Female,Operations,Operations Analyst,88548,5.2,3.5,No,3,2,2,6,1,3,4,0,17.5,2,No
+100512,32,Male,HR,Recruiter,72834,4.2,3.6,No,2,2,3,14,2,4,3,0,11.5,3,No
+100513,35,Male,R&D,Lab Technician,87196,3.2,1.7,No,4,2,3,7,2,2,5,0,10.6,0,No
+100514,34,Female,HR,HR Generalist,69977,1.8,0.0,Yes,4,2,3,6,3,3,4,0,15.0,2,No
+100515,41,Male,R&D,Product Engineer,125453,11.1,8.5,No,3,3,5,13,2,3,2,0,13.0,5,No
+100516,37,Male,Operations,Operations Manager,126794,14.3,14.1,Yes,2,3,3,2,0,4,4,0,16.4,4,No
+100517,40,Female,HR,HR Business Partner,75089,4.5,4.3,Yes,3,3,3,12,5,4,3,0,9.9,5,No
+100518,29,Male,Customer Support,Customer Success Manager,100321,4.6,2.5,No,4,4,4,6,3,1,4,0,12.3,1,No
+100519,42,Male,Finance,Financial Analyst,96824,6.5,6.2,Yes,1,3,3,6,2,4,4,0,14.8,2,No
+100520,48,Male,HR,HR Business Partner,50459,3.9,3.4,Yes,2,1,4,24,2,3,3,0,14.4,3,No
+100521,27,Female,IT,IT Support,67959,2.0,0.7,No,4,2,3,6,2,3,5,0,12.4,2,No
+100522,27,Male,HR,Recruiter,67559,1.5,0.0,Yes,1,3,3,14,3,2,4,0,5.3,2,No
+100523,45,Male,Customer Support,Customer Success Manager,113198,14.0,11.8,Yes,2,3,4,10,2,3,3,0,12.8,7,No
+100524,33,Male,Sales,Sales Executive,68163,1.0,0.0,Yes,3,3,2,10,1,4,3,0,15.0,1,No
+100525,46,Male,Customer Support,Support Specialist,84321,5.5,2.7,Yes,2,2,4,7,2,3,4,0,11.3,9,Yes
+100526,31,Female,Operations,Operations Analyst,58528,1.2,0.0,No,4,2,3,7,0,3,3,0,14.5,1,Yes
+100527,46,Male,Operations,Supply Chain Specialist,63827,4.1,2.6,No,3,3,3,19,2,3,3,0,12.9,1,No
+100528,36,Female,HR,Recruiter,63629,3.4,3.0,No,2,3,3,14,1,2,3,0,11.3,5,No
+100529,37,Male,Operations,Operations Manager,82710,1.4,0.9,No,1,4,3,6,2,4,3,1,19.3,1,No
+100530,47,Male,R&D,Product Engineer,109265,6.7,6.2,No,4,4,3,5,1,3,2,0,10.8,5,No
+100531,32,Female,Operations,Supply Chain Specialist,56442,1.8,1.1,No,4,4,4,6,2,2,4,0,13.1,4,No
+100532,27,Male,Sales,Account Manager,84522,1.2,0.2,No,4,3,3,14,0,2,2,0,11.3,0,No
+100533,31,Male,R&D,Software Engineer,109531,7.2,5.4,No,2,2,4,16,2,3,3,0,14.3,7,Yes
+100534,38,Female,R&D,Software Engineer,92253,3.4,3.1,No,4,3,3,11,1,4,2,0,14.7,0,No
+100535,22,Male,R&D,Product Engineer,85608,2.4,2.0,No,2,2,3,3,1,2,2,0,6.8,7,Yes
+100536,40,Male,R&D,Data Scientist,114540,7.5,5.1,No,2,4,3,12,2,4,4,0,15.0,4,No
+100537,30,Female,Operations,Supply Chain Specialist,82401,1.8,0.9,Yes,2,1,3,17,3,3,3,0,12.2,10,Yes
+100538,44,Male,R&D,Software Engineer,74673,0.9,0.3,No,4,3,3,9,2,2,3,0,13.9,2,No
+100539,18,Male,IT,IT Support,107575,9.7,8.5,Yes,4,2,4,24,0,3,2,0,22.4,3,Yes
+100540,28,Male,Sales,Sales Manager,113531,12.8,8.9,No,3,3,4,4,2,4,3,0,12.2,0,No
+100541,21,Male,Operations,Operations Manager,78225,4.0,1.4,No,2,2,3,12,3,2,4,0,7.7,4,Yes
+100542,28,Male,Operations,Operations Analyst,58213,0.2,0.0,No,2,1,3,5,2,2,3,0,12.7,5,Yes
+100543,37,Female,R&D,Software Engineer,85393,4.0,0.0,Yes,2,2,3,15,3,4,4,0,13.2,2,Yes
+100544,33,Male,IT,Security Analyst,91349,7.7,5.8,No,4,3,3,11,7,3,4,0,15.1,0,No
+100545,32,Female,Customer Support,Support Specialist,73177,9.1,3.8,No,4,4,3,22,2,2,3,1,12.6,1,No
+100546,33,Male,Operations,Operations Manager,93712,1.9,0.0,No,4,2,3,11,0,4,2,0,9.1,1,No
+100547,36,Male,R&D,Lab Technician,91834,3.5,3.2,No,3,3,2,7,1,4,3,0,6.6,1,No
+100548,26,Male,HR,HR Business Partner,69888,5.2,5.0,No,3,2,3,6,2,3,3,0,7.2,0,No
+100549,40,Female,Operations,Operations Analyst,81172,7.5,7.0,No,4,3,4,7,3,3,3,0,12.5,0,No
+100550,40,Male,R&D,Product Engineer,86624,6.9,3.3,No,3,1,4,6,2,3,3,0,13.6,6,No
+100551,38,Male,Operations,Operations Manager,104129,6.2,5.0,No,3,4,4,17,3,3,3,0,21.2,1,No
+100552,39,Female,R&D,Lab Technician,115521,9.1,8.0,Yes,1,2,3,16,2,2,5,0,6.1,7,No
+100553,37,Female,Operations,Operations Analyst,85848,4.2,1.4,Yes,2,1,3,4,4,4,3,0,13.2,3,No
+100554,51,Male,Sales,Sales Representative,82448,11.2,10.4,Yes,2,1,3,8,2,4,3,0,9.5,8,Yes
+100555,34,Female,Sales,Sales Executive,79201,2.9,1.2,No,2,2,4,8,1,3,2,0,14.8,7,No
+100556,32,Male,Customer Support,Support Lead,69140,7.0,4.6,No,3,3,3,5,2,3,4,0,10.1,1,No
+100557,28,Male,Operations,Supply Chain Specialist,61097,3.2,2.6,No,3,3,4,10,2,4,4,0,17.6,2,No
+100558,26,Male,Operations,Operations Manager,82543,4.0,3.6,No,3,3,3,18,1,4,4,0,15.6,6,No
+100559,24,Male,Customer Support,Customer Success Manager,76714,4.5,3.0,No,2,2,3,13,3,4,4,0,11.6,4,No
+100560,27,Male,R&D,Lab Technician,86924,3.1,1.4,Yes,2,1,3,17,2,2,3,0,17.0,5,No
+100561,34,Female,R&D,Lab Technician,101443,9.3,6.6,Yes,2,3,3,6,3,3,3,0,14.7,7,No
+100562,37,Male,Sales,Sales Representative,56872,3.3,2.8,No,3,4,4,8,3,4,5,0,18.9,2,No
+100563,35,Female,HR,HR Business Partner,62133,4.3,3.6,No,4,3,5,5,0,3,4,0,13.8,3,No
+100564,28,Female,R&D,Software Engineer,85025,6.5,0.9,No,2,3,3,9,4,4,2,0,15.3,2,No
+100565,42,Female,Customer Support,Support Specialist,99271,17.9,14.7,Yes,4,1,3,10,2,4,4,0,9.3,5,Yes
+100566,41,Female,Sales,Sales Representative,82259,6.6,5.3,No,3,3,4,14,3,2,3,0,11.0,0,Yes
+100567,33,Female,Sales,Sales Manager,104950,4.6,1.0,No,3,3,3,17,2,3,4,0,19.6,4,No
+100568,29,Female,R&D,Research Scientist,93346,0.8,0.3,No,2,3,4,12,1,2,4,0,10.2,6,No
+100569,39,Male,Sales,Sales Executive,70984,4.0,2.8,Yes,3,2,4,5,3,3,2,0,12.5,6,No
+100570,36,Male,R&D,Research Scientist,78210,2.7,1.0,No,3,3,3,4,2,3,4,0,5.4,3,No
+100571,23,Male,Finance,Finance Manager,97190,3.5,2.5,No,3,2,2,11,2,4,4,0,9.0,5,No
+100572,34,Male,R&D,Lab Technician,91045,3.2,2.1,No,3,4,3,19,5,2,4,0,8.5,2,No
+100573,37,Male,Finance,Financial Analyst,88263,6.4,3.8,No,3,3,3,8,3,1,4,0,9.7,2,No
+100574,27,Female,Operations,Operations Analyst,76187,3.9,0.7,No,3,4,4,4,2,2,5,0,15.0,0,Yes
+100575,36,Male,Finance,Accountant,94414,2.2,1.3,No,3,3,3,26,3,2,4,0,13.9,3,No
+100576,23,Female,IT,IT Support,95551,8.0,7.7,No,3,4,3,11,3,3,3,0,8.5,2,No
+100577,45,Male,R&D,Lab Technician,99621,1.6,1.4,No,2,4,3,9,0,3,4,0,9.2,4,No
+100578,45,Male,Sales,Sales Manager,78258,4.5,4.4,Yes,2,2,4,4,0,2,5,0,17.8,2,Yes
+100579,32,Male,R&D,Research Scientist,90827,4.0,0.0,Yes,3,1,3,8,2,2,4,0,18.0,1,No
+100580,37,Male,Customer Support,Support Specialist,70744,5.6,3.0,No,3,2,3,12,2,2,4,0,16.4,5,No
+100581,18,Male,Finance,Finance Manager,112263,9.1,7.0,Yes,4,2,3,11,0,2,4,1,8.7,5,No
+100582,25,Male,R&D,Product Engineer,143935,19.6,18.8,Yes,4,2,3,6,2,3,4,0,16.2,6,No
+100583,32,Male,R&D,Product Engineer,102497,4.6,3.8,No,3,3,3,8,2,3,3,0,18.5,4,No
+100584,26,Male,Operations,Supply Chain Specialist,88144,2.6,0.0,No,3,4,3,6,1,4,5,0,6.1,3,No
+100585,40,Male,IT,Security Analyst,79702,2.5,2.3,Yes,3,2,3,20,1,2,3,0,15.8,3,No
+100586,51,Male,Finance,Finance Manager,82579,2.4,1.4,No,2,4,4,13,0,3,4,0,14.8,4,No
+100587,25,Male,Operations,Supply Chain Specialist,81893,5.5,1.9,No,3,2,4,6,0,3,3,1,15.4,3,No
+100588,28,Male,IT,Systems Administrator,76598,0.6,0.0,No,3,4,5,4,1,4,2,0,14.4,5,No
+100589,36,Male,Finance,Accountant,72683,1.5,0.0,No,2,3,4,10,2,3,3,0,15.6,4,No
+100590,48,Male,Sales,Sales Executive,71536,5.5,4.2,No,3,4,3,6,1,4,3,0,16.1,4,No
+100591,24,Male,Sales,Sales Executive,73889,8.2,6.9,Yes,2,3,3,6,0,2,4,0,15.9,4,Yes
+100592,37,Female,Customer Support,Customer Success Manager,97037,8.2,6.7,No,2,3,4,4,2,3,3,1,11.2,2,No
+100593,49,Female,Finance,Finance Manager,116517,4.8,3.6,Yes,2,2,2,5,6,3,3,0,9.7,10,Yes
+100594,21,Female,R&D,Lab Technician,110501,7.5,7.1,No,4,4,5,9,3,2,5,0,14.3,1,No
+100595,24,Male,Finance,Finance Manager,110004,9.2,8.0,No,2,3,2,7,1,3,4,0,17.5,8,No
+100596,31,Male,Sales,Sales Executive,57958,3.3,3.2,Yes,2,3,3,32,0,4,5,0,4.0,8,No
+100597,30,Male,Operations,Operations Manager,95224,8.6,7.6,Yes,1,2,3,11,2,2,4,0,9.9,10,No
+100598,41,Female,Sales,Sales Executive,72065,1.1,0.0,No,2,2,4,4,2,3,3,0,8.7,9,Yes
+100599,36,Female,Operations,Operations Analyst,72637,1.5,0.0,Yes,3,1,3,4,3,2,4,0,7.2,5,No
+100600,20,Female,HR,HR Business Partner,48871,3.4,0.0,No,2,3,3,10,2,2,3,0,15.5,8,No
+100601,39,Female,R&D,Research Scientist,76619,1.0,0.5,Yes,3,3,3,7,1,2,4,0,10.1,3,No
+100602,30,Male,Sales,Sales Executive,70249,6.5,6.2,No,4,3,3,17,4,3,3,0,4.0,0,No
+100603,45,Female,Operations,Operations Manager,84477,2.9,1.2,No,4,4,4,10,3,3,2,0,13.4,3,No
+100604,29,Female,Sales,Account Manager,96126,4.0,2.6,No,4,3,3,3,2,3,4,0,19.1,2,No
+100605,29,Male,Sales,Sales Executive,74240,4.1,1.8,No,2,2,4,5,3,2,3,1,10.2,1,No
+100606,39,Female,IT,Security Analyst,81305,3.4,2.6,No,3,3,3,6,3,3,3,0,13.9,0,No
+100607,41,Male,R&D,Product Engineer,75905,2.4,0.9,No,3,3,3,10,4,4,4,0,17.5,4,Yes
+100608,38,Female,R&D,Research Scientist,88461,6.3,4.9,Yes,3,2,4,5,1,2,4,0,13.8,3,Yes
+100609,21,Female,R&D,Software Engineer,83675,2.9,1.9,No,4,3,3,9,0,3,3,0,18.7,0,No
+100610,39,Male,Operations,Operations Manager,91006,4.1,3.9,No,4,3,3,4,3,3,3,0,9.7,2,No
+100611,26,Female,R&D,Product Engineer,92188,5.7,3.1,No,4,3,3,8,1,2,3,0,17.1,1,No
+100612,36,Male,Sales,Sales Executive,86463,9.2,7.5,No,4,3,4,10,2,3,3,0,18.2,1,No
+100613,23,Female,R&D,Software Engineer,88038,8.7,6.0,No,3,4,3,18,6,2,3,0,11.9,4,No
+100614,38,Female,Sales,Sales Executive,55096,3.1,0.0,No,3,4,3,9,2,4,3,0,6.8,3,No
+100615,28,Female,R&D,Research Scientist,81057,2.3,1.0,No,3,3,4,5,2,3,4,0,10.5,3,No
+100616,24,Female,Sales,Sales Executive,99368,10.4,7.8,No,2,3,3,19,2,3,4,0,4.0,6,No
+100617,40,Male,Sales,Sales Manager,90888,2.9,0.0,Yes,2,1,3,7,2,4,3,0,14.1,3,Yes
+100618,36,Male,R&D,Data Scientist,111488,6.1,0.1,No,2,4,3,12,3,3,4,0,13.7,5,No
+100619,29,Male,Operations,Supply Chain Specialist,66501,0.9,0.0,No,3,4,3,6,3,3,4,0,12.3,0,No
+100620,46,Male,Sales,Sales Manager,75006,0.6,0.0,Yes,2,3,4,9,3,4,3,0,13.6,3,Yes
+100621,31,Male,Sales,Sales Executive,76415,4.6,2.8,No,4,1,3,5,1,4,4,0,16.8,5,No
+100622,35,Male,Customer Support,Support Lead,65744,3.7,1.4,No,4,3,4,10,2,2,4,0,15.0,2,Yes
+100623,37,Male,Operations,Operations Analyst,94549,7.2,4.0,No,2,3,4,13,3,3,3,0,12.1,3,No
+100624,29,Male,IT,Systems Administrator,63802,2.5,0.7,No,4,4,3,6,0,4,4,0,12.5,3,Yes
+100625,38,Female,R&D,Research Scientist,84024,5.4,0.0,Yes,3,2,3,6,1,3,3,0,19.2,10,No
+100626,30,Male,R&D,Lab Technician,98871,7.0,1.9,Yes,2,2,3,10,2,4,4,0,14.2,6,No
+100627,31,Female,Sales,Account Manager,86442,2.5,1.0,Yes,2,2,4,5,1,4,4,0,12.6,4,No
+100628,46,Male,Sales,Account Manager,106483,3.4,1.9,Yes,2,1,3,4,3,3,3,0,11.8,6,Yes
+100629,26,Male,R&D,Lab Technician,63490,1.8,0.9,No,4,3,3,10,2,3,2,0,13.6,0,Yes
+100630,18,Male,Finance,Finance Manager,115382,7.4,5.0,No,3,3,4,8,0,3,4,0,12.5,0,No
+100631,48,Male,R&D,Research Scientist,93779,6.4,5.3,No,3,4,3,8,3,2,3,0,10.2,3,Yes
+100632,55,Male,Finance,Financial Analyst,93581,6.7,5.8,No,3,4,4,11,3,2,4,0,14.0,0,Yes
+100633,31,Male,R&D,Data Scientist,119439,3.7,1.4,No,2,4,3,12,2,3,4,0,17.3,2,No
+100634,19,Male,R&D,Lab Technician,102046,6.3,5.9,No,3,3,3,7,1,4,3,0,14.8,2,No
+100635,32,Male,Operations,Supply Chain Specialist,58044,3.9,0.7,No,4,4,3,4,2,4,4,0,10.6,1,No
+100636,32,Female,Operations,Operations Analyst,110604,11.5,9.1,No,4,2,4,6,1,4,4,0,17.0,6,No
+100637,33,Male,R&D,Data Scientist,119633,4.4,0.0,No,3,4,3,11,3,3,4,0,12.0,3,No
+100638,25,Female,Finance,Finance Manager,121248,8.4,6.5,No,4,4,3,9,1,3,3,0,13.2,3,No
+100639,39,Male,R&D,Data Scientist,89280,3.7,1.0,No,2,3,4,6,2,3,5,0,14.9,7,No
+100640,39,Female,Sales,Sales Manager,104635,10.0,7.0,Yes,2,3,5,5,4,3,3,0,6.6,2,No
+100641,22,Female,IT,IT Support,79579,2.3,0.0,No,4,3,2,11,2,4,3,0,4.0,4,No
+100642,40,Female,Sales,Sales Executive,79529,5.8,4.1,No,3,3,3,7,1,2,2,0,12.8,4,No
+100643,51,Female,R&D,Software Engineer,66706,2.7,1.8,No,3,3,3,12,1,2,4,0,9.0,2,Yes
+100644,36,Male,HR,HR Generalist,65718,5.2,3.3,No,3,3,3,13,4,2,3,0,6.3,2,No
+100645,32,Male,Sales,Sales Executive,71162,2.9,0.0,No,2,3,2,7,3,4,3,0,9.1,2,No
+100646,33,Male,Sales,Sales Representative,79276,4.3,0.8,No,3,3,3,14,1,4,3,0,15.2,3,No
+100647,40,Female,R&D,Software Engineer,88115,3.2,3.0,No,3,4,3,9,5,1,3,0,13.3,0,No
+100648,20,Female,Customer Support,Customer Success Manager,104097,6.8,0.0,No,3,3,3,9,3,4,2,0,14.7,1,No
+100649,36,Male,Finance,Financial Analyst,93298,6.0,5.1,No,2,2,3,2,1,3,2,0,13.6,7,No
+100650,31,Female,R&D,Research Scientist,90988,2.6,0.0,Yes,2,3,5,5,2,4,4,0,10.8,4,No
+100651,50,Male,Sales,Sales Manager,83626,2.6,0.0,Yes,2,1,3,5,2,4,2,1,17.2,9,No
+100652,33,Female,Finance,Finance Manager,103360,2.2,0.8,No,2,3,4,7,2,4,4,0,16.1,2,No
+100653,48,Female,Sales,Account Manager,68764,1.8,0.0,Yes,3,2,3,9,0,3,5,0,11.6,5,No
+100654,25,Male,HR,Recruiter,85219,7.1,6.9,No,4,3,4,9,3,2,3,1,16.7,2,No
+100655,39,Female,IT,Systems Administrator,63449,2.1,0.0,Yes,3,1,4,10,4,3,4,0,16.8,6,No
+100656,37,Female,R&D,Research Scientist,98089,5.5,2.1,No,4,2,3,6,5,4,3,0,9.4,0,Yes
+100657,27,Male,R&D,Research Scientist,79649,3.0,0.9,No,3,2,3,12,4,3,5,0,15.8,8,No
+100658,36,Male,Sales,Sales Representative,81570,8.2,5.0,Yes,3,2,3,22,3,4,3,0,14.0,7,No
+100659,44,Male,Sales,Sales Executive,85985,13.3,8.1,No,3,4,3,7,1,3,2,0,12.0,3,No
+100660,32,Female,R&D,Research Scientist,70108,0.2,0.0,No,3,2,4,6,2,3,3,0,19.4,4,Yes
+100661,21,Male,Operations,Operations Analyst,70672,2.3,0.8,Yes,4,3,3,6,1,2,5,0,7.5,1,Yes
+100662,34,Female,R&D,Data Scientist,108389,3.0,1.1,Yes,1,3,3,9,0,3,4,0,10.4,8,Yes
+100663,27,Female,Finance,Financial Analyst,92004,3.8,2.5,No,3,3,5,6,4,3,3,0,11.6,4,No
+100664,32,Male,IT,Systems Administrator,69169,3.6,2.5,Yes,3,1,3,3,4,1,4,0,13.3,2,No
+100665,34,Male,Sales,Account Manager,65290,1.5,0.0,No,2,2,3,4,1,2,4,0,16.1,7,Yes
+100666,21,Female,Sales,Sales Manager,108422,13.5,12.3,No,3,3,3,14,3,1,3,0,8.6,1,No
+100667,21,Female,R&D,Data Scientist,94250,3.7,0.7,No,4,4,5,17,2,3,5,0,25.0,2,No
+100668,38,Male,IT,IT Support,101301,6.0,4.6,No,4,3,3,20,2,4,3,0,9.7,3,No
+100669,30,Male,R&D,Research Scientist,105582,6.1,4.5,No,2,2,3,9,1,2,4,0,13.3,1,No
+100670,18,Male,IT,Systems Administrator,62870,1.2,0.5,Yes,1,2,4,5,3,4,4,0,14.0,5,No
+100671,41,Female,Operations,Operations Manager,108273,3.4,0.5,No,2,2,4,6,2,4,3,0,14.2,6,Yes
+100672,37,Male,IT,IT Support,102244,7.1,6.9,No,2,3,3,4,1,4,3,0,9.2,7,Yes
+100673,29,Female,Customer Support,Support Lead,68614,10.4,6.5,No,2,2,5,4,3,3,4,0,17.7,5,No
+100674,24,Male,IT,Security Analyst,69608,3.4,0.0,Yes,2,1,2,9,2,4,4,0,9.0,6,Yes
+100675,41,Female,Operations,Operations Analyst,49547,1.4,0.0,Yes,3,2,3,11,1,2,4,0,5.8,4,Yes
+100676,37,Male,Operations,Operations Manager,90181,2.8,1.2,No,3,4,3,24,4,2,2,0,8.1,3,No
+100677,54,Male,IT,Security Analyst,78717,3.3,3.0,No,3,4,3,8,4,3,4,0,17.1,4,No
+100678,38,Female,Operations,Operations Manager,92380,3.2,2.3,No,2,2,4,4,3,3,4,0,18.4,4,No
+100679,38,Female,Customer Support,Customer Success Manager,60799,2.2,0.0,No,4,3,3,8,0,4,3,0,5.0,5,No
+100680,33,Male,R&D,Data Scientist,83315,1.3,0.0,No,4,3,3,7,2,3,4,0,14.8,2,No
+100681,41,Male,Finance,Financial Analyst,77781,1.7,0.0,No,2,4,3,6,1,3,3,0,5.1,2,No
+100682,40,Male,HR,HR Business Partner,70560,2.8,0.0,Yes,3,1,3,10,2,3,3,0,11.9,8,No
+100683,45,Male,Operations,Operations Analyst,64222,7.0,6.3,No,3,3,4,4,5,3,3,1,12.3,2,Yes
+100684,30,Male,R&D,Research Scientist,90630,8.8,6.6,No,3,3,3,9,4,3,3,0,15.1,3,No
+100685,31,Female,Operations,Supply Chain Specialist,84242,4.7,0.1,Yes,3,1,4,12,2,2,5,0,15.9,4,Yes
+100686,31,Male,Operations,Operations Analyst,54741,1.8,0.0,No,3,2,3,18,4,3,4,0,15.4,5,No
+100687,41,Female,Customer Support,Support Lead,59148,2.9,0.0,No,4,3,5,10,1,3,3,0,13.0,2,No
+100688,47,Male,R&D,Software Engineer,64044,0.6,0.0,Yes,2,2,4,14,3,3,5,0,13.3,2,Yes
+100689,31,Male,IT,IT Support,109403,10.6,8.3,No,3,4,3,6,5,4,3,0,6.8,4,No
+100690,31,Female,IT,Systems Administrator,58167,2.6,0.0,Yes,3,2,3,7,1,4,3,0,8.4,1,Yes
+100691,37,Male,Customer Support,Support Lead,65180,5.6,5.2,No,4,4,4,17,0,4,4,0,17.3,4,No
+100692,32,Female,Customer Support,Support Specialist,85343,8.4,8.3,No,2,3,3,4,2,2,2,0,13.3,1,No
+100693,42,Male,Finance,Financial Analyst,115170,12.4,8.7,No,3,2,3,7,1,3,3,1,14.9,3,No
+100694,18,Female,Finance,Accountant,89823,7.5,5.2,No,4,3,4,15,6,2,3,0,18.4,4,No
+100695,28,Female,Sales,Sales Representative,55952,3.2,1.3,Yes,1,3,4,7,3,3,4,0,9.4,1,No
+100696,28,Female,Customer Support,Support Specialist,67744,6.2,3.7,No,3,4,4,7,2,2,4,0,16.5,4,No
+100697,18,Male,R&D,Data Scientist,119116,12.1,12.0,No,3,3,4,7,5,4,3,0,9.9,3,No
+100698,27,Male,IT,Systems Administrator,75420,2.6,1.3,No,3,2,3,9,0,4,3,0,17.2,4,No
+100699,27,Male,Operations,Supply Chain Specialist,63094,1.2,0.4,Yes,3,2,4,15,4,4,4,0,15.9,1,Yes
+100700,33,Male,R&D,Lab Technician,77278,2.2,0.5,Yes,2,2,3,14,4,4,4,1,17.9,12,No
+100701,44,Male,Sales,Account Manager,101883,5.9,4.1,Yes,3,3,4,8,2,3,3,0,11.5,1,Yes
+100702,32,Male,Sales,Sales Representative,52926,3.3,0.9,Yes,2,1,3,15,0,3,4,0,19.6,5,Yes
+100703,26,Male,Operations,Supply Chain Specialist,57781,4.1,1.4,Yes,3,1,3,10,1,4,5,0,19.0,2,Yes
+100704,34,Male,HR,HR Generalist,72392,6.6,6.4,Yes,3,3,5,13,3,3,4,0,15.5,3,No
+100705,43,Male,Sales,Sales Representative,59836,2.1,0.8,No,3,3,3,5,1,2,3,0,16.1,2,No
+100706,26,Male,IT,IT Support,79519,3.9,2.4,No,3,3,3,21,6,4,2,1,13.4,0,Yes
+100707,27,Male,R&D,Lab Technician,81920,2.9,2.5,No,2,4,3,9,0,3,2,0,7.6,2,No
+100708,39,Female,Operations,Operations Manager,109623,11.8,11.5,No,4,2,3,2,2,4,3,0,14.8,3,No
+100709,33,Male,R&D,Software Engineer,88837,7.4,7.1,No,4,4,3,20,2,3,3,0,8.8,3,Yes
+100710,40,Male,Sales,Sales Representative,58165,3.3,0.2,No,3,3,4,8,3,3,3,0,18.6,2,Yes
+100711,34,Male,Sales,Account Manager,78815,3.1,2.9,Yes,1,3,3,7,3,4,4,0,15.7,4,Yes
+100712,40,Female,HR,HR Business Partner,106523,12.7,12.4,No,2,3,3,6,1,2,3,0,12.8,3,No
+100713,26,Male,R&D,Lab Technician,114775,12.0,10.3,No,4,3,3,10,6,3,3,0,12.6,2,No
+100714,34,Female,IT,Systems Administrator,82087,5.9,3.7,Yes,1,2,4,5,4,2,4,0,17.5,4,Yes
+100715,33,Female,R&D,Product Engineer,97295,4.2,2.7,No,4,4,4,6,0,1,4,0,15.0,2,Yes
+100716,25,Male,R&D,Data Scientist,100817,1.5,1.0,No,2,3,3,6,1,4,3,0,10.6,8,Yes
+100717,22,Female,R&D,Data Scientist,86822,2.2,1.9,No,4,3,3,7,0,3,4,0,6.7,3,No
+100718,40,Female,R&D,Research Scientist,49305,1.4,0.0,No,2,4,4,6,2,4,2,0,17.4,8,No
+100719,32,Male,Customer Support,Support Lead,65584,8.6,7.2,No,2,3,3,13,2,3,2,0,13.3,5,No
+100720,26,Male,Sales,Sales Manager,84154,1.5,0.4,No,2,2,3,9,4,4,3,0,21.6,8,No
+100721,34,Female,Customer Support,Support Lead,67943,3.1,0.1,Yes,2,1,3,10,2,3,4,0,11.7,6,Yes
+100722,44,Female,R&D,Lab Technician,61618,0.8,0.0,Yes,3,3,3,11,2,2,3,1,15.6,0,No
+100723,18,Male,Sales,Sales Representative,61448,1.1,0.8,Yes,3,2,5,8,4,3,3,0,15.1,3,No
+100724,22,Male,R&D,Product Engineer,101347,6.8,5.7,No,2,4,4,5,3,4,3,0,16.3,3,No
+100725,27,Female,Sales,Sales Executive,81515,5.3,2.9,Yes,3,2,4,22,1,3,3,0,10.6,4,No
+100726,46,Male,Operations,Operations Analyst,82314,4.3,3.1,Yes,1,2,3,14,0,2,3,0,11.7,2,No
+100727,37,Female,HR,HR Generalist,78087,3.1,0.7,No,4,3,5,20,3,2,5,0,16.9,4,No
+100728,41,Male,R&D,Product Engineer,81595,1.0,0.0,No,4,4,3,14,2,3,3,0,10.8,1,Yes
+100729,25,Female,IT,IT Support,81054,2.8,1.5,No,3,1,4,6,0,3,3,0,16.8,4,Yes
+100730,25,Female,Finance,Financial Analyst,78804,3.7,2.2,No,3,3,2,2,0,3,3,0,12.3,0,No
+100731,38,Female,Customer Support,Support Specialist,78182,6.5,5.4,No,4,3,3,4,5,3,4,0,13.4,2,No
+100732,35,Female,Customer Support,Customer Success Manager,86568,8.3,5.9,No,3,3,3,12,2,3,4,0,16.0,0,No
+100733,39,Female,IT,IT Support,88832,6.9,5.8,No,2,3,4,8,3,3,5,0,13.2,6,Yes
+100734,33,Female,Operations,Supply Chain Specialist,81499,5.2,3.0,No,3,3,3,6,3,4,3,0,6.9,1,No
+100735,37,Female,Operations,Operations Analyst,86434,4.3,2.5,Yes,1,2,3,2,4,4,4,0,11.1,6,No
+100736,36,Male,HR,HR Business Partner,67379,4.9,4.8,No,3,3,3,8,8,4,4,1,11.6,5,No
+100737,41,Male,IT,Security Analyst,85339,2.7,0.4,No,2,2,5,5,3,4,4,0,6.6,9,Yes
+100738,41,Male,Sales,Sales Representative,64625,4.5,2.8,No,2,3,4,5,3,2,3,1,16.1,5,Yes
+100739,21,Female,IT,Systems Administrator,88724,3.7,0.0,No,3,4,4,13,1,2,3,0,14.7,0,No
+100740,18,Female,Customer Support,Support Lead,93988,16.0,15.6,No,4,3,3,5,2,3,4,0,15.6,4,No
+100741,43,Male,Sales,Sales Executive,74534,5.0,3.1,No,4,4,4,5,2,4,4,0,10.0,4,No
+100742,44,Male,Operations,Operations Analyst,61062,0.6,0.0,No,4,4,3,9,4,4,5,0,12.3,0,No
+100743,26,Male,Customer Support,Support Lead,48934,3.0,2.8,No,3,4,3,13,1,4,4,0,15.9,5,No
+100744,19,Female,R&D,Software Engineer,83500,3.4,3.3,No,3,4,4,7,1,1,3,0,12.0,1,No
+100745,35,Male,HR,Recruiter,91895,7.5,2.9,Yes,1,2,3,18,2,4,1,0,13.9,4,No
+100746,42,Male,Customer Support,Support Specialist,58107,5.4,3.5,No,3,4,3,4,4,3,2,0,17.6,1,No
+100747,49,Female,Customer Support,Support Lead,53281,5.2,4.0,Yes,1,3,3,4,1,2,3,0,5.5,5,No
+100748,39,Female,Sales,Sales Executive,86949,9.8,9.6,Yes,1,3,4,4,0,4,3,0,15.0,3,No
+100749,31,Male,R&D,Software Engineer,97620,12.1,7.7,No,3,3,4,3,1,3,4,0,18.1,1,No
+100750,27,Male,IT,Security Analyst,103830,6.8,6.1,No,3,3,3,10,0,3,2,0,10.8,2,No
+100751,35,Female,R&D,Software Engineer,98083,3.2,1.3,Yes,2,2,4,5,2,4,3,0,18.9,2,No
+100752,32,Female,R&D,Data Scientist,111905,3.3,1.7,No,4,4,3,4,3,3,3,0,14.2,3,No
+100753,26,Female,Sales,Sales Executive,80699,9.0,3.0,Yes,2,2,3,10,2,2,4,0,18.2,6,No
+100754,51,Male,Sales,Sales Representative,77542,3.3,1.8,No,3,3,3,13,3,3,3,0,14.0,2,No
+100755,49,Male,Finance,Financial Analyst,95229,4.1,3.2,No,4,4,3,15,3,2,4,0,18.5,5,No
+100756,44,Male,Finance,Accountant,74806,3.0,1.1,No,4,2,3,13,2,4,4,0,13.1,3,Yes
+100757,27,Female,Finance,Finance Manager,110710,1.8,0.0,No,3,2,4,5,1,4,4,0,9.2,3,Yes
+100758,42,Male,Operations,Supply Chain Specialist,100435,15.2,6.0,Yes,1,1,4,10,0,2,4,0,11.8,8,Yes
+100759,40,Male,R&D,Software Engineer,85347,4.1,2.7,No,3,2,3,11,2,2,3,0,15.6,4,No
+100760,38,Female,R&D,Software Engineer,92099,10.7,10.3,Yes,2,3,4,6,1,2,2,1,20.0,0,No
+100761,45,Female,Sales,Sales Executive,63873,3.3,2.2,No,3,4,4,9,0,3,3,0,12.9,4,No
+100762,40,Female,Sales,Sales Executive,57669,2.6,0.7,No,2,3,3,4,2,3,3,0,18.3,5,No
+100763,41,Male,R&D,Research Scientist,90410,6.4,4.2,No,3,3,3,6,3,3,4,0,10.8,4,No
+100764,40,Male,Sales,Account Manager,99069,8.3,8.1,Yes,3,2,3,10,2,4,3,0,13.6,7,No
+100765,37,Male,Sales,Sales Executive,74624,8.7,7.8,Yes,1,1,3,19,0,4,4,1,16.0,8,Yes
+100766,20,Male,Sales,Account Manager,86215,3.7,0.0,No,2,4,3,15,0,4,3,0,7.3,8,No
+100767,35,Male,IT,Systems Administrator,101312,6.8,6.2,No,3,4,3,12,7,2,3,0,11.6,2,No
+100768,30,Male,Finance,Accountant,69403,2.8,0.0,No,3,3,3,9,1,4,3,0,20.3,1,No
+100769,24,Female,Customer Support,Customer Success Manager,94163,4.5,3.4,No,3,2,3,8,5,4,5,0,8.8,4,No
+100770,48,Female,Operations,Operations Manager,95137,3.5,2.0,No,3,3,3,4,1,4,4,0,14.2,2,No
+100771,49,Female,Finance,Accountant,83287,3.1,1.9,No,2,2,3,5,3,3,4,1,10.5,4,No
+100772,46,Male,Sales,Sales Manager,88444,4.6,2.7,No,2,3,3,5,1,2,3,0,8.7,9,No
+100773,37,Male,Finance,Accountant,68983,1.7,0.2,Yes,2,2,4,11,3,2,3,0,9.0,2,No
+100774,46,Male,Sales,Sales Representative,81284,7.9,6.6,No,3,3,3,14,0,2,3,0,15.3,1,No
+100775,35,Male,R&D,Lab Technician,88590,3.1,0.7,No,3,2,3,12,3,3,4,0,9.0,5,No
+100776,36,Male,R&D,Product Engineer,91116,7.6,7.3,No,3,4,3,16,1,4,3,0,16.4,0,No
+100777,26,Male,R&D,Research Scientist,68353,2.0,0.1,No,3,3,3,8,0,4,3,0,10.1,4,No
+100778,38,Female,R&D,Product Engineer,84688,3.1,3.0,No,4,3,2,5,2,3,3,0,12.4,1,No
+100779,35,Male,IT,Security Analyst,80232,1.7,0.0,No,2,3,3,8,2,3,3,0,13.4,4,No
+100780,24,Female,Operations,Supply Chain Specialist,74486,1.7,0.4,No,2,2,3,5,3,3,3,0,6.3,8,Yes
+100781,34,Male,Operations,Operations Analyst,78190,2.3,0.0,No,4,3,3,12,1,3,4,0,12.7,0,No
+100782,34,Male,Finance,Accountant,80063,2.1,2.1,No,3,3,3,7,3,4,2,0,13.2,0,No
+100783,49,Male,HR,HR Business Partner,59071,1.7,0.0,No,2,4,4,8,1,3,4,0,18.0,5,No
+100784,42,Male,Sales,Sales Executive,65741,4.3,3.6,Yes,3,3,3,12,2,3,5,0,8.6,0,No
+100785,35,Male,IT,Security Analyst,76971,6.3,4.8,No,4,4,3,5,3,3,3,0,9.1,1,No
+100786,37,Female,HR,HR Business Partner,70656,6.5,3.9,No,4,4,3,14,1,4,3,0,14.3,3,No
+100787,35,Male,R&D,Data Scientist,94401,0.9,0.0,Yes,3,3,3,4,1,4,4,0,16.9,2,No
+100788,33,Male,R&D,Product Engineer,82480,3.4,1.1,No,4,3,3,10,1,2,3,0,9.9,1,No
+100789,26,Female,Customer Support,Support Lead,61068,3.2,2.1,Yes,2,3,2,8,2,4,3,0,7.7,4,No
+100790,33,Male,Finance,Accountant,89306,9.9,6.0,Yes,2,2,3,13,1,3,3,0,10.9,6,Yes
+100791,28,Female,R&D,Lab Technician,74837,3.5,2.2,Yes,2,1,5,4,2,3,2,0,10.5,4,No
+100792,24,Male,Finance,Accountant,89780,4.0,2.7,No,3,3,3,4,2,3,3,0,13.4,3,No
+100793,39,Female,R&D,Research Scientist,70340,1.2,0.0,No,4,2,3,12,2,3,2,0,8.2,1,No
+100794,38,Male,R&D,Lab Technician,74954,2.2,0.7,No,3,3,3,7,3,4,3,0,15.4,2,No
+100795,20,Male,R&D,Research Scientist,78695,1.2,0.8,Yes,1,1,3,8,1,2,4,0,12.7,0,No
+100796,33,Female,R&D,Lab Technician,80019,4.5,3.9,No,2,3,3,6,2,4,5,0,15.5,0,No
+100797,43,Female,IT,Systems Administrator,110277,10.1,6.9,No,4,4,3,13,2,3,3,0,4.0,0,No
+100798,43,Male,Sales,Sales Executive,48049,2.3,0.0,No,3,4,4,10,3,3,4,0,7.8,2,No
+100799,43,Female,Operations,Operations Manager,93534,3.6,0.9,Yes,3,3,4,9,1,3,4,0,18.5,0,No
+100800,35,Male,R&D,Data Scientist,91983,2.1,0.0,Yes,2,1,4,4,5,2,3,0,11.5,9,Yes
+100801,28,Male,IT,Systems Administrator,77726,2.6,1.7,Yes,3,1,3,11,3,2,2,0,6.9,2,Yes
+100802,26,Male,Finance,Financial Analyst,79923,4.5,3.7,No,2,4,3,5,6,4,5,0,11.3,5,No
+100803,37,Female,Finance,Financial Analyst,112027,13.2,11.8,No,3,4,3,6,6,4,3,0,12.8,2,No
+100804,38,Male,Finance,Finance Manager,134352,9.8,6.2,No,2,3,4,4,0,2,5,0,13.4,3,No
+100805,45,Female,Customer Support,Support Specialist,81253,11.7,9.9,No,3,3,2,7,2,2,4,0,13.6,3,No
+100806,44,Male,HR,HR Generalist,74378,7.7,7.2,No,2,3,3,15,1,4,3,0,13.2,5,No
+100807,33,Female,IT,Systems Administrator,76357,3.5,3.2,No,1,2,3,9,2,3,4,0,13.0,6,No
+100808,24,Female,IT,Security Analyst,91506,3.2,0.3,No,3,2,3,6,1,4,5,0,16.7,0,No
+100809,32,Male,R&D,Research Scientist,80552,2.3,0.0,No,2,3,3,9,5,3,5,1,14.5,3,No
+100810,36,Male,R&D,Research Scientist,86068,0.3,0.1,Yes,3,1,3,9,1,3,3,0,11.8,3,No
+100811,33,Male,R&D,Data Scientist,101608,3.5,0.5,No,3,3,3,8,3,3,3,0,14.8,0,No
+100812,30,Female,R&D,Research Scientist,117347,10.2,8.1,No,4,4,3,9,3,1,3,0,13.9,0,No
+100813,37,Male,R&D,Lab Technician,110307,10.2,9.5,No,3,3,3,5,2,2,3,0,8.8,5,No
+100814,30,Male,R&D,Lab Technician,131151,16.3,14.5,No,3,3,2,9,3,4,4,0,11.7,1,No
+100815,29,Male,Finance,Accountant,72438,4.8,4.4,No,3,3,4,3,2,4,4,1,18.0,2,No
+100816,37,Female,Sales,Sales Representative,42543,1.5,0.3,No,4,3,3,11,2,4,2,0,9.9,0,Yes
+100817,31,Male,Operations,Supply Chain Specialist,88832,6.0,4.5,Yes,2,2,3,4,2,3,4,0,10.1,6,No
+100818,37,Male,R&D,Software Engineer,126080,13.3,9.4,Yes,2,3,3,16,6,1,3,0,7.1,0,No
+100819,37,Female,IT,Systems Administrator,125313,11.1,9.9,No,4,3,3,2,0,3,3,0,4.0,1,No
+100820,25,Male,Sales,Sales Representative,47906,2.9,2.2,No,1,2,3,21,1,4,4,0,10.7,3,No
+100821,31,Female,R&D,Data Scientist,101492,1.6,0.0,No,4,3,2,3,4,4,4,0,12.4,2,Yes
+100822,46,Male,Sales,Sales Executive,47906,1.6,0.0,No,4,3,3,4,2,4,4,0,8.2,1,No
+100823,25,Male,IT,Systems Administrator,69015,2.4,1.7,No,3,3,3,10,0,3,3,0,16.8,5,No
+100824,18,Female,R&D,Research Scientist,78120,2.7,2.2,No,2,3,3,11,2,2,3,1,10.8,4,No
+100825,19,Female,Customer Support,Customer Success Manager,86001,3.3,2.8,No,4,3,4,7,5,3,3,0,17.2,2,No
+100826,35,Female,R&D,Product Engineer,89144,6.6,2.7,No,2,3,3,13,3,3,2,0,13.5,6,No
+100827,35,Male,Finance,Financial Analyst,80543,3.2,0.9,Yes,2,2,2,5,4,4,3,0,19.6,2,No
+100828,34,Male,R&D,Research Scientist,95248,4.3,3.2,No,2,3,4,7,1,3,5,1,18.4,3,No
+100829,44,Male,Finance,Financial Analyst,83672,1.1,0.0,Yes,4,1,4,7,2,3,2,0,8.9,2,No
+100830,18,Male,R&D,Data Scientist,105593,2.3,1.6,No,2,4,3,6,1,3,3,0,15.7,1,No
+100831,38,Male,R&D,Software Engineer,85107,2.2,0.8,No,3,3,3,3,0,3,3,0,17.9,0,No
+100832,47,Male,Sales,Sales Representative,53605,0.9,0.5,No,1,2,2,8,3,4,4,0,5.8,7,Yes
+100833,25,Male,Sales,Sales Representative,57120,3.2,0.0,Yes,3,2,4,8,3,2,3,0,16.2,4,Yes
+100834,31,Male,Sales,Sales Executive,60371,1.1,0.4,No,3,3,3,15,2,2,2,0,15.0,3,No
+100835,28,Male,Customer Support,Support Specialist,50142,3.0,2.3,No,4,4,4,4,4,4,2,0,13.3,2,No
+100836,27,Male,R&D,Data Scientist,107792,4.6,2.6,No,3,3,3,6,1,2,4,0,4.0,2,No
+100837,32,Female,Sales,Account Manager,97279,10.3,10.2,No,4,3,3,16,2,4,3,0,11.0,0,No
+100838,46,Female,Customer Support,Customer Success Manager,78348,2.1,1.8,Yes,1,3,4,10,3,1,3,0,12.0,9,No
+100839,50,Male,Sales,Sales Executive,56917,4.5,1.8,Yes,3,2,2,11,0,3,5,0,17.4,6,No
+100840,32,Female,R&D,Research Scientist,78715,2.6,2.1,No,3,3,3,10,3,4,3,0,11.7,1,No
+100841,50,Female,IT,IT Support,65116,1.0,0.0,No,3,3,3,11,1,3,4,0,10.6,5,No
+100842,35,Male,Customer Support,Support Specialist,76111,10.4,8.7,No,3,4,3,22,1,2,4,0,9.9,2,No
+100843,49,Male,IT,Security Analyst,82254,4.7,4.5,No,4,2,2,9,1,3,4,0,13.1,3,No
+100844,34,Male,R&D,Product Engineer,70746,5.8,1.1,No,3,4,3,5,4,3,2,0,12.2,0,Yes
+100845,36,Male,Customer Support,Customer Success Manager,92578,11.5,9.8,No,4,3,3,12,1,3,3,0,9.2,2,Yes
+100846,37,Female,Sales,Sales Executive,68833,3.0,1.8,Yes,1,3,3,6,2,3,4,0,12.9,4,Yes
+100847,60,Female,Customer Support,Support Lead,55807,1.4,0.0,Yes,3,1,4,8,2,3,5,0,12.0,4,No
+100848,41,Male,Operations,Supply Chain Specialist,60210,2.1,1.9,No,4,3,3,10,1,3,3,0,4.0,0,No
+100849,29,Female,Customer Support,Customer Success Manager,84925,1.3,0.0,No,2,3,3,5,2,4,3,0,14.3,2,No
+100850,42,Male,R&D,Research Scientist,95767,8.6,8.0,No,3,3,3,6,1,3,4,0,14.0,4,No
+100851,32,Female,Sales,Sales Manager,112623,13.7,12.4,Yes,4,1,3,11,3,3,4,0,12.7,2,No
+100852,30,Female,IT,Systems Administrator,75350,4.5,3.6,No,4,3,4,6,4,3,4,0,12.5,0,No
+100853,42,Male,HR,Recruiter,94600,6.7,5.1,Yes,3,1,4,14,0,4,3,0,13.7,5,No
+100854,35,Male,HR,HR Business Partner,83396,7.9,6.8,No,3,2,4,5,3,2,3,0,16.9,2,No
+100855,37,Female,Customer Support,Support Specialist,90161,12.0,11.1,Yes,3,1,4,5,3,3,4,0,11.8,6,No
+100856,35,Female,Finance,Finance Manager,138758,13.3,12.8,No,2,4,3,23,0,3,4,0,15.0,5,No
+100857,37,Male,R&D,Lab Technician,59566,0.7,0.5,Yes,3,2,3,4,4,2,3,0,6.8,4,No
+100858,38,Male,R&D,Software Engineer,76974,2.6,2.5,Yes,2,2,3,8,5,2,3,0,12.6,6,No
+100859,19,Male,Sales,Sales Executive,69535,4.2,3.9,No,4,4,4,23,4,3,3,0,14.1,2,Yes
+100860,40,Male,Sales,Account Manager,81643,2.4,0.0,Yes,2,2,3,8,5,2,5,0,15.5,6,No
+100861,26,Female,Sales,Sales Representative,82729,3.4,2.9,No,2,3,3,17,3,3,4,1,11.3,2,No
+100862,23,Female,Operations,Operations Manager,95103,5.6,4.9,Yes,3,2,4,12,1,4,4,0,11.2,2,No
+100863,34,Female,IT,IT Support,94089,5.5,4.8,No,4,3,3,8,0,3,3,0,7.1,0,Yes
+100864,35,Female,HR,HR Generalist,87894,7.7,6.7,No,4,4,4,8,3,2,3,0,12.0,1,No
+100865,29,Female,R&D,Research Scientist,89045,4.3,2.1,No,2,4,4,3,2,2,2,0,14.9,1,No
+100866,41,Male,IT,Systems Administrator,72200,0.4,0.0,No,1,3,4,7,3,3,2,0,7.7,7,No
+100867,23,Male,Operations,Supply Chain Specialist,67628,3.2,0.3,No,3,4,3,9,2,3,4,0,10.4,4,No
+100868,31,Male,Operations,Operations Analyst,58881,5.2,4.9,Yes,1,2,3,9,0,3,3,0,14.1,7,Yes
+100869,30,Male,HR,HR Business Partner,85063,8.1,5.5,No,4,3,4,32,5,3,4,1,16.1,3,No
+100870,34,Female,Operations,Operations Manager,109216,7.3,3.0,Yes,3,2,3,10,3,4,2,0,12.3,3,Yes
+100871,37,Female,HR,HR Generalist,73431,3.8,2.4,No,4,3,2,12,2,3,3,0,6.7,2,No
+100872,26,Female,R&D,Lab Technician,82568,2.5,2.1,No,4,1,5,15,4,2,4,1,16.1,4,Yes
+100873,40,Male,Operations,Operations Analyst,81534,4.0,1.8,No,4,4,4,11,1,4,5,0,14.1,6,No
+100874,35,Male,R&D,Software Engineer,68766,0.8,0.0,No,4,2,4,8,3,4,3,0,13.4,2,No
+100875,19,Male,R&D,Research Scientist,95855,2.7,0.8,Yes,4,2,3,8,3,3,4,0,12.5,0,Yes
+100876,18,Male,R&D,Research Scientist,94229,9.1,6.2,Yes,3,2,3,7,0,3,4,0,10.9,3,No
+100877,34,Male,HR,Recruiter,67829,4.0,3.0,No,3,2,4,10,1,4,3,0,12.4,2,No
+100878,33,Male,HR,Recruiter,79408,5.4,4.6,No,2,3,3,7,2,3,5,0,8.4,2,No
+100879,34,Male,IT,Systems Administrator,67525,1.3,0.0,No,4,3,3,12,3,1,3,0,15.4,3,No
+100880,34,Female,R&D,Product Engineer,106661,8.1,5.9,No,3,2,3,5,4,4,4,0,7.7,5,No
+100881,36,Male,Sales,Sales Executive,60755,3.7,0.3,No,4,3,4,9,2,4,4,0,14.6,1,No
+100882,42,Male,Operations,Supply Chain Specialist,77703,5.2,2.4,No,3,3,3,19,2,4,3,0,18.3,1,Yes
+100883,25,Female,R&D,Data Scientist,109570,6.0,2.6,No,4,4,3,7,1,2,4,0,15.9,1,No
+100884,25,Male,Customer Support,Customer Success Manager,92089,7.9,6.0,Yes,1,1,3,23,4,3,4,0,13.8,6,No
+100885,26,Female,Sales,Sales Manager,109300,4.7,1.6,Yes,2,1,3,9,3,3,3,0,12.9,7,Yes
+100886,37,Female,Finance,Financial Analyst,74602,3.8,3.1,No,3,4,4,8,1,3,5,0,13.6,3,No
+100887,45,Male,HR,HR Business Partner,40225,1.5,1.3,Yes,2,2,3,9,7,3,4,1,11.3,10,Yes
+100888,31,Female,Operations,Supply Chain Specialist,56607,1.2,0.6,Yes,4,1,3,7,1,3,4,0,11.1,1,No
+100889,18,Female,Sales,Sales Executive,67902,4.6,3.4,Yes,1,2,3,3,2,3,1,1,16.5,3,No
+100890,21,Female,Customer Support,Customer Success Manager,85568,5.3,4.2,No,4,3,3,13,3,4,4,0,13.4,2,Yes
+100891,28,Female,HR,HR Business Partner,84047,5.9,4.5,No,4,3,3,27,1,4,4,0,14.8,1,No
+100892,30,Female,Finance,Financial Analyst,85560,2.1,1.4,No,4,3,4,11,3,2,3,0,18.3,2,No
+100893,31,Female,HR,Recruiter,61774,2.7,2.6,Yes,4,1,3,11,3,3,4,0,11.4,5,Yes
+100894,35,Male,Sales,Sales Executive,51580,4.6,3.6,No,3,4,3,7,3,3,4,0,12.7,3,No
+100895,32,Female,HR,HR Generalist,54052,3.0,2.7,No,2,4,3,15,4,3,4,0,5.4,5,Yes
+100896,43,Female,R&D,Product Engineer,128750,17.2,15.8,No,4,2,5,8,0,2,3,0,21.9,5,No
+100897,29,Female,R&D,Software Engineer,68239,2.6,0.6,No,4,2,4,9,1,3,5,0,12.6,4,No
+100898,27,Female,Finance,Finance Manager,106290,5.5,4.5,No,3,4,3,3,0,4,4,0,14.3,6,Yes
+100899,38,Male,HR,Recruiter,91832,7.2,6.8,No,2,4,3,6,1,3,4,0,10.5,2,No
+100900,22,Female,Sales,Sales Manager,101085,7.5,6.0,No,2,1,3,10,1,3,4,0,10.5,8,No
+100901,38,Female,Sales,Account Manager,83691,2.9,0.0,Yes,4,3,4,13,3,3,4,0,13.2,3,No
+100902,35,Male,Sales,Account Manager,84153,6.1,3.9,No,3,4,5,14,4,4,4,0,9.6,5,No
+100903,33,Male,Sales,Sales Executive,71556,5.6,3.3,No,1,2,4,3,1,3,3,0,5.3,3,Yes
+100904,48,Male,Finance,Accountant,87513,6.2,5.3,No,4,4,4,4,2,2,4,0,18.1,4,No
+100905,29,Male,Sales,Sales Executive,68548,4.5,3.9,No,2,3,3,11,1,3,4,0,13.9,4,No
+100906,51,Female,Operations,Supply Chain Specialist,89584,7.2,3.8,Yes,3,2,3,5,1,4,5,0,8.8,3,Yes
+100907,33,Male,Sales,Account Manager,97763,4.9,4.9,No,3,2,3,13,3,2,4,0,13.6,1,No
+100908,24,Male,Sales,Sales Executive,57640,1.4,0.7,Yes,3,3,4,3,3,4,3,0,16.9,3,No
+100909,35,Female,Operations,Supply Chain Specialist,79967,4.8,0.0,Yes,3,3,3,8,0,4,5,0,9.6,3,No
+100910,26,Female,R&D,Product Engineer,86032,5.2,3.9,No,3,4,3,8,3,1,2,0,13.4,1,No
+100911,28,Female,R&D,Research Scientist,106273,6.9,6.7,No,4,4,3,11,4,3,4,0,15.5,2,No
+100912,38,Female,Customer Support,Support Lead,56736,4.6,2.5,No,3,3,3,5,2,4,3,0,7.0,3,No
+100913,39,Female,Customer Support,Support Specialist,87173,12.2,11.2,No,3,4,4,3,1,3,5,0,15.9,6,No
+100914,29,Female,IT,IT Support,91610,3.9,3.8,Yes,2,3,3,9,0,3,4,0,13.3,1,Yes
+100915,43,Female,Sales,Sales Executive,56625,2.8,1.1,No,3,3,4,11,7,3,3,1,23.1,0,No
+100916,44,Male,Finance,Accountant,89293,9.8,8.3,No,4,2,3,14,2,3,3,0,13.9,1,No
+100917,46,Female,Customer Support,Support Specialist,58463,3.8,2.3,No,3,2,3,7,3,3,3,0,10.6,4,No
+100918,39,Male,Customer Support,Customer Success Manager,98286,4.3,2.1,No,4,2,4,13,4,3,3,0,13.0,2,No
+100919,46,Male,Sales,Account Manager,70203,5.2,4.8,No,2,2,4,11,0,3,3,0,21.1,6,No
+100920,19,Male,R&D,Software Engineer,90602,4.9,3.0,No,1,4,4,17,1,4,3,0,12.8,3,No
+100921,32,Female,R&D,Lab Technician,88134,6.2,4.6,No,3,3,3,8,1,2,4,0,14.1,1,No
+100922,27,Female,Sales,Sales Executive,71611,6.6,3.3,No,3,3,3,3,2,2,4,0,11.2,0,Yes
+100923,35,Male,IT,Security Analyst,73183,2.6,1.9,No,3,3,4,8,2,4,3,0,17.8,5,Yes
+100924,30,Female,R&D,Research Scientist,88084,1.7,0.0,No,2,3,4,9,2,3,2,0,18.0,2,No
+100925,33,Male,R&D,Research Scientist,80244,1.8,0.0,No,3,4,4,11,5,3,4,1,16.4,1,No
+100926,50,Female,Sales,Sales Executive,90535,9.2,7.9,No,3,2,4,4,2,3,4,0,12.6,6,No
+100927,33,Female,HR,Recruiter,79077,3.6,2.1,No,2,3,3,7,1,3,4,0,10.5,3,No
+100928,38,Female,Sales,Sales Executive,75309,7.2,5.8,No,2,3,3,13,2,3,4,0,6.0,3,Yes
+100929,33,Female,R&D,Software Engineer,92525,6.8,4.2,No,3,2,4,8,1,4,5,0,14.4,7,No
+100930,35,Male,Sales,Sales Representative,69155,4.3,3.2,No,4,4,3,7,2,2,4,0,12.3,1,No
+100931,35,Male,Customer Support,Support Lead,61852,2.1,0.0,Yes,3,2,4,23,1,3,5,0,11.1,3,Yes
+100932,38,Female,Sales,Account Manager,85700,6.9,4.8,Yes,2,1,3,5,3,1,5,0,5.6,4,Yes
+100933,44,Female,HR,HR Business Partner,71565,4.2,0.0,No,3,4,4,16,1,4,2,1,17.2,0,Yes
+100934,48,Male,Sales,Sales Manager,76838,1.6,0.9,No,4,3,4,14,1,3,2,0,15.2,5,No
+100935,37,Male,Sales,Sales Executive,57817,3.0,0.6,No,2,3,3,7,2,4,3,1,15.9,2,No
+100936,39,Male,Sales,Sales Executive,49301,1.1,0.8,Yes,3,1,4,8,3,4,4,0,10.5,5,No
+100937,25,Male,Sales,Sales Representative,56289,3.1,1.9,No,4,4,3,8,1,4,3,0,13.4,0,No
+100938,34,Male,Sales,Sales Representative,77701,4.5,2.3,No,2,4,3,9,3,3,4,0,11.4,5,Yes
+100939,42,Male,HR,HR Business Partner,65204,3.9,1.4,Yes,4,1,4,6,2,3,3,0,17.0,4,No
+100940,42,Female,Finance,Finance Manager,113814,3.6,2.6,Yes,4,2,3,6,1,2,3,0,8.6,4,Yes
+100941,36,Male,Sales,Sales Representative,67579,4.5,0.9,No,3,2,3,7,3,2,3,0,16.0,1,Yes
+100942,42,Male,R&D,Lab Technician,83006,6.0,1.8,Yes,2,3,3,7,2,3,3,0,17.3,4,No
+100943,39,Male,Finance,Financial Analyst,95717,7.5,6.8,No,4,4,5,7,2,2,4,0,14.4,3,No
+100944,44,Male,R&D,Research Scientist,89549,8.2,7.0,No,3,3,3,2,2,4,3,0,13.4,1,No
+100945,37,Female,R&D,Lab Technician,87144,2.4,1.3,No,1,2,4,9,3,3,3,0,16.7,7,Yes
+100946,32,Male,Sales,Sales Manager,99970,8.7,7.8,Yes,3,1,3,6,3,2,4,0,8.4,5,No
+100947,37,Female,R&D,Lab Technician,95137,4.2,0.2,No,3,4,3,3,2,3,3,0,10.3,0,No
+100948,18,Female,R&D,Data Scientist,115462,3.3,0.0,No,4,2,4,7,2,3,4,0,14.6,5,No
+100949,38,Male,Customer Support,Customer Success Manager,62462,1.9,0.8,No,2,2,3,7,2,3,3,0,19.1,8,Yes
+100950,18,Female,Customer Support,Support Specialist,46810,0.3,0.0,No,3,3,4,16,1,3,2,0,9.8,5,No
+100951,20,Female,Customer Support,Support Specialist,57355,5.7,2.4,No,4,3,4,6,2,3,4,1,22.2,0,No
+100952,38,Male,R&D,Product Engineer,111024,5.5,3.7,No,3,3,5,12,5,2,4,1,15.8,0,No
+100953,38,Male,Sales,Sales Representative,56997,2.8,1.7,No,2,3,4,17,2,1,3,0,13.9,1,No
+100954,25,Female,R&D,Data Scientist,89124,2.8,2.1,No,4,4,3,6,0,3,4,0,16.3,1,No
+100955,29,Female,R&D,Lab Technician,106323,3.8,1.2,No,3,2,4,8,3,4,5,0,21.1,6,No
+100956,46,Male,Sales,Sales Representative,56025,3.3,3.0,Yes,4,2,3,21,2,3,3,0,13.5,2,No
+100957,31,Male,Sales,Sales Manager,66763,2.3,1.2,No,2,3,3,9,2,4,5,1,18.6,4,No
+100958,53,Male,R&D,Software Engineer,69014,1.7,0.8,No,3,3,3,10,3,3,1,0,8.8,5,Yes
+100959,34,Female,R&D,Lab Technician,103449,8.8,8.5,No,3,4,4,7,2,4,4,0,12.1,3,No
+100960,38,Male,Sales,Sales Executive,62012,3.0,1.7,No,3,3,3,12,4,4,3,0,7.3,2,No
+100961,48,Male,IT,Security Analyst,78076,5.5,4.3,No,2,3,3,8,2,4,4,0,10.2,1,No
+100962,36,Female,R&D,Lab Technician,89795,6.3,5.8,Yes,1,1,3,3,2,2,3,0,14.0,5,Yes
+100963,26,Female,Operations,Operations Analyst,78718,5.7,1.8,No,4,1,3,7,1,3,3,0,12.7,1,No
+100964,34,Female,R&D,Lab Technician,106715,6.5,3.9,Yes,3,2,4,4,4,4,3,0,20.0,2,No
+100965,34,Male,HR,Recruiter,77240,5.7,4.2,No,4,3,3,9,1,3,3,0,19.2,4,Yes
+100966,23,Male,Sales,Sales Manager,77252,2.6,0.0,No,4,2,4,5,2,4,5,0,13.5,1,No
+100967,32,Female,HR,HR Business Partner,64824,3.4,0.0,No,4,2,4,11,0,2,3,0,11.6,7,No
+100968,28,Female,Sales,Sales Representative,86447,8.6,4.5,No,3,4,3,8,1,4,5,0,16.1,3,No
+100969,42,Male,Sales,Sales Representative,76401,2.9,2.2,No,3,4,3,4,0,2,3,0,16.4,2,No
+100970,35,Female,Finance,Accountant,73499,4.2,1.3,No,4,2,3,6,1,1,5,0,13.5,4,Yes
+100971,32,Male,R&D,Lab Technician,103227,6.0,4.8,No,3,3,3,11,0,3,2,0,14.5,2,No
+100972,34,Male,Sales,Sales Manager,105425,10.7,9.0,No,4,3,3,15,3,1,3,0,13.9,2,No
+100973,36,Male,Customer Support,Support Lead,61302,8.1,7.3,No,2,3,3,5,3,2,3,0,8.5,4,No
+100974,40,Male,Sales,Sales Representative,42000,2.0,0.6,Yes,2,1,4,4,2,4,5,0,9.7,4,Yes
+100975,26,Male,Finance,Finance Manager,121288,5.4,2.4,No,4,3,3,24,1,3,4,1,14.3,3,No
+100976,26,Female,HR,HR Generalist,85080,5.0,3.7,Yes,2,3,2,8,1,2,2,0,11.3,6,Yes
+100977,44,Male,R&D,Product Engineer,79758,3.4,2.9,No,4,4,3,9,7,3,2,0,13.0,0,No
+100978,31,Male,R&D,Lab Technician,85851,4.3,0.0,Yes,4,1,4,5,4,2,3,0,13.5,2,No
+100979,23,Male,Sales,Sales Representative,44279,2.6,1.9,No,4,3,3,9,4,4,4,0,6.0,4,No
+100980,38,Male,IT,Security Analyst,87018,3.8,3.6,Yes,4,2,4,21,2,2,4,1,9.1,1,No
+100981,38,Male,R&D,Product Engineer,83025,2.9,2.1,No,2,2,3,9,1,3,3,0,14.6,1,Yes
+100982,22,Female,Sales,Sales Executive,52750,4.6,1.2,Yes,2,2,4,15,1,2,3,0,11.7,0,No
+100983,36,Male,R&D,Software Engineer,86403,3.3,2.7,No,4,2,3,8,4,4,4,0,11.2,6,No
+100984,41,Female,Customer Support,Support Lead,73335,11.2,10.8,Yes,1,3,3,5,2,4,2,0,10.0,4,Yes
+100985,38,Female,Operations,Operations Manager,102057,4.7,3.1,No,4,4,3,6,3,3,4,0,8.8,1,No
+100986,40,Male,Customer Support,Support Specialist,53375,4.1,0.0,No,4,3,3,4,2,3,4,0,8.7,3,No
+100987,23,Female,Finance,Accountant,84554,3.6,1.5,No,3,3,4,9,1,3,3,0,17.6,4,No
+100988,37,Female,IT,Systems Administrator,72683,3.3,3.0,No,3,4,2,16,1,2,4,0,11.2,1,No
+100989,32,Female,HR,HR Generalist,39829,1.6,0.0,No,3,4,3,9,4,2,3,0,14.2,0,Yes
+100990,31,Female,Customer Support,Support Specialist,81685,7.1,5.2,No,3,2,3,7,3,4,4,0,14.7,5,No
+100991,42,Female,HR,HR Generalist,96818,9.8,6.7,No,4,3,3,5,5,3,2,0,13.1,0,No
+100992,47,Female,R&D,Research Scientist,78584,2.9,2.7,Yes,4,2,4,10,1,1,4,1,19.3,6,No
+100993,49,Female,Finance,Financial Analyst,99990,8.6,2.6,No,3,2,3,4,2,2,4,1,14.6,0,No
+100994,45,Male,HR,HR Business Partner,114664,17.1,16.1,Yes,1,2,4,4,1,4,4,1,21.3,8,No
+100995,34,Female,Sales,Account Manager,120794,13.3,13.1,No,4,2,4,13,2,3,4,0,16.9,4,No
+100996,37,Female,R&D,Research Scientist,120250,9.6,7.9,No,1,3,3,7,3,3,3,0,15.3,4,Yes
+100997,41,Female,R&D,Lab Technician,83191,1.7,0.0,No,3,3,3,7,2,4,4,0,8.7,3,No
+100998,35,Male,Operations,Supply Chain Specialist,62221,1.7,0.0,Yes,4,1,3,7,5,2,3,0,12.9,4,No
+100999,36,Male,R&D,Software Engineer,98651,6.5,4.1,No,2,1,3,12,1,4,2,1,8.1,6,No
+101000,41,Male,Operations,Operations Analyst,69890,4.3,2.1,Yes,3,3,4,9,1,2,4,0,18.9,5,No
+101001,34,Male,R&D,Data Scientist,84650,0.7,0.0,No,3,2,3,5,1,4,2,0,9.8,2,Yes
+101002,29,Male,IT,IT Support,88898,3.1,2.9,No,3,4,3,6,1,3,4,0,10.3,0,No
+101003,31,Male,Sales,Sales Representative,76967,6.3,5.1,Yes,3,3,4,7,2,3,3,1,11.7,2,No
+101004,40,Male,Customer Support,Support Specialist,45405,3.8,2.8,Yes,1,2,3,10,1,4,3,0,11.9,4,No
+101005,35,Male,HR,HR Generalist,63607,4.3,0.2,No,4,4,4,8,4,4,4,0,13.1,2,No
+101006,37,Male,R&D,Research Scientist,86259,1.7,0.0,Yes,1,3,3,8,4,3,3,0,18.4,2,No
+101007,40,Female,R&D,Product Engineer,69846,3.1,2.2,No,3,3,3,8,2,3,4,0,15.0,3,No
+101008,31,Male,R&D,Lab Technician,88024,6.5,3.8,No,3,1,3,8,4,4,3,0,10.2,4,No
+101009,41,Male,R&D,Lab Technician,107554,3.0,1.7,No,3,4,3,5,3,4,3,0,6.2,0,No
+101010,38,Male,IT,IT Support,94140,9.1,8.9,Yes,2,2,5,15,1,3,4,0,6.0,4,No
+101011,24,Male,Customer Support,Customer Success Manager,95504,4.3,1.8,Yes,3,2,3,6,2,3,4,0,8.4,4,Yes
+101012,46,Male,IT,Security Analyst,99744,5.7,5.2,Yes,3,2,4,9,1,4,4,1,11.8,6,No
+101013,30,Female,HR,Recruiter,68304,6.4,5.9,No,3,2,4,3,2,3,5,1,17.7,5,No
+101014,21,Female,R&D,Data Scientist,114237,6.2,5.5,No,3,3,3,7,1,3,5,0,11.5,2,No
+101015,26,Male,Operations,Operations Manager,106929,2.0,0.0,Yes,3,3,4,4,1,3,4,0,14.1,3,No
+101016,26,Female,Operations,Supply Chain Specialist,71496,2.3,0.0,Yes,3,2,3,5,4,3,3,0,8.7,5,No
+101017,35,Male,R&D,Data Scientist,115530,0.7,0.0,No,3,3,3,31,0,3,2,0,12.5,5,Yes
+101018,32,Male,Customer Support,Support Lead,55148,3.4,3.3,Yes,3,1,4,9,1,4,4,0,9.0,3,No
+101019,32,Male,R&D,Research Scientist,97214,2.2,1.5,No,3,3,3,16,0,4,4,0,11.7,4,No
+101020,40,Male,Operations,Operations Manager,91430,2.9,2.3,No,4,2,4,13,1,4,4,0,16.9,0,No
+101021,37,Female,Customer Support,Support Specialist,58573,3.6,1.1,Yes,3,3,3,14,3,4,1,0,10.7,3,No
+101022,37,Female,IT,IT Support,88800,4.7,4.0,No,3,2,3,7,2,3,4,0,13.6,1,No
+101023,38,Female,Sales,Sales Executive,63157,3.8,2.5,No,2,3,3,20,1,4,4,0,5.1,3,No
+101024,40,Male,Finance,Finance Manager,103399,3.8,1.1,No,4,4,3,13,3,4,3,1,7.3,4,No
+101025,18,Female,Sales,Account Manager,95647,5.4,3.9,No,3,3,3,8,0,4,4,1,15.6,3,No
+101026,32,Male,Operations,Supply Chain Specialist,57170,4.2,2.3,No,2,3,4,9,2,4,4,0,17.7,10,Yes
+101027,18,Male,R&D,Product Engineer,90812,7.5,6.3,No,4,3,2,8,1,4,3,0,11.2,1,No
+101028,35,Male,IT,Security Analyst,87944,4.2,1.1,No,4,2,4,8,2,4,4,0,21.5,5,No
+101029,34,Female,Customer Support,Support Lead,93164,10.7,7.3,No,4,4,3,8,5,3,2,0,6.9,5,No
+101030,43,Female,Sales,Account Manager,83295,1.9,0.0,No,3,4,3,10,4,3,3,0,9.6,3,No
+101031,44,Male,R&D,Software Engineer,87043,3.3,0.0,No,3,3,3,21,4,3,3,0,12.5,3,No
+101032,36,Male,Finance,Finance Manager,103941,2.6,0.0,No,3,1,3,4,4,3,3,0,13.6,5,No
+101033,30,Female,R&D,Lab Technician,98300,4.9,2.2,No,4,3,3,15,1,1,4,0,10.0,4,No
+101034,38,Female,Sales,Sales Representative,45244,1.9,0.5,Yes,4,1,3,7,0,4,4,0,8.3,3,No
+101035,30,Male,Sales,Sales Executive,51575,1.3,0.0,Yes,2,3,3,16,1,2,4,0,14.2,11,No
+101036,34,Female,R&D,Software Engineer,80370,2.2,0.0,No,4,4,3,7,3,3,4,0,12.5,1,No
+101037,43,Female,Finance,Financial Analyst,76242,1.4,0.4,Yes,2,2,3,10,3,2,2,0,10.8,8,Yes
+101038,30,Female,Finance,Financial Analyst,62853,3.7,2.8,No,2,2,3,7,2,4,2,1,16.2,4,No
+101039,41,Male,Sales,Sales Representative,55723,4.7,2.8,Yes,1,3,3,3,2,2,4,0,11.5,7,No
+101040,40,Female,R&D,Software Engineer,77370,1.1,0.0,No,2,3,3,21,1,2,3,0,11.5,1,No
+101041,27,Male,R&D,Lab Technician,93358,3.2,2.6,No,3,4,4,5,1,3,3,1,15.9,3,No
+101042,42,Female,R&D,Product Engineer,96149,8.1,6.4,Yes,3,2,2,9,0,2,5,0,9.1,2,Yes
+101043,40,Male,IT,Security Analyst,93038,9.7,5.4,No,4,3,3,5,4,3,3,0,8.8,2,No
+101044,35,Male,R&D,Software Engineer,100518,6.8,4.6,No,3,3,3,4,4,3,4,0,10.2,6,No
+101045,28,Male,HR,HR Business Partner,54327,0.4,0.0,No,4,4,3,7,6,4,4,0,12.1,1,No
+101046,27,Male,Customer Support,Support Specialist,72328,4.5,2.0,No,3,3,4,6,8,2,3,0,7.5,2,No
+101047,30,Male,HR,HR Business Partner,81848,8.7,7.6,No,3,4,4,4,5,2,5,0,17.3,1,No
+101048,39,Male,Finance,Finance Manager,91563,3.0,0.0,No,3,3,4,8,5,3,3,0,14.1,1,No
+101049,27,Male,Sales,Sales Executive,69905,1.6,0.0,Yes,3,2,3,4,1,4,3,0,8.3,6,No
+101050,38,Male,Sales,Sales Executive,89695,8.3,7.5,Yes,1,2,3,9,5,4,3,0,17.7,7,No
+101051,24,Female,Sales,Sales Representative,72521,9.1,6.5,No,3,4,2,8,1,2,5,0,12.1,2,No
+101052,33,Female,Operations,Operations Manager,98681,4.1,2.3,Yes,3,3,4,2,1,3,4,0,9.3,5,No
+101053,35,Female,Operations,Operations Manager,84180,1.6,0.0,Yes,4,2,3,6,2,4,3,0,17.5,2,Yes
+101054,55,Male,Sales,Sales Executive,60772,1.0,0.1,No,3,2,3,11,3,4,3,0,16.7,4,No
+101055,23,Male,Sales,Sales Executive,60759,5.2,2.9,No,3,4,3,5,4,2,5,0,8.8,5,Yes
+101056,47,Female,R&D,Software Engineer,90167,2.6,2.4,No,3,2,4,11,2,2,4,0,12.9,4,No
+101057,36,Male,Finance,Financial Analyst,93555,4.0,2.4,No,4,3,3,10,2,3,5,0,10.4,1,No
+101058,38,Male,Finance,Finance Manager,95314,3.7,3.3,No,3,3,3,5,2,3,3,0,5.4,6,No
+101059,35,Female,IT,IT Support,75329,2.1,0.4,Yes,4,1,4,8,0,2,4,0,15.1,4,No
+101060,38,Female,Customer Support,Support Lead,63824,0.9,0.0,Yes,3,2,3,13,1,3,4,1,17.5,5,No
+101061,33,Male,R&D,Product Engineer,74588,3.0,0.8,No,3,4,4,5,6,4,3,0,16.3,5,No
+101062,46,Female,Finance,Financial Analyst,78701,4.6,3.7,No,3,3,3,7,0,2,3,0,12.1,0,No
+101063,31,Male,HR,HR Business Partner,76996,4.7,3.0,No,3,4,4,15,1,4,2,0,17.3,6,Yes
+101064,44,Female,R&D,Research Scientist,80554,2.5,0.0,No,2,4,4,5,3,3,4,0,10.0,3,Yes
+101065,29,Male,Customer Support,Support Specialist,64623,9.0,3.8,No,3,4,3,11,2,3,4,0,18.4,3,Yes
+101066,34,Male,Sales,Account Manager,76558,1.7,0.0,Yes,3,2,4,5,5,4,4,0,11.3,4,Yes
+101067,26,Female,IT,Security Analyst,108358,7.7,4.0,No,3,3,3,7,1,3,4,0,9.7,0,No
+101068,38,Male,IT,IT Support,100966,4.5,3.9,No,3,3,3,10,2,3,3,0,10.0,3,No
+101069,46,Female,Customer Support,Support Lead,53866,3.0,2.0,Yes,2,3,3,2,4,4,5,0,9.7,7,No
+101070,34,Male,HR,HR Generalist,66020,5.7,3.8,Yes,2,3,3,6,4,3,4,0,11.3,2,Yes
+101071,33,Female,R&D,Product Engineer,81078,3.5,2.1,No,4,1,2,10,1,4,5,1,13.7,6,No
+101072,25,Female,Operations,Operations Manager,102377,1.3,0.1,No,3,2,3,9,3,3,5,0,12.5,3,Yes
+101073,33,Male,Operations,Operations Manager,94699,1.6,0.0,Yes,4,2,4,6,0,4,3,0,11.1,2,No
+101074,21,Female,HR,Recruiter,79737,3.3,2.8,No,3,2,4,4,1,2,4,0,14.6,8,No
+101075,27,Male,Operations,Supply Chain Specialist,77628,2.7,2.1,Yes,4,1,3,12,8,2,4,0,8.2,4,No
+101076,36,Male,R&D,Software Engineer,86446,7.6,7.3,No,2,2,3,7,1,2,2,0,14.6,7,No
+101077,45,Male,Finance,Finance Manager,92100,2.7,0.8,No,4,3,3,11,4,3,2,0,14.5,1,No
+101078,58,Female,Operations,Supply Chain Specialist,61734,2.5,1.4,No,2,3,3,10,3,2,2,0,12.0,1,No
+101079,30,Female,R&D,Product Engineer,76662,2.3,0.0,Yes,3,1,4,6,2,2,3,0,11.7,4,No
+101080,46,Female,HR,Recruiter,56615,2.1,0.3,No,3,3,5,15,3,2,3,0,15.1,0,Yes
+101081,36,Female,Customer Support,Customer Success Manager,73982,2.2,1.3,Yes,2,2,3,6,4,4,2,0,8.9,2,Yes
+101082,33,Female,Operations,Operations Analyst,70244,1.4,0.7,No,3,3,3,16,1,2,4,0,12.1,2,No
+101083,38,Male,Operations,Supply Chain Specialist,75942,4.6,3.3,No,2,4,3,17,4,2,3,0,11.5,4,No
+101084,35,Female,R&D,Software Engineer,96818,3.7,3.3,No,3,3,3,15,2,3,4,0,21.2,3,No
+101085,35,Female,Customer Support,Support Specialist,63787,3.6,0.2,Yes,4,1,3,7,0,4,5,0,7.7,2,No
+101086,31,Male,Sales,Sales Executive,49114,1.0,0.0,Yes,2,1,3,33,3,3,4,0,4.0,2,Yes
+101087,23,Female,HR,HR Business Partner,74656,5.3,5.0,No,2,3,3,9,3,3,3,0,9.8,1,No
+101088,22,Male,R&D,Lab Technician,78638,5.7,1.7,No,4,4,3,9,2,4,4,0,6.0,3,No
+101089,40,Male,Operations,Operations Manager,94473,10.4,9.1,No,2,2,4,8,3,4,3,0,11.5,6,No
+101090,32,Male,Customer Support,Support Specialist,73389,5.5,3.1,No,4,3,4,4,3,3,3,0,9.5,1,No
+101091,30,Male,IT,Systems Administrator,114605,11.7,10.8,No,3,3,3,17,6,3,3,0,8.8,3,No
+101092,35,Male,Finance,Finance Manager,100329,2.4,0.0,No,4,4,3,6,1,4,3,0,8.3,1,No
+101093,41,Female,R&D,Research Scientist,105038,10.8,10.2,Yes,4,2,4,14,2,2,3,0,17.4,3,No
+101094,36,Female,HR,Recruiter,61843,5.6,4.5,Yes,2,1,3,15,2,3,4,0,11.8,12,No
+101095,29,Male,HR,Recruiter,83142,5.2,5.0,No,4,4,4,11,1,4,4,0,17.8,1,No
+101096,45,Male,Sales,Sales Manager,89633,3.5,0.0,No,4,4,2,6,0,4,5,0,12.1,3,No
+101097,47,Male,HR,HR Generalist,68221,3.0,2.2,Yes,1,2,4,7,1,3,4,0,17.3,8,No
+101098,39,Male,Operations,Operations Manager,90277,2.6,0.6,No,2,2,3,2,6,1,4,0,10.9,6,No
+101099,42,Female,IT,Systems Administrator,98974,11.0,8.8,No,3,3,4,8,0,2,3,0,19.6,2,No
+101100,45,Male,Operations,Operations Analyst,61180,3.5,0.0,No,3,3,2,13,0,2,3,0,13.6,4,No
+101101,44,Female,R&D,Lab Technician,94514,5.7,3.9,Yes,2,1,4,7,2,3,3,0,11.3,2,No
+101102,40,Female,HR,HR Generalist,71953,6.5,5.1,No,3,3,3,6,1,2,3,0,14.2,0,Yes
+101103,39,Female,Sales,Sales Manager,90984,6.5,3.3,Yes,2,2,2,7,2,3,1,0,12.1,6,No
+101104,39,Female,R&D,Research Scientist,104181,4.6,2.4,No,4,2,4,16,4,4,3,0,13.3,1,No
+101105,26,Male,R&D,Lab Technician,107487,10.6,9.4,Yes,3,2,3,8,6,3,5,0,12.3,5,No
+101106,40,Female,R&D,Lab Technician,69203,5.4,1.3,No,4,4,3,23,0,3,4,0,14.6,5,No
+101107,23,Female,Sales,Sales Representative,55181,2.5,0.2,No,4,4,3,6,3,2,3,0,4.6,3,No
+101108,28,Female,IT,Security Analyst,68907,3.1,2.7,Yes,2,3,4,9,1,2,4,0,12.8,6,No
+101109,45,Female,R&D,Software Engineer,76267,1.1,0.0,No,2,3,4,6,2,2,2,0,16.4,3,No
+101110,41,Female,R&D,Software Engineer,77180,5.0,4.1,No,3,3,3,26,1,2,4,0,12.9,1,No
+101111,47,Female,R&D,Research Scientist,97103,6.0,2.5,No,3,3,4,9,6,3,4,0,10.1,2,No
+101112,32,Male,HR,Recruiter,73815,6.4,6.1,No,4,2,4,26,2,3,3,0,5.7,4,No
+101113,25,Female,R&D,Lab Technician,87639,5.6,2.4,No,2,2,3,6,1,2,2,0,18.0,0,Yes
+101114,33,Female,R&D,Software Engineer,86867,3.6,3.2,No,4,3,3,19,0,3,3,0,11.3,2,No
+101115,35,Male,Finance,Accountant,82110,4.0,2.2,No,4,4,3,9,2,4,4,0,17.3,1,No
+101116,35,Female,Sales,Sales Manager,85588,4.0,1.7,No,3,4,3,13,3,4,4,0,14.8,3,No
+101117,44,Male,Customer Support,Support Lead,72302,7.6,6.4,Yes,3,1,3,4,6,4,2,0,9.2,2,Yes
+101118,32,Female,Sales,Sales Manager,76057,0.7,0.0,No,2,3,3,10,3,3,5,0,4.0,8,No
+101119,37,Male,R&D,Software Engineer,86369,2.9,2.4,Yes,3,2,4,5,3,4,2,0,12.4,6,No
+101120,26,Male,Sales,Sales Executive,59722,1.8,0.0,No,2,3,3,9,2,4,3,0,11.9,3,No
+101121,38,Female,HR,HR Generalist,109022,13.4,11.5,Yes,3,2,3,4,7,1,3,0,13.6,5,Yes
+101122,35,Male,R&D,Data Scientist,114600,8.6,8.0,No,2,4,3,8,2,4,3,0,8.1,6,No
+101123,28,Male,Operations,Operations Manager,93743,3.0,1.1,No,2,3,2,15,1,3,3,0,12.6,4,No
+101124,33,Male,R&D,Data Scientist,118175,1.3,0.0,No,2,3,4,11,1,3,4,0,14.6,8,Yes
+101125,33,Male,Finance,Financial Analyst,74751,1.6,0.0,Yes,4,2,3,4,2,3,4,0,15.5,3,No
+101126,32,Female,R&D,Data Scientist,116300,7.6,7.6,No,4,2,4,3,4,3,3,0,12.9,4,No
+101127,49,Female,Sales,Account Manager,66150,1.1,0.0,No,3,3,3,11,2,2,3,0,13.5,1,No
+101128,34,Male,R&D,Product Engineer,80701,4.1,1.2,No,4,4,3,19,3,3,4,0,13.0,5,No
+101129,33,Female,HR,Recruiter,76803,6.8,4.4,No,3,4,4,5,2,4,4,0,17.1,4,No
+101130,18,Male,R&D,Product Engineer,83601,1.5,0.0,Yes,3,1,4,26,3,3,4,0,11.1,4,No
+101131,27,Female,Customer Support,Customer Success Manager,90962,4.1,2.2,Yes,4,1,3,8,3,3,4,0,4.0,3,No
+101132,32,Male,IT,Systems Administrator,80536,3.0,0.0,No,3,3,4,3,1,3,3,0,13.2,2,No
+101133,29,Male,Customer Support,Customer Success Manager,87877,2.7,1.8,Yes,2,3,3,3,3,4,3,0,11.2,3,No
+101134,46,Male,R&D,Data Scientist,90686,2.4,1.7,No,3,3,3,12,2,4,3,0,7.9,2,No
+101135,33,Female,Operations,Operations Manager,109440,7.2,1.6,No,4,4,2,9,6,4,4,1,9.2,2,No
+101136,45,Male,HR,HR Business Partner,87480,9.8,9.0,No,3,2,3,18,4,3,5,0,10.0,8,Yes
+101137,35,Male,Finance,Accountant,82004,3.4,3.0,No,4,3,4,4,1,4,4,0,13.6,3,No
+101138,35,Female,Customer Support,Support Lead,63379,5.2,4.0,No,3,1,3,9,3,4,3,0,12.3,4,Yes
+101139,34,Female,Finance,Finance Manager,96543,4.1,2.4,No,3,3,4,8,1,4,4,0,6.0,0,No
+101140,35,Male,Operations,Operations Manager,73624,0.8,0.0,Yes,2,1,4,8,2,4,3,0,7.9,3,No
+101141,49,Female,IT,Security Analyst,81446,3.3,2.2,No,3,4,3,7,3,3,4,1,18.5,1,No
+101142,18,Female,Sales,Sales Executive,58721,0.7,0.0,Yes,3,3,3,7,3,2,4,0,11.3,4,Yes
+101143,18,Male,IT,Systems Administrator,75794,2.8,1.3,No,3,3,3,9,4,3,3,0,12.0,0,No
+101144,30,Female,HR,Recruiter,68667,4.0,3.1,No,3,2,3,10,2,3,4,0,7.3,4,No
+101145,35,Male,Customer Support,Customer Success Manager,85998,6.4,6.1,No,3,3,4,9,2,4,3,1,16.5,6,No
+101146,40,Female,Operations,Operations Analyst,80208,4.9,4.5,Yes,4,3,4,16,2,2,3,0,12.7,0,No
+101147,38,Male,Sales,Account Manager,97906,7.3,3.4,No,4,3,3,4,1,4,4,0,9.8,1,Yes
+101148,31,Female,Sales,Sales Representative,55429,2.1,0.0,Yes,3,3,3,3,3,2,4,0,6.9,0,No
+101149,43,Male,Sales,Sales Executive,88595,9.0,7.5,Yes,2,2,3,14,4,2,4,0,9.0,1,No
+101150,43,Male,HR,Recruiter,93165,9.8,7.4,Yes,1,1,2,5,4,3,4,0,18.9,8,No
+101151,36,Female,Sales,Sales Executive,40097,0.6,0.0,No,4,3,3,7,3,2,3,0,10.8,3,No
+101152,42,Male,IT,Security Analyst,71642,1.0,0.2,No,3,2,3,6,3,2,3,0,14.8,3,No
+101153,37,Female,HR,HR Generalist,59856,3.9,3.4,No,3,4,3,6,2,3,3,0,11.3,4,No
+101154,30,Female,Operations,Supply Chain Specialist,69896,2.7,0.0,No,4,3,3,4,1,2,4,0,10.9,3,No
+101155,40,Female,R&D,Data Scientist,73233,3.0,2.9,Yes,4,3,3,6,1,3,4,0,9.8,4,No
+101156,35,Male,HR,Recruiter,73134,4.8,2.4,No,4,3,3,12,2,3,4,1,19.2,7,No
+101157,35,Female,Sales,Sales Manager,104408,7.5,5.7,Yes,4,1,3,8,3,3,3,0,13.3,0,No
+101158,47,Male,Operations,Operations Manager,87403,2.0,0.0,Yes,2,3,3,11,1,3,4,0,9.2,2,No
+101159,18,Male,Sales,Sales Executive,68078,8.3,5.8,No,2,2,3,6,4,4,3,1,13.1,7,No
+101160,23,Female,Sales,Sales Executive,77287,2.4,0.1,Yes,1,2,3,13,2,4,5,0,15.8,10,No
+101161,25,Female,Sales,Sales Executive,108804,14.5,13.9,Yes,3,2,4,6,0,3,4,0,4.1,1,No
+101162,32,Male,Operations,Operations Manager,106020,9.0,6.1,Yes,4,2,3,3,3,3,2,0,13.1,3,No
+101163,32,Male,Sales,Sales Representative,57651,2.5,0.3,Yes,3,1,3,10,0,3,4,0,13.9,3,No
+101164,22,Female,Finance,Finance Manager,78331,1.3,0.6,No,4,3,3,12,2,4,4,0,9.4,2,Yes
+101165,26,Female,IT,Security Analyst,80261,2.5,0.7,No,3,2,3,6,2,3,3,1,15.0,5,No
+101166,27,Male,IT,Security Analyst,62717,2.2,1.7,No,3,4,3,16,3,4,2,0,13.8,0,No
+101167,55,Female,Sales,Sales Manager,98877,5.9,4.6,No,2,3,4,5,0,1,3,0,9.7,5,No
+101168,49,Male,Sales,Account Manager,85473,0.7,0.0,No,3,3,4,12,2,3,4,0,16.9,2,No
+101169,31,Male,R&D,Lab Technician,76568,1.0,0.5,No,2,3,3,21,0,3,2,0,13.0,5,No
+101170,32,Female,Sales,Sales Representative,60980,5.8,5.5,No,4,4,3,8,2,3,2,1,14.0,1,No
+101171,25,Female,IT,Systems Administrator,86281,2.2,1.8,No,2,2,4,7,4,2,4,0,14.4,9,Yes
+101172,19,Male,R&D,Software Engineer,82980,2.8,1.5,Yes,2,1,3,8,2,2,3,0,14.5,8,Yes
+101173,34,Male,R&D,Research Scientist,96599,6.8,4.2,No,1,3,3,20,3,4,3,0,20.1,3,No
+101174,26,Male,Sales,Sales Executive,68256,7.7,6.1,No,3,3,4,10,0,2,3,0,16.1,1,No
+101175,34,Female,Finance,Financial Analyst,99897,8.8,8.5,No,3,4,3,27,1,2,2,0,14.8,2,No
+101176,21,Male,Sales,Sales Executive,70654,6.4,3.8,Yes,3,2,3,10,3,4,4,0,12.7,0,No
+101177,28,Male,IT,Systems Administrator,67244,3.5,3.1,No,2,3,3,6,2,4,3,0,18.7,6,No
+101178,36,Female,Sales,Sales Representative,74620,3.3,2.4,No,3,3,2,6,3,3,3,0,6.9,1,Yes
+101179,38,Male,Customer Support,Customer Success Manager,97432,3.0,0.0,No,3,3,5,8,2,2,4,1,10.4,4,No
+101180,38,Male,IT,Security Analyst,81964,1.5,0.0,Yes,3,3,3,3,1,3,3,0,12.5,2,No
+101181,24,Male,Sales,Sales Manager,87899,1.9,0.2,Yes,3,2,3,6,2,4,3,0,14.3,4,Yes
+101182,42,Female,Sales,Account Manager,115806,8.1,7.8,No,3,2,3,6,1,2,2,0,4.0,0,No
+101183,28,Male,R&D,Lab Technician,71933,2.3,1.3,No,3,3,3,9,5,2,4,0,12.0,2,Yes
+101184,40,Male,Sales,Sales Representative,47264,1.5,0.0,Yes,2,1,3,24,4,3,3,0,11.4,5,Yes
+101185,34,Male,Sales,Sales Representative,75470,8.5,6.5,Yes,1,2,3,8,2,3,3,0,14.6,2,No
+101186,23,Female,Operations,Operations Analyst,77401,4.6,1.9,No,3,4,3,3,3,3,3,0,13.5,0,No
+101187,32,Female,Finance,Accountant,102886,11.1,9.6,No,4,3,3,5,3,4,3,0,5.7,4,No
+101188,37,Male,Sales,Sales Representative,76100,10.4,7.2,No,3,3,4,9,0,4,4,0,10.2,1,No
+101189,40,Male,HR,Recruiter,61171,1.6,1.3,No,3,3,3,9,1,3,3,0,9.2,1,No
+101190,33,Female,R&D,Research Scientist,84991,3.7,2.4,No,2,4,4,20,4,4,5,0,16.6,6,No
+101191,47,Male,Customer Support,Customer Success Manager,85332,1.8,0.0,Yes,1,3,3,14,3,3,4,1,15.8,4,No
+101192,43,Male,Sales,Sales Representative,58161,1.8,1.6,No,2,3,3,14,0,3,3,0,9.8,4,Yes
+101193,32,Male,IT,Security Analyst,60139,2.9,2.9,No,4,3,4,7,3,2,4,0,14.5,4,No
+101194,41,Male,Operations,Operations Analyst,82669,6.0,0.4,Yes,3,1,4,15,1,2,3,0,10.3,3,No
+101195,50,Male,Sales,Sales Representative,85756,6.1,4.5,No,4,4,3,5,4,2,3,0,19.2,2,No
+101196,51,Male,Sales,Account Manager,92180,5.6,5.4,Yes,3,2,3,14,1,3,4,1,16.5,2,No
+101197,24,Male,R&D,Data Scientist,112083,3.5,1.9,Yes,1,2,4,7,2,3,3,0,16.8,6,No
+101198,27,Male,Operations,Supply Chain Specialist,75614,6.3,5.9,No,2,2,3,4,5,2,3,0,16.8,7,No
+101199,47,Female,HR,HR Generalist,65892,1.5,0.9,Yes,3,3,3,11,2,3,4,0,15.6,1,No
+101200,26,Female,Finance,Finance Manager,100339,4.7,1.1,Yes,2,2,3,18,3,2,4,0,12.1,8,No
+101201,24,Male,Operations,Operations Analyst,70902,4.1,3.2,No,3,3,4,7,3,2,3,0,13.4,3,No
+101202,31,Female,Operations,Supply Chain Specialist,68412,3.3,2.4,Yes,2,2,3,19,2,3,2,0,16.5,9,Yes
+101203,38,Male,R&D,Research Scientist,93650,4.8,4.4,No,4,3,3,3,5,2,2,0,12.1,3,No
+101204,34,Female,HR,HR Generalist,50503,0.6,0.0,No,3,2,4,4,0,4,5,0,11.4,5,No
+101205,29,Male,IT,Security Analyst,60896,1.9,0.2,Yes,2,2,3,8,4,3,4,0,18.9,5,No
+101206,29,Female,R&D,Product Engineer,96471,5.7,4.8,No,3,2,4,7,1,4,3,0,10.7,3,No
+101207,29,Male,Operations,Supply Chain Specialist,76693,4.0,0.0,Yes,3,1,3,6,1,3,4,0,5.9,5,No
+101208,27,Male,Sales,Sales Representative,56532,1.1,0.6,Yes,1,3,4,9,4,3,3,0,17.5,6,No
+101209,53,Male,Sales,Sales Manager,94876,3.9,3.4,No,3,2,3,6,3,4,3,0,9.4,3,No
+101210,37,Male,Operations,Operations Manager,88816,2.7,1.7,Yes,3,3,3,7,0,2,3,0,13.5,2,No
+101211,42,Male,R&D,Lab Technician,102772,8.2,2.1,No,4,3,3,10,3,4,2,0,18.4,0,Yes
+101212,30,Female,Sales,Sales Representative,53971,1.6,0.0,No,4,2,4,6,4,4,2,0,9.2,4,Yes
+101213,33,Female,Sales,Sales Executive,54792,1.6,0.7,No,2,4,3,8,3,4,2,0,11.9,6,No
+101214,29,Male,HR,HR Business Partner,75702,5.2,4.3,No,2,3,2,6,1,3,4,0,17.2,2,No
+101215,18,Female,Operations,Supply Chain Specialist,91919,3.6,3.1,Yes,3,2,2,4,5,4,3,0,14.4,7,No
+101216,23,Female,Sales,Sales Executive,69561,3.4,2.4,No,4,4,3,12,4,3,4,0,11.4,1,No
+101217,20,Female,Sales,Sales Representative,103657,14.6,13.4,No,3,4,3,21,0,2,4,0,20.4,0,No
+101218,18,Female,R&D,Data Scientist,118801,6.2,3.6,No,3,3,3,15,1,3,3,0,11.7,2,No
+101219,25,Female,Customer Support,Support Specialist,38790,3.1,0.9,No,2,3,3,10,2,3,3,0,13.4,4,Yes
+101220,45,Male,R&D,Software Engineer,80073,1.0,0.0,Yes,4,2,4,6,0,2,4,0,19.8,4,Yes
+101221,34,Female,Customer Support,Support Specialist,67794,3.0,0.0,Yes,4,2,3,7,4,4,3,0,15.4,1,No
+101222,45,Female,Operations,Operations Manager,87560,1.5,0.8,No,2,2,3,15,2,2,4,0,16.6,7,No
+101223,38,Male,R&D,Product Engineer,80011,2.0,1.7,No,2,3,3,2,3,3,5,0,8.9,4,No
+101224,41,Male,Operations,Supply Chain Specialist,57941,2.0,0.2,Yes,4,3,3,7,3,2,5,0,16.3,0,No
+101225,27,Male,IT,Systems Administrator,89059,7.8,4.4,No,2,3,4,12,1,3,2,0,14.6,4,No
+101226,39,Female,HR,HR Business Partner,52339,1.2,0.0,No,4,2,3,4,0,2,3,0,9.4,5,No
+101227,40,Male,R&D,Product Engineer,106356,7.3,6.9,No,3,4,3,10,2,2,3,0,12.8,1,No
+101228,30,Female,Operations,Operations Analyst,90795,5.4,3.7,Yes,3,2,4,10,2,3,4,0,14.7,3,No
+101229,39,Female,Operations,Operations Manager,116376,5.3,3.4,No,3,1,3,4,3,4,2,0,18.5,5,No
+101230,39,Female,IT,Security Analyst,66430,1.9,0.0,No,3,4,4,9,8,3,2,1,17.8,2,No
+101231,30,Male,Customer Support,Support Specialist,65424,6.7,5.0,No,4,2,3,6,3,4,4,0,9.3,3,Yes
+101232,25,Female,R&D,Lab Technician,72693,1.7,0.0,Yes,4,3,4,10,5,3,3,0,10.5,2,No
+101233,25,Female,Operations,Operations Manager,104513,9.9,9.4,No,4,4,4,12,1,3,2,0,13.8,0,No
+101234,35,Male,Operations,Supply Chain Specialist,76258,7.9,7.8,No,3,3,4,10,1,4,3,0,9.3,1,No
+101235,37,Female,Sales,Sales Representative,82561,11.0,10.7,No,3,3,2,8,3,3,4,0,9.5,1,No
+101236,28,Male,Sales,Sales Representative,72990,4.1,1.1,Yes,3,3,4,10,3,4,3,0,13.1,1,No
+101237,35,Female,R&D,Data Scientist,97059,3.6,2.5,Yes,3,3,4,4,4,4,4,0,12.5,1,No
+101238,39,Male,Operations,Operations Analyst,78758,2.9,0.0,No,4,3,3,8,2,2,3,0,14.5,5,No
+101239,40,Male,R&D,Research Scientist,132387,14.4,14.0,No,4,4,3,5,1,2,2,1,11.9,1,No
+101240,47,Male,IT,Security Analyst,89766,6.0,1.3,No,3,3,3,14,0,3,5,0,4.0,3,No
+101241,45,Male,Sales,Account Manager,89862,1.5,0.9,No,2,3,4,12,6,2,4,0,8.1,1,No
+101242,26,Male,R&D,Research Scientist,91189,9.2,8.0,Yes,4,1,4,12,3,3,3,0,13.9,7,Yes
+101243,48,Female,Finance,Financial Analyst,76176,3.5,3.3,No,3,2,3,21,1,4,3,0,9.9,2,No
+101244,30,Male,Sales,Sales Executive,54665,0.3,0.0,No,3,3,3,7,4,2,5,0,7.7,0,Yes
+101245,43,Male,Operations,Supply Chain Specialist,69049,2.2,0.8,No,4,3,3,6,4,4,4,0,18.9,1,No
+101246,35,Female,Sales,Account Manager,112143,7.9,1.0,Yes,2,2,3,7,2,3,4,0,14.9,3,No
+101247,31,Female,Customer Support,Customer Success Manager,80290,5.4,1.9,No,3,2,4,3,3,4,3,1,16.3,5,No
+101248,20,Male,Sales,Account Manager,89007,6.2,5.0,No,3,3,3,4,0,2,3,0,12.8,1,No
+101249,33,Female,Customer Support,Customer Success Manager,100355,9.1,8.4,No,2,2,4,11,4,3,4,0,13.1,5,No
+101250,22,Male,Finance,Finance Manager,89892,0.8,0.0,Yes,3,2,3,4,5,2,3,0,7.6,4,No
+101251,42,Female,Sales,Sales Representative,49976,2.3,0.8,Yes,1,3,3,5,1,2,3,0,15.6,3,Yes
+101252,47,Male,Sales,Sales Representative,60831,4.1,3.4,No,3,3,4,8,3,4,3,0,17.0,2,Yes
+101253,28,Female,Sales,Sales Executive,75390,8.0,6.4,Yes,1,1,3,7,1,4,4,0,5.1,5,No
+101254,37,Female,Finance,Financial Analyst,88468,1.7,1.6,No,3,4,4,13,4,4,2,0,14.8,4,No
+101255,29,Female,Operations,Operations Analyst,60738,3.1,1.0,Yes,1,3,4,8,3,2,4,0,15.2,7,Yes
+101256,29,Female,R&D,Data Scientist,112137,4.0,1.6,Yes,3,2,4,5,4,4,4,0,12.9,6,No
+101257,41,Female,R&D,Data Scientist,110489,2.2,1.8,No,3,4,4,14,2,2,3,0,21.3,4,No
+101258,34,Male,Finance,Finance Manager,99867,3.9,0.1,No,3,3,3,12,2,2,4,0,19.0,4,No
+101259,49,Female,HR,Recruiter,69539,3.5,0.3,No,4,3,3,4,3,3,3,0,10.7,2,No
+101260,31,Female,IT,Security Analyst,81503,2.6,0.7,No,3,2,4,9,4,3,3,0,13.2,3,No
+101261,43,Female,R&D,Research Scientist,98819,6.6,6.1,No,4,3,3,6,1,3,4,0,10.8,2,No
+101262,35,Male,IT,IT Support,87619,5.9,3.4,No,4,4,4,5,2,4,4,0,11.9,2,No
+101263,41,Male,Customer Support,Support Lead,65651,6.8,5.8,Yes,2,3,3,23,5,4,3,1,11.3,3,No
+101264,31,Female,R&D,Software Engineer,103002,7.2,5.4,No,3,3,4,9,4,4,3,0,15.8,0,No
+101265,34,Male,Sales,Sales Representative,82550,10.6,7.9,No,3,4,3,7,3,2,3,1,21.4,2,No
+101266,34,Male,Sales,Account Manager,77778,1.1,0.8,No,3,3,4,9,2,4,3,0,19.4,6,No
+101267,28,Male,HR,HR Business Partner,61422,1.2,1.0,No,3,2,3,13,0,4,5,0,14.8,2,No
+101268,40,Female,R&D,Research Scientist,101864,6.3,5.4,No,3,2,3,6,1,3,4,0,4.0,6,No
+101269,40,Male,Customer Support,Support Lead,76311,2.8,0.0,No,3,3,4,6,2,2,3,0,7.5,3,No
+101270,39,Male,Finance,Financial Analyst,71680,2.6,0.0,No,1,2,3,12,3,2,3,1,18.2,7,Yes
+101271,47,Male,HR,HR Generalist,63833,2.3,0.3,No,4,4,3,4,1,3,4,0,17.7,0,No
+101272,46,Female,Operations,Operations Analyst,69040,7.0,3.7,No,4,3,3,14,2,4,3,0,13.9,1,No
+101273,31,Female,R&D,Software Engineer,131493,13.8,12.4,No,3,3,3,3,1,3,3,0,10.9,4,No
+101274,38,Male,Operations,Operations Manager,105435,7.2,5.6,Yes,4,3,3,7,2,3,4,1,19.2,3,No
+101275,29,Male,Sales,Sales Manager,79943,2.7,1.5,No,4,2,3,3,0,2,4,0,14.6,3,No
+101276,35,Male,Finance,Financial Analyst,92230,6.8,3.2,No,2,3,2,5,3,2,1,0,16.0,5,No
+101277,30,Male,Customer Support,Support Specialist,54765,1.2,0.0,No,4,4,2,17,3,4,3,0,5.5,3,No
+101278,48,Female,Operations,Operations Analyst,64293,3.4,1.8,No,3,3,4,15,1,3,4,0,15.2,1,No
+101279,37,Male,Operations,Operations Manager,95252,0.8,0.0,Yes,4,3,4,15,2,4,3,0,20.2,0,No
+101280,33,Female,R&D,Research Scientist,88763,2.8,1.5,No,3,4,3,4,2,4,4,0,13.8,3,No
+101281,44,Male,Operations,Supply Chain Specialist,81458,4.5,0.0,No,4,4,3,5,2,4,2,0,15.3,5,No
+101282,18,Female,HR,HR Generalist,99160,15.4,12.4,No,3,4,3,10,3,3,1,0,12.1,0,No
+101283,18,Male,Finance,Accountant,90593,8.5,8.0,No,4,3,4,12,1,2,3,0,14.4,2,No
+101284,41,Female,Sales,Sales Representative,53538,0.8,0.0,Yes,3,2,4,5,1,2,4,0,18.9,1,No
+101285,35,Female,Sales,Sales Executive,62080,0.9,0.9,Yes,4,2,3,6,2,2,1,0,9.7,1,No
+101286,37,Female,HR,HR Business Partner,67555,2.2,0.0,No,4,2,3,4,4,4,3,0,9.3,3,No
+101287,24,Male,Sales,Account Manager,104761,11.8,8.4,No,3,3,4,20,4,3,2,0,12.3,6,No
+101288,34,Male,IT,Systems Administrator,76890,0.9,0.0,Yes,2,2,3,6,3,4,3,0,12.1,1,No
+101289,51,Female,Operations,Supply Chain Specialist,58611,2.3,0.7,No,2,4,3,8,0,3,5,0,6.4,4,No
+101290,41,Female,Customer Support,Support Lead,51405,2.3,1.0,No,1,3,3,9,1,3,3,0,14.6,3,No
+101291,36,Male,Sales,Account Manager,92060,5.2,4.6,No,4,4,5,15,1,2,3,0,13.4,3,No
+101292,31,Male,Customer Support,Support Lead,61537,6.9,1.3,No,3,1,3,5,0,3,4,0,15.0,5,No
+101293,31,Male,Sales,Sales Executive,62208,5.9,4.4,No,4,2,3,16,3,3,3,0,4.6,0,No
+101294,18,Female,R&D,Data Scientist,121009,4.7,4.2,No,3,3,4,4,2,4,3,0,17.0,4,No
+101295,37,Female,Operations,Operations Analyst,75816,1.1,0.0,Yes,4,3,3,16,2,2,4,0,16.7,1,No
+101296,41,Female,Sales,Sales Manager,108047,4.2,2.0,Yes,3,2,3,3,1,4,4,0,13.5,2,No
+101297,22,Female,Sales,Sales Executive,85815,9.3,7.0,No,1,2,3,8,1,4,4,0,12.1,9,No
+101298,29,Male,Sales,Sales Executive,93963,11.3,5.0,Yes,4,2,5,20,2,3,3,0,17.0,5,No
+101299,25,Male,HR,HR Generalist,70925,5.1,2.5,No,3,2,3,12,0,4,3,0,16.4,8,Yes
+101300,27,Male,Operations,Operations Manager,81726,0.9,0.1,No,4,2,3,10,5,4,4,0,13.8,1,No
+101301,35,Female,Sales,Sales Executive,76487,5.2,2.6,No,4,4,4,5,3,4,3,0,16.1,4,Yes
+101302,18,Male,Sales,Sales Executive,75458,3.5,2.9,Yes,3,2,4,5,4,3,4,0,19.8,4,No
+101303,40,Male,Finance,Accountant,80280,1.0,0.0,Yes,2,2,3,17,2,4,3,0,14.7,6,No
+101304,41,Male,R&D,Product Engineer,71562,1.6,0.0,No,2,3,3,11,0,3,5,0,9.2,3,No
+101305,32,Male,IT,Security Analyst,77605,1.9,0.0,No,3,3,3,13,1,2,4,1,18.9,0,No
+101306,18,Female,Customer Support,Customer Success Manager,85229,6.3,5.4,Yes,1,1,3,9,1,2,3,0,11.6,5,No
+101307,26,Male,Operations,Operations Manager,114280,11.0,9.7,No,2,3,3,7,1,4,4,0,12.1,0,No
+101308,45,Male,Operations,Operations Analyst,92966,5.7,4.4,Yes,2,2,4,12,2,2,3,0,14.4,3,Yes
+101309,18,Female,HR,Recruiter,65684,6.4,2.7,Yes,2,3,4,9,1,4,3,0,17.4,1,No
+101310,32,Male,Operations,Operations Manager,113358,3.7,2.1,No,3,4,4,7,2,3,3,0,20.1,2,No
+101311,25,Male,Sales,Sales Manager,86946,2.5,0.0,No,3,2,3,4,1,4,3,0,12.1,3,No
+101312,41,Male,Sales,Sales Representative,66365,5.8,4.8,No,3,4,3,14,2,3,4,0,18.1,2,No
+101313,29,Female,Finance,Financial Analyst,85974,4.8,3.9,No,3,3,4,10,2,2,4,0,14.6,3,No
+101314,38,Male,Sales,Sales Executive,52235,2.0,0.0,No,2,3,3,6,2,3,2,0,16.9,4,No
+101315,39,Female,Operations,Operations Manager,91798,4.6,2.2,Yes,3,2,3,16,3,3,3,0,12.7,6,No
+101316,50,Female,IT,Security Analyst,81140,3.9,0.0,No,2,3,3,9,0,2,4,1,12.8,2,No
+101317,33,Female,Customer Support,Customer Success Manager,78960,3.1,2.7,Yes,3,2,3,9,3,4,4,0,18.7,5,No
+101318,38,Male,R&D,Software Engineer,73603,2.5,1.0,No,2,3,3,13,2,2,3,0,9.9,2,No
+101319,22,Female,HR,HR Generalist,70327,5.1,3.1,No,4,2,3,12,2,2,5,0,9.7,2,No
+101320,44,Male,IT,Security Analyst,64488,2.6,0.7,No,3,4,4,10,1,3,4,0,9.6,4,Yes
+101321,28,Male,R&D,Research Scientist,106714,13.8,12.5,No,3,2,2,7,1,4,3,0,16.4,1,No
+101322,30,Male,HR,HR Generalist,62062,5.5,3.7,No,4,3,3,24,4,1,3,0,17.3,1,No
+101323,34,Male,Finance,Accountant,101682,5.2,3.3,No,3,3,3,5,4,4,3,0,13.3,2,No
+101324,22,Male,Customer Support,Support Specialist,64531,3.4,2.5,No,4,3,3,12,4,2,3,0,8.6,2,Yes
+101325,36,Male,IT,IT Support,82643,2.9,0.0,No,1,2,3,8,3,3,4,1,14.5,8,No
+101326,42,Male,Sales,Sales Representative,54341,0.7,0.0,No,3,4,2,10,4,2,4,0,10.9,1,No
+101327,37,Male,R&D,Product Engineer,85597,2.2,0.0,No,4,3,2,16,3,4,3,0,8.4,3,No
+101328,21,Male,Finance,Financial Analyst,83143,0.8,0.0,No,3,2,3,7,7,3,4,0,10.3,1,Yes
+101329,33,Female,Sales,Sales Representative,58230,0.8,0.0,No,4,2,4,11,3,2,4,0,15.8,4,No
+101330,41,Male,R&D,Product Engineer,93243,1.4,0.0,No,4,3,3,9,1,3,3,0,9.9,1,No
+101331,19,Female,R&D,Product Engineer,101185,8.6,6.5,No,3,2,3,6,4,3,4,0,13.0,5,No
+101332,26,Male,Sales,Sales Executive,84910,8.6,8.0,No,3,4,5,16,1,3,4,1,10.3,1,Yes
+101333,42,Male,HR,Recruiter,69376,2.2,0.0,No,2,4,4,12,4,3,4,0,19.9,6,Yes
+101334,37,Male,Sales,Sales Executive,47132,1.1,0.1,No,3,4,4,6,5,3,3,0,12.6,3,No
+101335,38,Male,Finance,Finance Manager,101345,2.8,0.0,No,3,4,3,15,3,2,3,0,15.0,0,No
+101336,50,Male,Sales,Account Manager,77267,6.2,4.4,No,2,3,4,5,4,3,3,0,14.7,2,No
+101337,38,Male,IT,IT Support,90831,7.5,4.0,No,2,2,3,8,4,4,3,0,13.4,2,No
+101338,40,Male,Sales,Sales Executive,63888,4.5,1.7,No,3,1,3,6,3,2,2,0,8.0,2,No
+101339,57,Male,Operations,Supply Chain Specialist,73269,5.1,4.7,No,4,3,4,12,2,4,4,0,11.3,2,No
+101340,33,Male,Sales,Account Manager,85692,4.8,0.4,No,4,4,3,6,2,3,4,0,9.4,4,No
+101341,28,Male,HR,Recruiter,63488,0.9,0.2,Yes,2,1,4,12,4,3,2,0,14.1,3,Yes
+101342,38,Male,R&D,Data Scientist,87868,1.2,0.2,Yes,4,2,5,11,0,4,3,1,21.1,7,Yes
+101343,38,Male,R&D,Lab Technician,126900,11.3,10.2,No,3,3,3,7,2,2,3,1,16.0,0,No
+101344,30,Male,R&D,Product Engineer,93507,4.5,4.3,No,3,3,3,22,2,2,4,0,8.8,5,Yes
+101345,26,Male,Operations,Operations Analyst,54373,0.5,0.0,Yes,3,3,4,5,2,4,3,0,14.3,0,No
+101346,53,Male,Customer Support,Support Specialist,72785,5.3,1.6,No,3,2,3,4,2,4,2,0,11.7,4,No
+101347,37,Male,R&D,Product Engineer,88714,1.8,0.0,Yes,3,1,3,13,4,4,4,0,10.8,3,Yes
+101348,28,Female,Sales,Sales Executive,80602,7.9,6.6,No,3,4,3,3,1,3,2,0,11.9,1,No
+101349,42,Male,IT,Security Analyst,82628,7.4,5.9,No,2,4,4,19,3,4,3,0,16.7,5,No
+101350,34,Male,Finance,Financial Analyst,109336,6.0,3.1,No,2,3,4,9,1,4,3,0,11.5,7,No
+101351,32,Male,Sales,Account Manager,94155,4.5,3.1,Yes,2,3,3,4,3,4,3,0,10.8,6,No
+101352,39,Female,Operations,Operations Analyst,78212,9.2,5.3,Yes,3,1,4,5,3,3,4,0,17.4,2,No
+101353,24,Female,HR,HR Business Partner,89242,9.8,8.3,Yes,3,3,4,3,2,4,5,0,15.6,2,No
+101354,37,Female,Finance,Accountant,74097,1.9,1.3,No,2,3,3,10,1,4,2,0,16.5,7,No
+101355,50,Female,R&D,Research Scientist,93258,6.0,4.1,No,4,3,3,4,2,4,4,1,19.5,0,No
+101356,38,Male,R&D,Product Engineer,71257,2.5,2.2,No,4,1,3,11,1,2,1,0,7.2,7,No
+101357,31,Female,Sales,Sales Manager,79609,1.6,0.0,Yes,1,2,4,7,2,3,5,0,15.0,5,No
+101358,30,Male,IT,Security Analyst,91879,9.8,7.6,Yes,3,3,3,6,1,3,2,0,10.2,3,No
+101359,31,Female,Sales,Sales Executive,69974,6.6,5.9,Yes,3,2,3,11,3,2,5,0,7.8,7,No
+101360,32,Male,Operations,Supply Chain Specialist,78527,4.7,2.6,Yes,3,3,3,12,5,2,3,0,9.2,1,No
+101361,31,Male,Operations,Supply Chain Specialist,62110,2.0,0.8,Yes,3,3,3,15,1,3,4,0,10.9,3,No
+101362,42,Female,IT,IT Support,97386,10.0,9.3,Yes,3,1,2,6,1,3,4,0,11.0,0,No
+101363,20,Male,Sales,Sales Executive,65142,1.8,1.6,No,4,4,3,8,2,3,3,0,9.9,3,No
+101364,42,Female,R&D,Software Engineer,70803,1.5,1.2,No,3,2,2,6,0,4,3,0,12.0,1,No
+101365,31,Male,R&D,Software Engineer,80644,3.9,0.0,No,2,3,4,9,2,3,3,0,22.6,5,No
+101366,38,Female,Finance,Finance Manager,100549,6.2,5.0,Yes,1,2,4,5,0,3,4,0,8.0,2,No
+101367,25,Female,Customer Support,Support Specialist,52194,3.0,0.9,No,4,2,4,6,1,2,3,0,18.0,6,No
+101368,45,Male,R&D,Software Engineer,155162,25.0,20.0,No,4,4,3,6,2,4,3,0,11.9,0,No
+101369,45,Female,Operations,Operations Analyst,79835,4.4,0.0,No,2,3,3,10,1,3,4,0,10.5,3,No
+101370,42,Female,Sales,Sales Manager,74744,2.5,1.8,Yes,2,2,4,8,3,3,3,0,6.9,1,Yes
+101371,22,Female,R&D,Lab Technician,88128,2.7,1.0,No,3,4,3,11,1,3,3,0,14.7,0,No
+101372,41,Male,Sales,Sales Representative,91667,12.1,11.1,No,3,2,3,8,3,2,3,0,7.0,0,No
+101373,38,Male,IT,Systems Administrator,67077,3.6,0.1,No,4,2,3,6,3,3,3,0,14.9,3,No
+101374,21,Female,Sales,Account Manager,106291,9.6,7.5,No,3,4,3,9,2,3,3,1,20.6,2,No
+101375,34,Male,R&D,Data Scientist,105309,0.8,0.0,No,3,3,3,5,2,3,5,0,7.5,2,No
+101376,37,Male,Operations,Operations Analyst,68571,8.0,7.6,No,4,2,4,11,2,4,3,1,20.6,6,No
+101377,39,Male,HR,HR Business Partner,80767,2.1,0.0,Yes,1,3,4,7,5,3,3,0,14.1,5,No
+101378,36,Female,Sales,Sales Executive,67945,6.7,5.3,Yes,3,2,4,9,1,4,3,1,9.2,5,No
+101379,37,Male,Sales,Sales Executive,43878,2.1,1.5,No,2,2,5,9,5,4,4,0,9.8,7,No
+101380,47,Female,HR,Recruiter,66526,2.9,2.7,Yes,3,1,4,20,4,4,3,0,14.6,2,Yes
+101381,45,Female,R&D,Software Engineer,86600,1.6,1.3,No,3,4,3,10,1,4,4,0,13.4,1,No
+101382,18,Male,Sales,Sales Representative,71236,6.8,5.2,Yes,3,1,3,9,5,4,4,0,6.5,5,No
+101383,32,Male,Finance,Financial Analyst,97124,7.6,4.1,No,3,2,4,6,2,3,2,1,16.6,4,No
+101384,33,Female,R&D,Product Engineer,100118,2.2,0.2,Yes,3,2,3,13,1,4,5,1,17.4,5,No
+101385,20,Male,Finance,Financial Analyst,75051,1.0,0.7,No,3,4,4,7,2,3,5,0,17.5,1,No
+101386,35,Female,R&D,Software Engineer,131242,9.5,7.9,No,2,2,3,4,2,2,3,0,10.6,5,No
+101387,45,Female,Sales,Sales Manager,93062,2.4,0.0,No,4,4,3,7,3,4,3,1,16.0,6,No
+101388,26,Female,Sales,Sales Executive,63664,3.5,2.4,Yes,2,3,4,9,0,2,4,0,17.8,0,Yes
+101389,37,Male,R&D,Research Scientist,82384,1.8,0.0,No,3,4,4,5,2,3,2,0,17.0,0,No
+101390,27,Female,Sales,Account Manager,91605,6.4,5.2,No,3,4,4,8,2,2,4,1,19.6,5,No
+101391,29,Female,R&D,Data Scientist,115046,6.5,4.1,No,3,3,3,8,3,4,3,0,12.4,2,No
+101392,47,Male,Customer Support,Customer Success Manager,110654,10.5,9.8,No,4,3,3,8,1,4,5,0,11.7,2,No
+101393,30,Female,Operations,Operations Manager,104603,8.2,7.8,Yes,3,2,3,16,2,4,3,0,13.0,5,No
+101394,38,Female,R&D,Software Engineer,86540,7.8,6.8,No,4,3,4,4,1,4,3,1,13.8,1,No
+101395,19,Female,Finance,Finance Manager,116052,3.8,2.3,No,3,2,3,25,3,3,4,0,15.9,4,Yes
+101396,50,Male,Finance,Financial Analyst,89641,3.4,2.4,Yes,4,1,3,8,1,4,3,0,6.6,2,No
+101397,39,Male,Operations,Supply Chain Specialist,67406,6.3,5.3,No,3,2,3,11,1,4,4,0,10.2,4,No
+101398,33,Male,R&D,Lab Technician,87059,3.6,0.1,No,3,3,4,9,2,2,4,1,16.4,2,Yes
+101399,39,Male,R&D,Software Engineer,110124,8.4,7.9,Yes,3,2,3,3,3,3,3,0,13.6,6,No
+101400,23,Male,R&D,Product Engineer,87754,1.7,0.1,No,4,3,5,5,4,3,2,0,16.3,2,No
+101401,44,Female,Sales,Account Manager,70314,0.8,0.5,Yes,3,3,3,6,1,3,2,0,17.2,3,Yes
+101402,32,Male,R&D,Lab Technician,101399,5.8,3.0,Yes,1,1,3,14,3,2,4,0,12.3,10,No
+101403,33,Female,Operations,Operations Analyst,68456,2.6,0.6,No,3,2,4,4,2,3,4,0,11.5,4,No
+101404,30,Male,Customer Support,Customer Success Manager,80298,1.5,0.0,No,2,4,3,5,4,2,4,0,11.5,4,No
+101405,30,Male,Sales,Sales Executive,91085,14.8,14.3,No,4,4,3,9,4,1,3,0,10.9,3,Yes
+101406,40,Male,R&D,Software Engineer,48487,4.0,0.0,No,4,2,3,11,3,3,2,0,13.8,6,No
+101407,37,Male,R&D,Data Scientist,88844,1.2,0.6,No,2,3,3,10,0,2,2,0,8.3,8,Yes
+101408,40,Female,HR,Recruiter,68509,2.4,1.3,No,2,2,4,5,1,2,5,0,13.4,9,No
+101409,34,Female,HR,HR Generalist,64391,3.2,2.8,No,2,3,3,3,1,1,4,0,17.7,3,No
+101410,39,Female,Sales,Sales Executive,76092,5.7,0.0,Yes,2,2,3,11,1,2,4,0,12.6,6,No
+101411,31,Male,Operations,Operations Analyst,77635,2.4,0.2,No,3,3,4,18,1,3,4,0,10.3,0,No
+101412,53,Female,Customer Support,Support Specialist,58225,3.5,1.3,No,4,3,3,7,1,3,2,0,10.8,4,No
+101413,22,Male,Finance,Finance Manager,103499,4.8,4.2,No,2,3,3,4,1,3,3,0,4.2,0,No
+101414,45,Female,IT,Security Analyst,65918,5.5,5.4,No,4,2,4,6,0,4,5,0,13.8,7,Yes
+101415,46,Male,HR,HR Generalist,53911,3.7,2.6,Yes,1,2,4,10,2,4,4,0,19.8,5,No
+101416,28,Male,R&D,Software Engineer,100341,12.0,11.1,No,2,3,3,7,2,4,3,0,7.8,5,No
+101417,53,Male,Sales,Sales Executive,77490,6.4,5.3,No,4,4,3,18,2,4,2,0,6.9,3,No
+101418,43,Male,Finance,Accountant,86955,6.2,4.6,No,4,2,3,14,2,2,3,0,9.7,9,No
+101419,42,Male,Sales,Sales Representative,66392,6.0,3.7,No,3,4,3,9,3,3,3,0,15.2,2,No
+101420,35,Female,Operations,Supply Chain Specialist,81041,8.4,8.3,No,3,2,4,3,2,4,5,0,20.0,5,Yes
+101421,33,Female,R&D,Data Scientist,99709,4.6,4.2,No,3,3,3,6,4,3,3,1,16.1,2,No
+101422,33,Female,R&D,Lab Technician,87751,1.7,1.0,No,3,3,3,6,6,2,2,0,7.5,3,No
+101423,38,Male,R&D,Data Scientist,109800,5.3,1.6,No,2,2,3,5,3,4,3,0,11.9,2,Yes
+101424,46,Female,Customer Support,Support Specialist,77482,5.8,2.2,Yes,1,2,4,9,2,2,4,0,20.3,3,Yes
+101425,36,Male,Sales,Account Manager,84020,9.3,7.2,Yes,1,2,4,9,3,2,2,0,12.9,1,No
+101426,27,Male,Sales,Sales Representative,61915,1.6,0.5,No,4,2,3,3,3,2,4,0,12.5,3,No
+101427,41,Male,Sales,Sales Executive,53726,1.9,0.0,Yes,3,2,3,13,4,4,4,0,12.8,4,No
+101428,42,Male,Finance,Finance Manager,102587,4.1,2.2,Yes,3,1,3,8,4,3,4,0,6.6,3,No
+101429,40,Female,Customer Support,Support Specialist,82015,6.2,2.5,Yes,1,3,3,10,3,4,3,0,15.5,5,No
+101430,41,Male,R&D,Product Engineer,74651,1.3,0.0,No,3,3,4,12,1,2,3,0,17.0,0,No
+101431,32,Male,Customer Support,Customer Success Manager,81547,1.6,1.4,No,3,3,4,5,1,2,2,0,7.0,1,No
+101432,27,Female,R&D,Research Scientist,87878,7.2,7.1,No,4,3,4,16,2,4,3,0,9.3,4,No
+101433,27,Male,Finance,Financial Analyst,74805,1.4,0.4,No,1,3,3,8,4,2,4,0,8.6,5,No
+101434,21,Female,Sales,Account Manager,65759,1.9,0.0,No,4,4,4,19,3,3,3,0,16.6,3,No
+101435,36,Male,HR,HR Generalist,79484,7.5,6.6,No,4,2,3,5,2,1,5,0,9.4,3,Yes
+101436,34,Female,Finance,Financial Analyst,92989,6.1,1.7,No,3,4,3,18,4,3,4,0,13.4,6,No
+101437,31,Female,HR,HR Business Partner,73637,2.4,0.0,Yes,2,3,3,5,2,4,2,0,11.4,8,No
+101438,18,Female,R&D,Software Engineer,84559,5.6,1.5,No,4,3,4,33,2,2,2,0,14.2,2,No
+101439,24,Female,Operations,Supply Chain Specialist,70919,4.9,3.8,Yes,2,2,4,5,5,4,3,0,15.7,5,No
+101440,44,Female,Customer Support,Support Lead,55723,3.6,3.1,Yes,2,1,3,15,3,3,5,0,13.0,6,Yes
+101441,29,Female,R&D,Data Scientist,99314,3.0,2.5,Yes,3,1,4,7,3,2,4,0,13.9,2,No
+101442,37,Male,Finance,Finance Manager,100925,5.5,3.1,Yes,3,2,4,12,1,2,5,0,15.1,6,No
+101443,23,Male,Operations,Supply Chain Specialist,45385,1.5,1.3,No,3,4,4,8,4,2,3,0,14.8,3,No
+101444,46,Female,R&D,Research Scientist,81896,5.4,5.2,No,4,4,3,4,3,3,3,0,11.3,0,Yes
+101445,33,Male,Operations,Supply Chain Specialist,74279,4.6,3.8,No,3,3,5,2,6,3,2,0,12.5,1,No
+101446,37,Male,R&D,Product Engineer,88027,4.8,3.0,No,3,4,4,32,1,4,4,0,20.6,2,No
+101447,54,Male,Operations,Supply Chain Specialist,71049,1.9,1.2,No,4,4,3,9,3,2,3,0,10.5,0,No
+101448,47,Male,Sales,Sales Representative,89660,9.4,5.8,Yes,2,2,3,2,1,3,3,1,19.3,6,Yes
+101449,32,Male,R&D,Research Scientist,77634,2.4,0.0,No,2,4,4,10,3,2,5,0,11.6,4,No
+101450,30,Female,HR,HR Generalist,50368,2.7,2.7,No,3,2,4,12,1,2,3,0,16.8,2,No
+101451,32,Female,HR,Recruiter,70829,3.5,1.3,No,2,2,3,6,1,3,4,0,18.2,4,No
+101452,39,Female,Operations,Operations Analyst,79432,6.1,5.2,No,3,3,5,6,3,3,2,1,15.3,4,No
+101453,34,Male,Customer Support,Customer Success Manager,84714,4.7,1.5,Yes,4,1,3,8,4,1,5,0,9.7,2,Yes
+101454,31,Male,Sales,Sales Representative,66184,1.0,0.0,No,3,3,3,16,2,3,3,0,10.5,3,No
+101455,47,Female,R&D,Software Engineer,90855,4.0,2.2,No,1,4,3,9,1,2,4,0,11.9,5,No
+101456,34,Male,R&D,Product Engineer,88546,4.2,2.8,No,3,3,3,18,0,3,4,0,13.1,4,No
+101457,53,Female,R&D,Lab Technician,106195,9.6,9.4,Yes,2,2,3,15,1,4,3,0,11.9,7,No
+101458,35,Male,HR,HR Business Partner,73887,3.2,0.0,No,3,3,3,7,3,4,4,0,10.5,3,No
+101459,49,Female,Operations,Operations Analyst,72034,5.7,5.3,No,3,1,3,3,2,3,4,0,18.8,4,Yes
+101460,37,Male,Operations,Operations Analyst,113518,19.2,13.8,No,3,2,2,7,1,3,3,0,11.3,1,No
+101461,42,Female,Sales,Sales Representative,77093,8.5,5.8,No,3,3,2,11,3,3,3,0,9.8,2,No
+101462,29,Female,R&D,Data Scientist,87159,1.8,0.9,Yes,2,1,4,8,1,4,3,0,16.9,8,Yes
+101463,27,Male,Finance,Finance Manager,112711,6.6,5.8,No,3,3,3,12,3,4,3,0,15.0,2,No
+101464,38,Female,R&D,Research Scientist,92153,5.4,5.2,Yes,1,3,2,13,2,3,5,0,16.9,1,No
+101465,43,Male,Sales,Sales Executive,61301,3.1,1.5,Yes,3,2,3,11,1,3,4,0,18.7,2,Yes
+101466,35,Female,R&D,Research Scientist,92187,6.7,6.5,No,4,2,3,7,2,2,3,0,13.2,7,Yes
+101467,24,Female,R&D,Research Scientist,94637,1.8,0.0,No,3,2,2,11,3,2,4,0,11.0,1,No
+101468,23,Male,Sales,Account Manager,90146,2.4,0.5,No,4,4,4,28,4,4,2,0,7.3,4,No
+101469,23,Male,IT,IT Support,78646,3.6,2.1,Yes,2,3,3,4,2,4,3,0,8.7,2,Yes
+101470,20,Female,R&D,Research Scientist,84437,3.0,1.3,Yes,3,2,3,11,2,3,4,0,12.7,0,Yes
+101471,35,Male,Finance,Finance Manager,124227,6.2,4.2,No,4,2,3,22,1,4,4,0,7.9,5,No
+101472,44,Female,HR,HR Business Partner,63219,3.9,2.8,No,3,3,3,4,2,4,4,0,6.5,6,No
+101473,34,Female,Operations,Operations Analyst,59950,2.7,1.4,Yes,4,2,4,14,4,3,5,0,14.2,2,Yes
+101474,18,Female,Sales,Sales Representative,80922,8.4,2.6,No,2,3,4,15,1,2,4,0,16.7,3,No
+101475,33,Male,Sales,Sales Representative,75245,6.1,2.6,Yes,1,2,3,4,0,4,3,0,11.1,6,Yes
+101476,33,Female,R&D,Software Engineer,82237,1.2,0.0,No,2,3,3,12,6,4,3,0,15.1,7,No
+101477,52,Female,R&D,Research Scientist,85290,1.2,0.3,Yes,3,2,3,7,3,4,4,0,14.2,4,No
+101478,23,Male,R&D,Research Scientist,76367,2.8,2.7,No,3,2,3,8,6,4,3,0,16.0,3,No
+101479,31,Male,Operations,Supply Chain Specialist,51484,1.3,0.0,No,3,4,3,7,5,2,5,0,19.6,4,No
+101480,48,Male,R&D,Software Engineer,93059,7.6,5.9,No,2,4,3,17,0,2,3,0,21.1,4,No
+101481,38,Male,Sales,Sales Executive,65237,2.5,1.3,No,1,3,3,8,3,1,4,0,14.6,7,No
+101482,39,Female,R&D,Research Scientist,83943,5.7,4.3,No,4,3,3,6,0,4,4,0,10.4,3,No
+101483,35,Male,Operations,Operations Manager,85715,6.6,6.2,No,3,3,4,6,2,4,3,0,14.2,4,No
+101484,37,Female,Operations,Operations Analyst,63538,0.7,0.1,Yes,3,3,3,7,2,3,3,1,20.0,1,No
+101485,41,Male,IT,Security Analyst,71216,2.6,0.0,No,2,4,3,5,1,2,3,0,8.9,1,No
+101486,28,Male,HR,Recruiter,51336,3.4,3.3,No,4,4,4,6,3,3,4,0,19.1,3,No
+101487,42,Male,IT,IT Support,84350,4.9,1.8,Yes,4,2,3,9,3,3,3,0,11.4,1,Yes
+101488,23,Female,IT,IT Support,87884,7.3,2.7,Yes,1,2,3,10,3,4,3,0,12.8,6,No
+101489,37,Female,R&D,Research Scientist,137724,15.2,12.9,No,4,4,3,16,3,3,4,0,9.2,4,No
+101490,36,Male,HR,HR Generalist,92640,11.2,9.0,No,3,3,3,9,2,4,4,0,7.4,1,No
+101491,29,Female,Operations,Operations Analyst,77755,3.9,3.3,Yes,2,1,4,6,1,3,4,0,13.0,6,Yes
+101492,34,Male,R&D,Software Engineer,86005,3.8,3.1,No,3,3,3,5,1,4,4,0,16.6,1,No
+101493,29,Male,Finance,Financial Analyst,98222,10.5,9.5,No,2,4,3,10,2,4,5,1,12.0,5,No
+101494,26,Male,HR,Recruiter,64411,4.0,3.7,Yes,2,1,4,8,4,2,4,0,19.6,6,Yes
+101495,32,Female,HR,Recruiter,74049,2.6,2.0,No,4,2,3,8,1,4,3,0,10.0,7,Yes
+101496,25,Female,Sales,Sales Representative,83370,7.7,6.1,No,3,3,4,9,4,4,4,0,10.3,3,No
+101497,37,Female,IT,Security Analyst,70602,5.0,4.1,No,4,2,3,11,0,4,3,0,12.9,1,Yes
+101498,25,Male,Operations,Operations Analyst,52283,1.1,0.0,No,3,2,3,9,3,3,3,0,14.4,5,No
+101499,40,Male,Sales,Account Manager,73502,3.2,0.0,Yes,3,2,4,7,4,4,2,0,14.7,3,No
+101500,25,Female,R&D,Product Engineer,88021,1.4,0.0,No,1,3,3,5,2,2,3,0,12.5,6,No
