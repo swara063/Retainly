@@ -10,7 +10,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: CORS_ORIGINS
-        value: https://retainly-frontend.onrender.com,http://localhost:5173,http://127.0.0.1:5173
+        value: https://retainlyfrontendfron.onrender.com,http://localhost:5173,http://127.0.0.1:5173
       - key: CORS_ORIGIN_REGEX
         value: https://.*\.onrender\.com
   - type: web
