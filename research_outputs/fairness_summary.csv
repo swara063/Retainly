@@ -1,0 +1,5 @@
+dataset,approach,fairness_status,max_disparity,audited_fields
+ibm_hr_attrition,Baseline,Not assessed,,
+ibm_hr_attrition,Retainly,High,0.8333333333333334,"Age, Gender, MaritalStatus"
+synthetic_employee_attrition_74498,Baseline,Not assessed,,
+synthetic_employee_attrition_74498,Retainly,High,0.4669522643818849,"Age, Gender, Marital Status"

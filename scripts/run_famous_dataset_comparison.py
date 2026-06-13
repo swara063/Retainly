@@ -317,7 +317,7 @@ def fit_retainly(df: pd.DataFrame, target_col: str, fields: dict[str, list[str]]
     if audited_fields:
         disparities: list[float] = []
         for col in audited_fields:
-            values = clean[col].copy()
+            values = clean.loc[X_test.index, col].copy()
             if _normalize_name(col) in {"age"}:
                 values = align_age_bins(values)
             groups = pd.Series(values).astype(str).fillna("Unknown")
@@ -402,7 +402,7 @@ def write_notebook(output_dir: Path, script_name: str) -> None:
             {"cell_type": "markdown", "metadata": {}, "source": ["# Retainly Research Validation: Baseline ML vs Multi-Agent Attrition Intelligence\n", "\n", "This notebook runs the benchmark script, loads the outputs, and presents the comparison in a viva-friendly format.\n"]},
             {"cell_type": "markdown", "metadata": {}, "source": ["## Objective\n", "This notebook evaluates whether Retainly's multi-agent workflow improves attrition prediction and HR usability compared with a normal single-pipeline ML baseline.\n"]},
             {"cell_type": "markdown", "metadata": {}, "source": ["## Experimental Setup\n", "- Baseline ML Approach: one simple model, default threshold, no leakage detection, no fairness audit, no HR action generation.\n", "- Retainly Multi-Agent Approach: workflow orchestration, smart column mapping, data validation/EDA, model comparison, threshold tuning, explainability, fairness audit, and HR action planning.\n"]},
-            {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": [f"from pathlib import Path\n", f"import pandas as pd\n", f"import matplotlib.pyplot as plt\n", f"root = Path('.').resolve()\n", f"out = root / 'research_outputs'\n", f"if not (out / 'famous_dataset_comparison_results.csv').exists():\n", f"    import subprocess, sys\n", f"    subprocess.run([sys.executable, {script_name!r}], check=True)\n", f"results = pd.read_csv(out / 'famous_dataset_comparison_results.csv')\n", f"summary = pd.read_json(out / 'famous_dataset_comparison_summary.json')\n"]},
+            {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": [f"from pathlib import Path\n", f"import json\n", f"import pandas as pd\n", f"import matplotlib.pyplot as plt\n", f"root = Path('.').resolve()\n", f"out = root / 'research_outputs'\n", f"if not (out / 'famous_dataset_comparison_results.csv').exists():\n", f"    import subprocess, sys\n", f"    subprocess.run([sys.executable, str(root / 'scripts' / {script_name!r})], check=True)\n", f"results = pd.read_csv(out / 'famous_dataset_comparison_results.csv')\n", f"summary = json.loads((out / 'famous_dataset_comparison_summary.json').read_text())\n"]},
             {"cell_type": "markdown", "metadata": {}, "source": ["## Datasets Used\n", "The table below summarizes the datasets that were available locally and used in the comparison.\n"]},
             {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": ["dataset_overview = results[['dataset','approach','rows','columns','target_column','attrition_rate']].drop_duplicates(subset=['dataset']).sort_values('dataset')\n", "dataset_overview\n"]},
             {"cell_type": "markdown", "metadata": {}, "source": ["## Metrics\n", "Accuracy, Precision, Recall, F1 score, ROC-AUC, and PR-AUC are shown below. Attrition is often imbalanced, so F1, Recall, ROC-AUC, and PR-AUC are especially important.\n"]},
