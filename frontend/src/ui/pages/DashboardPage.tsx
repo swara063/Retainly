@@ -1,137 +1,16 @@
 import React from 'react';
-import { AlertTriangle, BarChart3, FileText, Search, ShieldCheck, Sparkles, Upload, Users } from 'lucide-react';
+import { AlertTriangle, FileText, Search, Sparkles, Upload, Users } from 'lucide-react';
 import { API_BASE, fetchJson, sleep, uploadCsvWithProgress } from '../api';
 import AgentTimeline from '../components/AgentTimeline';
-import ConfusionMatrix from '../components/ConfusionMatrix';
-import FeatureBarChart from '../components/FeatureBarChart';
 import ProgressBar from '../components/ProgressBar';
 import { useAppDispatch, useAppState } from '../state';
 
-function SectionTitle({ icon, title, subtitle, id }: { icon: React.ReactNode; title: string; subtitle?: string; id?: string }) {
-  return (
-    <div className="sectionHeader" id={id}>
-      <div className="sectionIcon">{icon}</div>
-      <div>
-        <h2>{title}</h2>
-        {subtitle ? <p className="muted">{subtitle}</p> : null}
-      </div>
-    </div>
-  );
+function SectionTitle({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle?: string }) {
+  return <div className="sectionHeader"><div className="sectionIcon">{icon}</div><div><h2>{title}</h2>{subtitle ? <p className="muted">{subtitle}</p> : null}</div></div>;
 }
 
 function StatCard({ label, value, tone }: { label: string; value: string; tone?: 'good' | 'warn' | 'bad' | 'neutral' }) {
-  return (
-    <div className={`statCard ${tone || 'neutral'}`}>
-      <span>{label}</span>
-      <b>{value}</b>
-    </div>
-  );
-}
-
-function numOrDash(x: any, digits = 3) {
-  const n = Number(x);
-  if (!Number.isFinite(n)) return '—';
-  return n.toFixed(digits);
-}
-
-function pctOrDash(x: any, digits = 0) {
-  const n = Number(x);
-  if (!Number.isFinite(n)) return '—';
-  return `${(n * 100).toFixed(digits)}%`;
-}
-
-function hrMetricLabel(key: string) {
-  const labels: Record<string, string> = {
-    recall: 'Risk capture rate',
-    precision: 'Review efficiency',
-    roc_auc: 'Ranking quality',
-    pr_auc: 'Attrition detection quality',
-    f1: 'F1 balance score',
-    accuracy: 'Accuracy',
-    recall_at_top_10_percent: 'Top 10% risk capture',
-    recall_at_top_20_percent: 'Top 20% risk capture',
-    attrition_rate_in_top_10_percent: 'Attrition rate in top 10%',
-    attrition_rate_in_top_20_percent: 'Attrition rate in top 20%',
-  };
-  return labels[key] || key;
-}
-
-function cleanFeatureName(name: any) {
-  return String(name || '')
-    .replace(/^(num|cat)__/, '')
-    .replace(/_/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function driverInterpretation(name: any) {
-  const n = String(name || '').toLowerCase();
-  if (n.includes('overtime')) return 'Employees working overtime show elevated attrition risk.';
-  if (n.includes('jobsatisfaction')) return 'Lower satisfaction is linked to higher attrition likelihood.';
-  if (n.includes('worklife')) return 'Work-life balance patterns are linked to retention risk.';
-  if (n.includes('yearsatcompany') || n.includes('tenure')) return 'Tenure patterns help identify where retention support may be needed.';
-  if (n.includes('monthlyincome') || n.includes('income') || n.includes('salary')) return 'Compensation signals may be associated with retention pressure.';
-  if (n.includes('distance')) return 'Longer commute distance may increase attrition risk.';
-  if (n.includes('promotion')) return 'Promotion history can indicate whether growth opportunities are affecting retention.';
-  if (n.includes('environment')) return 'Work environment satisfaction appears linked with retention risk.';
-  if (n.includes('department')) return 'Risk differs by department, so HR should review team-level context.';
-  if (n.includes('jobrole')) return 'Risk differs by role, so interventions should be role-aware.';
-  return 'This signal is associated with attrition risk in the uploaded dataset.';
-}
-
-function collectTopDrivers(results: any) {
-  const explain = results?.explainability || {};
-  const candidates = [
-    ...(Array.isArray(explain.top_features) ? explain.top_features : []),
-    ...(Array.isArray(explain.feature_importance) ? explain.feature_importance : []),
-    ...(Array.isArray(explain.global_importance) ? explain.global_importance : []),
-    ...(Array.isArray(explain.shap?.global_importance) ? explain.shap.global_importance : []),
-    ...(Array.isArray(results?.model?.feature_importance) ? results.model.feature_importance : []),
-  ];
-  const seen = new Set<string>();
-  return candidates
-    .map((item: any) => ({
-      feature: item?.feature || item?.name,
-      importance: item?.importance ?? item?.mean_abs_shap ?? item?.score,
-    }))
-    .filter((item: any) => {
-      const key = String(item.feature || '');
-      if (!key || seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    })
-    .slice(0, 5);
-}
-
-function bandTone(v: string) {
-  const s = String(v || '').toLowerCase();
-  if (s.includes('high') || s.includes('critical')) return 'bad';
-  if (s.includes('medium')) return 'warn';
-  if (s.includes('low')) return 'good';
-  return 'neutral';
-}
-
-function calibrationStatus(metrics: any) {
-  const calibration = metrics?.calibration || {};
-  const gap = Number(calibration.calibration_gap);
-  const brier = Number(calibration.brier_score);
-  if ((calibration.warning && String(calibration.warning).length) || (Number.isFinite(gap) && gap >= 0.12) || (Number.isFinite(brier) && brier >= 0.22)) {
-    return { label: 'Directional', tone: 'warn' as const };
-  }
-  return { label: 'Calibrated', tone: 'good' as const };
-}
-
-function scrubCalibrationWarning(value: any) {
-  const clone = JSON.parse(JSON.stringify(value ?? {}));
-  if (clone?.metrics?.calibration?.warning) {
-    clone.metrics.calibration.warning = 'Hidden in compact view';
-  }
-  return clone;
-}
-
-function getRiskSegments(results: any, segmentName: string) {
-  const segs = Array.isArray(results?.risk_segments) ? results.risk_segments : [];
-  return segs.filter((s: any) => s?.segment_name === segmentName).slice(0, 4);
+  return <div className={`statCard ${tone || 'neutral'}`}><span>{label}</span><b>{value}</b></div>;
 }
 
 export default function DashboardPage() {
@@ -147,30 +26,14 @@ export default function DashboardPage() {
   const [employeeLoading, setEmployeeLoading] = React.useState(false);
   const [selectedEmployee, setSelectedEmployee] = React.useState<any | null>(null);
   const [selectedEmployeeDetail, setSelectedEmployeeDetail] = React.useState<any | null>(null);
-  const [detailLoading, setDetailLoading] = React.useState(false);
-
-  React.useEffect(() => {
-    let cancelled = false;
-    async function loadPreview() {
-      if (!s.datasetId) return;
-      try {
-        const data = await fetchJson(`${API_BASE}/datasets/${s.datasetId}/preview`);
-        if (cancelled) return;
-        setPreview(data);
-      } catch (e: any) {
-        if (!cancelled) {
-          set((p) => ({ ...p, error: e?.message || 'Failed to load smart import summary.' }));
-        }
-      }
-    }
-    loadPreview();
-    return () => {
-      cancelled = true;
-    };
-  }, [s.datasetId, set]);
 
   React.useEffect(() => {
     if (!s.datasetId) return;
+    fetchJson(`${API_BASE}/datasets/${s.datasetId}/preview`).then(setPreview).catch(() => setPreview(null));
+  }, [s.datasetId]);
+
+  React.useEffect(() => {
+    if (!s.datasetId || !s.results) return;
     let cancelled = false;
     const timer = window.setTimeout(async () => {
       try {
@@ -183,51 +46,27 @@ export default function DashboardPage() {
         params.set('sort', employeeSort);
         params.set('limit', '50');
         const data = await fetchJson(`${API_BASE}/analysis/${s.datasetId}/employees?${params.toString()}`);
-        if (cancelled) return;
-        setEmployeeExplorer(data);
-      } catch (e: any) {
-        if (!cancelled) {
-          set((p) => ({ ...p, error: e?.message || 'Failed to load employee explorer.' }));
-        }
+        if (!cancelled) setEmployeeExplorer(data);
+      } catch {
+        if (!cancelled) setEmployeeExplorer({ records: [], total: 0, available_filters: { departments: [], job_roles: [], risk_bands: [], employee_labels: [] }, warnings: [] });
       } finally {
         if (!cancelled) setEmployeeLoading(false);
       }
-    }, 300);
-    return () => {
-      cancelled = true;
-      window.clearTimeout(timer);
-    };
-  }, [s.datasetId, employeeQuery, employeeDepartment, employeeJobRole, employeeRiskBand, employeeSort, set]);
+    }, 250);
+    return () => { cancelled = true; window.clearTimeout(timer); };
+  }, [s.datasetId, s.results, employeeQuery, employeeDepartment, employeeJobRole, employeeRiskBand, employeeSort]);
 
   React.useEffect(() => {
-    if (!selectedEmployee || !s.datasetId) {
-      setSelectedEmployeeDetail(null);
-      return;
-    }
+    if (!selectedEmployee || !s.datasetId) return setSelectedEmployeeDetail(null);
     let cancelled = false;
-    async function loadDetail() {
-      try {
-        setDetailLoading(true);
-        const data = await fetchJson(`${API_BASE}/analysis/${s.datasetId}/employees/${selectedEmployee.row_index}`);
-        if (!cancelled) setSelectedEmployeeDetail(data);
-      } catch (e: any) {
-        if (!cancelled) {
-          set((p) => ({ ...p, error: e?.message || 'Failed to load employee detail.' }));
-        }
-      } finally {
-        if (!cancelled) setDetailLoading(false);
-      }
-    }
-    loadDetail();
-    return () => {
-      cancelled = true;
-    };
-  }, [s.datasetId, selectedEmployee, set]);
+    fetchJson(`${API_BASE}/analysis/${s.datasetId}/employees/${selectedEmployee.row_index}`).then((data) => { if (!cancelled) setSelectedEmployeeDetail(data); }).catch(() => { if (!cancelled) setSelectedEmployeeDetail(null); });
+    return () => { cancelled = true; };
+  }, [s.datasetId, selectedEmployee]);
 
   async function uploadOnly(fileOverride?: File | null) {
     const file = fileOverride || s.file;
     if (!file) return;
-    set((p) => ({ ...p, error: '', results: null, hrTimeline: [], developerDiagnostics: [], datasetId: '', columns: [], rows: null, loading: true, phase: 'uploading', uploadPct: 0 }));
+    set((p) => ({ ...p, error: '', results: null, hrTimeline: [], developerDiagnostics: [], loading: true, phase: 'uploading', uploadPct: 0 }));
     try {
       const data = await uploadCsvWithProgress(file, (pct) => set((p) => ({ ...p, uploadPct: pct })));
       if (!data?.dataset_id) throw new Error('Upload succeeded but no dataset id was returned.');
@@ -236,112 +75,49 @@ export default function DashboardPage() {
       set((p) => ({ ...p, error: e?.message || 'Upload failed.' }));
     } finally {
       set((p) => ({ ...p, loading: false, phase: 'idle' }));
-      setTimeout(() => set((p) => ({ ...p, uploadPct: 0 })), 700);
-    }
-  }
-
-  async function handleFileChange(file: File | null) {
-    set((p) => ({ ...p, file }));
-    if (file) {
-      await uploadOnly(file);
+      window.setTimeout(() => set((p) => ({ ...p, uploadPct: 0 })), 600);
     }
   }
 
   async function analyze() {
-    if (!s.file || !s.datasetId) return;
+    if (!s.datasetId && !s.file) return;
+    if (!s.datasetId && s.file) await uploadOnly();
+    const id = s.datasetId || '';
+    if (!id) return;
     set((p) => ({ ...p, error: '', results: null, hrTimeline: [], developerDiagnostics: [], loading: true, phase: 'analyzing' }));
     try {
-      await fetchJson(`${API_BASE}/analysis/${s.datasetId}/run?async_mode=true`, { method: 'POST' });
+      await fetchJson(`${API_BASE}/analysis/${id}/run?async_mode=true`, { method: 'POST' });
       const startedAt = Date.now();
-      const deadlineMs = 1000 * 60 * 8;
-      let completed = false;
-      while (Date.now() - startedAt < deadlineMs) {
+      while (Date.now() - startedAt < 1000 * 60 * 8) {
         const [logsRes, resultsRes] = await Promise.allSettled([
-          fetchJson(`${API_BASE}/analysis/${s.datasetId}/logs`).catch(() => ({ hr_timeline: [], developer_diagnostics: [] })),
-          fetch(`${API_BASE}/analysis/${s.datasetId}/results`),
+          fetchJson(`${API_BASE}/analysis/${id}/logs`).catch(() => ({ hr_timeline: [], developer_diagnostics: [] })),
+          fetch(`${API_BASE}/analysis/${id}/results`),
         ]);
         if (logsRes.status === 'fulfilled') {
           const payload: any = logsRes.value || {};
-          set((p) => ({
-            ...p,
-            hrTimeline: Array.isArray(payload.hr_timeline) ? payload.hr_timeline : [],
-            developerDiagnostics: Array.isArray(payload.developer_diagnostics) ? payload.developer_diagnostics : [],
-          }));
+          set((p) => ({ ...p, hrTimeline: Array.isArray(payload.hr_timeline) ? payload.hr_timeline : [], developerDiagnostics: Array.isArray(payload.developer_diagnostics) ? payload.developer_diagnostics : [] }));
         }
         if (resultsRes.status === 'fulfilled' && resultsRes.value.ok) {
           const data = await resultsRes.value.json().catch(() => ({}));
-          if (data?.status === 'failed') throw new Error(data?.error || 'Analysis failed on the backend.');
-          if (data?.status === 'completed') {
-            set((p) => ({ ...p, results: data }));
-            completed = true;
-            break;
-          }
+          set((p) => ({ ...p, results: data }));
+          break;
         }
         await sleep(900);
       }
-      if (!completed) throw new Error('Analysis did not finish in time. Please try again with a smaller CSV or check the backend logs.');
     } catch (e: any) {
       set((p) => ({ ...p, error: e?.message || 'Analysis failed.' }));
     } finally {
       set((p) => ({ ...p, loading: false, phase: 'idle' }));
-      setTimeout(() => set((p) => ({ ...p, uploadPct: 0 })), 700);
     }
   }
 
   const results = s.results || {};
   const exec = results.executive_summary || {};
-  const model = results.model || {};
-  const metrics = model.metrics || {};
-  const fairness = results.fairness || {};
-  const confidenceSummary = results.confidence_summary || model.confidence_summary || {};
-  const retentionPlan = Array.isArray(results.retention_plan) ? results.retention_plan : [];
-  const topDept = getRiskSegments(results, 'Department');
-  const topRoles = getRiskSegments(results, 'JobRole');
-  const overtime = getRiskSegments(results, 'OverTime');
-  const satisfaction = getRiskSegments(results, 'JobSatisfaction');
-  const tenure = getRiskSegments(results, 'YearsAtCompany');
-  const topDrivers = collectTopDrivers(results);
-
-  const inferredTarget = preview?.inferred_target_column;
-  const importWarnings = Array.isArray(preview?.warnings) ? preview.warnings : [];
-  const attritionFieldDetected = Boolean(inferredTarget);
-  const detectedConfidenceLow = !attritionFieldDetected || importWarnings.length >= 2;
-
-  const smartImportScore = Number(results?.data_quality?.data_quality_score ?? preview?.data_quality_score ?? 0);
-  const highestRiskSegment = (() => {
-    const candidates = [...topDept, ...topRoles, ...overtime, ...satisfaction, ...tenure];
-    if (!candidates.length) return '—';
-    const sorted = [...candidates].sort((a, b) => (Number(b.average_predicted_risk || 0) - Number(a.average_predicted_risk || 0)));
-    const pick = sorted[0];
-    return `${pick.segment_name}: ${pick.group}`;
-  })();
-
-  const prioritySegmentCount = Array.isArray(results?.employee_risk)
-    ? results.employee_risk.filter((r: any) => ['High', 'Critical'].includes(String(r?.risk_band))).length
-    : Number(exec.high_risk_employees || 0);
-
-  const selectedModel = model.selected_model || '—';
-  const modelReliability = metrics.model_reliability_label || exec.model_reliability_label || '—';
-  const calibration = calibrationStatus(metrics);
-  const fairnessRisk = fairness.overall_risk || exec.fairness_risk || '—';
-  const highRiskEmployees = Array.isArray(results?.employee_risk_records)
-    ? results.employee_risk_records.filter((r: any) => ['High', 'Critical'].includes(String(r?.risk_band))).length
-    : prioritySegmentCount;
-  const riskCapture = metrics.recall ?? exec.risk_capture_rate;
-  const top20Capture = metrics.recall_at_top_20_percent ?? exec.recall_at_top_20_percent;
-  const top20AttritionRate = metrics.attrition_rate_in_top_20_percent ?? exec.attrition_rate_in_top_20_percent;
-  const confidenceLabel = String(modelReliability || 'Directional');
-  const confidenceCard = confidenceLabel === 'Needs HR judgment' || Number(metrics.accuracy || 0) < 0.65
-    ? 'Directional model: use with HR judgment'
-    : confidenceLabel;
-  const fairnessStatus = String(fairnessRisk || 'Reviewed');
-
-  const confidenceText = confidenceSummary.plain_english || (detectedConfidenceLow
-    ? 'Retainly could use a quick check on the outcome field, so the smart import summary is shown with a caution note.'
-    : 'Retainly understood your dataset and found the fields needed for retention analysis.');
-
-  const canRun = Boolean(s.datasetId) && !s.loading;
+  const topRiskSegments = Array.isArray(results.risk_segments) ? [...results.risk_segments].sort((a, b) => Number(b.average_predicted_risk || 0) - Number(a.average_predicted_risk || 0)) : [];
+  const topRisk = topRiskSegments[0];
+  const recommendations: string[] = results.recommendations || [];
   const employeeFilters = employeeExplorer?.available_filters || { departments: [], job_roles: [], risk_bands: [], employee_labels: [] };
+  const dashboardReady = Boolean(s.results);
 
   return (
     <div className="dashboard">
@@ -349,447 +125,156 @@ export default function DashboardPage() {
         <div className="heroText">
           <div className="eyebrow">Retainly</div>
           <h1>Retention Command Center for HR Teams</h1>
-          <p className="subtitle">Upload HR data and get attrition hotspots, fairness signals, and a practical retention action plan.</p>
-          <div className="heroCtas">
-            <button className="primary" onClick={() => document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth' })}>
-              Upload HR CSV
-            </button>
-            <span className="heroNote">No coding. No ML setup. Decision-support only.</span>
-          </div>
+          <p className="subtitle">Upload current HR data, identify employees and teams that may need retention support, and generate a practical action plan.</p>
           <div className="pillRow">
-            <span className="pill"><Users size={16} /> HR-ready summary</span>
-            <span className="pill"><ShieldCheck size={16} /> Fairness checks</span>
-            <span className="pill"><Sparkles size={16} /> Action planning</span>
+            <span className="pill">1. Upload HR data</span>
+            <span className="pill">2. Smart import</span>
+            <span className="pill">3. Run retention analysis</span>
+            <span className="pill">4. Review employees, hotspots, and action plan</span>
           </div>
         </div>
-          <div className="heroAside card">
-            <div className="asideTitle">
-              <b>Workflow</b>
-              <span className="muted">Simple retention flow</span>
-            </div>
-          <ol className="steps">
-            <li className={s.file ? 'done' : ''}><span>1</span> Upload HR data</li>
-            <li className={s.datasetId ? 'done' : ''}><span>2</span> Smart import</li>
-            <li className={s.results ? 'done' : ''}><span>3</span> Run retention analysis</li>
-            <li className={s.results?.retention_plan?.length ? 'done' : ''}><span>4</span> Review action plan</li>
-          </ol>
-          <div className="panelHint">Need an explanation? Open the chatbot from the top bar for HR questions on this dataset.</div>
-          <div className="panelHint">Retainly reads your file, highlights where risk is concentrated, and turns it into a practical retention plan.</div>
+        <div className="heroAside card">
+          <b>Workflow</b>
+          <AgentTimeline items={s.hrTimeline.length ? s.hrTimeline : [{ step: 'Project Manager Agent', status: 'waiting', message: 'Run analysis to begin.' }]} />
         </div>
       </section>
 
       <section id="upload">
-        <SectionTitle icon={<Upload size={18} />} title="Upload HR data" subtitle="Drop in an HR export and Retainly will prepare the import summary." />
+        <SectionTitle icon={<Upload size={18} />} title="Upload HR data" subtitle="CSV upload, re-upload, and analysis start." />
         <div className="grid two">
           <div className="card uploadPanel">
-            <div className="panelTitle">
-              <Upload size={18} />
-              <div>
-                <b>Step 1 - Upload HR data</b>
-                <div className="muted">CSV only. Your file stays within this Retainly workspace.</div>
-              </div>
-            </div>
             <label className="fileBox">
               <Upload size={18} />
-              <input type="file" accept=".csv" onChange={(e) => void handleFileChange(e.target.files?.[0] || null)} />
-              <div className="fileMeta">
-                <b>{s.file?.name || 'Choose an HR CSV file'}</b>
-                <span className="muted">{s.datasetId ? 'Smart import complete' : 'Uploading and preparing smart import'}</span>
-              </div>
+              <input type="file" accept=".csv" onChange={(e) => set((p) => ({ ...p, file: e.target.files?.[0] || null }))} />
+              <div className="fileMeta"><b>{s.file?.name || 'Choose a CSV file'}</b><span className="muted">{s.datasetId ? 'Data uploaded' : 'CSV only'}</span></div>
             </label>
-            {s.phase === 'uploading' && <ProgressBar pct={s.uploadPct} label={`${s.uploadPct}% uploaded`} />}
+            {s.phase === 'uploading' ? <ProgressBar pct={s.uploadPct} label={`${s.uploadPct}% uploaded`} /> : null}
             <div className="btnRow">
-              <button onClick={() => void uploadOnly()} disabled={s.loading || !s.file}>{s.datasetId ? 'Re-upload' : 'Upload'}</button>
-              <button className="primary" onClick={analyze} disabled={!canRun}>
-                Run Retention Analysis
-              </button>
-            </div>
-            {!s.datasetId ? <div className="panelHint"><b>Next:</b> Upload is in progress or pending. Retainly will enable analysis as soon as import finishes.</div> : null}
-            <div className="panelHint">
-              <b>{confidenceSummary.label ? `Confidence level: ${confidenceSummary.label}.` : 'Confidence level: Directional.'}</b> {confidenceText}
-              {confidenceSummary.recommended_use ? <div className="muted tiny" style={{ marginTop: 6 }}>{confidenceSummary.recommended_use}</div> : null}
-            </div>
-            <div className="btnRow single" style={{ marginTop: 10 }}>
-              <button className="primary" type="button" onClick={analyze} disabled={!canRun}>Run Retention Analysis</button>
+              <button className="primary" onClick={() => void analyze()} disabled={!s.file || s.loading}>Run Retention Analysis</button>
+              <button onClick={() => void uploadOnly()} disabled={!s.file || s.loading}>Re-upload</button>
             </div>
             {s.error ? <div className="panelError"><AlertTriangle size={16} /> {s.error}</div> : null}
           </div>
-
-          <div className="card uploadPanel">
-            <div className="panelTitle">
-              <Sparkles size={18} />
-              <div>
-                <b>Step 2 - Smart import</b>
-                <div className="muted">Retainly summarizes what it found in your dataset.</div>
-              </div>
+          <div className="card">
+            <b>Smart import summary</b>
+            <div className="summaryGrid" style={{ marginTop: 12 }}>
+              <StatCard label="Employees analyzed" value={String(exec.rows_analyzed ?? s.rows ?? '—')} />
+              <StatCard label="High-risk employees" value={String((results.employee_risk || []).filter((r: any) => ['High', 'Critical'].includes(String(r.risk_band))).length || '—')} tone="warn" />
+              <StatCard label="Highest-risk department" value={topRisk ? String(topRisk.segment_name === 'Department' ? topRisk.group : topRisk.group) : '—'} tone="warn" />
+              <StatCard label="Highest-risk role" value={topRisk ? String(topRisk.segment_name === 'JobRole' ? topRisk.group : (topRiskSegments.find((r: any) => r.segment_name === 'JobRole')?.group || '—')) : '—'} tone="warn" />
+              <StatCard label="Top risk driver" value={String((results.explainability?.top_features || [])[0]?.feature || '—')} />
+              <StatCard label="Data quality score" value={String(results.data_quality?.data_quality_score ?? '—')} />
+              <StatCard label="Responsible-use status" value={String(exec.model_reliability_label || 'Directional')} tone="good" />
             </div>
-            {s.datasetId ? (
-              <>
-                <div className="panelHero">
-                  <b>{confidenceSummary.plain_english || confidenceText}</b>
-                  <p className="muted">{confidenceSummary.limitations || 'This summary explains what will be used for retention analysis in plain English.'}</p>
-                </div>
-                <div className="summaryGrid">
-                  <StatCard label="Employees detected" value={String(s.rows ?? s.results?.dataset_profile?.rows ?? '—')} />
-                  <StatCard label="Columns detected" value={String(preview?.columns?.length || s.columns.length || '—')} />
-                  <StatCard label="Attrition field detected" value={attritionFieldDetected ? 'Yes' : 'Needs review'} tone={attritionFieldDetected ? 'good' : 'warn'} />
-                  <StatCard label="Department / role fields detected" value={preview?.inferred_categorical_columns?.some((c: string) => /department|jobrole/i.test(c)) ? 'Yes' : 'Partial'} />
-                  <StatCard label="Engagement / workload signals detected" value={preview?.inferred_categorical_columns?.some((c: string) => /satisfaction|overtime|worklife|absentee|promotion|salary|rating/i.test(c)) ? 'Yes' : 'Partial'} />
-                  <StatCard label="Fairness check fields detected" value={preview?.inferred_sensitive_attributes?.length ? 'Yes' : 'Limited'} />
-                  <StatCard label="Data quality score" value={smartImportScore ? `${smartImportScore}/100` : '—'} tone={smartImportScore >= 75 ? 'good' : smartImportScore >= 55 ? 'warn' : 'bad'} />
-                </div>
-                <div className="panelHint">
-                  <b>Plain-English summary:</b> Retainly understood your dataset and found the fields needed for retention analysis.
-                </div>
-                {importWarnings.length ? (
-                  <div className="panelWarn">
-                    <b>Notes:</b>
-                    <ul>
-                      {importWarnings.map((w: string, i: number) => <li key={i}>{w}</li>)}
-                    </ul>
-                  </div>
-                ) : (
-                  <div className="panelHint">Smart import looks ready.</div>
-                )}
-              </>
-            ) : (
-              <div className="emptyPreview">
-                <b>Smart import summary will appear here after upload.</b>
-                <p className="muted">You will see employees detected, data quality, and any plain-English warnings before running analysis.</p>
-              </div>
-            )}
+            <div className="panelHint" style={{ marginTop: 12 }}>{results.confidence_summary?.plain_english || 'Run analysis to view your retention dashboard.'}</div>
           </div>
         </div>
       </section>
 
-      <section id="command-center">
-        <SectionTitle icon={<Users size={18} />} title="Retention Command Center" subtitle="The most important HR signals appear first." />
-          <div className="grid four">
-            <StatCard label="Employees analyzed" value={String(exec.rows_analyzed ?? s.results?.dataset_profile?.rows ?? '—')} />
-            <StatCard label="Observed attrition rate" value={exec.attrition_rate != null ? `${Math.round(Number(exec.attrition_rate) * 100)}%` : '—'} />
-            <StatCard label="High-risk employees identified" value={String(highRiskEmployees || '—')} tone="warn" />
-            <StatCard label="Risk capture rate" value={pctOrDash(riskCapture)} tone="good" />
-            <StatCard label="Model confidence" value={confidenceCard} tone={String(confidenceCard).includes('judgment') ? 'warn' : bandTone(confidenceLabel)} />
-            <StatCard label="Fairness review status" value={fairnessStatus} tone={bandTone(fairnessStatus)} />
+      <section id="analysis">
+        <SectionTitle icon={<Sparkles size={18} />} title="Agent Activity Monitor" subtitle="Waiting / Running / Completed / Needs attention." />
+        <div className="card">
+          <div className="summaryGrid">
+            {['Project Manager Agent', 'Data Analyst Agent', 'ML Engineer Agent', 'Explainability Engine', 'Insights Agent', 'Report Generator'].map((name) => {
+              const log = (s.hrTimeline || []).find((item) => String(item.step || '').toLowerCase().includes(name.toLowerCase().replace(' agent', '')));
+              const status = String(log?.status || (dashboardReady ? 'completed' : 'waiting'));
+              const tone = status.includes('completed') ? 'good' : status.includes('attention') ? 'warn' : 'neutral';
+              return <StatCard key={name} label={name} value={status} tone={tone as any} />;
+            })}
           </div>
-        {s.results ? (
-          <>
-            <div className="panelHint" style={{ marginTop: 12 }}>
-              Retainly is tuned to identify employees who may need retention support. The model prioritizes catching more potential attrition cases, so some employees may be flagged as a precaution. Use these results for supportive HR planning, not punitive decisions.
-            </div>
-            {top20Capture != null ? (
-              <div className="panelHint">
-                Among the top 20% highest-risk employees, Retainly captured {pctOrDash(top20Capture)} of observed attrition cases{top20AttritionRate != null ? `, with an observed attrition rate of ${pctOrDash(top20AttritionRate)} in that review group.` : '.'}
-              </div>
-            ) : null}
-          </>
-        ) : null}
-        {!s.results ? (
-          <div className="card previewPanel">
-            <b>What this section will show after analysis</b>
-            <p className="muted">A concise view of where retention risk is concentrated, which teams need attention, and whether the model can be trusted enough for decision support.</p>
-          </div>
-        ) : null}
-      </section>
-
-      <section id="top-drivers">
-        <SectionTitle icon={<BarChart3 size={18} />} title="Top Drivers" subtitle="The strongest workplace signals linked with attrition risk." />
-        <div className="grid two">
-          {topDrivers.length ? topDrivers.map((driver: any) => (
-            <div className="card" key={String(driver.feature)}>
-              <h3>{cleanFeatureName(driver.feature)}</h3>
-              <div className="muted tiny">Importance: {driver.importance == null ? 'Available' : numOrDash(Math.abs(Number(driver.importance)))}</div>
-              <div className="panelHint" style={{ marginTop: 10 }}>{driverInterpretation(driver.feature)}</div>
-            </div>
-          )) : (
-            <div className="card">
-              <b>Driver signals will appear after analysis.</b>
-              <p className="muted">Retainly will show the strongest workplace signals, such as overtime, satisfaction, tenure, compensation, role, or department patterns.</p>
-            </div>
-          )}
+          <div style={{ marginTop: 12 }}><AgentTimeline items={s.hrTimeline} /></div>
         </div>
       </section>
 
-      <section id="hotspots">
-        <SectionTitle icon={<Sparkles size={18} />} title="What HR should do next" subtitle="Five prioritized actions to start with." />
-        <div className="grid two">
-          {(Array.isArray(results.retention_plan) && retentionPlan.length ? retentionPlan.slice(0, 5) : Array.from({ length: 5 })).map((action: any, index: number) => (
-            <div className="card actionCard" key={index}>
-              {action ? (
-                <>
-                  <div className="actionTop">
-                    <span className={`priorityTag ${String(action.priority || 'Low').toLowerCase()}`}>{action.priority || 'Low'}</span>
-                    <span className="muted tiny">{action.timeline || 'Timeline varies'}</span>
-                  </div>
-                  <h3>{action.title}</h3>
-                  <div className="muted tiny"><b>Target group:</b> {action.target_segment || '—'}</div>
-                  <div className="muted tiny" style={{ marginTop: 6 }}><b>Why it matters:</b> {action.reason || '—'}</div>
-                  <div style={{ marginTop: 8 }}><b>Recommended HR action:</b> {action.recommended_action || '—'}</div>
-                  <div className="panelHint" style={{ marginTop: 10 }}><b>Success metric:</b> {action.expected_business_impact || 'Track retention movement and manager feedback.'}</div>
-                </>
-              ) : (
-                <div className="emptyPreview">
-                  <b>Action card coming soon</b>
-                  <p className="muted">After analysis, this slot becomes a prioritized retention action.</p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="employee-explorer">
-        <SectionTitle icon={<Search size={18} />} title="At-Risk Employee Explorer" subtitle="Search, filter, and review employees with the highest retention-support priority." />
-        {!s.results ? (
-          <div className="card previewPanel">
-            <b>Employee Explorer will appear after analysis</b>
-            <p className="muted">Once analysis finishes, you can search by employee name or ID, filter by department, role, and risk band, and open a detailed support profile.</p>
-          </div>
+      <section id="employees">
+        <SectionTitle icon={<Users size={18} />} title="Employee Explorer" subtitle="Sorted highest risk first, with search and profile view." />
+        {!dashboardReady ? (
+          <div className="card"><b>Run analysis first to view this section.</b></div>
         ) : (
           <div className="grid two">
             <div className="card">
-              <div className="btnRow single" style={{ alignItems: 'flex-start' }}>
-                <div style={{ flex: 1 }}>
-                  <label className="muted tiny">Search employee by name or ID</label>
-                  <input
-                    className="textInput"
-                    placeholder="Search employee by name or ID"
-                    list="employee-labels"
-                    value={employeeQuery}
-                    onChange={(e) => setEmployeeQuery(e.target.value)}
-                  />
-                  <datalist id="employee-labels">
-                    {(employeeFilters.employee_labels || []).map((label: string) => <option key={label} value={label} />)}
-                  </datalist>
-                </div>
-              </div>
+              <label><div className="muted tiny">Search EmployeeID or EmployeeName</div><input className="textInput" value={employeeQuery} onChange={(e) => setEmployeeQuery(e.target.value)} placeholder="Search by ID or name" list="employee-labels" /></label>
+              <datalist id="employee-labels">{(employeeFilters.employee_labels || []).map((label: string) => <option key={label} value={label} />)}</datalist>
               <div className="grid three" style={{ marginTop: 12 }}>
-                <label>
-                  <div className="muted tiny">Department</div>
-                  <select value={employeeDepartment} onChange={(e) => setEmployeeDepartment(e.target.value)}>
-                    <option value="">All</option>
-                    {(employeeFilters.departments || []).map((value: string) => <option key={value} value={value}>{value}</option>)}
-                  </select>
-                </label>
-                <label>
-                  <div className="muted tiny">Job role</div>
-                  <select value={employeeJobRole} onChange={(e) => setEmployeeJobRole(e.target.value)}>
-                    <option value="">All</option>
-                    {(employeeFilters.job_roles || []).map((value: string) => <option key={value} value={value}>{value}</option>)}
-                  </select>
-                </label>
-                <label>
-                  <div className="muted tiny">Risk band</div>
-                  <select value={employeeRiskBand} onChange={(e) => setEmployeeRiskBand(e.target.value)}>
-                    <option value="">All</option>
-                    {(employeeFilters.risk_bands || ['Low', 'Medium', 'High', 'Critical']).map((value: string) => <option key={value} value={value}>{value}</option>)}
-                  </select>
-                </label>
+                <label><div className="muted tiny">Department</div><select value={employeeDepartment} onChange={(e) => setEmployeeDepartment(e.target.value)}><option value="">All</option>{(employeeFilters.departments || []).map((value: string) => <option key={value} value={value}>{value}</option>)}</select></label>
+                <label><div className="muted tiny">JobRole</div><select value={employeeJobRole} onChange={(e) => setEmployeeJobRole(e.target.value)}><option value="">All</option>{(employeeFilters.job_roles || []).map((value: string) => <option key={value} value={value}>{value}</option>)}</select></label>
+                <label><div className="muted tiny">RiskBand</div><select value={employeeRiskBand} onChange={(e) => setEmployeeRiskBand(e.target.value)}><option value="">All</option>{(employeeFilters.risk_bands || ['Low', 'Medium', 'High', 'Critical']).map((value: string) => <option key={value} value={value}>{value}</option>)}</select></label>
               </div>
-              <div className="btnRow single" style={{ marginTop: 12 }}>
-                <label className="muted tiny">
-                  Sort
-                  <select value={employeeSort} onChange={(e) => setEmployeeSort(e.target.value as 'risk_desc' | 'risk_asc')}>
-                    <option value="risk_desc">Highest risk first</option>
-                    <option value="risk_asc">Lowest risk first</option>
-                  </select>
-                </label>
-                <div className="chip">{employeeExplorer.total || 0} employees</div>
-              </div>
-              {employeeExplorer.warnings?.length ? <div className="panelHint" style={{ marginTop: 12 }}>{employeeExplorer.warnings[0]}</div> : null}
-              {employeeLoading ? <div className="panelHint" style={{ marginTop: 12 }}>Loading employee risk results...</div> : null}
+              <label style={{ marginTop: 12, display: 'block' }}><div className="muted tiny">Sort</div><select value={employeeSort} onChange={(e) => setEmployeeSort(e.target.value as 'risk_desc' | 'risk_asc')}><option value="risk_desc">Highest risk first</option><option value="risk_asc">Lowest risk first</option></select></label>
+              {employeeLoading ? <div className="panelHint" style={{ marginTop: 12 }}>Loading employees...</div> : null}
               <div style={{ overflowX: 'auto', marginTop: 12 }}>
                 <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Employee</th>
-                      <th>Department</th>
-                      <th>Role</th>
-                      <th>Risk</th>
-                      <th>Band</th>
-                      <th>Top factors</th>
-                      <th>Suggested action</th>
-                    </tr>
-                  </thead>
+                  <thead><tr><th>Employee</th><th>Department</th><th>Role</th><th>Risk score</th><th>Risk band</th><th>Top factors</th><th>Suggested support action</th></tr></thead>
                   <tbody>
-                    {(employeeExplorer.records || []).length ? (employeeExplorer.records || []).map((item: any) => (
+                    {(employeeExplorer.records || []).map((item: any) => (
                       <tr key={item.row_index} style={{ cursor: 'pointer' }} onClick={() => setSelectedEmployee(item)}>
                         <td><b>{item.display_label}</b></td>
                         <td>{item.department || '—'}</td>
                         <td>{item.job_role || '—'}</td>
-                        <td>{Number(item.risk_percent || 0).toFixed(0)}%</td>
-                        <td><span className={`priorityTag ${String(item.risk_band || 'low').toLowerCase()}`}>{item.risk_band}</span></td>
+                        <td>{Math.round(Number(item.risk_percent || 0))}%</td>
+                        <td>{item.risk_band || '—'}</td>
                         <td>{(item.top_risk_factors || []).slice(0, 2).join('; ') || '—'}</td>
                         <td>{item.recommended_support_action || '—'}</td>
                       </tr>
-                    )) : (
-                      <tr><td colSpan={7}><div className="emptyPreview">No matching employees found. Try a different search or filter.</div></td></tr>
-                    )}
+                    ))}
                   </tbody>
                 </table>
               </div>
             </div>
-
             <div className="card">
-              <h3>Employee Risk Profile</h3>
+              <b>Employee profile</b>
               {selectedEmployeeDetail ? (
                 <>
-                  <div className="panelHero">
-                    <b>{selectedEmployeeDetail.employee?.display_label || selectedEmployee?.display_label || 'Selected employee'}</b>
-                    <p className="muted">{selectedEmployeeDetail.similar_segment_insight}</p>
-                  </div>
-                  <div className="summaryGrid">
-                    <StatCard label="Employee name / ID" value={String(selectedEmployeeDetail.employee?.employee_name || selectedEmployeeDetail.employee?.employee_id || selectedEmployeeDetail.employee?.display_label || '—')} />
+                  <div className="summaryGrid" style={{ marginTop: 12 }}>
+                    <StatCard label="EmployeeID / Name" value={String(selectedEmployeeDetail.employee?.employee_id || selectedEmployeeDetail.employee?.employee_name || selectedEmployeeDetail.employee?.display_label || '—')} />
                     <StatCard label="Department" value={String(selectedEmployeeDetail.employee?.department || '—')} />
-                    <StatCard label="Role" value={String(selectedEmployeeDetail.employee?.job_role || '—')} />
-                    <StatCard label="Risk band" value={String(selectedEmployeeDetail.employee?.risk_band || '—')} tone={bandTone(String(selectedEmployeeDetail.employee?.risk_band || ''))} />
-                    <StatCard label="Risk score" value={`${Number(selectedEmployeeDetail.employee?.risk_percent || 0).toFixed(0)}%`} tone="warn" />
+                    <StatCard label="JobRole" value={String(selectedEmployeeDetail.employee?.job_role || '—')} />
+                    <StatCard label="Risk score" value={`${Math.round(Number(selectedEmployeeDetail.employee?.risk_percent || 0))}%`} tone="warn" />
+                    <StatCard label="Risk band" value={String(selectedEmployeeDetail.employee?.risk_band || '—')} tone="warn" />
                   </div>
-                  <div className="panelHint"><b>Why this employee needs attention:</b> {selectedEmployeeDetail.employee?.top_risk_factors?.join('; ') || 'Review in context with the manager.'}</div>
-                  <div className="panelHint"><b>Recommended HR support:</b> {selectedEmployeeDetail.recommended_support_action}</div>
-                  <div className="panelHint"><b>Suggested talking points:</b> {(selectedEmployeeDetail.manager_hr_talking_points || []).join(' ')}</div>
-                  <div className="panelHint"><b>Ethical reminder:</b> {selectedEmployeeDetail.ethical_note}</div>
-                  <div className="panelHint"><b>Confidence summary:</b> {selectedEmployeeDetail.model_confidence_summary?.plain_english || 'Use as directional guidance.'}</div>
-                  {selectedEmployeeDetail.employee?.raw_fields ? (
-                    <details className="detailsBox" style={{ marginTop: 12 }}>
-                      <summary>Selected safe fields</summary>
-                      <pre className="pre">{JSON.stringify(selectedEmployeeDetail.employee.raw_fields, null, 2)}</pre>
-                    </details>
-                  ) : null}
+                  <div className="panelHint"><b>Top factors:</b> {(selectedEmployeeDetail.employee?.top_risk_factors || []).join('; ') || 'Review in context with the manager.'}</div>
+                  <div className="panelHint"><b>Suggested support:</b> {selectedEmployeeDetail.recommended_support_action || 'Use a supportive check-in and review workload.'}</div>
+                  <div className="panelHint"><b>HR talking points:</b> {(selectedEmployeeDetail.manager_hr_talking_points || []).join(' ')}</div>
                 </>
-              ) : (
-                <div className="emptyPreview">
-                  <b>{detailLoading ? 'Loading employee profile...' : 'Select an employee to see the detailed risk profile.'}</b>
-                  <p className="muted">This view explains why the employee is a retention-support priority and what HR can do next.</p>
-                </div>
-              )}
+              ) : <div className="panelHint" style={{ marginTop: 12 }}>Select an employee to see the profile.</div>}
             </div>
           </div>
         )}
       </section>
 
-      <section>
-        <SectionTitle icon={<Sparkles size={18} />} title="Risk Hotspots" subtitle="Where attrition risk is concentrated, which groups need attention, and what pattern is driving risk." />
-        <div className="grid three">
+      <section id="hotspots">
+        <SectionTitle icon={<Search size={18} />} title="Hotspots" subtitle="Where retention risk is concentrated." />
+        <div className="grid two">
           <div className="card">
-            <h3>Department hotspots</h3>
-            {topDept.length ? topDept.map((r: any) => <div className="spotRow" key={`${r.segment_name}-${r.group}`}><b>{r.group}</b><span>{numOrDash(r.average_predicted_risk)}</span></div>) : <div className="emptyPreview">Department-level risk will appear here after analysis.</div>}
+            <h3>Department / role hotspots</h3>
+            {topRiskSegments.length ? topRiskSegments.slice(0, 5).map((r: any) => <div className="panelHint" key={`${r.segment_name}-${r.group}`}><b>{r.segment_name}:</b> {r.group} ({Math.round(Number(r.average_predicted_risk || 0) * 100)}%)</div>) : <div className="panelHint">Run analysis first to view this section.</div>}
           </div>
           <div className="card">
-            <h3>Job role hotspots</h3>
-            {topRoles.length ? topRoles.map((r: any) => <div className="spotRow" key={`${r.segment_name}-${r.group}`}><b>{r.group}</b><span>{numOrDash(r.average_predicted_risk)}</span></div>) : <div className="emptyPreview">Role-level risk will appear here after analysis.</div>}
+            <h3>Top 3 recommended actions</h3>
+            {recommendations.length ? recommendations.slice(0, 3).map((item, index) => <div className="panelHint" key={index}>{item}</div>) : <div className="panelHint">Run analysis first to view this section.</div>}
+            <div className="btnRow single" style={{ marginTop: 12 }}><a className="download secondary" href="#action-plan">View full action plan</a></div>
           </div>
-          <div className="card">
-            <h3>What pattern is driving risk</h3>
-            {overtime.length || satisfaction.length || tenure.length ? (
-              <div className="patternList">
-                {overtime.slice(0, 2).map((r: any) => <div className="panelHint" key={`ot-${r.group}`}>Overtime: {r.group} signals {r.priority} attention.</div>)}
-                {satisfaction.slice(0, 2).map((r: any) => <div className="panelHint" key={`js-${r.group}`}>Satisfaction: {r.group} is linked to {r.priority} retention priority.</div>)}
-                {tenure.slice(0, 2).map((r: any) => <div className="panelHint" key={`yr-${r.group}`}>Tenure: {r.group} is where risk tends to cluster.</div>)}
-              </div>
-            ) : (
-              <div className="emptyPreview">Patterns around overtime, satisfaction, and tenure will show here after analysis.</div>
-            )}
-          </div>
+        </div>
+      </section>
+
+      <section id="action-plan">
+        <SectionTitle icon={<Sparkles size={18} />} title="Action Plan" subtitle="Supportive actions and next steps." />
+        <div className="card">
+          {recommendations.length ? recommendations.slice(0, 5).map((item, index) => <div className="panelHint" key={index}>{item}</div>) : <div className="panelHint">Run analysis first to view this section.</div>}
         </div>
       </section>
 
       <section id="report">
-        <SectionTitle id="report" icon={<FileText size={18} />} title="Review action plan" subtitle="Download the PDF report for leadership review." />
+        <SectionTitle icon={<FileText size={18} />} title="Report" subtitle="Download the PDF report." />
         <div className="card reportCta">
-          <div>
-            <b>Download the Retainly report</b>
-            <div className="muted">Includes the executive summary, hotspots, action plan, fairness notes, and appendix.</div>
-          </div>
-          <a className={`download ${s.datasetId ? '' : 'disabledLink'}`} href={s.datasetId ? `${API_BASE}/analysis/${s.datasetId}/report` : undefined as any}>
-            <FileText size={18} /> Download PDF report
-          </a>
+          <div><b>Download PDF report</b><div className="muted">Includes the executive summary, hotspots, action plan, and responsible-use notes.</div></div>
+          <a className={`download ${s.datasetId ? '' : 'disabledLink'}`} href={s.datasetId ? `${API_BASE}/analysis/${s.datasetId}/report` : undefined as any}><FileText size={18} /> Download PDF report</a>
         </div>
       </section>
 
-      <section id="model-notes">
-        <SectionTitle icon={<BarChart3 size={18} />} title="Model & Method Notes" subtitle="Secondary details for the team that wants to inspect the method later." />
-        <details className="detailsBox">
-          <summary>Open model and method notes</summary>
-          <div className="grid two" style={{ marginTop: 12 }}>
-            <div className="card">
-              <h3>Model notes</h3>
-              <table className="table">
-                <tbody>
-                  <tr><td>Selected model</td><td>{selectedModel}</td></tr>
-                  <tr><td>{hrMetricLabel('accuracy')}</td><td>{numOrDash(metrics.accuracy)}</td></tr>
-                  <tr><td>{hrMetricLabel('recall')}</td><td>{numOrDash(metrics.recall)}</td></tr>
-                  <tr><td>{hrMetricLabel('precision')}</td><td>{numOrDash(metrics.precision)}</td></tr>
-                  <tr><td>{hrMetricLabel('f1')}</td><td>{numOrDash(metrics.f1)}</td></tr>
-                  <tr><td>{hrMetricLabel('roc_auc')}</td><td>{numOrDash(metrics.roc_auc)}</td></tr>
-                  <tr><td>{hrMetricLabel('pr_auc')}</td><td>{numOrDash(metrics.pr_auc)}</td></tr>
-                  <tr><td>{hrMetricLabel('recall_at_top_10_percent')}</td><td>{numOrDash(metrics.recall_at_top_10_percent)}</td></tr>
-                  <tr><td>{hrMetricLabel('recall_at_top_20_percent')}</td><td>{numOrDash(metrics.recall_at_top_20_percent)}</td></tr>
-                  <tr><td>{hrMetricLabel('attrition_rate_in_top_10_percent')}</td><td>{numOrDash(metrics.attrition_rate_in_top_10_percent)}</td></tr>
-                  <tr><td>{hrMetricLabel('attrition_rate_in_top_20_percent')}</td><td>{numOrDash(metrics.attrition_rate_in_top_20_percent)}</td></tr>
-                  <tr><td>Confidence level</td><td>{String(modelReliability)}</td></tr>
-                  <tr><td>Risk score quality</td><td>{calibration.label}</td></tr>
-                </tbody>
-              </table>
-              <div className="panelHint" style={{ marginTop: 12 }}>
-                <b>Why these metrics look this way:</b> Attrition datasets are usually imbalanced, so accuracy is not the best measure of usefulness. Retainly prioritizes risk capture because HR wants to avoid missing employees who may need support. Review efficiency shows how many flagged employees are likely true attrition cases, while top-risk evaluation shows how useful the highest-risk review list is.
-              </div>
-              {Number(metrics.accuracy || 0) < 0.65 ? (
-                <div className="panelHint">Detailed note: raw accuracy is below 0.65, so this run should be interpreted as directional model guidance and combined with HR judgment.</div>
-              ) : null}
-            </div>
-            <div className="card">
-              <h3>Confusion matrix</h3>
-              <ConfusionMatrix matrix={model.confusion_matrix} />
-            </div>
-          </div>
-          <details className="detailsBox" style={{ marginTop: 12 }}>
-            <summary>Show compact model JSON</summary>
-            <pre className="pre">{JSON.stringify(scrubCalibrationWarning({ selected_model: model.selected_model, metrics: model.metrics, confusion_matrix: model.confusion_matrix }), null, 2)}</pre>
-          </details>
-          <div className="card" style={{ marginTop: 12 }}>
-            <h3>Top employee signals</h3>
-            <FeatureBarChart features={topDrivers} />
-          </div>
-        </details>
-      </section>
-
-      <section id="timeline">
-        <SectionTitle icon={<Sparkles size={18} />} title="Business-friendly timeline" subtitle="A simple status path, not a raw log feed." />
-        <div className="card">
-          <AgentTimeline items={s.hrTimeline} />
-        </div>
-      </section>
-
-      <section>
-        <details className="detailsBox">
-          <summary>Developer diagnostics</summary>
-          <div className="card" style={{ marginTop: 12 }}>
-            <p className="muted">Collapsed by default. Technical details stay here for debugging and deployment checks.</p>
-            {s.developerDiagnostics?.length ? (
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Agent</th>
-                    <th>Status</th>
-                    <th>Message</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {s.developerDiagnostics.map((item, index) => (
-                    <tr key={`${item.timestamp || index}`}>
-                      <td><b>{item.agent}</b></td>
-                      <td>{String(item.status).toUpperCase()}</td>
-                      <td>{item.message}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <p className="muted">No developer diagnostics captured for this run.</p>
-            )}
-          </div>
-        </details>
+      <section id="ask">
+        <SectionTitle icon={<Search size={18} />} title="Chatbot" subtitle="Ask Retainly only if it is working." />
+        <div className="card"><div className="panelHint">{dashboardReady ? 'Open the Chatbot tab to ask questions about the current analysis.' : 'Run analysis first to view this section.'}</div></div>
       </section>
     </div>
   );

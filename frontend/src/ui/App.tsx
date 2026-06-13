@@ -1,22 +1,13 @@
 import React from 'react';
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
 import { AppStateProvider } from './state';
 import DashboardPage from './pages/DashboardPage';
-import RunPage from './pages/RunPage';
 import OverviewPage from './pages/OverviewPage';
 import DataPage from './pages/DataPage';
 import AgentsPage from './pages/AgentsPage';
-import ModelPage from './pages/ModelPage';
-import FairnessPage from './pages/FairnessPage';
 import ChatPage from './pages/ChatPage';
-import EmployeesPage from './pages/EmployeesPage';
-
-function NavLink({ to, children }: { to: string; children: React.ReactNode }) {
-  const location = useLocation();
-  const active = location.pathname === to || (to === '/' && location.pathname === '');
-  return <Link className={`link ${active ? 'active' : ''}`} to={to}>{children}</Link>;
-}
+import RunPage from './pages/RunPage';
 
 function TopBar() {
   return (
@@ -29,14 +20,13 @@ function TopBar() {
         </div>
       </Link>
       <nav className="topActions" aria-label="Retainly navigation">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/employees">Employees</NavLink>
-        <NavLink to="/overview">Insights</NavLink>
-        <NavLink to="/data">Data Story</NavLink>
-        <NavLink to="/models">Explainability</NavLink>
-        <NavLink to="/fairness">Fairness</NavLink>
-        <NavLink to="/agents">Agents</NavLink>
-        <NavLink to="/help">Chatbot</NavLink>
+        <a className="link" href="#upload">Home</a>
+        <a className="link" href="#employees">Employees</a>
+        <a className="link" href="#hotspots">Hotspots</a>
+        <a className="link" href="#action-plan">Action Plan</a>
+        <a className="link" href="#analysis">Agents</a>
+        <a className="link" href="#report">Report</a>
+        <Link className="link" to="/help">Chatbot</Link>
       </nav>
     </header>
   );
@@ -50,14 +40,12 @@ export default function App() {
         <div className="content">
           <Routes>
             <Route path="/" element={<DashboardPage />} />
-            <Route path="/run" element={<RunPage />} />
-            <Route path="/employees" element={<EmployeesPage />} />
-            <Route path="/overview" element={<OverviewPage />} />
-            <Route path="/data" element={<DataPage />} />
-            <Route path="/models" element={<ModelPage />} />
-            <Route path="/fairness" element={<FairnessPage />} />
+            <Route path="/employees" element={<DashboardPage />} />
+            <Route path="/hotspots" element={<OverviewPage />} />
+            <Route path="/action-plan" element={<DataPage />} />
             <Route path="/agents" element={<AgentsPage />} />
             <Route path="/help" element={<ChatPage />} />
+            <Route path="/report" element={<RunPage />} />
           </Routes>
           <footer className="footer">
             <div className="muted">Retainly is a decision-support tool for retention planning. Use results for supportive HR action, not as the sole basis for employment decisions.</div>
