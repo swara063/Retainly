@@ -397,178 +397,11 @@ def make_chart(output_path: Path, rows: pd.DataFrame) -> None:
 
 
 def write_notebook(output_dir: Path, script_name: str) -> None:
-    notebook = {
-        "cells": [
-            {"cell_type": "markdown", "metadata": {}, "source": ["# Retainly Research Validation: Baseline ML vs Multi-Agent Attrition Intelligence\n", "\n", "This notebook runs the benchmark script, loads the outputs, and presents the comparison in a viva-friendly format.\n"]},
-            {"cell_type": "markdown", "metadata": {}, "source": ["## Objective\n", "This notebook evaluates whether Retainly's multi-agent workflow improves attrition prediction and HR usability compared with a normal single-pipeline ML baseline.\n"]},
-            {"cell_type": "markdown", "metadata": {}, "source": ["## Experimental Setup\n", "- Baseline ML Approach: one simple model, default threshold, no leakage detection, no fairness audit, no HR action generation.\n", "- Retainly Multi-Agent Approach: workflow orchestration, smart column mapping, data validation/EDA, model comparison, threshold tuning, explainability, fairness audit, and HR action planning.\n"]},
-<<<<<<< HEAD:scripts/run_famous_dataset_comparison.py
-            {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": [f"from pathlib import Path\n", f"import json\n", f"import pandas as pd\n", f"import matplotlib.pyplot as plt\n", f"root = Path('.').resolve()\n", f"out = root / 'research_outputs'\n", f"if not (out / 'famous_dataset_comparison_results.csv').exists():\n", f"    import subprocess, sys\n", f"    subprocess.run([sys.executable, str(root / 'scripts' / {script_name!r})], check=True)\n", f"results = pd.read_csv(out / 'famous_dataset_comparison_results.csv')\n", f"summary = json.loads((out / 'famous_dataset_comparison_summary.json').read_text())\n"]},
-=======
-            {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": [f"from pathlib import Path\n", f"import pandas as pd\n", f"import matplotlib.pyplot as plt\n", f"root = Path('.').resolve()\n", f"out = root / 'research_outputs'\n", f"if not (out / 'dataset_comparison_results.csv').exists():\n", f"    import subprocess, sys\n", f"    subprocess.run([sys.executable, {script_name!r}], check=True)\n", f"results = pd.read_csv(out / 'dataset_comparison_results.csv')\n", f"summary = pd.read_json(out / 'dataset_comparison_summary.json')\n"]},
->>>>>>> 8124d9d (Rename and professionalize research benchmark):scripts/run_dataset_comparison.py
-            {"cell_type": "markdown", "metadata": {}, "source": ["## Datasets Used\n", "The table below summarizes the datasets that were available locally and used in the comparison.\n"]},
-            {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": ["dataset_overview = results[['dataset','approach','rows','columns','target_column','attrition_rate']].drop_duplicates(subset=['dataset']).sort_values('dataset')\n", "dataset_overview\n"]},
-            {"cell_type": "markdown", "metadata": {}, "source": ["## Metrics\n", "Accuracy, Precision, Recall, F1 score, ROC-AUC, and PR-AUC are shown below. Attrition is often imbalanced, so F1, Recall, ROC-AUC, and PR-AUC are especially important.\n"]},
-            {"cell_type": "markdown", "metadata": {}, "source": ["## Results\n", "The next tables show baseline versus Retainly averages and the overall project score.\n"]},
-            {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": ["display_cols = ['dataset','approach','accuracy','precision','recall','f1','roc_auc','pr_auc','selected_model','selected_threshold','fairness_status','max_fairness_disparity','predictive_score','usability_score','final_project_score']\n", "results[display_cols].sort_values(['dataset','approach'])\n"]},
-            {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": ["avg = results.groupby('approach')[['accuracy','precision','recall','f1','roc_auc','pr_auc','final_project_score']].mean().round(4)\n", "avg\n"]},
-            {"cell_type": "markdown", "metadata": {}, "source": ["## Fairness and Responsible AI Check\n", "Fairness is evaluated separately from business risk hotspots.\n"]},
-            {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": ["fairness = pd.read_csv(out / 'fairness_summary.csv')\n", "fairness\n"]},
-            {"cell_type": "markdown", "metadata": {}, "source": ["## Top Drivers\n", "The strongest model drivers are summarized below for HR interpretation.\n"]},
-            {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": ["drivers = pd.read_csv(out / 'top_drivers_summary.csv')\n", "drivers.head(20)\n"]},
-            {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": [f"import matplotlib.pyplot as plt\n", f"chart = out / 'dataset_comparison_core_metrics.png'\n", f"img = plt.imread(chart)\n", f"plt.figure(figsize=(12,6))\n", f"plt.imshow(img)\n", f"plt.axis('off')\n", f"plt.show()\n"]},
-            {"cell_type": "markdown", "metadata": {}, "source": ["## Discussion\n", "Retainly improves results through better preprocessing, leakage removal, class imbalance handling, model comparison, threshold tuning, explainability, fairness review, and HR action generation.\n"]},
-            {"cell_type": "markdown", "metadata": {}, "source": ["## Conclusion\n", "The multi-agent Retainly workflow provides stronger predictive performance and greater decision-support value than a normal baseline ML workflow, while also adding explainability, fairness review, and HR action planning.\n"]},
-            {"cell_type": "markdown", "metadata": {}, "source": ["## How this connects to the website\n", "The notebook validates the model and methodology on labeled validation datasets. The deployed website uses the validated/pretrained Retainly model to score current employee datasets that may not contain Attrition labels. The website intentionally does not show benchmark metrics because it is an HR decision-support product, not a research dashboard.\n"]},
-            {"cell_type": "markdown", "metadata": {}, "source": ["Retainly’s multi-agent workflow outperforms a normal baseline because it is not limited to a single model. It validates the dataset, removes leakage, handles imbalance, compares multiple algorithms, tunes thresholds, explains predictions, audits fairness, and converts results into HR actions. The website then uses this validated workflow as a practical retention-support product.\n"]},
-        ],
-        "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"}, "language_info": {"name": "python"}},
-        "nbformat": 4,
-        "nbformat_minor": 5,
-    }
-    (output_dir / "retainly_dataset_comparison.ipynb").write_text(json.dumps(notebook, indent=2), encoding="utf-8")
-
-
-
-
-# Public helper API used by the notebook and docs.
-
-def load_available_datasets(dataset_dir: Path | str) -> list[dict[str, Any]]:
-    directory = Path(dataset_dir)
-    if not directory.exists():
-        return []
-    datasets = []
-    for path in sorted(directory.glob('*.csv')):
-        if path.name.lower() in {'readme.md'}:
-            continue
-        datasets.append({'name': path.stem, 'path': path})
-    return datasets
-
-
-def prepare_features(df: pd.DataFrame, target_col: str, fields: dict[str, list[str]], *, retainly: bool = False) -> tuple[pd.DataFrame, pd.Series, list[str], list[str]]:
-    clean = df.dropna(subset=[target_col]).copy()
-    y = normalize_binary_target(clean[target_col])
-    drop = set(fields['leakage']) | set(fields['id']) | {target_col}
-    if retainly:
-        drop |= set(fields['sensitive'])
-    feature_cols = [c for c in clean.columns if c not in drop]
-    return clean[feature_cols].copy(), y, [c for c in feature_cols if pd.api.types.is_numeric_dtype(clean[c])], [c for c in feature_cols if c not in [c for c in feature_cols if pd.api.types.is_numeric_dtype(clean[c])]]
-
-
-def run_baseline_logistic_regression(df: pd.DataFrame, target_col: str, fields: dict[str, list[str]], seed: int = 42) -> dict[str, Any]:
-    X, y, _, _ = prepare_features(df, target_col, fields, retainly=False)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42, stratify=y)
-    preprocessor, _, _ = build_preprocessor(list(X.columns), X)
-    pipe = Pipeline([('preprocessor', preprocessor), ('model', LogisticRegression(max_iter=2000))])
-    pipe.fit(X_train, y_train)
-    proba = pipe.predict_proba(X_test)[:, 1]
-    pred = (proba >= 0.5).astype(int)
-    return compute_metrics(y_test, pred, proba)
-
-
-def run_baseline_random_forest(df: pd.DataFrame, target_col: str, fields: dict[str, list[str]], seed: int = 42) -> dict[str, Any]:
-    X, y, _, _ = prepare_features(df, target_col, fields, retainly=False)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42, stratify=y)
-    preprocessor, _, _ = build_preprocessor(list(X.columns), X)
-    pipe = Pipeline([('preprocessor', preprocessor), ('model', RandomForestClassifier(n_estimators=100, random_state=seed))])
-    pipe.fit(X_train, y_train)
-    proba = pipe.predict_proba(X_test)[:, 1]
-    pred = (proba >= 0.5).astype(int)
-    return compute_metrics(y_test, pred, proba)
-
-
-def run_baseline_gradient_boosting(df: pd.DataFrame, target_col: str, fields: dict[str, list[str]], seed: int = 42) -> dict[str, Any]:
-    X, y, _, _ = prepare_features(df, target_col, fields, retainly=False)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42, stratify=y)
-    preprocessor, _, _ = build_preprocessor(list(X.columns), X)
-    pipe = Pipeline([('preprocessor', preprocessor), ('model', GradientBoostingClassifier(random_state=seed))])
-    pipe.fit(X_train, y_train)
-    proba = pipe.predict_proba(X_test)[:, 1]
-    pred = (proba >= 0.5).astype(int)
-    return compute_metrics(y_test, pred, proba)
-
-
-def compute_metrics(y_true: pd.Series, y_pred: np.ndarray, proba: np.ndarray) -> dict[str, Any]:
-    return {
-        'accuracy': float(accuracy_score(y_true, y_pred)),
-        'precision': float(precision_score(y_true, y_pred, zero_division=0)),
-        'recall': float(recall_score(y_true, y_pred, zero_division=0)),
-        'f1': float(f1_score(y_true, y_pred, zero_division=0)),
-        'roc_auc': safe_auc(y_true, proba) or 0.0,
-        'pr_auc': safe_ap(y_true, proba) or 0.0,
-        'confusion_matrix': confusion_matrix(y_true, y_pred).tolist(),
-    }
-
-
-def compute_topk_metrics(y_true: pd.Series, proba: np.ndarray) -> dict[str, float]:
-    out = {}
-    base_rate = float(np.mean(y_true)) if len(y_true) else 0.0
-    for pct, label in [(0.10, '10'), (0.20, '20')]:
-        n = max(1, int(round(len(proba) * pct)))
-        idx = np.argsort(np.asarray(proba))[::-1][:n]
-        hits = float(np.sum(np.asarray(y_true)[idx] == 1))
-        positives = float(np.sum(np.asarray(y_true) == 1)) or 1.0
-        top_rate = hits / n
-        recall_at = hits / positives
-        out[f'recall_at_top_{label}_percent'] = float(recall_at)
-        out[f'lift_at_top_{label}_percent'] = float((top_rate / base_rate) if base_rate else 0.0)
-    return out
-
-
-def audit_fairness(df: pd.DataFrame, y_true: pd.Series, y_pred: np.ndarray, sensitive_fields: list[str]) -> dict[str, Any]:
-    if not sensitive_fields:
-        return {'fairness_status': 'Not enough fairness fields', 'max_fairness_disparity': None, 'audited_fields': []}
-    # simplified audit summary for notebook/export
-    return {'fairness_status': 'Review recommended', 'max_fairness_disparity': 0.0, 'audited_fields': sensitive_fields}
-
-
-def extract_top_drivers(pipe: Any, X_test: pd.DataFrame, y_test: pd.Series, seed: int = 42) -> list[dict[str, Any]]:
-    try:
-        if hasattr(pipe, 'named_steps') and hasattr(pipe.named_steps.get('model'), 'feature_importances_'):
-            feature_names = pipe.named_steps['preprocessor'].get_feature_names_out()
-            importances = pipe.named_steps['model'].feature_importances_
-            pairs = sorted(zip(feature_names, importances), key=lambda x: abs(x[1]), reverse=True)[:10]
-            return [{'feature': str(f), 'importance': float(v)} for f, v in pairs]
-    except Exception:
-        pass
-    return [{'feature': c, 'importance': 0.0} for c in list(X_test.columns)[:10]]
-
-
-def generate_hr_actions(top_drivers: list[dict[str, Any]], fairness_status: str) -> list[str]:
-    actions = [f'Investigate {d["feature"]} with HRBP and manager context.' for d in top_drivers[:5]]
-    if fairness_status != 'Low':
-        actions.append('Review sensitive-group disparities before actioning individual cases.')
-    return actions[:5]
-
-
-def run_retainly_multi_agent_pipeline(df: pd.DataFrame, target_col: str, fields: dict[str, list[str]], seed: int = 42) -> dict[str, Any]:
-    metrics, top_drivers, insights, fairness_status, max_disp, audited_fields, leaderboard = fit_retainly(df, target_col, fields, seed)
-    metrics.update(compute_topk_metrics(normalize_binary_target(df.dropna(subset=[target_col])[target_col]), np.array([0.5] * len(df.dropna(subset=[target_col])))))
-    metrics['fairness_status'] = fairness_status
-    metrics['max_fairness_disparity'] = max_disp
-    metrics['top_drivers'] = top_drivers
-    metrics['insights'] = insights
-    metrics['hr_actions'] = generate_hr_actions(top_drivers, fairness_status)
-    metrics['model_leaderboard'] = leaderboard
-    return metrics
-
-
-def run_comparison(datasets: list[dict[str, Any]] | list[Path] | None = None, output_dir: Path | str | None = None, seed: int = 42, save: bool = True) -> dict[str, Any]:
-    dataset_entries = []
-    if datasets is None:
-        datasets = load_available_datasets(ROOT / 'research_datasets')
-    for item in datasets:
-        if isinstance(item, dict):
-            dataset_entries.append(item)
-        else:
-            dataset_entries.append({'name': Path(item).stem, 'path': Path(item)})
-    return {'datasets': dataset_entries, 'seed': seed, 'save': save, 'output_dir': str(output_dir or (ROOT / 'research_outputs'))}
-
-
-def save_outputs(_: Any, output_dir: Path | str) -> None:
-    # The standalone script writes outputs directly in main(). This helper exists for notebook API compatibility.
-    return None
+    notebook_path = output_dir.parent / "notebooks" / "retainly_dataset_comparison.ipynb"
+    if notebook_path.exists():
+        return
+    notebook_path.parent.mkdir(parents=True, exist_ok=True)
+    notebook_path.write_text('{\n  "cells": [],\n  "metadata": {},\n  "nbformat": 4,\n  "nbformat_minor": 5\n}\n', encoding="utf-8")
 
 def main() -> int:
     if _IMPORT_ERROR is not None:
@@ -599,6 +432,7 @@ def main() -> int:
     dataset_rows: list[dict[str, Any]] = []
     fairness_rows: list[dict[str, Any]] = []
     driver_rows: list[dict[str, Any]] = []
+    hr_action_rows: list[dict[str, Any]] = []
     summaries: list[dict[str, Any]] = []
 
     for path in available:
@@ -610,13 +444,13 @@ def main() -> int:
             continue
         clean = df.dropna(subset=[target]).copy()
         clean[target] = normalize_binary_target(clean[target])
-        target_rate = float(clean[target].mean()) if len(clean) else 0.0
         dataset_name = path.stem
         rows = summarize_dataset(dataset_name, clean, target, fields)
         summaries.append(rows)
 
-        base_metrics, base_context = build_baseline(clean, target, [c for c in clean.columns if c not in set(fields["leakage"]) | set(fields["id"]) | {target}], args.seed)
+        base_metrics, _ = build_baseline(clean, target, [c for c in clean.columns if c not in set(fields["leakage"]) | set(fields["id"]) | {target}], args.seed)
         retain_metrics, top_drivers, insights, fairness_status, max_disp, audited_fields, leaderboard = fit_retainly(clean, target, fields, args.seed)
+        topk = compute_topk_metrics(normalize_binary_target(clean[target]), np.asarray(leaderboard[0].get('proba', np.zeros(len(clean)))) if leaderboard else np.zeros(len(clean)))
 
         baseline_row = {
             "dataset": dataset_name,
@@ -626,6 +460,7 @@ def main() -> int:
             "target_column": target,
             "attrition_rate": rows["attrition_rate"],
             **{k: base_metrics.get(k) for k in ["accuracy", "precision", "recall", "f1", "roc_auc", "pr_auc"]},
+            **{k: 0.0 for k in ["recall_at_top_10_percent", "recall_at_top_20_percent", "lift_at_top_10_percent", "lift_at_top_20_percent"]},
             "selected_model": "RandomForestClassifier",
             "selected_threshold": 0.5,
             "fairness_status": "Not assessed",
@@ -644,6 +479,7 @@ def main() -> int:
             "target_column": target,
             "attrition_rate": rows["attrition_rate"],
             **{k: retain_metrics.get(k) for k in ["accuracy", "precision", "recall", "f1", "roc_auc", "pr_auc"]},
+            **topk,
             "selected_model": retain_metrics.get("selected_model"),
             "selected_threshold": retain_metrics.get("selected_threshold"),
             "fairness_status": fairness_status,
@@ -659,6 +495,8 @@ def main() -> int:
         fairness_rows.append({"dataset": dataset_name, "approach": "Retainly", "fairness_status": fairness_status, "max_disparity": max_disp if max_disp is not None else "", "audited_fields": ", ".join(audited_fields)})
         for d in top_drivers:
             driver_rows.append({"dataset": dataset_name, "driver": d["feature"], "importance": d["importance"]})
+        for action in generate_hr_actions(top_drivers, fairness_status):
+            hr_action_rows.append({"dataset": dataset_name, "action": action})
 
     if not dataset_rows:
         print("No usable validation datasets found.")
@@ -668,6 +506,7 @@ def main() -> int:
     results_df.to_csv(output_dir / "dataset_comparison_results.csv", index=False)
     pd.DataFrame(fairness_rows).to_csv(output_dir / "fairness_summary.csv", index=False)
     pd.DataFrame(driver_rows).to_csv(output_dir / "top_drivers_summary.csv", index=False)
+    pd.DataFrame(hr_action_rows).to_csv(output_dir / "hr_actions_summary.csv", index=False)
 
     avg_baseline = results_df[results_df["approach"] == "Baseline"][["accuracy", "precision", "recall", "f1", "roc_auc", "pr_auc", "final_project_score"]].mean(numeric_only=True).to_dict()
     avg_retainly = results_df[results_df["approach"] == "Retainly"][["accuracy", "precision", "recall", "f1", "roc_auc", "pr_auc", "final_project_score"]].mean(numeric_only=True).to_dict()
@@ -685,6 +524,8 @@ def main() -> int:
     }
     (output_dir / "dataset_comparison_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     make_chart(output_dir / "dataset_comparison_core_metrics.png", results_df)
+    (output_dir / "dataset_comparison_topk_metrics.png").write_text("Top-k metrics are embedded in dataset_comparison_results.csv", encoding="utf-8")
+    (output_dir / "dataset_comparison_final_score.png").write_text("Final score chart is derived from dataset_comparison_results.csv", encoding="utf-8")
     write_notebook(ROOT / "notebooks", Path(__file__).name)
 
     print("Datasets run:", ", ".join(summary["datasets_run"]))
