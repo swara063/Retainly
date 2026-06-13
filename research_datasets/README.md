@@ -1,6 +1,6 @@
 # Research datasets
 
-Place the following CSV files here to run the famous-dataset comparison:
+Place the following CSV files here to run the benchmark-dataset comparison:
 
 - `research_datasets/ibm_hr_attrition.csv`
 - `research_datasets/saudi_employee_attrition.csv`
