@@ -196,6 +196,12 @@ def fallback_hr_answer(question: str, results: dict[str, Any] | None = None) -> 
             "Use this as supportive screening with HR judgment, not as an automated employment decision."
         )
 
+    if "reliable" in q or "validated" in q or "proof" in q or "how was this validated" in q or "where is the proof" in q:
+        return (
+            "Retainly’s model workflow is validated separately in the research notebook using labeled benchmark attrition datasets. "
+            "The website applies that validated workflow to current HR datasets for risk scoring and retention planning."
+        )
+
     if "employee" in q or "person" in q or "risk" in q:
         top = sorted(employees, key=lambda r: float(r.get("risk_score") or 0), reverse=True)[:5]
         if top:

@@ -34,6 +34,10 @@ export default function DataPage() {
             <a className="download" href={`${API_BASE}/analysis/${s.datasetId}/report`}>Download PDF report</a>
             <a className="download secondary" href={`${API_BASE}/analysis/${s.datasetId}/results.json`}>Download results JSON</a>
           </div>
+          <div className="panelHint" style={{ marginTop: 12 }}>
+            Research validation notebook available separately.{' '}
+            <a href="https://github.com/swara063/Retainly/blob/main/notebooks/retainly_dataset_comparison.ipynb" target="_blank" rel="noreferrer">Open validation notebook</a>
+          </div>
         </div>
         <div className="card">
           <h3>Responsible use</h3>

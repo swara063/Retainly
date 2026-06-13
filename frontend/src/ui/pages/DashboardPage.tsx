@@ -158,6 +158,19 @@ export default function DashboardPage() {
         </div>
       </section>
 
+      <section id="validation">
+        <div className="card">
+          <b>Validation & Method Proof</b>
+          <div className="panelHint" style={{ marginTop: 12 }}>
+            Retainly’s multi-agent prediction workflow is validated separately using labeled benchmark attrition datasets. The validation notebook compares standard ML baselines against the Retainly multi-agent pipeline.
+          </div>
+          <div className="btnRow" style={{ marginTop: 12 }}>
+            <a className="download secondary" href="https://github.com/swara063/Retainly/blob/main/notebooks/retainly_dataset_comparison.ipynb" target="_blank" rel="noreferrer">Open validation notebook</a>
+            <a className="download secondary" href="https://github.com/swara063/Retainly/tree/main/research_outputs" target="_blank" rel="noreferrer">View research outputs</a>
+          </div>
+        </div>
+      </section>
+
       <section id="upload">
         <SectionTitle icon={<Upload size={18} />} title="Upload HR data" subtitle="CSV upload, re-upload, and analysis start." />
         <div className="grid two">
