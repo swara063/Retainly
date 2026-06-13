@@ -33,13 +33,18 @@ def build_system_prompt() -> str:
         "You are Retainly Help, an HR-friendly assistant for an employee attrition analytics dashboard.\n"
         "Rules:\n"
         "- Explain results in simple, non-technical language first, then (optionally) provide technical detail.\n"
+        "- Do not lead with raw ML metrics such as accuracy, precision, F1, ROC-AUC, or PR-AUC.\n"
+        "- Use HR-friendly metric names in user-facing answers: recall = risk capture rate; precision = review efficiency; ROC-AUC = ranking quality; PR-AUC = attrition detection quality.\n"
+        "- If accuracy or precision looks low, explain that attrition data is imbalanced and Retainly is tuned for supportive risk screening, not automated decisions.\n"
+        "- Mention raw accuracy/precision/F1/ROC-AUC only when the user explicitly asks for technical metrics, model details, or method notes.\n"
+        "- When explaining model usefulness, prefer top-risk evaluation: top 10%/top 20% risk capture and attrition rate in highest-risk groups.\n"
         "- Never suggest using model outputs for automatic termination/punitive actions.\n"
         "- Be clear that insights are correlations/patterns, not guaranteed causation.\n"
         "- If the user asks for a decision, respond with a decision-support framing.\n"
         "- Use the latest uploaded dataset's results as source material when available.\n"
-        "- Answer questions using the provided executive summary, hotspots, action plan, fairness notes, and SHAP explanations.\n"
+        "- Answer questions using the provided executive summary, hotspots, action plan, fairness notes, top-risk evaluation, and explainability signals.\n"
         "- If something is missing from the results, say so plainly instead of guessing.\n"
-        "- Include brief source anchors such as 'Based on the executive summary', 'Based on hotspot analysis', or 'Based on SHAP'.\n"
+        "- Include brief source anchors such as 'Based on the executive summary', 'Based on hotspot analysis', or 'Based on model explainability'.\n"
         "- When helpful, name the exact field or segment you are referencing.\n"
         "- Keep responses concise and actionable (bulleted steps when helpful).\n"
     )
@@ -53,6 +58,15 @@ def _fmt(value: Any) -> str:
     if isinstance(value, int):
         return str(value)
     return str(value)
+
+
+def _pct(value: Any) -> str:
+    try:
+        if value is None:
+            return "—"
+        return f"{float(value) * 100:.0f}%"
+    except Exception:
+        return _fmt(value)
 
 
 def _compact_list(items: Any, limit: int = 5) -> str:
@@ -90,19 +104,25 @@ def build_context_snippet(results: dict[str, Any] | None) -> str:
         "Latest Retainly analysis context:\n"
         f"- Dataset ID: {_fmt(results.get('dataset_id'))}\n"
         f"- Employees analyzed: {_fmt(exec_sum.get('rows_analyzed') or (results.get('dataset_profile') or {}).get('rows'))}\n"
-        f"- Selected best model: {_fmt(model.get('selected_model'))}\n"
-        f"- Model reliability: {_fmt(exec_sum.get('model_reliability_label') or metrics.get('model_reliability_label'))}\n"
-        f"- Observed attrition rate: {_fmt(exec_sum.get('attrition_rate'))}\n"
-        f"- Fairness risk: {_fmt(fairness.get('overall_risk'))}\n"
+        f"- Observed attrition rate: {_pct(exec_sum.get('attrition_rate'))}\n"
+        f"- Model confidence: {_fmt(exec_sum.get('model_reliability_label') or metrics.get('model_reliability_label'))}\n"
+        f"- Fairness review status: {_fmt(fairness.get('overall_risk'))}\n"
+        f"- Risk capture rate (recall): {_pct(metrics.get('recall'))}\n"
+        f"- Review efficiency (precision): {_pct(metrics.get('precision'))}\n"
+        f"- Ranking quality (ROC-AUC): {_fmt(metrics.get('roc_auc'))}\n"
+        f"- Attrition detection quality (PR-AUC): {_fmt(metrics.get('pr_auc'))}\n"
+        f"- Top 10% risk capture: {_pct(metrics.get('recall_at_top_10_percent'))}; attrition rate in top 10%: {_pct(metrics.get('attrition_rate_in_top_10_percent'))}\n"
+        f"- Top 20% risk capture: {_pct(metrics.get('recall_at_top_20_percent'))}; attrition rate in top 20%: {_pct(metrics.get('attrition_rate_in_top_20_percent'))}\n"
+        f"- Selected model for method notes: {_fmt(model.get('selected_model'))}\n"
         f"- Action plan summary: {_compact_list(plan, limit=3)}\n"
         f"- Hotspots summary: {_compact_list(hotspots, limit=4)}\n"
-        f"- Top HR signals: {_compact_list(top_features, limit=5)}\n"
+        f"- Top HR signals/drivers: {_compact_list(top_features, limit=5)}\n"
         f"- SHAP summary: {_compact_list(shap_top, limit=5)}\n"
         f"- Data quality score: {_fmt((dq or {}).get('data_quality_score'))}\n"
         f"- Data quality warnings: {_compact_list((dq or {}).get('warnings'), limit=3)}\n"
         f"- Action plan titles: {', '.join(action_titles[:5]) if action_titles else '—'}\n"
         f"- Hotspot anchors: {' | '.join(hotspot_labels) if hotspot_labels else '—'}\n"
-        f"- Key metrics: recall={_fmt(metrics.get('recall'))}, precision={_fmt(metrics.get('precision'))}, f1={_fmt(metrics.get('f1'))}, roc_auc={_fmt(metrics.get('roc_auc'))}, pr_auc={_fmt(metrics.get('pr_auc'))}\n"
+        "- Chat guidance: Lead with HR interpretation. Keep raw metrics in method notes unless explicitly requested.\n"
     )
 
 
@@ -144,7 +164,7 @@ def build_source_notes(results: dict[str, Any] | None) -> list[str]:
     if dq:
         notes.append(f"Based on data quality review: score {dq.get('data_quality_score', '—')} with warnings if present.")
     if model:
-        notes.append(f"Based on the selected model: {model.get('selected_model', '—')} and its metrics.")
+        notes.append(f"Based on the selected model method notes: {model.get('selected_model', '—')} and HR-facing risk-screening metrics.")
     return notes[:8]
 
 
@@ -166,6 +186,15 @@ def fallback_hr_answer(question: str, results: dict[str, Any] | None = None) -> 
     plan = [x for x in (results.get("retention_plan") or []) if isinstance(x, dict)]
     explain = results.get("explainability") or {}
     employees = results.get("employee_risk_records") or []
+
+    if "accuracy" in q or "precision" in q or "f1" in q or "roc" in q or "auc" in q or "metric" in q or "model" in q:
+        return (
+            "Based on the model and method notes: attrition datasets are usually imbalanced, so raw accuracy is not the best first measure of HR usefulness. "
+            f"Retainly's risk capture rate is {_pct(metrics.get('recall'))}, review efficiency is {_pct(metrics.get('precision'))}, "
+            f"ranking quality is {_fmt(metrics.get('roc_auc'))}, and attrition detection quality is {_fmt(metrics.get('pr_auc'))}. "
+            f"Among the top 20% highest-risk employees, Retainly captured {_pct(metrics.get('recall_at_top_20_percent'))} of observed attrition cases. "
+            "Use this as supportive screening with HR judgment, not as an automated employment decision."
+        )
 
     if "employee" in q or "person" in q or "risk" in q:
         top = sorted(employees, key=lambda r: float(r.get("risk_score") or 0), reverse=True)[:5]
@@ -201,9 +230,10 @@ def fallback_hr_answer(question: str, results: dict[str, Any] | None = None) -> 
             return "\n".join(lines)
     return (
         f"Based on the latest Retainly analysis: {exec_sum.get('rows_analyzed', 'the uploaded')} employees were analyzed, "
-        f"observed attrition rate is {_fmt(exec_sum.get('attrition_rate'))}, selected model is {model.get('selected_model', 'available model')}, "
-        f"confidence level is {exec_sum.get('model_reliability_label') or metrics.get('model_reliability_label') or 'Directional'}, "
-        f"and fairness signal is {fairness.get('overall_risk', 'reviewed')}. Start with the action plan and employee explorer for practical HR follow-up."
+        f"observed attrition rate is {_pct(exec_sum.get('attrition_rate'))}, risk capture rate is {_pct(metrics.get('recall'))}, "
+        f"and fairness review status is {fairness.get('overall_risk', 'reviewed')}. "
+        f"Among the top 20% highest-risk employees, Retainly captured {_pct(metrics.get('recall_at_top_20_percent'))} of observed attrition cases. "
+        "Start with the action plan and employee explorer for practical HR follow-up."
     )
 
 

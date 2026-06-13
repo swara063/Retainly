@@ -14,7 +14,17 @@ def _compact_for_llm(context: dict) -> dict[str, Any]:
     eda = context.get("eda") or {}
     return {
         "selected_model": model.get("selected_model"),
-        "metrics": {k: metrics.get(k) for k in ["recall", "precision", "f1", "roc_auc", "pr_auc", "recall_at_top_20_percent"]},
+        "hr_friendly_metrics": {
+            "risk_capture_rate": metrics.get("recall"),
+            "review_efficiency": metrics.get("precision"),
+            "ranking_quality": metrics.get("roc_auc"),
+            "attrition_detection_quality": metrics.get("pr_auc"),
+            "top_10_percent_risk_capture": metrics.get("recall_at_top_10_percent"),
+            "top_20_percent_risk_capture": metrics.get("recall_at_top_20_percent"),
+            "attrition_rate_in_top_10_percent": metrics.get("attrition_rate_in_top_10_percent"),
+            "attrition_rate_in_top_20_percent": metrics.get("attrition_rate_in_top_20_percent"),
+        },
+        "technical_metrics_for_method_notes_only": {k: metrics.get(k) for k in ["accuracy", "precision", "recall", "f1", "roc_auc", "pr_auc"]},
         "target_distribution": eda.get("target_distribution"),
         "top_features": (explainability.get("top_features") or [])[:6],
         "fairness_risk": fairness.get("overall_risk"),
@@ -35,7 +45,11 @@ def _generate_llm_hr_brief(context: dict) -> dict[str, Any]:
             "content": (
                 "You are Retainly's HR analytics narrative agent. Convert structured attrition-analysis results "
                 "into a short executive brief. Do not invent numbers. Do not recommend punitive employment decisions. "
-                "Keep it practical: risk pattern, what HR should do next, fairness caution, and how to defend the method."
+                "Keep it practical: risk pattern, what HR should do next, fairness caution, and how to defend the method. "
+                "Do not lead with raw ML metrics such as accuracy, precision, F1, ROC-AUC, or PR-AUC. "
+                "Use HR-friendly terms: risk capture rate, review efficiency, ranking quality, attrition detection quality. "
+                "If technical metrics look weak, explain that attrition data is imbalanced and Retainly is tuned for supportive risk screening. "
+                "Prefer top-risk evaluation, especially what was captured in the top 10% or top 20% highest-risk employees."
             ),
         },
         {"role": "user", "content": str(_compact_for_llm(context))},
@@ -64,18 +78,24 @@ class InsightsAgent(BaseAgent):
         recall = float(metrics.get("recall") or 0.0)
         accuracy = float(metrics.get("accuracy") or 0.0)
         roc_auc = metrics.get("roc_auc")
+        top20 = metrics.get("recall_at_top_20_percent")
         s = [
-            f"Model performance (holdout set): Accuracy {accuracy:.3f}, Recall {recall:.3f}, Precision {precision:.3f}, F1 {f1:.3f}."
+            f"Risk screening summary: risk capture rate {recall:.3f}, review efficiency {precision:.3f}, and F1 balance {f1:.3f}."
         ]
+        if top20 is not None:
+            try:
+                s.append(f"Top-risk review: the top 20% highest-risk employees captured {float(top20):.3f} of observed attrition cases.")
+            except Exception:
+                pass
         if roc_auc is not None:
             try:
-                s.append(f"Ranking quality (ROC-AUC): {float(roc_auc):.3f}.")
+                s.append(f"Ranking quality: {float(roc_auc):.3f}.")
             except Exception:
                 pass
         if recall >= 0.70 and precision < 0.40:
-            s.append("Interpretation: the model catches many at-risk employees (high recall) but will flag many who won’t leave (lower precision). Use as a prioritization list, not a decision.")
+            s.append("Interpretation: the model catches many at-risk employees but will flag some as a precaution. Use as a prioritization list, not a decision.")
         elif recall < 0.55:
-            s.append("Interpretation: the model may miss many leavers (lower recall). Improve features and thresholding before relying on it for early interventions.")
+            s.append("Interpretation: use this as directional screening and combine it with HR judgment before relying on early interventions.")
         else:
             s.append("Interpretation: treat risk scores as decision-support signals and validate against HR reality before acting.")
         return s
@@ -94,7 +114,7 @@ class InsightsAgent(BaseAgent):
         insights.append(f"Selected model: {model['selected_model']}.")
         insights.extend(self._metric_sentence(metrics))
         if float(metrics.get("recall") or 0.0) < 0.70:
-            recs.append("Action: improve recall with better features, threshold tuning, and class-imbalance handling before using for early intervention.")
+            recs.append("Action: treat risk scores as directional screening, validate with HR context, and improve data quality/features over time.")
         else:
             recs.append("Action: use risk flags to prioritize retention conversations and check-ins; avoid automated decisions.")
         fairness = context.get("fairness", {})
