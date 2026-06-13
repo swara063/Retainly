@@ -12,6 +12,52 @@ function Metric({ label, value }: { label: string; value: string }) {
   );
 }
 
+function pctOrDash(x: any, digits = 0) {
+  const n = Number(x);
+  if (!Number.isFinite(n)) return '—';
+  return `${(n * 100).toFixed(digits)}%`;
+}
+
+function cleanFeatureName(name: any) {
+  return String(name || '').replace(/^(num|cat)__/, '').replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function driverInterpretation(name: any) {
+  const n = String(name || '').toLowerCase();
+  if (n.includes('overtime')) return 'Employees working overtime show elevated attrition risk.';
+  if (n.includes('jobsatisfaction')) return 'Lower satisfaction is linked to higher attrition likelihood.';
+  if (n.includes('worklife')) return 'Work-life balance patterns are linked to retention risk.';
+  if (n.includes('yearsatcompany') || n.includes('tenure')) return 'Tenure patterns help identify where retention support may be needed.';
+  if (n.includes('monthlyincome') || n.includes('income') || n.includes('salary')) return 'Compensation signals may be associated with retention pressure.';
+  if (n.includes('distance')) return 'Longer commute distance may increase attrition risk.';
+  if (n.includes('promotion')) return 'Promotion history can indicate whether growth opportunities are affecting retention.';
+  if (n.includes('environment')) return 'Work environment satisfaction appears linked with retention risk.';
+  if (n.includes('department')) return 'Risk differs by department, so HR should review team-level context.';
+  if (n.includes('jobrole')) return 'Risk differs by role, so interventions should be role-aware.';
+  return 'This signal is associated with attrition risk in the uploaded dataset.';
+}
+
+function collectTopDrivers(results: any) {
+  const explain = results?.explainability || {};
+  const candidates = [
+    ...(Array.isArray(explain.top_features) ? explain.top_features : []),
+    ...(Array.isArray(explain.feature_importance) ? explain.feature_importance : []),
+    ...(Array.isArray(explain.global_importance) ? explain.global_importance : []),
+    ...(Array.isArray(explain.shap?.global_importance) ? explain.shap.global_importance : []),
+    ...(Array.isArray(results?.model?.feature_importance) ? results.model.feature_importance : []),
+  ];
+  const seen = new Set<string>();
+  return candidates
+    .map((item: any) => ({ feature: item?.feature || item?.name, importance: item?.importance ?? item?.mean_abs_shap ?? item?.score }))
+    .filter((item: any) => {
+      const key = String(item.feature || '');
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 5);
+}
+
 export default function OverviewPage() {
   const s = useAppState();
   const metrics = s.results?.model?.metrics || {};
@@ -19,10 +65,15 @@ export default function OverviewPage() {
   const model = s.results?.model?.selected_model || '—';
   const dist = s.results?.eda?.target_distribution;
   const distText = dist ? Object.entries(dist).map(([k, v]) => `${k}: ${v}`).join(', ') : '—';
-  const topDrivers = (s.results?.explainability?.top_features || []).slice(0, 5);
+  const exec = s.results?.executive_summary || {};
+  const topDrivers = collectTopDrivers(s.results);
   const recommendations: string[] = s.results?.recommendations || [];
   const insights: string[] = s.results?.insights || [];
   const llmInsights = s.results?.llm_insights;
+  const highRiskEmployees = Array.isArray(s.results?.employee_risk_records)
+    ? s.results.employee_risk_records.filter((r: any) => ['High', 'Critical'].includes(String(r?.risk_band))).length
+    : Number(exec.high_risk_employees || 0);
+  const confidence = metrics.model_reliability_label || exec.model_reliability_label || 'Directional';
 
   if (!s.datasetId) {
     return (
@@ -59,22 +110,50 @@ export default function OverviewPage() {
         <div className="card">
           <h3>Key findings</h3>
           <div className="metricGrid">
-            <Metric label="Selected model" value={String(model)} />
-            <Metric label="Fairness risk" value={String(fairness)} />
-            <Metric label="Accuracy" value={Number(metrics.accuracy || 0).toFixed(3)} />
-            <Metric label="Recall" value={Number(metrics.recall || 0).toFixed(3)} />
-            <Metric label="Precision" value={Number(metrics.precision || 0).toFixed(3)} />
-            <Metric label="F1 score" value={Number(metrics.f1 || 0).toFixed(3)} />
+            <Metric label="Employees analyzed" value={String(exec.rows_analyzed || s.results?.dataset_profile?.rows || '—')} />
+            <Metric label="Observed attrition rate" value={pctOrDash(exec.attrition_rate)} />
+            <Metric label="High-risk employees identified" value={String(highRiskEmployees || '—')} />
+            <Metric label="Risk capture rate" value={pctOrDash(metrics.recall || exec.risk_capture_rate)} />
+            <Metric label="Model confidence" value={String(confidence === 'Needs HR judgment' || Number(metrics.accuracy || 0) < 0.65 ? 'Directional model: use with HR judgment' : confidence)} />
+            <Metric label="Fairness review status" value={String(fairness)} />
           </div>
+          <div className="panelHint">Retainly is tuned to identify employees who may need retention support. The model prioritizes catching more potential attrition cases, so some employees may be flagged as a precaution. Use these results for supportive HR planning, not punitive decisions.</div>
+          {metrics.recall_at_top_20_percent != null ? (
+            <div className="panelHint">Among the top 20% highest-risk employees, Retainly captured {pctOrDash(metrics.recall_at_top_20_percent)} of observed attrition cases.</div>
+          ) : null}
           <div className="panelHint">Attrition distribution in your uploaded data: {distText}</div>
           <h4>Top drivers (what’s linked to attrition)</h4>
           {topDrivers.length ? (
             <ul>
-              {topDrivers.map((d: any) => <li key={d.feature}><b>{d.feature}</b> (importance {Math.abs(Number(d.importance || 0)).toFixed(3)})</li>)}
+              {topDrivers.map((d: any) => (
+                <li key={d.feature}>
+                  <b>{cleanFeatureName(d.feature)}</b>
+                  {d.importance != null ? ` (importance ${Math.abs(Number(d.importance || 0)).toFixed(3)})` : null}
+                  {`: ${driverInterpretation(d.feature)}`}
+                </li>
+              ))}
             </ul>
           ) : (
             <p className="muted">Driver signals will appear after analysis.</p>
           )}
+          <details className="detailsBox">
+            <summary>Model & Method Notes</summary>
+            <div className="panelHint" style={{ marginTop: 10 }}>
+              Attrition datasets are usually imbalanced, so accuracy is not the best measure. Retainly prioritizes risk capture because HR wants to avoid missing employees who may need support.
+            </div>
+            <table className="table">
+              <tbody>
+                <tr><td>Selected model</td><td>{String(model)}</td></tr>
+                <tr><td>Accuracy</td><td>{Number(metrics.accuracy || 0).toFixed(3)}</td></tr>
+                <tr><td>Review efficiency</td><td>{Number(metrics.precision || 0).toFixed(3)}</td></tr>
+                <tr><td>F1 balance score</td><td>{Number(metrics.f1 || 0).toFixed(3)}</td></tr>
+                <tr><td>Ranking quality</td><td>{metrics.roc_auc == null ? '—' : Number(metrics.roc_auc).toFixed(3)}</td></tr>
+                <tr><td>Attrition detection quality</td><td>{metrics.pr_auc == null ? '—' : Number(metrics.pr_auc).toFixed(3)}</td></tr>
+                <tr><td>Top 10% risk capture</td><td>{metrics.recall_at_top_10_percent == null ? '—' : Number(metrics.recall_at_top_10_percent).toFixed(3)}</td></tr>
+                <tr><td>Top 20% risk capture</td><td>{metrics.recall_at_top_20_percent == null ? '—' : Number(metrics.recall_at_top_20_percent).toFixed(3)}</td></tr>
+              </tbody>
+            </table>
+          </details>
           <details className="detailsBox">
             <summary>Downloads (CSV / results JSON)</summary>
             <div className="btnRow single" style={{ marginTop: 10 }}>

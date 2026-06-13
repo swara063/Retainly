@@ -24,6 +24,18 @@ function scrubCalibrationWarning(value: any) {
   return clone;
 }
 
+function labelMetric(key: string) {
+  const labels: Record<string, string> = {
+    recall: 'Risk capture rate',
+    precision: 'Review efficiency',
+    roc_auc: 'Ranking quality',
+    pr_auc: 'Attrition detection quality',
+    f1: 'F1 balance score',
+    recall_at_top_20_percent: 'Top 20% risk capture',
+  };
+  return labels[key] || key;
+}
+
 export default function ModelPage() {
   const s = useAppState();
   const model = s.results?.model;
@@ -69,7 +81,7 @@ export default function ModelPage() {
               <tbody>
                 {comparisonRows.map((key) => (
                   <tr key={key}>
-                    <td><b>{key.replace(/_/g, ' ')}</b></td>
+                    <td><b>{labelMetric(key)}</b></td>
                     <td>{fmt(researchComparison.baseline?.metrics?.[key])}</td>
                     <td>{fmt(researchComparison.retainly_multi_agent?.metrics?.[key])}</td>
                     <td>{fmt(researchComparison.metric_deltas?.[key])}</td>
@@ -101,11 +113,11 @@ export default function ModelPage() {
               <thead>
                 <tr>
                   <th>Model</th>
-                  <th>F1</th>
-                  <th>Recall</th>
-                  <th>Precision</th>
+                  <th>F1 balance</th>
+                  <th>Risk capture</th>
+                  <th>Review efficiency</th>
                   <th>Accuracy</th>
-                  <th>ROC-AUC</th>
+                  <th>Ranking quality</th>
                 </tr>
               </thead>
               <tbody>
@@ -133,11 +145,14 @@ export default function ModelPage() {
           <h3>Selected model notes</h3>
           <p className="muted">How to read these metrics (HR-friendly):</p>
           <ul>
-            <li><b>Recall</b> = how many actual leavers we catch (missed leavers are costly).</li>
-            <li><b>Precision</b> = how many flagged employees truly leave (false alarms waste HR time).</li>
-            <li><b>F1</b> balances both (useful summary).</li>
+            <li><b>Risk capture rate</b> = how many observed leavers Retainly catches.</li>
+            <li><b>Review efficiency</b> = how many flagged employees truly leave.</li>
+            <li><b>F1 balance score</b> balances risk capture and review efficiency.</li>
             <li><b>Calibration</b> tells you whether the risk score should be treated as approximate or directly comparable.</li>
           </ul>
+          <div className="panelHint">
+            <b>Why these metrics look this way:</b> Attrition datasets are usually imbalanced, so accuracy is not the best measure. Retainly prioritizes risk capture because HR wants to avoid missing employees who may need support.
+          </div>
           <div className="panelHint">
             <b>{model.confidence_summary?.plain_english || 'Confidence level: Directional.'}</b>
             <div className="muted tiny" style={{ marginTop: 6 }}>{model.confidence_summary?.limitations || 'Use these insights for team-level planning and validate with HR context.'}</div>

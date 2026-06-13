@@ -130,6 +130,8 @@ def _reliability_label(recall: float | None, precision: float | None, f1: float 
     p = precision or 0.0
     f = f1 or 0.0
     a = roc_auc or 0.0
+    if p < 0.30:
+        return "Needs HR judgment"
     if f >= 0.80 and r >= 0.75 and a >= 0.80:
         return "Excellent"
     if f >= 0.70 and r >= 0.65 and a >= 0.75:
@@ -144,7 +146,7 @@ def _confidence_summary(label: str, validation_note: str | None = None) -> dict[
         "Excellent": "Confidence level: Excellent. Retainly is suitable for team-level prioritization and monitoring.",
         "Good": "Confidence level: Good. Use these insights for retention planning and manager conversations.",
         "Directional": "Confidence level: Directional. Use these insights for team-level planning and validate with HR context.",
-        "Directional": "Confidence level: Directional. Use these insights for team-level planning and validate with HR context.",
+        "Needs HR judgment": "Confidence level: Needs HR judgment. Use Retainly as a prioritization screen and validate findings with HR context before acting.",
     }.get(label, "Confidence level: Directional. Use these insights for team-level planning and validate with HR context.")
     return {
         "label": label,
@@ -195,6 +197,15 @@ def build_executive_summary(*, df: pd.DataFrame, target_col: str, results: dict)
         "model_precision": precision,
         "model_f1": f1,
         "model_roc_auc": roc_auc,
+        "model_pr_auc": _safe_float(metrics.get("pr_auc")),
+        "risk_capture_rate": recall,
+        "review_efficiency": precision,
+        "ranking_quality": roc_auc,
+        "attrition_detection_quality": _safe_float(metrics.get("pr_auc")),
+        "recall_at_top_10_percent": _safe_float(metrics.get("recall_at_top_10_percent")),
+        "recall_at_top_20_percent": _safe_float(metrics.get("recall_at_top_20_percent")),
+        "attrition_rate_in_top_10_percent": _safe_float(metrics.get("attrition_rate_in_top_10_percent")),
+        "attrition_rate_in_top_20_percent": _safe_float(metrics.get("attrition_rate_in_top_20_percent")),
         "model_reliability_label": reliability,
         "fairness_risk": fairness_risk,
         "recommended_use": recommended_use,

@@ -68,12 +68,27 @@ def _hr_reliability_label(roc_auc: float | None, recall: float | None) -> str:
     return "Directional"
 
 
+def _model_confidence_label(metrics: dict[str, Any]) -> str:
+    precision = float(metrics.get("precision") or 0.0)
+    recall = float(metrics.get("recall") or 0.0)
+    f1 = float(metrics.get("f1") or 0.0)
+    roc_auc = float(metrics.get("roc_auc") or 0.0)
+    thresholding = metrics.get("threshold_tuning") or {}
+    if thresholding.get("needs_hr_judgment") or precision < 0.30:
+        return "Needs HR judgment"
+    if roc_auc >= 0.85 and recall >= 0.75 and f1 >= 0.65:
+        return "Excellent"
+    if roc_auc >= 0.75 and recall >= 0.65 and f1 >= 0.50:
+        return "Good"
+    return "Directional"
+
+
 def _confidence_summary(label: str, metrics: dict[str, Any], validation_note: str) -> dict[str, str]:
     plain = {
         "Excellent": "Confidence level: Excellent. Retainly is suitable for team-level prioritization and monitoring.",
         "Good": "Confidence level: Good. Use these insights for retention planning and manager conversations.",
         "Directional": "Confidence level: Directional. Use these insights for team-level planning and validate with HR context.",
-        "Directional": "Confidence level: Directional. Use these insights for team-level planning and validate with HR context.",
+        "Needs HR judgment": "Confidence level: Needs HR judgment. Use Retainly as a prioritization screen and validate findings with HR context before acting.",
     }.get(label, "Confidence level: Directional. Use these insights for team-level planning and validate with HR context.")
     limitations = validation_note or "Model performance should be reviewed alongside HR context and fairness checks."
     return {
@@ -139,6 +154,8 @@ def _evaluate_plain_baseline(
         pr_auc = float(average_precision_score(y_test, proba))
     except Exception:
         pr_auc = None
+    top10_eval = _top_risk_evaluation(y_test, proba, 0.10)
+    top20_eval = _top_risk_evaluation(y_test, proba, 0.20)
     return {
         "approach": "Plain baseline model",
         "model_type": "LogisticRegression",
@@ -152,6 +169,8 @@ def _evaluate_plain_baseline(
             "pr_auc": pr_auc,
             "recall_at_top_10_percent": float(_recall_at_top_percent(y_test, proba, 0.10)),
             "recall_at_top_20_percent": float(_recall_at_top_percent(y_test, proba, 0.20)),
+            "attrition_rate_in_top_10_percent": float(top10_eval["attrition_rate"]),
+            "attrition_rate_in_top_20_percent": float(top20_eval["attrition_rate"]),
             "selected_threshold": 0.5,
         },
     }
@@ -174,6 +193,8 @@ def _build_research_comparison(
         "pr_auc": _round_metric(best.get("pr_auc")),
         "recall_at_top_10_percent": _round_metric(best.get("recall_at_top_10_percent")),
         "recall_at_top_20_percent": _round_metric(best.get("recall_at_top_20_percent")),
+        "attrition_rate_in_top_10_percent": _round_metric(best.get("attrition_rate_in_top_10_percent")),
+        "attrition_rate_in_top_20_percent": _round_metric(best.get("attrition_rate_in_top_20_percent")),
         "selected_threshold": _round_metric(best.get("selected_threshold")),
     }
     base_clean = {k: _round_metric(v) for k, v in base_metrics.items()}
@@ -224,6 +245,19 @@ def _build_research_comparison(
     }
 
 
+def _selected_hr_score(metrics: dict[str, Any]) -> float:
+    sweep = (metrics.get("threshold_tuning") or {}).get("threshold_sweep")
+    if not isinstance(sweep, dict):
+        return 0.0
+    pick = sweep.get("best_with_precision_floor") or sweep.get("best_hr_score") or sweep.get("best_f1") or {}
+    if not isinstance(pick, dict):
+        return 0.0
+    try:
+        return float(pick.get("hr_score") or 0.0)
+    except Exception:
+        return 0.0
+
+
 def _recall_at_top_percent(y_true: np.ndarray, proba: np.ndarray, top_pct: float) -> float:
     top_pct = float(top_pct)
     if top_pct <= 0:
@@ -242,26 +276,77 @@ def _recall_at_top_percent(y_true: np.ndarray, proba: np.ndarray, top_pct: float
     return float(hits / positives)
 
 
+def _top_risk_evaluation(y_true: np.ndarray, proba: np.ndarray, top_pct: float) -> dict[str, float | int]:
+    top_pct = float(top_pct)
+    n = len(y_true)
+    if n <= 0:
+        return {"top_percent": top_pct, "employee_count": 0, "recall": 0.0, "attrition_rate": 0.0}
+    k = max(1, min(n, int(np.ceil(n * top_pct))))
+    order = np.argsort(-proba)
+    top_idx = order[:k]
+    positives = int(np.sum(y_true == 1))
+    hits = int(np.sum(y_true[top_idx] == 1))
+    return {
+        "top_percent": top_pct,
+        "employee_count": int(k),
+        "recall": float(hits / positives) if positives > 0 else 0.0,
+        "attrition_rate": float(np.mean(y_true[top_idx] == 1)) if k > 0 else 0.0,
+    }
+
+
 def _tune_threshold(y_true: np.ndarray, proba: np.ndarray) -> tuple[float, np.ndarray, dict]:
     thresholds = np.round(np.arange(0.05, 0.95 + 1e-9, 0.02), 2)
-    best_any = None
-    best_with_recall = None
+    try:
+        average_precision = float(average_precision_score(y_true, proba))
+    except Exception:
+        average_precision = 0.0
+    try:
+        roc_auc = float(roc_auc_score(y_true, proba))
+    except Exception:
+        roc_auc = 0.0
+    best_hr = None
+    best_precision_floor = None
+    best_f1 = None
     for t in thresholds:
         pred = (proba >= t).astype(int)
         rec = float(recall_score(y_true, pred, zero_division=0))
         f1 = float(f1_score(y_true, pred, zero_division=0))
         prec = float(precision_score(y_true, pred, zero_division=0))
         acc = float(accuracy_score(y_true, pred))
-        row = {"threshold": float(t), "recall": rec, "f1": f1, "precision": prec, "accuracy": acc}
-        if best_any is None or (row["f1"], row["recall"]) > (best_any["f1"], best_any["recall"]):
-            best_any = row
-        if rec >= 0.70:
-            if best_with_recall is None or (row["f1"], row["precision"]) > (best_with_recall["f1"], best_with_recall["precision"]):
-                best_with_recall = row
-    chosen = best_with_recall or best_any or {"threshold": 0.5, "recall": 0.0, "f1": 0.0, "precision": 0.0, "accuracy": 0.0}
+        hr_score = (0.45 * rec) + (0.25 * f1) + (0.20 * average_precision) + (0.10 * roc_auc)
+        row = {
+            "threshold": float(t),
+            "recall": rec,
+            "f1": f1,
+            "precision": prec,
+            "accuracy": acc,
+            "average_precision": average_precision,
+            "roc_auc": roc_auc,
+            "hr_score": float(hr_score),
+        }
+        if best_hr is None or (row["hr_score"], row["f1"], row["precision"]) > (best_hr["hr_score"], best_hr["f1"], best_hr["precision"]):
+            best_hr = row
+        if prec >= 0.30:
+            if best_precision_floor is None or (row["hr_score"], row["f1"]) > (best_precision_floor["hr_score"], best_precision_floor["f1"]):
+                best_precision_floor = row
+        if best_f1 is None or (row["f1"], row["recall"]) > (best_f1["f1"], best_f1["recall"]):
+            best_f1 = row
+    chosen = best_precision_floor or best_f1 or best_hr or {"threshold": 0.5, "recall": 0.0, "f1": 0.0, "precision": 0.0, "accuracy": 0.0, "hr_score": 0.0}
+    needs_hr_judgment = best_precision_floor is None
     t = float(chosen["threshold"])
     pred = (proba >= t).astype(int)
-    return t, pred, {"selected_threshold": t, "threshold_sweep": [best_any, best_with_recall], "meets_recall_target": bool(best_with_recall)}
+    return t, pred, {
+        "selected_threshold": t,
+        "selection_method": "practical_hr_score_with_precision_floor" if best_precision_floor else "best_f1_precision_floor_unavailable",
+        "precision_floor": 0.30,
+        "precision_floor_met": bool(best_precision_floor),
+        "needs_hr_judgment": bool(needs_hr_judgment),
+        "threshold_sweep": {
+            "best_hr_score": best_hr,
+            "best_with_precision_floor": best_precision_floor,
+            "best_f1": best_f1,
+        },
+    }
 
 
 def _calibration_warning(y_true: np.ndarray, proba: np.ndarray) -> dict:
@@ -538,6 +623,8 @@ class MLEngineerAgent(BaseAgent):
 
             recall_top10 = _recall_at_top_percent(y_test, proba_used, 0.10)
             recall_top20 = _recall_at_top_percent(y_test, proba_used, 0.20)
+            top10_eval = _top_risk_evaluation(y_test, proba_used, 0.10)
+            top20_eval = _top_risk_evaluation(y_test, proba_used, 0.20)
             calib = _calibration_warning(y_test, proba_used)
 
             metrics = {
@@ -550,6 +637,10 @@ class MLEngineerAgent(BaseAgent):
                 "pr_auc": pr_auc,
                 "recall_at_top_10_percent": float(recall_top10),
                 "recall_at_top_20_percent": float(recall_top20),
+                "attrition_rate_in_top_10_percent": float(top10_eval["attrition_rate"]),
+                "attrition_rate_in_top_20_percent": float(top20_eval["attrition_rate"]),
+                "top_10_percent_evaluation": top10_eval,
+                "top_20_percent_evaluation": top20_eval,
                 "selected_threshold": float(thr) if proba is not None else None,
                 "threshold_tuning": thr_meta if proba is not None else {"selected_threshold": None, "meets_recall_target": False},
                 "calibration": calib,
@@ -558,7 +649,7 @@ class MLEngineerAgent(BaseAgent):
                     "test": {"positive_rate": float(np.mean(y_test == 1)), "counts": pd.Series(y_test).value_counts().to_dict()},
                 },
             }
-            metrics["model_reliability_label"] = _hr_reliability_label(metrics.get("roc_auc"), metrics.get("recall"))
+            metrics["model_reliability_label"] = _model_confidence_label(metrics)
             leaderboard.append(metrics)
             fitted[name] = (model_for_eval, pred, proba_used)
 
@@ -577,6 +668,8 @@ class MLEngineerAgent(BaseAgent):
             except Exception:
                 ens_pr = None
             ens_calib = _calibration_warning(y_test, ensemble_proba)
+            ens_top10 = _top_risk_evaluation(y_test, ensemble_proba, 0.10)
+            ens_top20 = _top_risk_evaluation(y_test, ensemble_proba, 0.20)
             ens_metrics = {
                 "model_type": "EnsembleBlend",
                 "accuracy": float(accuracy_score(y_test, ens_pred)),
@@ -587,6 +680,10 @@ class MLEngineerAgent(BaseAgent):
                 "pr_auc": ens_pr,
                 "recall_at_top_10_percent": float(_recall_at_top_percent(y_test, ensemble_proba, 0.10)),
                 "recall_at_top_20_percent": float(_recall_at_top_percent(y_test, ensemble_proba, 0.20)),
+                "attrition_rate_in_top_10_percent": float(ens_top10["attrition_rate"]),
+                "attrition_rate_in_top_20_percent": float(ens_top20["attrition_rate"]),
+                "top_10_percent_evaluation": ens_top10,
+                "top_20_percent_evaluation": ens_top20,
                 "selected_threshold": float(ens_thr),
                 "threshold_tuning": ens_thr_meta,
                 "calibration": ens_calib,
@@ -595,20 +692,21 @@ class MLEngineerAgent(BaseAgent):
                     "test": {"positive_rate": float(np.mean(y_test == 1)), "counts": pd.Series(y_test).value_counts().to_dict()},
                 },
             }
-            ens_metrics["model_reliability_label"] = _hr_reliability_label(ens_metrics.get("roc_auc"), ens_metrics.get("recall"))
+            ens_metrics["model_reliability_label"] = _model_confidence_label(ens_metrics)
             leaderboard.append(ens_metrics)
             fitted["EnsembleBlend"] = (ProbabilityEnsemble([fitted[name][0] for name in test_probas.keys()]), ens_pred, ensemble_proba)
             if ens_metrics.get("calibration", {}).get("warning"):
                 self.logger.add("Calibration", "warning", f"EnsembleBlend: {ens_metrics['calibration']['warning']}")
 
-        # Practical HR score: prioritize recall, then PR-AUC, then ROC-AUC, then F1.
+        # Practical HR score: prioritize catching risk while keeping review quality usable.
         best = sorted(
             leaderboard,
             key=lambda m: (
-                float(m.get("recall") or 0),
-                float(m.get("pr_auc") or 0),
-                float(m.get("roc_auc") or 0),
+                1 if float(m.get("precision") or 0) >= 0.30 else 0,
+                _selected_hr_score(m),
+                float(m.get("recall_at_top_20_percent") or 0),
                 float(m.get("f1") or 0),
+                float(m.get("recall") or 0),
             ),
             reverse=True,
         )[0]
@@ -650,7 +748,14 @@ class MLEngineerAgent(BaseAgent):
 
         shap_summary = _safe_shap_explain(self.logger, best_pipe, X, X_test, y_test)
         if not shap_summary.get("top_features"):
-            shap_summary = _feature_fallback(self.logger, best_pipe, X, X_test, y_test)
+            if shap_summary.get("global_importance"):
+                shap_summary["top_features"] = [
+                    {"feature": item.get("feature"), "importance": item.get("mean_abs_shap")}
+                    for item in shap_summary.get("global_importance", [])
+                    if isinstance(item, dict)
+                ]
+            else:
+                shap_summary = _feature_fallback(self.logger, best_pipe, X, X_test, y_test)
         explainability = {
             "status": "Available",
             "method": shap_summary.get("method", "Model feature importance"),
@@ -672,10 +777,11 @@ class MLEngineerAgent(BaseAgent):
             "leaderboard": sorted(
                 leaderboard,
                 key=lambda m: (
-                    float(m.get("recall") or 0),
-                    float(m.get("pr_auc") or 0),
-                    float(m.get("roc_auc") or 0),
+                    1 if float(m.get("precision") or 0) >= 0.30 else 0,
+                    _selected_hr_score(m),
+                    float(m.get("recall_at_top_20_percent") or 0),
                     float(m.get("f1") or 0),
+                    float(m.get("recall") or 0),
                 ),
                 reverse=True,
             ),
@@ -689,6 +795,6 @@ class MLEngineerAgent(BaseAgent):
         context["explainability"] = explainability
         self.log(
             "completed",
-            f"Selected {best['model_type']} (HR score) with recall={best['recall']:.3f}, PR-AUC={(best.get('pr_auc') or 0):.3f}, ROC-AUC={(best.get('roc_auc') or 0):.3f}, F1={best['f1']:.3f}.",
+            f"Selected {best['model_type']} (HR score) with risk capture={best['recall']:.3f}, review efficiency={best['precision']:.3f}, top-20 capture={(best.get('recall_at_top_20_percent') or 0):.3f}.",
         )
         return context

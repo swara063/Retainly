@@ -34,6 +34,75 @@ function numOrDash(x: any, digits = 3) {
   return n.toFixed(digits);
 }
 
+function pctOrDash(x: any, digits = 0) {
+  const n = Number(x);
+  if (!Number.isFinite(n)) return '—';
+  return `${(n * 100).toFixed(digits)}%`;
+}
+
+function hrMetricLabel(key: string) {
+  const labels: Record<string, string> = {
+    recall: 'Risk capture rate',
+    precision: 'Review efficiency',
+    roc_auc: 'Ranking quality',
+    pr_auc: 'Attrition detection quality',
+    f1: 'F1 balance score',
+    accuracy: 'Accuracy',
+    recall_at_top_10_percent: 'Top 10% risk capture',
+    recall_at_top_20_percent: 'Top 20% risk capture',
+    attrition_rate_in_top_10_percent: 'Attrition rate in top 10%',
+    attrition_rate_in_top_20_percent: 'Attrition rate in top 20%',
+  };
+  return labels[key] || key;
+}
+
+function cleanFeatureName(name: any) {
+  return String(name || '')
+    .replace(/^(num|cat)__/, '')
+    .replace(/_/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function driverInterpretation(name: any) {
+  const n = String(name || '').toLowerCase();
+  if (n.includes('overtime')) return 'Employees working overtime show elevated attrition risk.';
+  if (n.includes('jobsatisfaction')) return 'Lower satisfaction is linked to higher attrition likelihood.';
+  if (n.includes('worklife')) return 'Work-life balance patterns are linked to retention risk.';
+  if (n.includes('yearsatcompany') || n.includes('tenure')) return 'Tenure patterns help identify where retention support may be needed.';
+  if (n.includes('monthlyincome') || n.includes('income') || n.includes('salary')) return 'Compensation signals may be associated with retention pressure.';
+  if (n.includes('distance')) return 'Longer commute distance may increase attrition risk.';
+  if (n.includes('promotion')) return 'Promotion history can indicate whether growth opportunities are affecting retention.';
+  if (n.includes('environment')) return 'Work environment satisfaction appears linked with retention risk.';
+  if (n.includes('department')) return 'Risk differs by department, so HR should review team-level context.';
+  if (n.includes('jobrole')) return 'Risk differs by role, so interventions should be role-aware.';
+  return 'This signal is associated with attrition risk in the uploaded dataset.';
+}
+
+function collectTopDrivers(results: any) {
+  const explain = results?.explainability || {};
+  const candidates = [
+    ...(Array.isArray(explain.top_features) ? explain.top_features : []),
+    ...(Array.isArray(explain.feature_importance) ? explain.feature_importance : []),
+    ...(Array.isArray(explain.global_importance) ? explain.global_importance : []),
+    ...(Array.isArray(explain.shap?.global_importance) ? explain.shap.global_importance : []),
+    ...(Array.isArray(results?.model?.feature_importance) ? results.model.feature_importance : []),
+  ];
+  const seen = new Set<string>();
+  return candidates
+    .map((item: any) => ({
+      feature: item?.feature || item?.name,
+      importance: item?.importance ?? item?.mean_abs_shap ?? item?.score,
+    }))
+    .filter((item: any) => {
+      const key = String(item.feature || '');
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 5);
+}
+
 function bandTone(v: string) {
   const s = String(v || '').toLowerCase();
   if (s.includes('high') || s.includes('critical')) return 'bad';
@@ -231,7 +300,7 @@ export default function DashboardPage() {
   const overtime = getRiskSegments(results, 'OverTime');
   const satisfaction = getRiskSegments(results, 'JobSatisfaction');
   const tenure = getRiskSegments(results, 'YearsAtCompany');
-  const topDrivers = Array.isArray(results?.explainability?.top_features) ? results.explainability.top_features.slice(0, 8) : [];
+  const topDrivers = collectTopDrivers(results);
 
   const inferredTarget = preview?.inferred_target_column;
   const importWarnings = Array.isArray(preview?.warnings) ? preview.warnings : [];
@@ -255,6 +324,17 @@ export default function DashboardPage() {
   const modelReliability = metrics.model_reliability_label || exec.model_reliability_label || '—';
   const calibration = calibrationStatus(metrics);
   const fairnessRisk = fairness.overall_risk || exec.fairness_risk || '—';
+  const highRiskEmployees = Array.isArray(results?.employee_risk_records)
+    ? results.employee_risk_records.filter((r: any) => ['High', 'Critical'].includes(String(r?.risk_band))).length
+    : prioritySegmentCount;
+  const riskCapture = metrics.recall ?? exec.risk_capture_rate;
+  const top20Capture = metrics.recall_at_top_20_percent ?? exec.recall_at_top_20_percent;
+  const top20AttritionRate = metrics.attrition_rate_in_top_20_percent ?? exec.attrition_rate_in_top_20_percent;
+  const confidenceLabel = String(modelReliability || 'Directional');
+  const confidenceCard = confidenceLabel === 'Needs HR judgment' || Number(metrics.accuracy || 0) < 0.65
+    ? 'Directional model: use with HR judgment'
+    : confidenceLabel;
+  const fairnessStatus = String(fairnessRisk || 'Reviewed');
 
   const confidenceText = confidenceSummary.plain_english || (detectedConfidenceLow
     ? 'Retainly could use a quick check on the outcome field, so the smart import summary is shown with a caution note.'
@@ -387,18 +467,47 @@ export default function DashboardPage() {
           <div className="grid four">
             <StatCard label="Employees analyzed" value={String(exec.rows_analyzed ?? s.results?.dataset_profile?.rows ?? '—')} />
             <StatCard label="Observed attrition rate" value={exec.attrition_rate != null ? `${Math.round(Number(exec.attrition_rate) * 100)}%` : '—'} />
-            <StatCard label="Highest-risk segment" value={highestRiskSegment} tone="warn" />
-            <StatCard label="Employees in priority segments" value={String(prioritySegmentCount || '—')} tone="warn" />
-            <StatCard label="Confidence level" value={String(modelReliability)} tone={bandTone(String(modelReliability))} />
-            <StatCard label="Risk score quality" value={calibration.label} tone={calibration.tone} />
-            <StatCard label="Fairness risk" value={String(fairnessRisk)} tone={bandTone(String(fairnessRisk))} />
+            <StatCard label="High-risk employees identified" value={String(highRiskEmployees || '—')} tone="warn" />
+            <StatCard label="Risk capture rate" value={pctOrDash(riskCapture)} tone="good" />
+            <StatCard label="Model confidence" value={confidenceCard} tone={String(confidenceCard).includes('judgment') ? 'warn' : bandTone(confidenceLabel)} />
+            <StatCard label="Fairness review status" value={fairnessStatus} tone={bandTone(fairnessStatus)} />
           </div>
+        {s.results ? (
+          <>
+            <div className="panelHint" style={{ marginTop: 12 }}>
+              Retainly is tuned to identify employees who may need retention support. The model prioritizes catching more potential attrition cases, so some employees may be flagged as a precaution. Use these results for supportive HR planning, not punitive decisions.
+            </div>
+            {top20Capture != null ? (
+              <div className="panelHint">
+                Among the top 20% highest-risk employees, Retainly captured {pctOrDash(top20Capture)} of observed attrition cases{top20AttritionRate != null ? `, with an observed attrition rate of ${pctOrDash(top20AttritionRate)} in that review group.` : '.'}
+              </div>
+            ) : null}
+          </>
+        ) : null}
         {!s.results ? (
           <div className="card previewPanel">
             <b>What this section will show after analysis</b>
             <p className="muted">A concise view of where retention risk is concentrated, which teams need attention, and whether the model can be trusted enough for decision support.</p>
           </div>
         ) : null}
+      </section>
+
+      <section id="top-drivers">
+        <SectionTitle icon={<BarChart3 size={18} />} title="Top Drivers" subtitle="The strongest workplace signals linked with attrition risk." />
+        <div className="grid two">
+          {topDrivers.length ? topDrivers.map((driver: any) => (
+            <div className="card" key={String(driver.feature)}>
+              <h3>{cleanFeatureName(driver.feature)}</h3>
+              <div className="muted tiny">Importance: {driver.importance == null ? 'Available' : numOrDash(Math.abs(Number(driver.importance)))}</div>
+              <div className="panelHint" style={{ marginTop: 10 }}>{driverInterpretation(driver.feature)}</div>
+            </div>
+          )) : (
+            <div className="card">
+              <b>Driver signals will appear after analysis.</b>
+              <p className="muted">Retainly will show the strongest workplace signals, such as overtime, satisfaction, tenure, compensation, role, or department patterns.</p>
+            </div>
+          )}
+        </div>
       </section>
 
       <section id="hotspots">
@@ -608,15 +717,26 @@ export default function DashboardPage() {
               <table className="table">
                 <tbody>
                   <tr><td>Selected model</td><td>{selectedModel}</td></tr>
-                  <tr><td>Recall</td><td>{numOrDash(metrics.recall)}</td></tr>
-                  <tr><td>Precision</td><td>{numOrDash(metrics.precision)}</td></tr>
-                  <tr><td>F1</td><td>{numOrDash(metrics.f1)}</td></tr>
-                  <tr><td>ROC-AUC</td><td>{numOrDash(metrics.roc_auc)}</td></tr>
-                  <tr><td>PR-AUC</td><td>{numOrDash(metrics.pr_auc)}</td></tr>
+                  <tr><td>{hrMetricLabel('accuracy')}</td><td>{numOrDash(metrics.accuracy)}</td></tr>
+                  <tr><td>{hrMetricLabel('recall')}</td><td>{numOrDash(metrics.recall)}</td></tr>
+                  <tr><td>{hrMetricLabel('precision')}</td><td>{numOrDash(metrics.precision)}</td></tr>
+                  <tr><td>{hrMetricLabel('f1')}</td><td>{numOrDash(metrics.f1)}</td></tr>
+                  <tr><td>{hrMetricLabel('roc_auc')}</td><td>{numOrDash(metrics.roc_auc)}</td></tr>
+                  <tr><td>{hrMetricLabel('pr_auc')}</td><td>{numOrDash(metrics.pr_auc)}</td></tr>
+                  <tr><td>{hrMetricLabel('recall_at_top_10_percent')}</td><td>{numOrDash(metrics.recall_at_top_10_percent)}</td></tr>
+                  <tr><td>{hrMetricLabel('recall_at_top_20_percent')}</td><td>{numOrDash(metrics.recall_at_top_20_percent)}</td></tr>
+                  <tr><td>{hrMetricLabel('attrition_rate_in_top_10_percent')}</td><td>{numOrDash(metrics.attrition_rate_in_top_10_percent)}</td></tr>
+                  <tr><td>{hrMetricLabel('attrition_rate_in_top_20_percent')}</td><td>{numOrDash(metrics.attrition_rate_in_top_20_percent)}</td></tr>
                   <tr><td>Confidence level</td><td>{String(modelReliability)}</td></tr>
                   <tr><td>Risk score quality</td><td>{calibration.label}</td></tr>
                 </tbody>
               </table>
+              <div className="panelHint" style={{ marginTop: 12 }}>
+                <b>Why these metrics look this way:</b> Attrition datasets are usually imbalanced, so accuracy is not the best measure of usefulness. Retainly prioritizes risk capture because HR wants to avoid missing employees who may need support. Review efficiency shows how many flagged employees are likely true attrition cases, while top-risk evaluation shows how useful the highest-risk review list is.
+              </div>
+              {Number(metrics.accuracy || 0) < 0.65 ? (
+                <div className="panelHint">Detailed note: raw accuracy is below 0.65, so this run should be interpreted as directional model guidance and combined with HR judgment.</div>
+              ) : null}
             </div>
             <div className="card">
               <h3>Confusion matrix</h3>

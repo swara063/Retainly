@@ -86,7 +86,7 @@ export default function ChatPage() {
             className="chatInput"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask: “Explain recall vs precision”, “What does fairness risk mean?”, “Top drivers?”"
+            placeholder="Ask: “What does risk capture mean?”, “What does fairness risk mean?”, “Top drivers?”"
             onKeyDown={(e) => {
               if (e.key === 'Enter') send();
             }}
