@@ -156,7 +156,7 @@ def _confidence_summary(label: str, validation_note: str | None = None) -> dict[
     }
 
 
-def build_executive_summary(*, df: pd.DataFrame, target_col: str, results: dict) -> dict[str, Any]:
+def build_executive_summary(*, df: pd.DataFrame, target_col: str | None, results: dict) -> dict[str, Any]:
     metrics = (results.get("model") or {}).get("metrics") or {}
     recall = _safe_float(metrics.get("recall"))
     precision = _safe_float(metrics.get("precision"))
@@ -167,17 +167,17 @@ def build_executive_summary(*, df: pd.DataFrame, target_col: str, results: dict)
     selected_model = (results.get("model") or {}).get("selected_model", "—")
 
     attrition_rate = None
-    try:
-        y = df[target_col]
-        # If target is numeric 0/1, use mean; else treat common positive strings as "attrition".
-        if pd.api.types.is_numeric_dtype(y):
-            attrition_rate = float(pd.to_numeric(y, errors="coerce").dropna().astype(float).mean())
-        else:
-            s = y.astype(str).str.strip().str.lower()
-            pos = s.isin({"1", "yes", "true", "left", "attrition"})
-            attrition_rate = float(pos.mean())
-    except Exception:
-        attrition_rate = None
+    if target_col and target_col in df.columns:
+        try:
+            y = df[target_col]
+            if pd.api.types.is_numeric_dtype(y):
+                attrition_rate = float(pd.to_numeric(y, errors="coerce").dropna().astype(float).mean())
+            else:
+                s = y.astype(str).str.strip().str.lower()
+                pos = s.isin({"1", "yes", "true", "left", "attrition"})
+                attrition_rate = float(pos.mean())
+        except Exception:
+            attrition_rate = None
 
     reliability = _reliability_label(recall, precision, f1, roc_auc)
     validation_note = (results.get("model") or {}).get("confidence_summary", {}).get("limitations")
@@ -216,11 +216,11 @@ def build_executive_summary(*, df: pd.DataFrame, target_col: str, results: dict)
 def build_employee_risk(
     *,
     df: pd.DataFrame,
-    target_col: str,
+    target_col: str | None,
     pipeline: Any,
     top_features: list[dict[str, Any]] | None,
 ) -> list[dict[str, Any]]:
-    X = df.drop(columns=[target_col], errors="ignore")
+    X = df.drop(columns=[target_col], errors="ignore") if target_col else df.copy()
     try:
         proba = pipeline.predict_proba(X)[:, 1]
     except Exception:
@@ -258,7 +258,7 @@ def build_employee_risk(
 def build_employee_risk_records(
     *,
     df: pd.DataFrame,
-    target_col: str,
+    target_col: str | None,
     pipeline: Any,
     top_features: list[dict[str, Any]] | None,
     model_confidence_label: str | None = None,
@@ -272,7 +272,7 @@ def build_employee_risk_records(
     if not employee_id_column and not employee_name_column:
         warnings.append("No employee identifier found. Showing row-based references.")
 
-    X = df.drop(columns=[target_col], errors="ignore")
+    X = df.drop(columns=[target_col], errors="ignore") if target_col else df.copy()
     try:
         proba = pipeline.predict_proba(X)[:, 1]
     except Exception:
@@ -365,7 +365,7 @@ def _bucket_tenure(years: float | None) -> str:
 def build_risk_segments(
     *,
     df: pd.DataFrame,
-    target_col: str,
+    target_col: str | None,
     risk_scores: pd.Series,
 ) -> list[dict[str, Any]]:
     dept_col = _find_column(df, ["department", "dept", "team", "businessunit", "function"])
@@ -383,15 +383,17 @@ def build_risk_segments(
 
     segs: list[dict[str, Any]] = []
 
-    y = df[target_col]
-    y_num = None
-    try:
-        if pd.api.types.is_numeric_dtype(y):
-            y_num = pd.to_numeric(y, errors="coerce").astype(float)
-        else:
-            s = y.astype(str).str.strip().str.lower()
-            y_num = s.isin({"1", "yes", "true", "left", "attrition"}).astype(float)
-    except Exception:
+    if target_col and target_col in df.columns:
+        y = df[target_col]
+        try:
+            if pd.api.types.is_numeric_dtype(y):
+                y_num = pd.to_numeric(y, errors="coerce").astype(float)
+            else:
+                s = y.astype(str).str.strip().str.lower()
+                y_num = s.isin({"1", "yes", "true", "left", "attrition"}).astype(float)
+        except Exception:
+            y_num = pd.Series([np.nan] * len(df), index=df.index)
+    else:
         y_num = pd.Series([np.nan] * len(df), index=df.index)
 
     base = df.copy()

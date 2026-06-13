@@ -3,6 +3,12 @@ import os
 import numpy as np
 import pandas as pd
 from app.agents.base import BaseAgent
+from app.services.pretrained_model_service import (
+    align_frame_to_model,
+    load_pretrained_metadata,
+    load_pretrained_model,
+    pretrained_model_exists,
+)
 from typing import Any
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.compose import ColumnTransformer
@@ -553,11 +559,81 @@ class MLEngineerAgent(BaseAgent):
         return (numeric > med).astype(int).to_numpy(), {"classes": unique, "positive_class": f"> {med:g}"}
 
     def run(self, context: dict) -> dict:
-        self.log("running", "Training Logistic Regression, Random Forest, and Gradient Boosting models.")
         df = context["dataframe"].copy()
         mapping = context["column_mapping"]
-        target = mapping["target"]
-        df = df.dropna(subset=[target])
+        target = mapping.get("target")
+        has_target = bool(target and target in df.columns)
+        if pretrained_model_exists():
+            self.log("running", "Scoring employees with the pretrained Retainly model.")
+            model = load_pretrained_model()
+            metadata = load_pretrained_metadata()
+            score_df = df.drop(columns=[target], errors="ignore")
+            score_df = align_frame_to_model(score_df, model)
+            try:
+                proba = model.predict_proba(score_df)[:, 1]
+            except Exception:
+                pred = model.predict(score_df)
+                proba = np.asarray(pred, dtype=float)
+            proba = np.asarray(proba, dtype=float).clip(0, 1)
+            risk_scores = pd.Series(proba)
+            best_pipe = model
+            y_pred = (proba >= 0.5).astype(int)
+            cm = []
+            explainability = {
+                "status": "Available",
+                "method": "Feature importance",
+                "top_features": [],
+                "shap": {},
+            }
+            confidence = {
+                "label": metadata.get("confidence_label", "Directional"),
+                "plain_english": metadata.get("plain_english", "Confidence level: Directional. Use these insights for team-level planning and validate with HR context."),
+                "recommended_use": "Decision-support for HR planning, manager coaching, and workforce risk review.",
+                "limitations": metadata.get("limitations", "Pretrained scoring model. Review findings with HR context."),
+            }
+            model_metrics = {
+                "model_type": metadata.get("model_type", "PretrainedLogisticRegression"),
+                "accuracy": None,
+                "precision": None,
+                "recall": None,
+                "f1": None,
+                "roc_auc": None,
+                "pr_auc": None,
+                "recall_at_top_10_percent": None,
+                "recall_at_top_20_percent": None,
+                "attrition_rate_in_top_10_percent": None,
+                "attrition_rate_in_top_20_percent": None,
+                "selected_threshold": metadata.get("selected_threshold", 0.5),
+                "model_reliability_label": confidence["label"],
+                "source": "pretrained_model",
+            }
+            leaderboard = [model_metrics]
+            context["model_artifacts"] = {
+                "pipeline": best_pipe,
+                "X_test": score_df,
+                "y_test": [],
+                "y_pred": list(map(int, y_pred)),
+                "y_proba": list(map(float, proba)),
+                "target_meta": {},
+            }
+            context["model"] = {
+                "selected_model": model_metrics["model_type"],
+                "leaderboard": leaderboard,
+                "metrics": model_metrics,
+                "confusion_matrix": cm,
+                "classification_report": {},
+                "confidence_summary": confidence,
+                "research_comparison": None,
+            }
+            context["explainability"] = explainability
+            context["research_comparison"] = None
+            self.log("completed", f"Pretrained scoring completed for {len(df)} employees.")
+            return context
+
+        self.log("running", "Training Logistic Regression, Random Forest, and Gradient Boosting models.")
+        df = df.dropna(subset=[target]) if has_target else df
+        if not has_target:
+            raise ValueError("No attrition target found and pretrained model is unavailable.")
         X = df.drop(columns=[target])
         y_raw = df[target]
         y, target_meta = self._normalize_target(y_raw)

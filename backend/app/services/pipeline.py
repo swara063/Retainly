@@ -75,7 +75,7 @@ class AttritionPipeline:
             artifacts = context.get("model_artifacts") or {}
             pipe = artifacts.get("pipeline")
 
-            if df is not None and target_col and target_col in getattr(df, "columns", []) and pipe is not None:
+            if df is not None and pipe is not None:
                 try:
                     exec_summary = build_executive_summary(df=df, target_col=target_col, results=results)
                     results["executive_summary"] = exec_summary
@@ -140,6 +140,14 @@ class AttritionPipeline:
                 except Exception as exc:
                     self.logger.add("DataQuality", "failed", str(exc))
                     results["data_quality"] = {"error": str(exc)}
+            elif df is not None:
+                results["executive_summary"] = {
+                    "rows_analyzed": int(df.shape[0]),
+                    "columns_analyzed": int(df.shape[1]),
+                    "selected_model": (results.get("model") or {}).get("selected_model"),
+                    "recommended_use": "Decision-support for HR planning, manager coaching, and workforce risk review.",
+                    "confidence_summary": results.get("confidence_summary") or ((results.get("model") or {}).get("confidence_summary") or {}),
+                }
 
             save_json(result_path(self.dataset_id), results)
             build_pdf_report(self.dataset_id, results)
