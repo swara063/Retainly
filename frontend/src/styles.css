@@ -557,6 +557,22 @@ li{ margin: 8px 0; color:#334155; }
   justify-content:space-between;
   gap: 12px;
 }
+.pageShell{ display:flex; flex-direction:column; gap: 18px; }
+.sectionCard{ max-width: 980px; }
+.sectionCardHeader{ margin-bottom: 10px; }
+.emptyState{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  align-items:flex-start;
+  max-width: 980px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(15, 23, 42, .08);
+  box-shadow: 0 16px 46px rgba(20, 34, 66, .10);
+  backdrop-filter: blur(10px);
+}
 .disabledLink{
   pointer-events:none;
   opacity: .6;
@@ -588,4 +604,7 @@ li{ margin: 8px 0; color:#334155; }
 @media (max-width: 1160px){
   .topbar{ align-items:flex-start; flex-direction: column; gap: 12px; }
   .topActions{ justify-content:flex-start; }
+}
+@media (max-width: 980px){
+  .heroNew, .grid.two, .grid.three, .metricGrid, .metrics, .agentTimeline{ grid-template-columns: 1fr; }
 }
