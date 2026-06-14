@@ -23,6 +23,16 @@ code{ background: rgba(15, 23, 42, .06); padding: 3px 8px; border-radius: 10px; 
 .content{ min-width: 0; }
 .page{ padding: 0; }
 
+.pageShell{
+  display:flex;
+  flex-direction:column;
+  gap: 18px;
+  align-items: center;
+}
+.pageShell > *{
+  width: min(100%, 1280px);
+}
+
 .pageHeader{
   display:flex;
   align-items:flex-end;
@@ -557,8 +567,7 @@ li{ margin: 8px 0; color:#334155; }
   justify-content:space-between;
   gap: 12px;
 }
-.pageShell{ display:flex; flex-direction:column; gap: 18px; }
-.sectionCard{ max-width: 980px; }
+.sectionCard{ width: 100%; }
 .sectionCardHeader{ margin-bottom: 10px; }
 .emptyState{
   display:flex;
