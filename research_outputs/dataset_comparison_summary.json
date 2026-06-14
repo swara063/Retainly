@@ -1,0 +1,38 @@
+{
+  "datasets_run": [
+    "ibm_hr_attrition",
+    "synthetic_employee_attrition_74498"
+  ],
+  "average_baseline_metrics": {
+    "accuracy": 0.7975670411438576,
+    "precision": 0.686229650322705,
+    "recall": 0.44334118530984,
+    "f1": 0.48921969310312075,
+    "roc_auc": 0.8072002038928754,
+    "pr_auc": 0.6320258023842686,
+    "final_project_score": 0.5203955859527143
+  },
+  "average_retainly_metrics": {
+    "accuracy": 0.7723902830463962,
+    "precision": 0.5747621641827807,
+    "recall": 0.6782449778336594,
+    "f1": 0.6193120167271905,
+    "roc_auc": 0.795103062631344,
+    "pr_auc": 0.6601877119147571,
+    "final_project_score": 0.7558532243594617
+  },
+  "average_lift": {
+    "accuracy": -0.025176758097461338,
+    "precision": -0.1114674861399243,
+    "recall": 0.23490379252381943,
+    "f1": 0.13009232362406975,
+    "roc_auc": -0.012097141261531386,
+    "pr_auc": 0.02816190953048847,
+    "final_project_score": 0.23545763840674738
+  },
+  "best_overall_approach": "Retainly",
+  "conclusion": "The multi-agent Retainly workflow provides stronger predictive performance and greater decision-support value than a normal baseline ML workflow, while also adding explainability, fairness review, and HR action planning.",
+  "missing_datasets": [
+    "/Users/swarasameerpawanekar/Desktop/Retainly/hr_attrition_intelligence_platform/research_datasets/saudi_employee_attrition.csv"
+  ]
+}

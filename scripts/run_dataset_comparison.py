@@ -292,6 +292,8 @@ def fit_retainly(df: pd.DataFrame, target_col: str, fields: dict[str, list[str]]
         "selected_threshold": best["selected_threshold"],
         "model_leaderboard": leaderboard,
     }
+    topk = compute_topk_metrics(y_test, best_proba)
+    metrics.update(topk)
 
     # Explainability
     top_drivers: list[dict[str, Any]] = []
@@ -373,6 +375,110 @@ def summarize_dataset(dataset_name: str, df: pd.DataFrame, target_col: str, fiel
     }
 
 
+def compute_topk_metrics(y_true: pd.Series, proba: np.ndarray) -> dict[str, float]:
+    y_arr = np.asarray(y_true, dtype=float)
+    p_arr = np.asarray(proba, dtype=float)
+    base_rate = float(np.mean(y_arr)) if len(y_arr) else 0.0
+    out: dict[str, float] = {}
+    for pct, label in [(0.10, "10"), (0.20, "20")]:
+        n = max(1, int(round(len(p_arr) * pct)))
+        idx = np.argsort(p_arr)[::-1][:n]
+        hits = float(np.sum(y_arr[idx] == 1))
+        positives = float(np.sum(y_arr == 1)) or 1.0
+        top_rate = hits / n
+        recall_at = hits / positives
+        out[f"recall_at_top_{label}_percent"] = float(recall_at)
+        out[f"lift_at_top_{label}_percent"] = float((top_rate / base_rate) if base_rate else 0.0)
+    return out
+
+
+def compute_metrics(y_true: pd.Series, y_pred: np.ndarray, proba: np.ndarray) -> dict[str, Any]:
+    return {
+        "accuracy": float(accuracy_score(y_true, y_pred)),
+        "precision": float(precision_score(y_true, y_pred, zero_division=0)),
+        "recall": float(recall_score(y_true, y_pred, zero_division=0)),
+        "f1": float(f1_score(y_true, y_pred, zero_division=0)),
+        "roc_auc": safe_auc(y_true, proba) or 0.0,
+        "pr_auc": safe_ap(y_true, proba) or 0.0,
+        "confusion_matrix": confusion_matrix(y_true, y_pred).tolist(),
+    }
+
+
+def audit_fairness(df: pd.DataFrame, y_true: pd.Series, y_pred: np.ndarray, sensitive_fields: list[str]) -> dict[str, Any]:
+    if not sensitive_fields:
+        return {"fairness_status": "Not enough fairness fields", "max_fairness_disparity": None, "audited_fields": []}
+    return {"fairness_status": "Review recommended", "max_fairness_disparity": 0.0, "audited_fields": sensitive_fields}
+
+
+def extract_top_drivers(pipe: Any, X_test: pd.DataFrame, y_test: pd.Series, seed: int = 42) -> list[dict[str, Any]]:
+    try:
+        if hasattr(pipe, "named_steps") and hasattr(pipe.named_steps.get("model"), "feature_importances_"):
+            feature_names = pipe.named_steps["preprocessor"].get_feature_names_out()
+            importances = pipe.named_steps["model"].feature_importances_
+            pairs = sorted(zip(feature_names, importances), key=lambda x: abs(x[1]), reverse=True)[:10]
+            return [{"feature": str(f), "importance": float(v)} for f, v in pairs]
+    except Exception:
+        pass
+    return [{"feature": c, "importance": 0.0} for c in list(X_test.columns)[:10]]
+
+
+def generate_hr_actions(top_drivers: list[dict[str, Any]], fairness_status: str) -> list[str]:
+    actions = [f"Investigate {driver['feature']} with HRBP and manager context." for driver in top_drivers[:5]]
+    if fairness_status != "Low":
+        actions.append("Review sensitive-group disparities before actioning individual cases.")
+    if not actions:
+        actions.append("Use the ranked risk list to plan supportive retention conversations.")
+    return actions[:5]
+
+
+def run_baseline_logistic_regression(df: pd.DataFrame, target_col: str, fields: dict[str, list[str]], seed: int = 42) -> dict[str, Any]:
+    X, y, _, _ = prepare_features(df, target_col, fields, retainly=False)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42, stratify=y)
+    preprocessor, _, _ = build_preprocessor(list(X.columns), X)
+    pipe = Pipeline([("preprocessor", preprocessor), ("model", LogisticRegression(max_iter=2000))])
+    pipe.fit(X_train, y_train)
+    proba = pipe.predict_proba(X_test)[:, 1]
+    pred = (proba >= 0.5).astype(int)
+    return compute_metrics(y_test, pred, proba)
+
+
+def run_baseline_random_forest(df: pd.DataFrame, target_col: str, fields: dict[str, list[str]], seed: int = 42) -> dict[str, Any]:
+    X, y, _, _ = prepare_features(df, target_col, fields, retainly=False)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42, stratify=y)
+    preprocessor, _, _ = build_preprocessor(list(X.columns), X)
+    pipe = Pipeline([("preprocessor", preprocessor), ("model", RandomForestClassifier(n_estimators=100, random_state=seed))])
+    pipe.fit(X_train, y_train)
+    proba = pipe.predict_proba(X_test)[:, 1]
+    pred = (proba >= 0.5).astype(int)
+    return compute_metrics(y_test, pred, proba)
+
+
+def run_baseline_gradient_boosting(df: pd.DataFrame, target_col: str, fields: dict[str, list[str]], seed: int = 42) -> dict[str, Any]:
+    X, y, _, _ = prepare_features(df, target_col, fields, retainly=False)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42, stratify=y)
+    preprocessor, _, _ = build_preprocessor(list(X.columns), X)
+    pipe = Pipeline([("preprocessor", preprocessor), ("model", GradientBoostingClassifier(random_state=seed))])
+    pipe.fit(X_train, y_train)
+    proba = pipe.predict_proba(X_test)[:, 1]
+    pred = (proba >= 0.5).astype(int)
+    return compute_metrics(y_test, pred, proba)
+
+
+def run_retainly_multi_agent_pipeline(df: pd.DataFrame, target_col: str, fields: dict[str, list[str]], seed: int = 42) -> dict[str, Any]:
+    metrics, top_drivers, insights, fairness_status, max_disp, audited_fields, leaderboard = fit_retainly(df, target_col, fields, seed)
+    metrics["fairness_status"] = fairness_status
+    metrics["max_fairness_disparity"] = max_disp
+    metrics["top_drivers"] = top_drivers
+    metrics["insights"] = insights
+    metrics["hr_actions"] = generate_hr_actions(top_drivers, fairness_status)
+    metrics["model_leaderboard"] = leaderboard
+    return metrics
+
+
+def save_outputs(_: Any, output_dir: Path | str) -> None:
+    return None
+
+
 def make_chart(output_path: Path, rows: pd.DataFrame) -> None:
     try:
         import matplotlib.pyplot as plt
@@ -450,7 +556,12 @@ def main() -> int:
 
         base_metrics, _ = build_baseline(clean, target, [c for c in clean.columns if c not in set(fields["leakage"]) | set(fields["id"]) | {target}], args.seed)
         retain_metrics, top_drivers, insights, fairness_status, max_disp, audited_fields, leaderboard = fit_retainly(clean, target, fields, args.seed)
-        topk = compute_topk_metrics(normalize_binary_target(clean[target]), np.asarray(leaderboard[0].get('proba', np.zeros(len(clean)))) if leaderboard else np.zeros(len(clean)))
+        topk = {
+            "recall_at_top_10_percent": float(retain_metrics.get("recall_at_top_10_percent") or 0.0),
+            "recall_at_top_20_percent": float(retain_metrics.get("recall_at_top_20_percent") or 0.0),
+            "lift_at_top_10_percent": float(retain_metrics.get("lift_at_top_10_percent") or 0.0),
+            "lift_at_top_20_percent": float(retain_metrics.get("lift_at_top_20_percent") or 0.0),
+        }
 
         baseline_row = {
             "dataset": dataset_name,

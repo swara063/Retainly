@@ -3,6 +3,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
 import { AppStateProvider } from './state';
 import DashboardPage from './pages/DashboardPage';
+import EmployeesPage from './pages/EmployeesPage';
 import OverviewPage from './pages/OverviewPage';
 import DataPage from './pages/DataPage';
 import AgentsPage from './pages/AgentsPage';
@@ -40,7 +41,7 @@ export default function App() {
         <div className="content">
           <Routes>
             <Route path="/" element={<DashboardPage />} />
-            <Route path="/employees" element={<DashboardPage />} />
+            <Route path="/employees" element={<EmployeesPage />} />
             <Route path="/hotspots" element={<OverviewPage />} />
             <Route path="/action-plan" element={<DataPage />} />
             <Route path="/agents" element={<AgentsPage />} />

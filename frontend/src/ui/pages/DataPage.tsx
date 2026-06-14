@@ -1,58 +1,44 @@
 import React from 'react';
-import { API_BASE } from '../api';
 import { useAppState } from '../state';
+
+function Empty({ text }: { text: string }) {
+  return <div className="card"><div className="panelHint">{text}</div></div>;
+}
 
 export default function DataPage() {
   const s = useAppState();
   const hasUploadedDataset = Boolean(s.datasetId || s.file);
   const hasValidResults = s.phase === 'completed' && s.results?.status === 'completed' && Array.isArray(s.results?.employee_risk);
   if (!hasValidResults) {
-    return <div className="page"><div className="card"><b>{hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.'}</b></div></div>;
+    return <div className="page"><h2>Action Plan</h2><Empty text={hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.'} /></div>;
   }
 
   const recommendations: string[] = s.results.recommendations || [];
-  const actionCards = recommendations.slice(0, 5);
+  const actionCards = (recommendations.length ? recommendations : ['Review the generated results after analysis.']).slice(0, 8);
+  const priorities = ['High', 'Medium', 'Low'];
 
   return (
     <div className="page">
-      <div className="grid two">
-        <div className="card">
-          <h3>Top recommended actions</h3>
-          {actionCards.length ? (
-            <table className="table">
-              <tbody>
-                {actionCards.map((item, index) => (
-                  <tr key={index}>
-                    <td><b>Action {index + 1}</b></td>
-                    <td>{String(item)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p className="muted">Run analysis first to view this section.</p>
-          )}
-          <div className="btnRow single" style={{ marginTop: 12 }}>
-            <a className="download" href={`${API_BASE}/analysis/${s.datasetId}/report`}>Download PDF report</a>
-            <a className="download secondary" href={`${API_BASE}/analysis/${s.datasetId}/results.json`}>Download results JSON</a>
-          </div>
-          <div className="panelHint" style={{ marginTop: 12 }}>
-            Research validation notebook available separately.{' '}
-            <a href="https://github.com/swara063/Retainly/blob/main/notebooks/retainly_dataset_comparison.ipynb" target="_blank" rel="noreferrer">Open validation notebook</a>
-          </div>
+      <div className="pageHeader">
+        <div>
+          <h2>Action Plan</h2>
+          <p className="muted">Full HR action plan only.</p>
         </div>
-        <div className="card">
-          <h3>Responsible use</h3>
-          <p className="muted">Retainly is decision-support only. Use supportive wording such as manager check-ins, stay interviews, workload review, and growth conversations.</p>
-          <h4>How to read the report</h4>
-          {s.results.insights?.length ? (
-            <ul>
-              {s.results.insights.slice(0, 4).map((item: string, index: number) => <li key={index}>{item}</li>)}
-            </ul>
-          ) : (
-            <p className="muted">Run analysis first to view this section.</p>
-          )}
-        </div>
+      </div>
+      <div className="grid one">
+        {actionCards.map((item, index) => (
+          <div className="card" key={index}>
+            <div className="panelTitle">
+              <b>Priority {priorities[index] || 'Low'}</b>
+              <div className="muted">Target group, why it matters, action, timeline, success metric</div>
+            </div>
+            <div className="panelHint"><b>Target group:</b> {String(s.results.risk_segments?.[index]?.group || 'Review highest-risk segments')}</div>
+            <div className="panelHint"><b>Why it matters:</b> {String(item)}</div>
+            <div className="panelHint"><b>Action:</b> Use this recommendation as a supportive retention intervention.</div>
+            <div className="panelHint"><b>Timeline:</b> 30 days</div>
+            <div className="panelHint"><b>Success metric:</b> Fewer high-risk employees in the next review cycle.</div>
+          </div>
+        ))}
       </div>
     </div>
   );

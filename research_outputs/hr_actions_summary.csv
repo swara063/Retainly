@@ -1,0 +1,11 @@
+dataset,action
+ibm_hr_attrition,Investigate OverTime with HRBP and manager context.
+ibm_hr_attrition,Investigate JobRole with HRBP and manager context.
+ibm_hr_attrition,Investigate TotalWorkingYears with HRBP and manager context.
+ibm_hr_attrition,Investigate NumCompaniesWorked with HRBP and manager context.
+ibm_hr_attrition,Investigate JobLevel with HRBP and manager context.
+synthetic_employee_attrition_74498,Investigate cat__Job Level_Senior with HRBP and manager context.
+synthetic_employee_attrition_74498,Investigate cat__Job Level_Entry with HRBP and manager context.
+synthetic_employee_attrition_74498,Investigate cat__Remote Work_Yes with HRBP and manager context.
+synthetic_employee_attrition_74498,Investigate cat__Work-Life Balance_Fair with HRBP and manager context.
+synthetic_employee_attrition_74498,Investigate cat__Remote Work_No with HRBP and manager context.
