@@ -1,0 +1,501 @@
+Employee ID,Age,Gender,Years at Company,Job Role,Monthly Income,Work-Life Balance,Job Satisfaction,Performance Rating,Number of Promotions,Overtime,Distance from Home,Education Level,Marital Status,Number of Dependents,Job Level,Company Size,Company Tenure,Remote Work,Leadership Opportunities,Innovation Opportunities,Company Reputation,Employee Recognition,HireDate,LastReviewDate,MixedNotes
+52685,36,Male,, ,8029,Excellent,High,Average,1,,,Master’s Degree,Married,1,Mid,Large,22,No,No,No,Poor,Medium,,,2024-01-01
+30585,35,Male,7.0,Education,4563,Good,High,Average,1,Yes,55,Associate Degree,Single,4,Entry,Medium,27,No,No,No,Good,High,2020-01-08,2020-01-14,1
+54656,50,Male,7.0,Education,5583,Fair,High,Average,3,Yes,14,Associate Degree,Divorced,2,Senior,Medium,76,No,No,Yes,Good,Low,2020-01-15,2020-01-27,2
+33442,58,Male,44.0,Media,5525,Fair,Very High,High,0,Yes,43,Master’s Degree,Single,4,Entry,Medium,96,No,No,No,Poor,Low,2020-01-22,2020-02-09,3
+15667,39,Male,24.0,Education,4604,Good,High,Average,0,Yes,47,Master’s Degree,Married,6,Mid,Large,45,Yes,No,No,Good,High,2020-01-29,2020-02-22,4
+3496,45,Female,30.0,Healthcare,8104,Fair,High,Average,0,No,38,Associate Degree,Divorced,0,Senior,Large,75,No,No,No,Good,Low,2020-02-05,2020-03-06,Unknown
+46775,22,Female,5.0,Healthcare,8700,Good,High,Average,0,No,2,High School,Married,0,Mid,Small,48,No,No,No,Poor,High,2020-02-12,2020-03-19,6
+72645,34,Female,15.0,Technology,11025,Fair,Medium,High,1,No,9,Master’s Degree,Single,4,Entry,Large,16,No,No,No,Good,Low,2020-02-19,2020-04-01,
+4941,48,Female,40.0,Technology,11452,Good,Medium,Below Average,0,No,65,Associate Degree,Divorced,1,Mid,Large,52,No,No,No,Good,Medium,2020-02-26,2020-04-14,8
+65181,55,Female,16.0,Media,5939,Poor,High,Average,0,No,31,Associate Degree,Divorced,1,Entry,Small,46,No,No,No,Good,High,2020-03-04,2020-04-27,2024-01-10
+49522,32,Female,12.0,Healthcare,8144,Good,High,Below Average,0,Yes,28,High School,Married,1,Mid,Medium,57,No,No,No,Fair,Medium,2020-03-11,2020-05-10,Unknown
+8195,26,Female,15.0,Finance,4758,Good,High,High,2,Yes,35,Bachelor’s Degree,Married,1,Senior,Medium,91,Yes,No,No,Good,Medium,,2020-05-23,11
+52948,45,Female,3.0,Media,6370,Fair,Medium,High,3,No,30,Bachelor’s Degree,Married,3,Senior,Medium,60,No,No,No,Good,High,2020-03-25,2020-06-05,12
+35067,42,Male,3.0,Healthcare,8344,Good,Very High,Average,0,No,88,Master’s Degree,Married,0,Mid,Small,14,No,No,No,Good,High,2020-04-01,2020-06-18,13
+53650,35,Female,5.0,Finance,10449,Good,Very High,Average,1,No,51,Bachelor’s Degree,Single,0,Entry,Small,69,No,No,No,Good,Low,2020-04-08,2020-07-01,
+49803,52,Female,44.0,Technology,12514,Fair,Very High,Average,1,Yes,38,High School,Married,4,Mid,Small,117,No,No,No,Good,Low,2020-04-15,2020-07-14,Unknown
+2213,42,Male,14.0,Education,5076,Fair,High,High,0,Yes,53,Bachelor’s Degree,Single,5,Entry,Medium,68,No,No,No,Good,High,2020-04-22,2020-07-27,16
+48091,37,Male,28.0,Technology,8287,Fair,Medium,High,0,No,10,Bachelor’s Degree,Married,5,Entry,Large,100,No,No,No,Good,Low,2020-04-29,,17
+49462,56,Male,24.0,Healthcare,8963,Excellent,High,Average,1,No,43,Bachelor’s Degree,Married,0,Mid,Medium,81,No,No,No,Good,High,2020-05-06,2020-08-22,2024-01-19
+16073,21,Female,1.0,Healthcare,7869,Fair,High,High,0,No,23,Master’s Degree,Married,0,Senior,Large,64,No,No,Yes,Good,Low,2020-05-13,2020-09-04,19
+54967,47,Female,11.0,Media,6664,Fair,High,Average,1,No,77,Associate Degree,Single,4,Mid,Small,41,No,No,No,Good,High,2020-05-20,2020-09-17,Unknown
+35183,47,Female,35.0,Healthcare,9319,Excellent,Very High,Below Average,2,Yes,89,High School,Single,3,Mid,Medium,44,No,No,Yes,Excellent,Medium,2020-05-27,2020-09-30,
+455,50,Male,15.0,Healthcare,8209,Good,High,Average,0,No,7,Master’s Degree,Single,0,Senior,Medium,91,No,No,No,Excellent,Very High,,2020-10-13,22
+36359,40,Male,22.0, ,5593,Good,High,Average,0,No,74,Associate Degree,Single,0,Entry,Medium,55,No,No,No,Good,Low,2020-06-10,2020-10-26,23
+36048,50,Female,19.0,Finance,8345,Fair,High,Below Average,2,No,55,Associate Degree,Married,3,Entry,Medium,24,No,No,No,Fair,High,2020-06-17,2020-11-08,24
+54081,23,Male,4.0,Education,4532,Excellent,High,Average,1,Yes,87,Master’s Degree,Single,1,Mid,Medium,60,No,No,No,Good,High,2020-06-24,2020-11-21,Unknown
+17189,43,Male,24.0,Education,3961,Poor,High,Low,0,No,64,Bachelor’s Degree,Married,0,Mid,Large,69,No,No,No,Fair,Very High,2020-07-01,2020-12-04,26
+31516,25,Male,2.0,Healthcare,7107,Excellent,Medium,Average,0,Yes,87,Associate Degree,Divorced,0,Mid,Small,18,No,No,No,Good,High,2020-07-08,2020-12-17,2024-01-28
+3586,37,Male,20.0,Education,3124,Excellent,Very High,High,0,Yes,79,Associate Degree,Married,4,Entry,Medium,51,Yes,No,No,Poor,Low,2020-07-15,2020-12-30,
+49198,34,Male,7.0,Healthcare,8312,Good,Medium,Below Average,1,Yes,,PhD,Single,0,Mid,Medium,27,No,No,No,Excellent,Low,2020-07-22,2021-01-12,29
+60686,36,Male,11.0,Technology,8085,Fair,Medium,Below Average,0,No,76,Bachelor’s Degree,Married,0,Entry,Medium,49,No,No,No,Good,Medium,2020-07-29,2021-01-25,Unknown
+14616,48,Male,,Education,4317,Poor,High,Below Average,1,No,69,Master’s Degree,Married,4,Entry,Small,47,No,No,No,Good,Low,2020-08-05,2021-02-07,31
+12605,20,Female,7.0,Media,6532,Good,High,High,0,No,26,Associate Degree,Married,2,Entry,Medium,85,Yes,No,Yes,Poor,Medium,2020-08-12,2021-02-20,32
+27617,57,Male,24.0,Media,6219,Excellent,Low,Below Average,3,Yes,44,High School,Divorced,2,Entry,Medium,75,No,No,No,Excellent,High,,2021-03-05,33
+23602,46,Female,26.0,Finance,8376,Fair,Very High,Low,1,No,77,Associate Degree,Single,1,Entry,Medium,94,No,No,No,Fair,Medium,2020-08-26,,34
+20883,18,Female,8.0,Healthcare,7162,Fair,High,Below Average,1,No,46,Master’s Degree,Single,2,Entry,Large,64,Yes,No,Yes,Poor,Medium,2020-09-02,2021-03-31,
+64272,22,Male,1.0,Media,6519,Poor,Medium,Average,2,No,68,Master’s Degree,Single,0,Entry,Medium,39,No,No,No,Good,Low,2020-09-09,2021-04-13,2024-01-09
+71141,26,Female,16.0,Finance,5785,Good,Very High,Below Average,1,,78,Associate Degree,Single,0,Entry,Medium,70,No,No,No,Good,Low,2020-09-16,2021-04-26,37
+62438,40,Female,23.0,Finance,8585,Good,Medium,Average,2,Yes,78,Bachelor’s Degree,Married,5,Mid,Small,49,No,No,No,Poor,Low,2020-09-23,2021-05-09,38
+55672,19,Female,7.0,Media,5965,Good,Very High,Average,1,No,3,Bachelor’s Degree,Single,1,Senior,Medium,84,Yes,No,Yes,Good,Very High,2020-09-30,2021-05-22,39
+18843,18,Female,5.0,Education,5162,Good,Low,Average,0,Yes,82,PhD,Single,4,Senior,Large,38,No,No,No,Fair,High,2020-10-07,2021-06-04,Unknown
+59459,29,Male,17.0,Media,5450,Fair,Very High,High,0,No,41,High School,Married,2,Mid,Small,32,No,No,No,Good,Medium,2020-10-14,2021-06-17,41
+56488,24,Male,4.0,Education,3198,Fair,High,Average,1,No,22,Master’s Degree,Married,3,Senior,Medium,49,No,No,No,Good,Medium,2020-10-21,2021-06-30,
+11062,24,Male,15.0,Finance,9551,Good,High,Average,0,Yes,40,Associate Degree,Single,0,Mid,Medium,54,No,No,No,Poor,High,2020-10-28,2021-07-13,43
+70350,41,Male,19.0,Technology,9587,Poor,Very High,Average,2,No,4,Bachelor’s Degree,Single,1,Mid,Small,32,No,No,No,Fair,Medium,,2021-07-26,44
+25065,18,Male,9.0,Healthcare,8419,Good,Medium,High,0,No,84,High School,Single,2,Senior,Medium,38,No,No,No,Poor,Medium,2020-11-11,2021-08-08,2024-01-18
+59563,55,Female,43.0, ,5996,Fair,Medium,Average,0,Yes,99,Associate Degree,Single,1,Senior,Small,115,No,No,Yes,Good,High,2020-11-18,2021-08-21,46
+6080,32,Female,18.0,Technology,9434,Fair,Medium,High,0,No,83,Master’s Degree,Single,1,Mid,Medium,94,No,No,No,Excellent,Low,2020-11-25,2021-09-03,47
+65256,50,Female,18.0,Technology,8935,Fair,Medium,Below Average,2,No,10,Master’s Degree,Married,1,Entry,Small,55,No,No,No,Good,High,2020-12-02,2021-09-16,48
+55816,28,Male,13.0,Technology,6261,Fair,High,Average,1,No,62,Associate Degree,Married,1,Mid,Large,87,No,No,No,Good,Low,2020-12-09,2021-09-29,
+48154,18,Male,2.0,Technology,8865,Good,High,Average,2,No,59,Master’s Degree,Married,2,Mid,Large,52,No,Yes,No,Good,Low,2020-12-16,2021-10-12,Unknown
+19598,30,Male,2.0,Education,3089,Poor,High,Average,0,Yes,35,Associate Degree,Married,0,Entry,Large,39,No,No,No,Poor,Low,2020-12-23,,51
+45711,38,Male,10.0,Healthcare,6138,Excellent,High,Average,0,Yes,35,High School,Married,2,Entry,Medium,71,No,No,No,Excellent,Medium,2020-12-30,2021-11-07,52
+31921,46,Male,6.0,Finance,7800,Good,Medium,Below Average,1,No,2,High School,Single,5,Entry,Large,44,No,No,No,Fair,Low,2021-01-06,2021-11-20,53
+28968,27,Female,5.0,Media,7043,Fair,Medium,Below Average,0,No,39,Bachelor’s Degree,Married,0,Entry,Small,48,No,No,No,Good,High,2021-01-13,2021-12-03,2024-01-27
+42658,59,Male,3.0,Healthcare,8326,Good,High,Low,1,No,71,Bachelor’s Degree,Married,0,Mid,Small,25,No,No,No,Excellent,Low,,2021-12-16,Unknown
+33024,34,Male,19.0,Technology,7603,Fair,Very High,Average,1,Yes,20,Associate Degree,Single,0,Entry,Medium,69,No,No,No,Good,High,2021-01-27,2021-12-29,
+12971,49,Male,33.0,Finance,12628,Poor,High,Average,0,No,19,Associate Degree,Single,0,Mid,Small,80,Yes,No,No,Good,Medium,2021-02-03,2022-01-11,57
+5719,53,Male,4.0,Education,3670,Fair,High,Average,0,No,,High School,Single,0,Entry,Small,65,No,No,No,Good,Medium,2021-02-10,2022-01-24,58
+9331,26,Male,11.0,Technology,9280,Fair,Medium,Below Average,0,No,50,Master’s Degree,Divorced,0,Mid,Medium,83,No,No,No,Excellent,Medium,2021-02-17,2022-02-06,59
+64168,45,Male,9.0,Media,7242,Good,Very High,Average,0,Yes,37,Bachelor’s Degree,Single,3,Entry,Medium,63,Yes,No,No,Good,High,2021-02-24,2022-02-19,Unknown
+20332,20,Male,11.0,Healthcare,9634,Excellent,High,Average,0,No,91,PhD,Divorced,1,Mid,Medium,37,Yes,No,No,Fair,Medium,2021-03-03,2022-03-04,61
+11169,52,Male,,Media,5834,Fair,High,High,2,No,86,Associate Degree,Married,2,Mid,Medium,53,No,No,No,Excellent,Medium,2021-03-10,2022-03-17,62
+30757,43,Female,26.0,Education,3973,Good,High,High,1,No,68,Associate Degree,Divorced,1,Mid,Medium,60,No,No,No,Good,Low,2021-03-17,2022-03-30,2024-01-08
+60983,18,Female,8.0,Media,6010,Fair,High,Average,0,No,53,High School,Married,5,Mid,Medium,34,No,No,No,Good,Medium,2021-03-24,2022-04-12,64
+26913,31,Male,1.0,Media,5687,Good,Very High,Average,1,No,72,Associate Degree,Single,2,Entry,Large,15,No,No,No,Good,High,2021-03-31,2022-04-25,Unknown
+7546,22,Male,6.0,Education,3963,Good,Very High,Average,0,No,64,Associate Degree,Married,3,Senior,Large,71,No,No,No,Good,Low,,2022-05-08,66
+67990,53,Female,22.0,Media,4939,Good,High,Average,1,Yes,50,Associate Degree,Single,2,Senior,Medium,76,Yes,No,No,Fair,Very High,2021-04-14,2022-05-21,67
+34301,22,Male,11.0,Finance,8595,Good,High,Average,2,Yes,50,Bachelor’s Degree,Single,2,Entry,Medium,54,No,No,No,Excellent,Low,2021-04-21,,68
+14321,25,Male,8.0, ,8872,Fair,High,Average,0,Yes,46,Bachelor’s Degree,Single,0,Mid,Large,35,No,No,No,Good,Medium,2021-04-28,2022-06-16,69
+53135,39,Male,30.0,Healthcare,8296,Good,High,Average,0,No,22,Bachelor’s Degree,Married,1,Mid,Medium,35,No,Yes,No,Good,Low,2021-05-05,2022-06-29,
+14669,54,Female,6.0,Education,3631,Fair,High,High,0,Yes,38,PhD,Married,3,Entry,Medium,68,No,No,No,Poor,High,2021-05-12,2022-07-12,71
+43491,56,Female,4.0,Media,6071,Poor,Medium,Average,1,Yes,82,Associate Degree,Single,2,Entry,Medium,12,No,No,Yes,Excellent,Low,2021-05-19,2022-07-25,2024-01-17
+54054,38,Male,26.0,Education,4419,Poor,High,Average,3,No,77,Master’s Degree,Single,0,Mid,Medium,97,No,No,No,Good,Low,2021-05-26,2022-08-07,73
+7163,19,Male,5.0,Technology,7391,Fair,Low,Below Average,1,,51,High School,Married,4,Entry,Medium,37,No,No,Yes,Poor,Low,2021-06-02,2022-08-20,74
+26780,57,Male,45.0,Technology,10599,Good,Very High,Below Average,0,No,23,Bachelor’s Degree,Single,2,Senior,Medium,71,No,No,Yes,Good,High,2021-06-09,2022-09-02,Unknown
+13903,35,Male,8.0,Media,6092,Good,Medium,Average,2,No,79,PhD,Single,0,Entry,Small,58,Yes,No,No,Fair,Low,2021-06-16,2022-09-15,76
+6649,40,Male,16.0,Healthcare,8727,Poor,High,High,2,No,35,High School,Divorced,2,Mid,Medium,65,No,No,No,Poor,Low,,2022-09-28,
+51846,41,Male,6.0,Healthcare,7252,Good,Medium,Average,2,No,14,Associate Degree,Divorced,0,Mid,Large,71,No,No,No,Poor,Low,2021-06-30,2022-10-11,78
+26809,33,Male,6.0,Technology,11283,Good,Low,Average,3,No,8,Bachelor’s Degree,Married,0,Entry,Large,30,No,No,No,Good,Low,2021-07-07,2022-10-24,79
+64951,42,Female,22.0,Technology,9062,Fair,High,High,3,No,75,High School,Married,1,Entry,Medium,77,Yes,No,No,Fair,High,2021-07-14,2022-11-06,Unknown
+23719,54,Male,1.0,Healthcare,7712,Excellent,Medium,Average,0,No,15,Bachelor’s Degree,Married,5,Mid,Large,40,No,No,No,Poor,Low,2021-07-21,2022-11-19,2024-01-26
+11190,33,Male,23.0,Education,5203,Good,High,Average,1,No,95,High School,Single,4,Mid,Small,98,No,No,Yes,Excellent,High,2021-07-28,2022-12-02,82
+29869,21,Male,10.0,Technology,8493,Excellent,Low,High,0,Yes,89,Master’s Degree,Married,3,Mid,Medium,78,Yes,No,No,Good,Low,2021-08-04,2022-12-15,83
+42562,58,Male,8.0,Healthcare,8149,Excellent,Medium,Average,0,No,13,PhD,Married,3,Mid,Small,69,No,No,Yes,Fair,Medium,2021-08-11,2022-12-28,
+3032,36,Female,26.0,Healthcare,9482,Poor,High,Below Average,2,No,44,Bachelor’s Degree,Married,4,Senior,Small,28,No,No,No,Fair,Medium,2021-08-18,,Unknown
+26880,27,Female,12.0,Technology,8022,Fair,Medium,High,1,No,73,Bachelor’s Degree,Married,1,Senior,Small,30,No,No,No,Fair,Low,2021-08-25,2023-01-23,86
+47539,32,Male,9.0,Technology,12240,Excellent,High,High,2,No,,Associate Degree,Married,0,Senior,Small,73,No,No,Yes,Good,High,2021-09-01,2023-02-05,87
+4786,59,Female,48.0,Healthcare,8196,Good,Medium,Average,0,No,62,Associate Degree,Married,0,Senior,Small,95,No,No,Yes,Good,Medium,,2023-02-18,88
+68000,22,Female,7.0,Finance,10012,Good,Medium,High,1,No,99,Associate Degree,Married,0,Senior,Medium,43,No,No,No,Good,Medium,2021-09-15,2023-03-03,89
+42053,43,Male,23.0,Education,3812,Excellent,High,Average,0,No,96,Bachelor’s Degree,Divorced,3,Senior,Medium,69,No,No,No,Fair,High,2021-09-22,2023-03-16,2024-01-07
+54995,22,Female,6.0,Finance,8767,Good,High,High,0,No,55,Associate Degree,Divorced,4,Mid,Large,63,No,No,No,Good,Low,2021-09-29,2023-03-29,
+1279,55,Female,25.0, ,9099,Poor,Low,High,0,No,42,Master’s Degree,Single,2,Entry,Medium,95,No,No,No,Good,Medium,2021-10-06,2023-04-11,92
+13376,32,Male,,Healthcare,8052,Fair,High,Average,0,No,5,Bachelor’s Degree,Single,3,Entry,Small,33,Yes,No,No,Poor,Medium,2021-10-13,2023-04-24,93
+13169,42,Male,7.0,Technology,7314,Good,High,High,3,Yes,28,Master’s Degree,Married,4,Mid,Small,38,No,No,No,Good,Low,2021-10-20,2023-05-07,94
+33968,56,Female,35.0,Technology,9615,Poor,High,Average,1,No,25,Bachelor’s Degree,Married,0,Mid,Medium,73,No,No,No,Poor,High,2021-10-27,2023-05-20,Unknown
+25662,41,Male,14.0,Technology,8118,Poor,Low,Average,1,No,3,Bachelor’s Degree,Single,4,Mid,Medium,63,No,No,No,Good,Low,2021-11-03,2023-06-02,96
+34240,57,Male,13.0,Education,4492,Fair,High,Average,3,Yes,27,Associate Degree,Married,5,Mid,Large,27,No,No,No,Good,Medium,2021-11-10,2023-06-15,97
+72123,59,Female,24.0,Education,3644,Fair,Low,Below Average,1,No,83,Bachelor’s Degree,Married,4,Entry,Medium,26,No,No,No,Good,High,2021-11-17,2023-06-28,
+11833,27,Female,10.0,Healthcare,9983,Poor,Very High,Average,0,No,14,High School,Married,0,Entry,Medium,49,No,No,No,Poor,High,,2023-07-11,2024-01-16
+63405,51,Female,41.0,Technology,8387,Good,High,Average,0,Yes,16,Associate Degree,Married,5,Mid,Medium,88,No,No,No,Fair,Medium,2021-12-01,2023-07-24,Unknown
+26938,59,Male,9.0,Technology,10107,Fair,High,Average,0,Yes,22,High School,Married,3,Senior,Small,66,Yes,No,Yes,Good,Medium,2021-12-08,2023-08-06,101
+49495,50,Male,10.0,Media,6493,Good,High,High,0,No,29,High School,Single,0,Mid,Small,72,Yes,No,No,Good,Low,2021-12-15,,102
+13947,56,Male,1.0,Healthcare,7758,Excellent,Very High,Average,0,No,14,Associate Degree,Married,2,Entry,Large,32,Yes,Yes,No,Good,Low,2021-12-22,2023-09-01,103
+62520,56,Female,43.0,Media,6357,Fair,Low,Average,1,No,90,High School,Single,0,Mid,Medium,44,No,No,No,Poor,High,2021-12-29,2023-09-14,104
+52157,42,Male,13.0,Education,3816,Excellent,Low,Average,1,Yes,23,High School,Single,1,Entry,Medium,49,Yes,No,No,Good,Low,2022-01-05,2023-09-27,
+24543,22,Male,2.0,Finance,9492,Good,Very High,Low,1,No,93,High School,Single,1,Entry,Medium,47,No,No,No,Good,Low,2022-01-12,2023-10-10,106
+54581,57,Male,24.0,Healthcare,9252,Good,Very High,Average,2,No,32,High School,Married,2,Mid,Medium,44,No,No,No,Good,Very High,2022-01-19,2023-10-23,107
+1091,57,Male,2.0,Finance,12142,Fair,Low,Low,1,No,16,High School,Married,1,Mid,Medium,67,No,No,No,Good,High,2022-01-26,2023-11-05,2024-01-25
+33481,35,Male,24.0,Education,3298,Fair,Very High,Average,1,No,7,Master’s Degree,Single,4,Entry,Medium,84,No,No,No,Good,High,2022-02-02,2023-11-18,109
+11336,23,Female,5.0,Healthcare,7127,Poor,High,Average,1,Yes,5,Associate Degree,Married,1,Senior,Medium,55,No,No,Yes,Good,Low,,2023-12-01,Unknown
+2108,23,Male,12.0,Healthcare,8423,Fair,Very High,Average,0,,6,Associate Degree,Single,2,Senior,Medium,61,Yes,No,No,Fair,Low,2022-02-16,2023-12-14,111
+6469,34,Female,5.0,Finance,10052,Fair,High,Below Average,0,Yes,25,Associate Degree,Married,5,Senior,Medium,59,No,No,No,Excellent,Low,2022-02-23,2023-12-27,
+66001,24,Male,16.0,Healthcare,8331,Fair,High,Average,0,Yes,88,Bachelor’s Degree,Married,0,Entry,Medium,49,Yes,No,No,Fair,Medium,2022-03-02,2024-01-09,113
+39357,55,Male,31.0,Education,5768,Good,High,Average,0,No,39,Bachelor’s Degree,Married,1,Mid,Small,57,No,No,No,Excellent,High,2022-03-09,2024-01-22,114
+29600,44,Female,4.0, ,10383,Fair,Medium,Below Average,0,No,11,Bachelor’s Degree,Single,4,Senior,Medium,51,No,No,No,Poor,Medium,2022-03-16,2024-02-04,Unknown
+34896,39,Male,10.0,Technology,11646,Excellent,Medium,Average,1,No,,Bachelor’s Degree,Married,0,Mid,Large,24,No,No,No,Good,Low,2022-03-23,2024-02-17,116
+49124,46,Male,23.0,Technology,7858,Excellent,Medium,Average,0,No,30,Associate Degree,Married,3,Entry,Medium,50,No,No,Yes,Good,Low,2022-03-30,2024-03-01,2024-01-06
+27997,55,Female,10.0,Finance,7169,Good,High,Below Average,0,No,87,Bachelor’s Degree,Married,0,Mid,Large,33,Yes,No,No,Good,Low,2022-04-06,2024-03-14,118
+31155,22,Female,9.0,Technology,9093,Good,High,Average,0,No,86,Bachelor’s Degree,Divorced,1,Entry,Small,33,No,No,No,Poor,High,2022-04-13,,
+38313,30,Female,18.0,Technology,12018,Fair,Medium,Average,0,No,60,Master’s Degree,Divorced,1,Mid,Large,29,No,No,No,Poor,Medium,2022-04-20,2024-04-09,Unknown
+7135,29,Female,10.0,Media,6547,Fair,Very High,Average,1,No,66,High School,Single,0,Mid,Medium,57,Yes,No,No,Fair,Medium,,2024-04-22,121
+39553,36,Male,11.0,Education,3883,Excellent,Low,Below Average,2,Yes,26,Associate Degree,Divorced,1,Entry,Small,35,Yes,No,No,Poor,Low,2022-05-04,2024-05-05,122
+6794,49,Male,30.0,Technology,10084,Fair,Very High,Average,3,No,31,PhD,Married,2,Entry,Medium,77,No,No,No,Good,Medium,2022-05-11,2024-05-18,123
+14519,36,Female,,Media,5680,Fair,Very High,Below Average,0,No,87,Master’s Degree,Single,4,Mid,Small,73,No,No,No,Poor,Low,2022-05-18,2024-05-31,124
+14011,53,Male,18.0,Education,5700,Excellent,Very High,High,0,No,35,Bachelor’s Degree,Married,0,Entry,Medium,34,No,No,No,Fair,Medium,2022-05-25,2024-06-13,Unknown
+16439,49,Male,9.0,Technology,7204,Good,High,Below Average,1,Yes,82,Bachelor’s Degree,Single,0,Senior,Medium,19,No,No,No,Excellent,Medium,2022-06-01,2024-06-26,2024-01-15
+6335,19,Male,11.0,Education,4934,Fair,High,Average,2,No,32,Master’s Degree,Single,2,Entry,Large,79,Yes,Yes,No,Fair,Low,2022-06-08,2024-07-09,127
+19394,43,Female,17.0,Healthcare,8245,Poor,High,Low,1,No,18,Bachelor’s Degree,Single,2,Entry,Large,74,Yes,No,No,Fair,Low,2022-06-15,2024-07-22,128
+71080,49,Male,13.0,Healthcare,7970,Fair,High,Average,0,No,53,Bachelor’s Degree,Married,4,Entry,Medium,21,Yes,No,No,Fair,High,2022-06-22,2024-08-04,129
+60021,49,Female,13.0,Finance,8164,Good,High,High,1,No,95,Associate Degree,Single,0,Senior,Small,74,No,No,No,Fair,High,2022-06-29,2024-08-17,Unknown
+44982,24,Male,6.0,Healthcare,8635,Good,Low,Average,0,No,99,Associate Degree,Single,1,Senior,Medium,19,No,No,Yes,Poor,Low,2022-07-06,2024-08-30,131
+8899,40,Female,4.0,Healthcare,6097,Fair,Very High,Average,0,Yes,81,High School,Married,5,Entry,Small,48,No,No,No,Good,High,,2024-09-12,132
+128,43,Female,10.0,Technology,10964,Excellent,Very High,High,0,No,94,Master’s Degree,Married,2,Entry,Medium,22,No,No,No,Good,Medium,2022-07-20,2024-09-25,
+69732,58,Female,8.0,Education,4021,Good,High,Average,3,Yes,78,Bachelor’s Degree,Married,1,Entry,Medium,65,No,No,No,Fair,High,2022-07-27,2024-10-08,134
+46987,40,Female,23.0,Technology,8471,Good,High,High,2,Yes,91,Associate Degree,Married,1,Entry,Small,30,No,No,No,Fair,Low,2022-08-03,2024-10-21,2024-01-24
+73607,45,Female,1.0,Technology,7841,Excellent,High,Below Average,0,No,35,Bachelor’s Degree,Single,3,Mid,Medium,19,No,No,Yes,Good,Low,2022-08-10,,136
+45755,39,Female,3.0,Education,4428,Good,Low,Average,0,No,90,Master’s Degree,Single,0,Mid,Medium,50,No,Yes,Yes,Poor,Low,2022-08-17,2024-11-16,137
+1881,29,Male,1.0, ,8703,Good,Very High,Below Average,1,Yes,12,Bachelor’s Degree,Married,4,Entry,Medium,74,Yes,No,No,Good,Medium,2022-08-24,2024-11-29,138
+31115,22,Female,14.0,Finance,8200,Good,Medium,Below Average,0,Yes,55,Bachelor’s Degree,Married,2,Mid,Medium,34,No,No,No,Good,Medium,2022-08-31,2024-12-12,139
+15295,51,Female,42.0,Healthcare,4830,Fair,High,High,0,No,53,Associate Degree,Single,0,Mid,Large,94,No,No,No,Good,Medium,2022-09-07,2024-12-25,
+15968,55,Female,21.0,Media,6860,Good,Very High,Low,0,No,35,Bachelor’s Degree,Married,0,Entry,Medium,79,No,No,No,Excellent,Low,2022-09-14,2025-01-07,141
+4666,35,Female,4.0,Finance,11105,Fair,High,Low,0,Yes,2,Master’s Degree,Single,0,Entry,Small,69,No,No,No,Good,High,2022-09-21,2025-01-20,142
+45346,51,Female,35.0,Technology,11078,Poor,High,Average,1,Yes,22,Bachelor’s Degree,Divorced,0,Mid,Medium,70,Yes,No,No,Good,Low,,2025-02-02,143
+17550,55,Male,41.0,Media,5448,Poor,High,Average,0,No,5,Master’s Degree,Married,4,Senior,Medium,111,No,No,Yes,Fair,Medium,2022-10-05,2025-02-15,2024-01-05
+61929,57,Male,19.0,Finance,8851,Good,High,High,1,Yes,,Associate Degree,Single,0,Entry,Medium,36,No,No,No,Fair,Low,2022-10-12,2025-02-28,Unknown
+832,57,Female,12.0,Media,6217,Fair,Medium,Average,0,Yes,58,Associate Degree,Married,1,Mid,Medium,90,Yes,No,No,Good,Low,2022-10-19,2025-03-13,146
+10269,29,Female,17.0,Healthcare,6642,Good,High,Average,0,Yes,75,Master’s Degree,Married,0,Entry,Medium,38,Yes,No,No,Fair,Medium,2022-10-26,2025-03-26,
+62491,25,Male,17.0,Education,4368,Good,Very High,Average,1,,69,High School,Divorced,2,Senior,Medium,46,No,No,No,Good,Medium,2022-11-02,2025-04-08,148
+41981,22,Female,2.0,Healthcare,9102,Good,High,Average,0,No,85,High School,Single,0,Senior,Small,16,No,No,No,Poor,Medium,2022-11-09,2025-04-21,149
+43687,49,Female,3.0,Technology,9599,Good,High,Below Average,1,No,4,Bachelor’s Degree,Divorced,3,Mid,Large,58,No,No,No,Fair,Medium,2022-11-16,2025-05-04,Unknown
+41828,37,Female,13.0,Media,5983,Fair,High,Average,0,No,11,Bachelor’s Degree,Married,0,Entry,Small,49,No,No,No,Good,High,2022-11-23,2025-05-17,151
+70755,41,Female,18.0,Finance,10901,Poor,Very High,Average,2,Yes,72,PhD,Divorced,1,Senior,Large,78,No,No,No,Good,Medium,2022-11-30,2025-05-30,152
+9802,49,Female,16.0,Finance,9338,Fair,Very High,Average,0,No,49,High School,Married,1,Mid,Medium,25,No,No,Yes,Good,Medium,2022-12-07,,2024-01-14
+43886,57,Female,8.0,Technology,8598,Good,High,Average,2,Yes,89,Master’s Degree,Married,3,Senior,Medium,69,No,No,No,Good,Medium,,2025-06-25,
+69600,38,Male,,Finance,9024,Good,Medium,Low,1,No,12,Master’s Degree,Married,1,Entry,Small,62,No,No,No,Good,Low,2022-12-21,2025-07-08,Unknown
+66482,36,Female,25.0,Media,5262,Good,Low,Below Average,0,Yes,95,Associate Degree,Married,5,Entry,Medium,75,No,No,No,Good,Low,2022-12-28,2025-07-21,156
+62883,19,Female,2.0,Education,4561,Good,High,Below Average,0,No,97,Associate Degree,Single,3,Mid,Medium,49,No,No,No,Fair,Medium,2023-01-04,2025-08-03,157
+61496,45,Male,8.0,Healthcare,7569,Excellent,Low,High,0,Yes,76,Associate Degree,Married,2,Entry,Small,46,No,No,Yes,Good,Medium,2023-01-11,2025-08-16,158
+39479,42,Female,18.0,Finance,8549,Poor,Very High,Average,0,Yes,94,High School,Divorced,2,Senior,Large,37,No,No,No,Poor,Low,2023-01-18,2025-08-29,159
+40258,21,Male,9.0,Education,4742,Good,High,Average,1,No,69,High School,Married,0,Entry,Medium,73,No,No,No,Good,Low,2023-01-25,2025-09-11,Unknown
+46253,24,Male,5.0, ,8231,Fair,High,Average,2,Yes,41,Master’s Degree,Married,1,Mid,Medium,74,No,No,No,Good,High,2023-02-01,2025-09-24,
+36030,25,Male,11.0,Technology,9236,Excellent,High,Average,0,No,80,Bachelor’s Degree,Married,0,Senior,Small,31,No,No,No,Good,Low,2023-02-08,2025-10-07,2024-01-23
+67337,24,Female,15.0,Technology,7575,Fair,Very High,Average,0,No,91,High School,Married,0,Entry,Medium,17,No,No,Yes,Poor,High,2023-02-15,2025-10-20,163
+63733,42,Male,28.0,Media,6956,Good,Very High,Below Average,3,Yes,17,Master’s Degree,Single,0,Mid,Large,33,No,No,No,Excellent,High,2023-02-22,2025-11-02,164
+65401,43,Female,19.0,Healthcare,8167,Excellent,High,Average,1,No,87,Bachelor’s Degree,Single,4,Senior,Medium,69,No,No,No,Fair,High,,2025-11-15,Unknown
+44205,29,Male,18.0,Education,3294,Good,Very High,Average,0,No,42,Associate Degree,Single,0,Senior,Medium,92,Yes,No,No,Good,Low,2023-03-08,2025-11-28,166
+17621,57,Female,48.0,Media,6521,Fair,Very High,Average,2,Yes,52,Associate Degree,Divorced,3,Mid,Medium,110,No,No,No,Good,Low,2023-03-15,2025-12-11,167
+26677,37,Male,4.0,Media,6097,Excellent,High,Average,2,No,90,Associate Degree,Married,3,Mid,Large,21,No,No,Yes,Poor,Low,2023-03-22,2025-12-24,
+32453,38,Female,3.0,Education,4916,Good,Very High,Average,0,No,86,Associate Degree,Married,1,Entry,Medium,59,Yes,No,No,Excellent,High,2023-03-29,2026-01-06,169
+27160,24,Male,13.0,Education,5131,Poor,High,Average,1,Yes,13,High School,Single,0,Entry,Large,28,Yes,No,No,Fair,Medium,2023-04-05,,Unknown
+3355,31,Male,14.0,Technology,10131,Good,Low,Average,0,Yes,42,Associate Degree,Single,4,Senior,Medium,89,Yes,No,No,Poor,Medium,2023-04-12,2026-02-01,2024-01-04
+63591,57,Male,38.0,Technology,9838,Fair,Very High,High,0,No,36,High School,Married,0,Entry,Medium,84,No,No,No,Good,Low,2023-04-19,2026-02-14,172
+30940,18,Female,2.0,Education,4743,Good,Very High,Average,0,No,41,Bachelor’s Degree,Single,4,Senior,Medium,80,No,No,No,Good,Medium,2023-04-26,2026-02-27,173
+17316,37,Female,15.0,Healthcare,8012,Good,Very High,Average,0,Yes,,Bachelor’s Degree,Married,1,Mid,Medium,59,No,No,No,Good,Low,2023-05-03,2026-03-12,174
+54762,29,Male,10.0,Healthcare,7539,Fair,Medium,Average,0,Yes,86,Master’s Degree,Married,0,Senior,Medium,49,No,No,Yes,Good,High,2023-05-10,2026-03-25,
+45422,40,Male,1.0,Technology,8284,Excellent,Medium,Average,2,Yes,20,Bachelor’s Degree,Single,1,Mid,Small,65,No,Yes,No,Fair,Medium,,2026-04-07,176
+21229,38,Female,22.0,Technology,10359,Good,High,Average,0,Yes,78,Associate Degree,Married,4,Mid,Small,91,No,No,No,Good,Low,2023-05-24,2026-04-20,177
+31471,23,Male,12.0,Education,5912,Fair,High,High,2,No,8,High School,Married,0,Entry,Medium,36,No,No,No,Fair,Low,2023-05-31,2026-05-03,178
+63696,52,Male,17.0,Media,5341,Fair,High,High,2,No,54,Associate Degree,Single,0,Mid,Medium,22,Yes,No,No,Good,Low,2023-06-07,2026-05-16,179
+52508,37,Male,15.0,Technology,11018,Fair,Very High,Average,2,No,60,Master’s Degree,Married,1,Entry,Large,22,Yes,No,No,Good,Very High,2023-06-14,2026-05-29,2024-01-13
+43399,43,Male,26.0,Technology,8393,Fair,High,Average,3,No,51,Bachelor’s Degree,Divorced,4,Mid,Medium,85,No,No,No,Fair,Medium,2023-06-21,2026-06-11,181
+25234,56,Female,5.0,Technology,10062,Excellent,Medium,Below Average,0,No,39,High School,Married,0,Senior,Small,59,No,No,Yes,Good,High,2023-06-28,2026-06-24,
+52082,57,Male,49.0,Healthcare,7280,Fair,High,Average,0,No,21,Associate Degree,Single,0,Entry,Medium,97,No,No,Yes,Good,Medium,2023-07-05,2026-07-07,183
+51526,30,Female,4.0, ,10333,Good,High,High,0,No,37,Master’s Degree,Single,0,Entry,Small,15,Yes,No,No,Poor,Medium,2023-07-12,2026-07-20,184
+1448,22,Female,1.0,Technology,8674,Good,High,Average,2,,73,Associate Degree,Divorced,2,Entry,Medium,71,No,No,No,Good,Low,2023-07-19,2026-08-02,Unknown
+61644,36,Male,,Healthcare,8283,Good,High,Below Average,0,No,50,Associate Degree,Married,1,Senior,Small,61,No,No,No,Good,Low,2023-07-26,2026-08-15,186
+62199,42,Male,1.0,Media,5733,Excellent,High,Average,2,No,81,Associate Degree,Married,0,Entry,Medium,22,No,No,Yes,Good,High,,,187
+44932,34,Male,3.0,Healthcare,9353,Fair,High,Average,1,No,75,High School,Married,0,Entry,Medium,65,No,No,No,Excellent,High,2023-08-09,2026-09-10,188
+12577,51,Male,9.0,Healthcare,6511,Good,High,Average,0,No,29,Bachelor’s Degree,Single,1,Senior,Large,18,Yes,Yes,No,Good,High,2023-08-16,2026-09-23,2024-01-22
+6010,20,Female,7.0,Media,4829,Poor,High,Below Average,1,Yes,10,High School,Married,4,Senior,Medium,30,No,No,No,Poor,Low,2023-08-23,2026-10-06,Unknown
+64073,38,Male,20.0,Finance,11758,Good,Medium,Average,0,No,9,Bachelor’s Degree,Married,0,Entry,Small,32,No,Yes,No,Good,Low,2023-08-30,2026-10-19,191
+22751,59,Male,50.0,Education,4505,Good,Very High,Average,0,No,2,High School,Married,0,Senior,Medium,52,No,No,No,Good,Medium,2023-09-06,2026-11-01,192
+8242,34,Male,5.0,Technology,7760,Good,Very High,Average,0,Yes,15,Bachelor’s Degree,Single,1,Mid,Medium,35,No,No,No,Poor,Medium,2023-09-13,2026-11-14,193
+72186,54,Male,37.0,Healthcare,7771,Poor,Very High,Average,0,No,23,Associate Degree,Single,0,Mid,Small,67,No,No,No,Good,Low,2023-09-20,2026-11-27,194
+34340,40,Female,10.0,Technology,11606,Fair,Medium,Average,4,Yes,89,Bachelor’s Degree,Single,1,Entry,Small,82,No,No,No,Excellent,Medium,2023-09-27,2026-12-10,Unknown
+48939,40,Male,20.0,Healthcare,8553,Fair,Very High,Average,2,Yes,75,Master’s Degree,Married,0,Mid,Small,84,No,No,No,Fair,Low,2023-10-04,2026-12-23,
+68996,33,Male,20.0,Technology,9980,Fair,Very High,Average,0,Yes,89,Associate Degree,Married,3,Mid,Medium,76,No,No,Yes,Good,High,2023-10-11,2027-01-05,197
+24222,26,Female,15.0,Technology,10868,Good,Very High,Average,0,No,20,High School,Single,5,Mid,Medium,40,No,No,No,Fair,High,,2027-01-18,2024-01-03
+20691,49,Male,1.0,Media,5138,Fair,High,Below Average,2,No,2,Associate Degree,Married,2,Mid,Medium,79,No,No,No,Poor,High,2023-10-25,2027-01-31,199
+21750,53,Male,37.0,Technology,8682,Fair,High,Average,1,No,86,Bachelor’s Degree,Single,5,Mid,Medium,96,No,No,No,Good,Medium,2023-11-01,2027-02-13,Unknown
+50869,20,Female,6.0,Media,6138,Fair,High,Below Average,0,Yes,55,High School,Divorced,3,Mid,Small,41,No,No,No,Good,Low,2023-11-08,2027-02-26,201
+67224,33,Female,10.0,Healthcare,7789,Fair,Very High,Below Average,2,No,53,Master’s Degree,Married,2,Senior,Small,39,No,No,No,Poor,Medium,2023-11-15,2027-03-11,202
+27073,48,Male,27.0,Healthcare,9460,Poor,Medium,High,2,No,,Associate Degree,Married,2,Mid,Small,106,No,No,No,Poor,High,2023-11-22,2027-03-24,
+45079,33,Male,23.0,Education,3606,Excellent,Medium,Below Average,1,Yes,84,Master’s Degree,Married,0,Entry,Medium,42,No,No,No,Good,Medium,2023-11-29,,204
+22285,20,Male,6.0,Healthcare,8065,Fair,Low,Below Average,0,Yes,8,High School,Married,2,Senior,Medium,17,No,No,No,Good,High,2023-12-06,2027-04-19,Unknown
+42992,31,Male,1.0,Education,3535,Good,High,Average,2,No,60,Associate Degree,Single,1,Entry,Medium,69,No,No,No,Good,Low,2023-12-13,2027-05-02,206
+68339,33,Male,4.0, ,7544,Fair,Low,Average,3,No,78,Bachelor’s Degree,Divorced,2,Entry,Small,31,No,No,No,Poor,Medium,2023-12-20,2027-05-15,2024-01-12
+29539,41,Male,31.0,Finance,5870,Fair,High,Average,0,No,67,Associate Degree,Single,1,Entry,Medium,43,No,No,No,Good,Low,2023-12-27,2027-05-28,208
+10792,22,Male,8.0,Technology,7848,Good,Very High,High,2,Yes,58,High School,Married,1,Entry,Large,28,No,No,No,Poor,Medium,,2027-06-10,209
+8611,22,Female,13.0,Media,5512,Excellent,High,High,0,No,89,Bachelor’s Degree,Divorced,1,Entry,Medium,29,No,No,No,Good,Medium,2024-01-10,2027-06-23,
+68083,43,Female,11.0,Healthcare,7746,Fair,Low,Below Average,1,Yes,54,High School,Married,0,Mid,Medium,27,Yes,No,No,Good,Low,2024-01-17,2027-07-06,211
+66525,24,Female,9.0,Healthcare,8895,Poor,Medium,Average,1,Yes,43,Associate Degree,Single,2,Mid,Small,63,No,No,No,Good,Medium,2024-01-24,2027-07-19,212
+63058,47,Female,17.0,Finance,12280,Fair,Medium,Low,1,No,28,High School,Divorced,1,Senior,Small,49,No,No,No,Good,Medium,2024-01-31,2027-08-01,213
+47545,23,Male,12.0,Technology,9652,Fair,Medium,Average,0,Yes,61,Associate Degree,Divorced,0,Senior,Small,68,No,No,No,Fair,Medium,2024-02-07,2027-08-14,214
+41659,43,Female,26.0,Healthcare,7497,Fair,Medium,High,1,No,72,Associate Degree,Single,0,Entry,Small,27,No,No,No,Good,High,2024-02-14,2027-08-27,Unknown
+61640,24,Female,14.0,Finance,7210,Good,High,Average,2,No,23,PhD,Married,4,Entry,Medium,29,No,Yes,No,Fair,Low,2024-02-21,2027-09-09,2024-01-21
+68045,52,Male,,Healthcare,7027,Poor,High,Average,1,Yes,86,Bachelor’s Degree,Single,1,Entry,Medium,69,Yes,No,Yes,Good,High,2024-02-28,2027-09-22,
+16937,45,Male,18.0,Media,6442,Poor,Low,Average,0,No,57,Associate Degree,Single,2,Entry,Medium,66,Yes,No,No,Good,Medium,2024-03-06,2027-10-05,218
+3887,21,Female,5.0,Healthcare,8976,Excellent,High,Below Average,1,No,13,High School,Single,1,Senior,Medium,66,Yes,No,No,Good,Medium,2024-03-13,2027-10-18,219
+411,29,Male,19.0,Healthcare,7045,Excellent,High,Average,0,No,11,Associate Degree,Married,1,Senior,Small,53,No,No,No,Poor,Low,,2027-10-31,Unknown
+44012,48,Female,26.0,Finance,12008,Excellent,Medium,Average,2,No,53,High School,Single,1,Mid,Large,97,No,No,No,Fair,High,2024-03-27,,221
+61460,18,Female,2.0,Media,6163,Poor,Very High,Low,2,,35,Master’s Degree,Divorced,0,Mid,Small,77,No,No,No,Fair,High,2024-04-03,2027-11-26,222
+6502,22,Male,3.0,Education,4340,Excellent,Very High,Average,1,No,55,Master’s Degree,Married,3,Mid,Medium,7,No,No,No,Good,Low,2024-04-10,2027-12-09,223
+550,55,Female,4.0,Healthcare,8981,Good,High,Average,0,No,83,Master’s Degree,Single,3,Entry,Medium,79,No,No,No,Good,Low,2024-04-17,2027-12-22,
+58222,35,Male,21.0,Healthcare,5749,Excellent,Low,Average,0,No,63,High School,Divorced,2,Entry,Medium,28,No,No,No,Good,Medium,2024-04-24,2028-01-04,2024-01-02
+74399,49,Male,14.0,Education,4639,Fair,Medium,High,2,No,47,High School,Single,2,Mid,Small,65,No,No,No,Good,High,2024-05-01,2028-01-17,226
+35388,58,Male,37.0,Technology,8045,Fair,Low,High,0,No,53,Associate Degree,Single,5,Mid,Large,62,No,No,No,Fair,Medium,2024-05-08,2028-01-30,227
+73312,30,Female,15.0,Education,5317,Fair,Medium,Average,0,No,5,Master’s Degree,Single,2,Mid,Medium,66,No,No,No,Good,High,2024-05-15,2028-02-12,228
+39168,21,Male,5.0,Technology,6498,Good,Very High,High,3,No,49,Bachelor’s Degree,Married,3,Entry,Medium,52,No,No,No,Good,High,2024-05-22,2028-02-25,229
+47804,45,Female,3.0, ,6678,Fair,Medium,High,1,No,64,Associate Degree,Married,3,Mid,Medium,42,No,No,No,Poor,Low,2024-05-29,2028-03-09,Unknown
+40010,35,Female,16.0,Media,5660,Fair,High,Average,0,Yes,23,Bachelor’s Degree,Married,1,Entry,Large,65,No,No,No,Fair,High,,2028-03-22,
+13905,52,Female,34.0,Media,5146,Good,Low,Below Average,1,No,,Master’s Degree,Married,0,Mid,Small,113,No,No,No,Good,Medium,2024-06-12,2028-04-04,232
+31436,45,Male,27.0,Technology,10185,Fair,Very High,Average,3,No,88,Bachelor’s Degree,Single,3,Mid,Medium,88,No,No,No,Good,Medium,2024-06-19,2028-04-17,233
+65592,57,Male,42.0,Education,4045,Fair,Medium,Low,0,No,50,Master’s Degree,Married,0,Senior,Medium,92,No,No,No,Poor,Low,2024-06-26,2028-04-30,2024-01-11
+42685,27,Female,4.0,Technology,7344,Excellent,High,Average,0,No,96,Master’s Degree,Married,5,Mid,Medium,21,Yes,No,No,Poor,High,2024-07-03,2028-05-13,Unknown
+34175,45,Male,15.0,Healthcare,9192,Excellent,Very High,High,3,No,93,High School,Single,0,Mid,Large,40,No,No,No,Good,Low,2024-07-10,2028-05-26,236
+20796,43,Female,7.0,Technology,10578,Excellent,High,Average,0,No,45,Master’s Degree,Single,1,Entry,Small,20,No,No,No,Good,Low,2024-07-17,2028-06-08,237
+4985,43,Female,8.0,Healthcare,8882,Poor,Medium,Low,1,Yes,45,Associate Degree,Divorced,1,Entry,Medium,81,Yes,No,No,Good,Low,2024-07-24,,
+66271,38,Female,24.0,Education,5414,Poor,Low,High,1,No,99,Bachelor’s Degree,Married,0,Entry,Small,102,No,No,No,Fair,Low,2024-07-31,2028-07-04,239
+34253,33,Female,9.0,Education,4325,Good,High,Average,0,No,64,Bachelor’s Degree,Single,2,Mid,Medium,77,No,No,No,Fair,High,2024-08-07,2028-07-17,Unknown
+40806,48,Male,21.0,Finance,5543,Good,Low,Average,1,No,74,Associate Degree,Single,1,Mid,Medium,69,Yes,No,Yes,Poor,High,2024-08-14,2028-07-30,241
+25507,43,Male,30.0,Healthcare,8492,Good,Very High,Average,0,No,96,High School,Married,4,Mid,Large,35,No,No,No,Good,Low,,2028-08-12,242
+48200,20,Male,2.0,Media,6112,Good,Very High,High,2,No,84,Master’s Degree,Single,1,Senior,Medium,42,No,No,No,Excellent,Medium,2024-08-28,2028-08-25,2024-01-20
+44235,25,Female,17.0,Healthcare,7632,Fair,High,Average,2,Yes,16,Master’s Degree,Divorced,1,Entry,Medium,88,Yes,No,No,Fair,Medium,2024-09-04,2028-09-07,244
+10619,43,Female,29.0,Technology,7161,Good,Low,Average,0,No,24,Master’s Degree,Single,4,Entry,Large,96,No,No,No,Poor,High,2024-09-11,2028-09-20,
+48496,44,Male,16.0,Healthcare,8135,Excellent,High,Below Average,0,No,83,Bachelor’s Degree,Married,2,Senior,Medium,63,No,No,No,Good,Low,2024-09-18,2028-10-03,246
+1604,32,Male,4.0,Technology,9645,Fair,Low,Average,2,Yes,10,Associate Degree,Married,4,Mid,Large,18,Yes,No,No,Good,Low,2024-09-25,2028-10-16,247
+74100,57,Male,,Media,6215,Fair,Medium,High,0,No,94,Master’s Degree,Divorced,4,Senior,Medium,38,No,No,No,Poor,Low,2024-10-02,2028-10-29,248
+24677,21,Female,5.0,Technology,7461,Excellent,Very High,Average,0,No,77,Associate Degree,Married,0,Senior,Medium,8,No,No,No,Good,High,2024-10-09,2028-11-11,249
+21907,47,Male,28.0,Media,6733,Good,Low,Average,0,No,8,Master’s Degree,Single,1,Mid,Large,75,No,No,No,Poor,Medium,2024-10-16,2028-11-24,Unknown
+45560,39,Female,20.0,Finance,8120,Poor,Medium,Average,0,No,41,High School,Divorced,4,Entry,Small,51,No,No,No,Fair,Very High,2024-10-23,2028-12-07,251
+10407,36,Female,4.0,Education,2937,Poor,Medium,Low,0,Yes,73,Master’s Degree,Married,2,Entry,Medium,51,No,No,No,Good,Low,2024-10-30,2028-12-20,2024-01-01
+27496,52,Female,20.0, ,11038,Good,Low,Average,0,No,26,High School,Married,0,Entry,Medium,84,No,No,Yes,Poor,High,,2029-01-02,253
+59803,25,Male,9.0,Technology,7347,Fair,Medium,Below Average,0,Yes,74,Associate Degree,Married,1,Mid,Large,53,Yes,No,No,Poor,Medium,2024-11-13,2029-01-15,254
+18658,36,Male,26.0,Education,5247,Poor,High,Average,2,No,9,Bachelor’s Degree,Single,1,Entry,Large,86,No,No,No,Good,Medium,2024-11-20,,Unknown
+47111,28,Female,18.0,Healthcare,9073,Excellent,High,Low,0,No,78,Bachelor’s Degree,Married,0,Mid,Small,82,No,No,Yes,Good,Low,2024-11-27,2029-02-10,256
+43850,42,Female,9.0,Healthcare,8615,Fair,Medium,Average,3,No,92,Bachelor’s Degree,Married,1,Entry,Medium,84,No,No,No,Fair,Very High,2024-12-04,2029-02-23,257
+35837,43,Male,17.0,Education,3503,Fair,High,Average,0,No,27,High School,Single,0,Senior,Small,25,No,No,No,Fair,Low,2024-12-11,2029-03-08,258
+39187,44,Female,25.0,Media,5771,Excellent,Very High,Average,2,,46,PhD,Divorced,1,Senior,Small,82,No,No,No,Fair,Low,2024-12-18,2029-03-21,
+31448,57,Female,14.0,Media,5622,Fair,Low,Average,2,No,1,Bachelor’s Degree,Married,2,Mid,Small,41,No,No,Yes,Good,High,2024-12-25,2029-04-03,Unknown
+29706,51,Female,32.0,Media,5680,Good,Very High,Average,0,No,,Bachelor’s Degree,Married,1,Entry,Small,69,No,No,No,Good,Low,2025-01-01,2029-04-16,2024-01-10
+5170,40,Female,19.0,Healthcare,6846,Poor,Medium,Average,3,No,15,Associate Degree,Single,4,Entry,Medium,46,No,Yes,Yes,Excellent,High,2025-01-08,2029-04-29,262
+47039,23,Male,6.0,Finance,6860,Poor,Low,High,1,No,86,Bachelor’s Degree,Married,1,Mid,Medium,64,Yes,No,No,Good,High,2025-01-15,2029-05-12,263
+69917,36,Male,3.0,Healthcare,7276,Fair,Very High,Average,0,Yes,56,Bachelor’s Degree,Married,4,Senior,Large,38,No,No,No,Good,Low,,2029-05-25,264
+47372,55,Male,24.0,Education,3586,Excellent,High,Average,2,No,3,Bachelor’s Degree,Married,2,Mid,Small,87,No,No,No,Good,Low,2025-01-29,2029-06-07,Unknown
+68950,48,Male,20.0,Education,5203,Excellent,High,Below Average,4,No,44,High School,Married,1,Entry,Medium,31,No,No,No,Excellent,Medium,2025-02-05,2029-06-20,
+19452,56,Female,42.0,Education,4116,Good,High,Below Average,0,Yes,87,Associate Degree,Married,3,Entry,Small,46,No,No,Yes,Good,High,2025-02-12,2029-07-03,267
+39231,36,Male,11.0,Technology,7237,Fair,Medium,Average,0,Yes,74,High School,Single,2,Mid,Medium,41,No,No,No,Good,Low,2025-02-19,2029-07-16,268
+14620,33,Male,2.0,Technology,7638,Excellent,Very High,Below Average,0,No,15,Associate Degree,Single,0,Entry,Medium,31,No,No,Yes,Poor,High,2025-02-26,2029-07-29,269
+65534,38,Male,16.0,Education,4854,Good,Very High,High,2,No,67,PhD,Married,4,Entry,Small,79,No,No,No,Good,High,2025-03-05,2029-08-11,2024-01-19
+12054,58,Male,28.0,Healthcare,8336,Excellent,High,High,0,No,8,High School,Married,0,Mid,Medium,86,No,No,No,Good,Medium,2025-03-12,2029-08-24,271
+22049,43,Male,21.0,Education,5451,Excellent,High,Average,0,No,44,Master’s Degree,Single,2,Mid,Small,63,No,No,No,Excellent,High,2025-03-19,,272
+65463,59,Male,38.0,Healthcare,6981,Good,Very High,Average,0,No,93,Bachelor’s Degree,Single,2,Mid,Small,79,No,No,No,Good,Very High,2025-03-26,2029-09-19,
+71859,33,Male,6.0,Media,6473,Poor,High,High,4,Yes,78,Master’s Degree,Married,0,Senior,Medium,72,No,No,No,Poor,Medium,2025-04-02,2029-10-02,274
+72339,53,Female,8.0,Technology,9983,Good,Medium,Below Average,0,No,59,High School,Married,1,Entry,Small,55,Yes,No,No,Good,Medium,,2029-10-15,Unknown
+73620,45,Male,10.0, ,6623,Fair,Medium,High,1,No,33,Associate Degree,Married,2,Mid,Small,60,No,No,No,Good,Low,2025-04-16,2029-10-28,276
+68295,20,Female,3.0,Education,4830,Excellent,Medium,Average,4,No,50,PhD,Single,2,Senior,Small,42,No,No,No,Poor,Low,2025-04-23,2029-11-10,277
+24974,56,Female,34.0,Education,5729,Good,High,Average,1,No,83,Master’s Degree,Married,4,Entry,Large,82,No,No,No,Fair,Low,2025-04-30,2029-11-23,278
+13459,34,Female,,Education,4662,Good,High,Below Average,3,Yes,18,Bachelor’s Degree,Single,0,Entry,Medium,85,No,No,No,Good,Medium,2025-05-07,2029-12-06,2024-01-28
+1119,20,Female,3.0,Finance,2030,Fair,Medium,Below Average,1,No,94,Bachelor’s Degree,Married,1,Entry,Medium,64,No,No,Yes,Good,Low,2025-05-14,2029-12-19,
+22683,40,Female,1.0,Education,5796,Excellent,High,High,3,No,32,High School,Married,2,Senior,Small,42,Yes,No,No,Fair,Low,2025-05-21,2030-01-01,281
+12690,20,Female,6.0,Healthcare,8162,Good,Very High,Low,0,No,36,Bachelor’s Degree,Single,0,Entry,Medium,29,No,No,No,Good,High,2025-05-28,2030-01-14,282
+29982,42,Male,24.0,Technology,9516,Excellent,High,Average,0,No,37,Master’s Degree,Single,5,Entry,Small,49,No,No,No,Fair,Medium,2025-06-04,2030-01-27,283
+30647,46,Female,35.0,Education,5079,Poor,High,Average,0,No,58,Bachelor’s Degree,Married,1,Senior,Medium,76,No,No,No,Good,Very High,2025-06-11,2030-02-09,284
+26730,44,Female,5.0,Healthcare,6291,Good,High,Average,2,No,46,Bachelor’s Degree,Married,1,Mid,Medium,6,No,No,No,Fair,Medium,2025-06-18,2030-02-22,Unknown
+71804,35,Female,4.0,Education,3393,Fair,Medium,Average,1,No,61,High School,Married,3,Mid,Medium,47,No,No,No,Good,High,,2030-03-07,286
+45922,26,Male,17.0,Media,5653,Excellent,High,Average,0,Yes,29,Bachelor’s Degree,Divorced,4,Entry,Medium,73,No,No,No,Fair,High,2025-07-02,2030-03-20,
+53315,56,Male,11.0,Healthcare,8832,Fair,Medium,High,1,No,32,Bachelor’s Degree,Single,0,Entry,Medium,31,No,No,Yes,Excellent,High,2025-07-09,2030-04-02,2024-01-09
+3841,34,Male,6.0,Technology,10043,Fair,Medium,High,2,Yes,27,Associate Degree,Divorced,1,Senior,Small,11,No,No,No,Good,Medium,2025-07-16,,289
+68736,29,Male,1.0,Education,4492,Fair,Medium,Average,0,No,,Master’s Degree,Single,1,Mid,Small,36,No,No,No,Good,Low,2025-07-23,2030-04-28,Unknown
+27838,25,Female,17.0,Education,4727,Good,High,High,0,Yes,36,High School,Single,2,Entry,Large,84,Yes,No,No,Good,Low,2025-07-30,2030-05-11,291
+8148,36,Female,11.0,Technology,10938,Good,High,Average,1,No,86,Associate Degree,Divorced,0,Senior,Large,79,No,No,No,Good,Medium,2025-08-06,2030-05-24,292
+1737,52,Female,16.0,Education,4466,Good,Medium,Average,1,Yes,83,PhD,Single,0,Mid,Small,61,Yes,No,No,Fair,Medium,2025-08-13,2030-06-06,293
+47561,31,Female,11.0,Healthcare,8183,Good,High,Average,0,No,51,Master’s Degree,Married,1,Mid,Medium,66,No,No,No,Good,Very High,2025-08-20,2030-06-19,
+71552,27,Male,5.0,Education,3439,Fair,High,Below Average,2,No,21,Bachelor’s Degree,Married,1,Senior,Small,61,No,No,No,Good,Low,2025-08-27,2030-07-02,Unknown
+628,43,Male,31.0,Education,3830,Fair,High,Below Average,2,,63,Associate Degree,Divorced,1,Mid,Medium,43,No,No,No,Good,Medium,2025-09-03,2030-07-15,296
+30614,55,Male,40.0,Technology,8323,Fair,High,Average,2,Yes,11,Associate Degree,Single,1,Mid,Large,68,Yes,No,No,Good,Medium,,2030-07-28,2024-01-18
+69721,54,Female,11.0,Finance,5192,Excellent,Low,Average,0,Yes,32,Associate Degree,Married,0,Mid,Medium,17,No,No,Yes,Good,Medium,2025-09-17,2030-08-10,298
+3336,55,Female,46.0, ,7311,Fair,Very High,Average,0,Yes,40,Bachelor’s Degree,Married,2,Entry,Large,63,No,No,No,Good,Low,2025-09-24,2030-08-23,299
+39576,30,Male,14.0,Healthcare,7446,Poor,High,High,0,No,74,Master’s Degree,Married,5,Senior,Medium,47,No,No,Yes,Excellent,Medium,2025-10-01,2030-09-05,Unknown
+14517,51,Female,1.0,Finance,8145,Fair,High,Average,0,No,3,Associate Degree,Married,2,Mid,Large,22,No,No,No,Good,High,2025-10-08,2030-09-18,
+5856,18,Female,5.0,Media,6372,Good,High,Average,1,Yes,91,Bachelor’s Degree,Married,3,Entry,Medium,23,No,No,No,Good,Low,2025-10-15,2030-10-01,302
+21096,43,Male,20.0,Media,4743,Fair,Low,Below Average,0,No,29,Associate Degree,Married,0,Mid,Medium,89,Yes,No,No,Fair,High,2025-10-22,2030-10-14,303
+33959,56,Male,48.0,Technology,10583,Good,Medium,Average,0,No,32,High School,Married,2,Senior,Small,102,No,No,No,Good,Low,2025-10-29,2030-10-27,304
+67477,57,Female,31.0,Media,6164,Good,High,High,1,Yes,4,Master’s Degree,Married,1,Mid,Large,110,Yes,Yes,No,Good,Medium,2025-11-05,2030-11-09,Unknown
+51506,38,Female,18.0,Healthcare,4914,Poor,High,Average,0,Yes,46,Master’s Degree,Divorced,0,Mid,Medium,51,No,No,No,Good,Medium,2025-11-12,,2024-01-27
+8401,37,Male,6.0,Education,4503,Excellent,High,Average,1,Yes,62,Associate Degree,Married,0,Mid,Medium,81,No,No,No,Fair,Low,2025-11-19,2030-12-05,307
+10174,53,Female,32.0,Technology,11853,Fair,High,Below Average,1,Yes,80,Bachelor’s Degree,Married,2,Senior,Small,105,No,No,No,Good,Low,,2030-12-18,
+43469,23,Female,1.0,Education,4927,Fair,Very High,Average,4,No,21,Associate Degree,Single,1,Mid,Large,75,No,No,No,Good,High,2025-12-03,2030-12-31,309
+10767,37,Male,,Technology,10885,Poor,High,Average,2,No,29,Bachelor’s Degree,Single,2,Entry,Large,97,No,No,Yes,Poor,Low,2025-12-10,2031-01-13,Unknown
+61148,39,Female,5.0,Media,6810,Good,Very High,Average,1,No,48,High School,Divorced,1,Entry,Medium,66,No,No,No,Excellent,Low,2025-12-17,2031-01-26,311
+47101,36,Female,12.0,Healthcare,10315,Good,Very High,Below Average,0,Yes,68,Associate Degree,Married,2,Entry,Small,25,No,No,Yes,Good,Low,2025-12-24,2031-02-08,312
+34252,44,Female,10.0,Technology,9906,Excellent,High,Average,1,No,93,Associate Degree,Single,0,Entry,Medium,36,Yes,No,No,Good,Low,2025-12-31,2031-02-21,313
+72488,49,Female,36.0,Media,5668,Good,High,Average,2,Yes,17,Bachelor’s Degree,Single,1,Mid,Medium,79,No,No,No,Poor,Medium,2026-01-07,2031-03-06,314
+15836,26,Male,12.0,Healthcare,5828,Poor,High,Average,0,No,25,Associate Degree,Single,0,Entry,Medium,76,No,No,No,Good,High,2026-01-14,2031-03-19,2024-01-08
+23177,22,Female,14.0,Healthcare,8131,Good,High,Below Average,4,No,52,Bachelor’s Degree,Married,0,Senior,Medium,80,Yes,No,No,Good,Low,2026-01-21,2031-04-01,316
+61913,39,Male,8.0,Education,5645,Excellent,High,Average,0,No,95,Bachelor’s Degree,Single,3,Entry,Large,31,No,No,No,Good,Very High,2026-01-28,2031-04-14,317
+15607,54,Female,14.0,Finance,8778,Fair,High,High,2,No,8,Bachelor’s Degree,Divorced,1,Senior,Large,50,No,No,No,Good,Low,2026-02-04,2031-04-27,318
+38449,42,Female,28.0,Finance,7720,Fair,High,Low,1,No,,Bachelor’s Degree,Divorced,3,Senior,Small,68,No,No,No,Fair,Low,,2031-05-10,319
+52700,41,Female,32.0,Technology,7617,Excellent,Very High,High,1,No,69,Associate Degree,Single,5,Entry,Large,35,No,No,Yes,Good,Low,2026-02-18,2031-05-23,Unknown
+53989,49,Male,34.0,Technology,7268,Fair,High,Average,0,No,76,Bachelor’s Degree,Married,0,Mid,Large,94,Yes,No,No,Poor,High,2026-02-25,2031-06-05,321
+20476,55,Male,13.0, ,6702,Poor,High,Average,0,No,58,Associate Degree,Married,2,Senior,Large,91,No,No,No,Good,Medium,2026-03-04,2031-06-18,
+23081,20,Female,10.0,Education,6108,Good,Very High,Average,0,No,85,Bachelor’s Degree,Married,0,Entry,Medium,32,No,No,No,Good,Medium,2026-03-11,,323
+70050,49,Male,26.0,Finance,7532,Good,High,Average,0,No,75,Bachelor’s Degree,Single,3,Entry,Medium,81,No,No,No,Fair,Low,2026-03-18,2031-07-14,2024-01-17
+46513,28,Male,16.0,Media,5066,Poor,High,Below Average,1,Yes,61,Associate Degree,Single,2,Mid,Medium,48,Yes,No,No,Poor,High,2026-03-25,2031-07-27,Unknown
+49400,29,Female,10.0,Technology,10573,Good,High,Low,0,No,79,Bachelor’s Degree,Married,1,Mid,Medium,34,No,No,No,Good,High,2026-04-01,2031-08-09,326
+66699,36,Female,6.0,Healthcare,9204,Poor,High,Average,1,No,67,Bachelor’s Degree,Married,5,Mid,Large,12,No,No,No,Good,Medium,2026-04-08,2031-08-22,327
+56983,19,Female,5.0,Media,5599,Excellent,High,High,0,No,54,High School,Divorced,0,Entry,Small,62,No,No,No,Fair,Low,2026-04-15,2031-09-04,328
+20888,51,Female,43.0,Technology,10555,Good,High,Average,0,No,49,Bachelor’s Degree,Married,0,Mid,Medium,105,Yes,No,No,Good,Low,2026-04-22,2031-09-17,
+62950,57,Male,35.0,Finance,6990,Excellent,Medium,Average,0,No,68,Associate Degree,Married,5,Mid,Large,36,Yes,No,No,Fair,Low,,2031-09-30,Unknown
+39788,26,Male,13.0,Healthcare,7960,Fair,Medium,Average,0,No,85,Bachelor’s Degree,Single,3,Entry,Medium,84,No,No,Yes,Good,Medium,2026-05-06,2031-10-13,331
+10063,27,Male,15.0,Technology,10652,Good,High,Average,0,No,74,High School,Married,4,Entry,Medium,20,No,No,No,Good,Low,2026-05-13,2031-10-26,332
+5611,48,Female,12.0,Education,4680,Good,High,Below Average,0,,37,Associate Degree,Single,4,Entry,Small,89,No,No,No,Good,Very High,2026-05-20,2031-11-08,2024-01-26
+31701,48,Male,8.0,Healthcare,5827,Excellent,High,Below Average,0,Yes,9,Associate Degree,Divorced,0,Senior,Medium,42,No,No,No,Excellent,Low,2026-05-27,2031-11-21,334
+74016,46,Female,36.0,Technology,12414,Poor,High,Average,0,Yes,55,Bachelor’s Degree,Married,4,Entry,Small,86,No,No,No,Poor,Medium,2026-06-03,2031-12-04,Unknown
+51706,21,Male,11.0,Education,5470,Good,High,Average,2,No,1,Bachelor’s Degree,Married,3,Mid,Medium,14,No,No,No,Poor,Very High,2026-06-10,2031-12-17,
+61645,43,Female,15.0,Healthcare,8912,Fair,Low,Average,1,No,71,PhD,Divorced,4,Mid,Small,74,No,No,No,Poor,Medium,2026-06-17,2031-12-30,337
+4422,30,Male,5.0,Education,4295,Good,Medium,Below Average,0,No,48,Bachelor’s Degree,Single,3,Entry,Medium,35,No,No,No,Good,Very High,2026-06-24,2032-01-12,338
+68185,21,Female,12.0,Education,6339,Fair,Very High,Average,0,Yes,96,Master’s Degree,Single,0,Mid,Small,14,No,No,Yes,Good,Very High,2026-07-01,2032-01-25,339
+41928,59,Female,25.0,Media,6250,Good,High,Average,0,No,92,Associate Degree,Married,1,Entry,Medium,70,Yes,No,No,Good,Medium,2026-07-08,,Unknown
+4780,25,Female,,Education,5246,Fair,Very High,Average,0,No,8,Bachelor’s Degree,Single,4,Mid,Medium,63,No,No,Yes,Poor,High,,2032-02-20,341
+61488,57,Male,36.0,Technology,9658,Poor,High,Average,3,Yes,21,Master’s Degree,Divorced,5,Mid,Medium,38,No,No,No,Excellent,Low,2026-07-22,2032-03-04,2024-01-07
+6272,40,Male,17.0,Healthcare,8088,Fair,High,Average,0,No,71,Associate Degree,Married,0,Entry,Medium,70,No,No,No,Good,Medium,2026-07-29,2032-03-17,
+47809,51,Female,22.0,Healthcare,5472,Good,High,High,0,No,46,High School,Married,2,Senior,Medium,39,No,Yes,No,Fair,Low,2026-08-05,2032-03-30,344
+45328,33,Male,24.0, ,3819,Fair,High,Average,0,No,30,Master’s Degree,Married,3,Entry,Medium,77,No,No,No,Good,Medium,2026-08-12,2032-04-12,Unknown
+66735,24,Female,1.0,Media,6463,Good,High,Average,0,Yes,85,Bachelor’s Degree,Single,2,Entry,Large,61,No,No,No,Poor,High,2026-08-19,2032-04-25,346
+40975,41,Female,22.0,Finance,7976,Fair,Medium,High,0,No,45,Associate Degree,Single,5,Senior,Large,37,No,No,No,Good,Low,2026-08-26,2032-05-08,347
+21269,43,Male,6.0,Finance,3548,Excellent,Very High,Average,2,No,,Bachelor’s Degree,Single,0,Entry,Large,60,No,No,No,Good,Low,2026-09-02,2032-05-21,348
+5396,32,Male,24.0,Technology,11991,Good,Very High,Average,1,No,28,High School,Single,2,Senior,Large,40,No,No,No,Poor,Medium,2026-09-09,2032-06-03,349
+34952,37,Female,20.0,Education,4527,Good,High,Average,0,No,23,Bachelor’s Degree,Single,1,Mid,Small,22,No,No,No,Poor,Medium,2026-09-16,2032-06-16,
+73470,27,Male,6.0,Technology,9103,Excellent,Very High,High,2,No,41,Master’s Degree,Married,3,Mid,Large,53,No,No,Yes,Good,Medium,2026-09-23,2032-06-29,2024-01-16
+55157,30,Male,5.0,Finance,12050,Fair,Very High,Average,0,Yes,96,Associate Degree,Married,3,Entry,Medium,36,No,No,No,Good,Low,,2032-07-12,352
+4414,32,Male,17.0,Healthcare,7288,Good,High,Average,0,Yes,36,Associate Degree,Single,4,Entry,Small,77,No,No,No,Fair,Medium,2026-10-07,2032-07-25,353
+67914,40,Female,5.0,Technology,8798,Fair,High,Average,2,No,39,Associate Degree,Married,0,Mid,Large,84,No,No,No,Good,Medium,2026-10-14,2032-08-07,354
+51608,42,Male,21.0,Healthcare,7194,Good,Medium,Average,0,Yes,51,High School,Single,6,Mid,Medium,40,No,No,Yes,Good,High,2026-10-21,2032-08-20,Unknown
+64134,33,Female,14.0,Finance,12968,Good,High,Average,0,Yes,34,Associate Degree,Single,0,Entry,Medium,27,No,No,No,Good,Medium,2026-10-28,2032-09-02,356
+17437,58,Male,47.0,Healthcare,6940,Good,Very High,Below Average,0,Yes,36,Master’s Degree,Married,0,Entry,Small,80,No,Yes,No,Good,Low,2026-11-04,,
+6351,41,Male,27.0,Media,6653,Excellent,High,High,2,No,1,Bachelor’s Degree,Married,4,Mid,Large,56,No,No,No,Excellent,Medium,2026-11-11,2032-09-28,358
+64061,39,Female,12.0,Media,7444,Fair,Low,Average,0,No,5,Bachelor’s Degree,Divorced,1,Mid,Medium,36,No,Yes,No,Poor,Low,2026-11-18,2032-10-11,359
+38205,54,Female,14.0,Technology,7559,Excellent,Very High,Below Average,1,Yes,99,Master’s Degree,Married,2,Mid,Small,91,No,No,No,Good,Medium,2026-11-25,2032-10-24,2024-01-25
+6964,21,Female,12.0,Education,5116,Good,Very High,Below Average,0,Yes,44,Associate Degree,Married,0,Entry,Medium,49,No,No,No,Excellent,Low,2026-12-02,2032-11-06,361
+34223,46,Male,6.0,Education,3364,Fair,High,Average,0,Yes,56,Associate Degree,Married,2,Entry,Medium,43,No,No,Yes,Fair,Medium,2026-12-09,2032-11-19,362
+44837,48,Male,8.0,Technology,6178,Fair,Low,Average,0,No,46,Associate Degree,Married,1,Mid,Large,73,No,No,No,Good,Low,,2032-12-02,363
+25154,48,Female,29.0,Healthcare,8224,Fair,High,Average,0,No,62,Bachelor’s Degree,Married,1,Mid,Medium,66,No,Yes,No,Good,Medium,2026-12-23,2032-12-15,
+53316,35,Female,5.0,Healthcare,8941,Excellent,Very High,Average,0,No,52,Bachelor’s Degree,Single,5,Mid,Small,22,No,No,No,Fair,Low,2026-12-30,2032-12-28,Unknown
+40894,52,Female,42.0,Education,3862,Fair,Medium,Average,2,Yes,13,PhD,Married,3,Entry,Medium,97,No,No,Yes,Good,High,2027-01-06,2033-01-10,366
+32212,24,Male,4.0,Healthcare,8848,Fair,Low,High,0,No,12,Bachelor’s Degree,Divorced,3,Entry,Medium,12,No,No,No,Fair,Low,2027-01-13,2033-01-23,367
+49209,51,Male,24.0, ,5012,Poor,High,Below Average,1,Yes,8,Master’s Degree,Married,0,Mid,Medium,47,No,No,No,Fair,Low,2027-01-20,2033-02-05,368
+59853,23,Male,7.0,Healthcare,10343,Good,High,Average,1,No,34,Master’s Degree,Divorced,2,Mid,Medium,45,Yes,Yes,No,Good,Medium,2027-01-27,2033-02-18,2024-01-06
+52031,53,Male,7.0,Healthcare,10064,Fair,Very High,Average,0,,43,Associate Degree,Married,1,Entry,Medium,42,No,No,No,Excellent,Low,2027-02-03,2033-03-03,Unknown
+54131,52,Female,9.0,Education,4536,Excellent,Medium,Average,1,No,26,Bachelor’s Degree,Single,4,Mid,Medium,15,No,No,No,Poor,Low,2027-02-10,2033-03-16,
+62311,40,Female,,Healthcare,9279,Fair,Very High,High,1,No,88,High School,Married,4,Entry,Small,73,No,Yes,No,Good,High,2027-02-17,2033-03-29,372
+20428,34,Female,2.0,Healthcare,9343,Good,High,Average,0,No,1,Master’s Degree,Married,4,Entry,Medium,5,No,No,No,Poor,Low,2027-02-24,2033-04-11,373
+65509,51,Male,10.0,Education,3813,Good,High,Average,3,Yes,82,Bachelor’s Degree,Single,2,Senior,Medium,65,No,No,No,Good,High,,,374
+19429,31,Female,9.0,Media,6293,Good,High,Average,4,No,14,Master’s Degree,Single,2,Entry,Small,39,No,No,No,Good,Low,2027-03-10,2033-05-07,Unknown
+19657,28,Male,10.0,Media,6292,Good,High,Average,0,Yes,67,Bachelor’s Degree,Divorced,0,Entry,Small,67,No,Yes,No,Good,High,2027-03-17,2033-05-20,376
+69186,19,Male,1.0,Media,6464,Fair,Very High,Average,1,No,,High School,Single,1,Mid,Large,40,No,No,Yes,Excellent,Medium,2027-03-24,2033-06-02,377
+26234,31,Female,13.0,Healthcare,7220,Poor,High,Average,0,No,68,High School,Single,0,Mid,Medium,37,No,No,No,Excellent,Low,2027-03-31,2033-06-15,2024-01-15
+17643,27,Female,16.0,Healthcare,8286,Fair,Very High,Average,2,No,76,Bachelor’s Degree,Married,0,Entry,Small,77,Yes,No,No,Fair,Low,2027-04-07,2033-06-28,379
+55006,20,Female,7.0,Technology,7342,Poor,Very High,Average,0,Yes,80,Bachelor’s Degree,Single,1,Entry,Small,28,No,No,No,Good,High,2027-04-14,2033-07-11,Unknown
+28047,27,Male,13.0,Education,4774,Excellent,High,Average,0,No,44,Bachelor’s Degree,Married,1,Entry,Small,34,No,No,No,Poor,Low,2027-04-21,2033-07-24,381
+54089,34,Female,4.0,Media,6225,Fair,Very High,Average,1,Yes,33,PhD,Married,0,Mid,Small,6,No,No,No,Fair,High,2027-04-28,2033-08-06,382
+19380,51,Female,4.0,Education,4807,Excellent,High,Low,1,Yes,8,Bachelor’s Degree,Single,3,Mid,Medium,47,Yes,No,Yes,Good,Low,2027-05-05,2033-08-19,383
+8194,19,Female,6.0,Media,6563,Fair,High,Average,0,No,2,Associate Degree,Single,0,Mid,Medium,13,No,No,No,Fair,Low,2027-05-12,2033-09-01,384
+61058,21,Female,1.0,Healthcare,9285,Good,High,Average,2,Yes,50,Bachelor’s Degree,Married,3,Entry,Small,11,No,No,No,Good,Medium,,2033-09-14,
+46239,58,Male,35.0,Healthcare,9131,Good,High,Below Average,1,No,35,Bachelor’s Degree,Divorced,3,Mid,Small,68,Yes,No,No,Good,High,2027-05-26,2033-09-27,386
+28182,36,Male,23.0,Finance,11390,Fair,High,Average,1,No,14,Master’s Degree,Married,0,Mid,Large,48,No,No,No,Good,Low,2027-06-02,2033-10-10,2024-01-24
+66104,49,Female,11.0,Technology,9583,Good,Low,Average,0,Yes,38,Associate Degree,Single,0,Entry,Medium,56,Yes,No,No,Good,High,2027-06-09,2033-10-23,388
+42248,34,Male,17.0,Education,4650,Good,Very High,Average,0,No,46,Bachelor’s Degree,Married,2,Entry,Medium,61,No,No,No,Good,Low,2027-06-16,2033-11-05,389
+63340,34,Female,9.0,Media,6168,Fair,High,High,0,No,66,Associate Degree,Single,2,Senior,Medium,52,No,No,No,Good,Medium,2027-06-23,2033-11-18,Unknown
+58239,55,Female,19.0, ,9636,Excellent,Medium,High,1,No,68,Associate Degree,Single,4,Entry,Large,75,No,No,Yes,Poor,Low,2027-06-30,,391
+28439,32,Male,17.0,Healthcare,7867,Fair,Very High,Average,1,No,3,Bachelor’s Degree,Single,0,Entry,Small,47,Yes,No,No,Good,Very High,2027-07-07,2033-12-14,
+1371,42,Female,27.0,Healthcare,7861,Poor,High,Low,1,No,15,Master’s Degree,Divorced,1,Senior,Medium,64,No,No,Yes,Poor,Medium,2027-07-14,2033-12-27,393
+5498,56,Female,45.0,Healthcare,8498,Good,High,Average,1,Yes,57,Bachelor’s Degree,Married,0,Mid,Small,113,No,No,No,Excellent,Low,2027-07-21,2034-01-09,394
+68570,37,Female,10.0,Media,5511,Fair,High,High,2,No,11,Bachelor’s Degree,Single,4,Entry,Medium,36,No,No,No,Good,Very High,2027-07-28,2034-01-22,Unknown
+60542,54,Male,18.0,Technology,10443,Excellent,Low,Average,0,No,72,Associate Degree,Married,5,Mid,Large,51,No,No,Yes,Good,High,,2034-02-04,2024-01-05
+29017,27,Female,1.0,Healthcare,8973,Fair,High,Below Average,0,No,16,Master’s Degree,Married,5,Entry,Small,37,No,No,Yes,Good,Medium,2027-08-11,2034-02-17,397
+67940,21,Male,10.0,Education,5557,Fair,High,High,1,No,45,High School,Married,1,Entry,Large,56,No,No,No,Fair,Medium,2027-08-18,2034-03-02,398
+48208,26,Male,7.0,Education,5802,Fair,High,Below Average,1,No,64,Associate Degree,Single,1,Mid,Large,22,No,No,No,Good,Medium,2027-08-25,2034-03-15,
+38036,43,Male,29.0,Media,6534,Fair,High,Average,0,No,11,Associate Degree,Married,1,Entry,Small,58,No,No,No,Good,Low,2027-09-01,2034-03-28,Unknown
+7384,18,Female,7.0,Education,4522,Poor,Medium,Average,1,Yes,22,Bachelor’s Degree,Single,0,Senior,Small,64,No,No,No,Good,Low,2027-09-08,2034-04-10,401
+63845,33,Male,19.0,Education,4194,Fair,High,Average,1,No,23,Associate Degree,Married,1,Entry,Medium,62,No,No,No,Fair,Medium,2027-09-15,2034-04-23,402
+70047,24,Female,,Technology,6823,Good,Medium,Average,2,No,17,Master’s Degree,Married,0,Mid,Large,81,Yes,No,No,Excellent,High,2027-09-22,2034-05-06,403
+61283,22,Female,14.0,Technology,9415,Fair,Very High,Average,1,No,71,Bachelor’s Degree,Married,3,Mid,Medium,67,No,No,No,Fair,Low,2027-09-29,2034-05-19,404
+56649,22,Male,13.0,Technology,11401,Excellent,High,High,2,No,21,High School,Married,0,Senior,Medium,58,No,No,Yes,Excellent,Very High,2027-10-06,2034-06-01,2024-01-14
+8689,32,Female,9.0,Finance,7440,Good,High,Low,1,No,,PhD,Single,4,Entry,Medium,53,No,No,No,Excellent,High,2027-10-13,2034-06-14,
+46757,28,Male,17.0,Healthcare,6829,Fair,High,High,0,,35,Associate Degree,Single,3,Entry,Medium,39,No,No,No,Good,High,,2034-06-27,407
+57892,30,Female,12.0,Technology,10570,Good,Medium,Average,0,No,81,PhD,Single,5,Mid,Medium,58,No,No,No,Good,Low,2027-10-27,,408
+28674,40,Male,18.0,Healthcare,6485,Poor,High,Average,2,No,55,Associate Degree,Divorced,1,Entry,Small,19,No,No,No,Good,Medium,2027-11-03,2034-07-23,409
+58308,49,Female,3.0,Media,6413,Good,High,Below Average,1,No,59,High School,Married,1,Mid,Small,49,No,No,Yes,Fair,High,2027-11-10,2034-08-05,Unknown
+44477,40,Male,3.0,Media,6215,Poor,Very High,Average,0,No,30,Master’s Degree,Single,3,Entry,Medium,42,Yes,No,No,Poor,Medium,2027-11-17,2034-08-18,411
+66747,39,Female,23.0,Healthcare,9281,Excellent,Medium,Average,2,No,13,Associate Degree,Single,3,Mid,Medium,94,No,No,No,Good,Medium,2027-11-24,2034-08-31,412
+2039,42,Female,12.0,Education,4744,Good,High,High,1,No,34,Associate Degree,Single,1,Mid,Large,75,No,No,No,Good,Very High,2027-12-01,2034-09-13,
+16276,59,Male,25.0, ,7721,Good,High,High,2,No,13,Bachelor’s Degree,Single,3,Mid,Medium,31,No,No,No,Poor,High,2027-12-08,2034-09-26,2024-01-23
+53226,55,Male,1.0,Education,4166,Good,Medium,Average,1,Yes,6,Master’s Degree,Married,2,Mid,Medium,69,No,No,No,Good,Medium,2027-12-15,2034-10-09,Unknown
+71744,34,Female,26.0,Education,3807,Fair,High,Below Average,1,No,96,Master’s Degree,Married,0,Entry,Small,93,Yes,No,No,Good,Medium,2027-12-22,2034-10-22,416
+54302,52,Male,31.0,Education,4217,Fair,High,Below Average,2,Yes,66,Associate Degree,Married,4,Mid,Small,48,No,No,No,Good,High,2027-12-29,2034-11-04,417
+59650,41,Male,21.0,Education,5059,Fair,Very High,Average,0,No,76,Bachelor’s Degree,Married,0,Entry,Medium,29,No,No,No,Good,Low,,2034-11-17,418
+14656,48,Female,9.0,Technology,9836,Good,Medium,Average,0,Yes,78,Bachelor’s Degree,Divorced,0,Mid,Medium,86,Yes,No,No,Good,High,2028-01-12,2034-11-30,419
+49584,23,Female,7.0,Healthcare,8926,Good,Medium,Below Average,0,Yes,53,Bachelor’s Degree,Married,2,Mid,Large,56,No,No,Yes,Excellent,Low,2028-01-19,2034-12-13,
+55278,39,Female,2.0,Education,4515,Fair,High,Low,0,No,7,Bachelor’s Degree,Single,0,Senior,Small,52,No,No,No,Poor,Very High,2028-01-26,2034-12-26,421
+41010,56,Female,4.0,Media,4669,Good,Medium,High,2,Yes,92,PhD,Married,1,Senior,Small,60,No,No,Yes,Good,High,2028-02-02,2035-01-08,422
+9285,49,Female,22.0,Media,6854,Poor,Very High,Average,1,No,46,Bachelor’s Degree,Single,2,Mid,Large,67,Yes,No,No,Poor,Medium,2028-02-09,2035-01-21,2024-01-04
+14165,49,Female,35.0,Healthcare,8039,Excellent,High,Below Average,0,Yes,67,Master’s Degree,Married,1,Mid,Large,65,No,No,No,Excellent,Low,2028-02-16,2035-02-03,424
+35000,30,Male,15.0,Technology,8522,Fair,High,High,2,No,97,PhD,Single,0,Senior,Small,20,No,No,No,Poor,Low,2028-02-23,,Unknown
+43434,44,Male,6.0,Media,5729,Fair,High,Below Average,1,Yes,2,Bachelor’s Degree,Married,1,Mid,Large,54,No,No,Yes,Poor,Low,2028-03-01,2035-03-01,426
+45457,28,Male,2.0,Healthcare,8236,Good,Medium,Low,0,No,97,Master’s Degree,Married,1,Senior,Large,40,No,No,No,Excellent,Low,2028-03-08,2035-03-14,
+65519,55,Male,17.0,Technology,10572,Good,High,Average,0,No,83,Master’s Degree,Married,4,Mid,Medium,60,No,No,No,Fair,Medium,2028-03-15,2035-03-27,428
+51729,28,Male,9.0,Education,5279,Fair,High,Average,0,No,37,Associate Degree,Married,0,Entry,Small,49,No,No,Yes,Good,Medium,,2035-04-09,429
+2777,49,Male,5.0,Finance,4994,Poor,High,Average,0,No,73,Master’s Degree,Divorced,1,Mid,Medium,17,No,No,Yes,Good,Low,2028-03-29,2035-04-22,Unknown
+20154,21,Female,1.0,Healthcare,7100,Good,Very High,Average,1,No,86,Bachelor’s Degree,Married,0,Entry,Medium,16,No,No,No,Good,Medium,2028-04-05,2035-05-05,431
+24805,28,Male,14.0,Finance,6142,Excellent,High,Average,0,No,82,Bachelor’s Degree,Divorced,0,Entry,Small,44,No,No,No,Fair,Medium,2028-04-12,2035-05-18,2024-01-13
+7252,44,Male,30.0,Education,5305,Fair,High,High,0,No,77,Master’s Degree,Single,1,Entry,Medium,45,No,No,No,Good,High,2028-04-19,2035-05-31,433
+46908,43,Male,,Finance,8848,Good,High,Average,0,No,9,High School,Single,0,Mid,Large,108,No,No,No,Good,Low,2028-04-26,2035-06-13,
+58921,38,Male,23.0,Finance,8830,Fair,High,Average,1,No,,Bachelor’s Degree,Single,1,Entry,Medium,102,Yes,No,No,Fair,Low,2028-05-03,2035-06-26,Unknown
+41255,57,Male,19.0,Technology,10861,Good,High,High,1,No,41,Bachelor’s Degree,Married,2,Mid,Small,93,No,No,No,Good,Low,2028-05-10,2035-07-09,436
+6392,45,Female,35.0, ,7471,Good,High,Average,0,Yes,89,Associate Degree,Single,1,Mid,Large,83,No,No,No,Poor,High,2028-05-17,2035-07-22,437
+10913,31,Female,18.0,Technology,7348,Fair,High,Average,0,Yes,9,Master’s Degree,Single,5,Mid,Large,72,No,No,No,Good,Medium,2028-05-24,2035-08-04,438
+40244,57,Female,10.0,Finance,8112,Excellent,Medium,High,1,Yes,24,Bachelor’s Degree,Single,2,Entry,Large,67,No,No,No,Fair,Medium,2028-05-31,2035-08-17,439
+23498,25,Female,7.0,Media,5451,Good,Low,Average,0,No,78,High School,Single,2,Entry,Medium,38,No,No,No,Poor,Low,,2035-08-30,Unknown
+12797,57,Female,26.0,Healthcare,8654,Poor,Medium,Below Average,0,No,77,High School,Single,1,Entry,Medium,61,No,No,No,Good,Low,2028-06-14,2035-09-12,2024-01-22
+13952,59,Female,1.0,Education,4444,Excellent,High,Average,0,No,19,High School,Single,2,Mid,Small,51,Yes,No,No,Good,Low,2028-06-21,,442
+7299,33,Female,5.0,Technology,11486,Good,High,Average,1,Yes,67,Bachelor’s Degree,Married,4,Mid,Medium,62,No,No,No,Fair,High,2028-06-28,2035-10-08,443
+51827,45,Female,13.0,Healthcare,7962,Poor,Low,Average,2,,37,Bachelor’s Degree,Married,2,Mid,Small,18,No,No,No,Good,Medium,2028-07-05,2035-10-21,444
+16114,52,Male,10.0,Healthcare,10644,Fair,Low,Below Average,0,No,67,Bachelor’s Degree,Single,2,Entry,Medium,12,No,No,No,Good,Medium,2028-07-12,2035-11-03,Unknown
+28237,54,Male,20.0,Media,5319,Poor,Medium,Average,1,No,6,PhD,Divorced,1,Mid,Medium,69,No,No,No,Good,Medium,2028-07-19,2035-11-16,446
+46691,58,Male,1.0,Technology,9489,Good,Medium,Below Average,0,No,93,Associate Degree,Married,1,Mid,Large,46,No,No,No,Good,Low,2028-07-26,2035-11-29,447
+40790,59,Female,2.0,Technology,8963,Fair,Low,High,3,No,25,Associate Degree,Single,4,Entry,Small,4,No,Yes,No,Excellent,Medium,2028-08-02,2035-12-12,
+47835,40,Female,15.0,Healthcare,8697,Good,High,High,3,Yes,3,Bachelor’s Degree,Married,2,Senior,Medium,89,No,No,No,Good,Very High,2028-08-09,2035-12-25,449
+5786,40,Female,11.0,Finance,7237,Fair,Medium,Average,3,Yes,43,PhD,Married,0,Mid,Medium,86,No,No,Yes,Good,High,2028-08-16,2036-01-07,2024-01-03
+35101,52,Male,41.0,Education,5539,Good,Very High,Average,2,No,40,Master’s Degree,Married,0,Senior,Medium,102,No,No,No,Excellent,Low,,2036-01-20,451
+52966,27,Female,7.0,Healthcare,7223,Good,High,Below Average,2,Yes,66,Associate Degree,Divorced,2,Entry,Medium,61,No,No,No,Fair,High,2028-08-30,2036-02-02,452
+35427,41,Male,8.0,Healthcare,8592,Fair,High,Average,0,No,28,Master’s Degree,Married,2,Entry,Large,32,Yes,No,No,Good,Low,2028-09-06,2036-02-15,453
+44635,38,Female,9.0,Education,5068,Fair,Medium,Average,1,No,50,Associate Degree,Married,0,Mid,Medium,56,Yes,No,Yes,Fair,Medium,2028-09-13,2036-02-28,454
+11436,28,Female,5.0,Education,4881,Excellent,Low,Below Average,0,Yes,56,Master’s Degree,Single,0,Senior,Small,35,No,No,No,Poor,Medium,2028-09-20,2036-03-12,
+27262,56,Female,17.0,Education,5163,Good,Very High,Average,2,No,90,High School,Single,2,Mid,Small,52,No,No,No,Good,High,2028-09-27,2036-03-25,456
+25297,54,Male,29.0,Finance,6957,Fair,Medium,Low,0,No,20,High School,Single,2,Mid,Medium,39,Yes,No,No,Good,Low,2028-10-04,2036-04-07,457
+40270,30,Female,17.0,Education,3951,Good,High,Average,2,Yes,66,High School,Divorced,1,Mid,Large,27,No,No,No,Good,High,2028-10-11,2036-04-20,458
+71547,58,Male,45.0,Technology,10475,Poor,Medium,High,1,No,33,Master’s Degree,Single,6,Entry,Small,55,No,No,No,Good,Low,2028-10-18,,2024-01-12
+11007,24,Male,7.0, ,5979,Fair,Medium,Average,0,No,28,Associate Degree,Married,1,Mid,Medium,37,No,No,No,Good,Medium,2028-10-25,2036-05-16,Unknown
+46107,51,Male,18.0,Healthcare,7042,Fair,Very High,Average,3,No,38,Bachelor’s Degree,Married,1,Mid,Large,43,No,No,Yes,Good,Very High,2028-11-01,2036-05-29,461
+2196,24,Male,6.0,Media,5189,Fair,High,High,0,No,77,High School,Divorced,0,Entry,Large,52,No,No,No,Fair,High,,2036-06-11,
+70255,54,Female,19.0,Healthcare,6206,Excellent,Very High,High,0,No,64,Bachelor’s Degree,Married,1,Senior,Small,31,No,No,Yes,Poor,Medium,2028-11-15,2036-06-24,463
+54940,35,Male,20.0,Technology,9539,Good,Low,Average,1,No,,PhD,Single,4,Mid,Medium,88,Yes,No,No,Poor,Low,2028-11-22,2036-07-07,464
+46594,56,Female,,Finance,6447,Fair,Very High,Average,2,No,51,Master’s Degree,Single,1,Senior,Medium,46,No,No,No,Good,Medium,2028-11-29,2036-07-20,Unknown
+63568,21,Female,2.0,Technology,7259,Excellent,High,Below Average,0,Yes,98,Master’s Degree,Divorced,1,Entry,Medium,61,No,No,No,Good,Medium,2028-12-06,2036-08-02,466
+17532,26,Female,4.0,Education,5423,Excellent,High,Average,0,No,88,Master’s Degree,Single,3,Entry,Medium,69,No,No,No,Good,Low,2028-12-13,2036-08-15,467
+12180,25,Male,8.0,Finance,9112,Fair,High,Average,0,No,23,High School,Divorced,4,Mid,Small,32,No,No,No,Good,Medium,2028-12-20,2036-08-28,2024-01-21
+49322,40,Female,21.0,Education,4000,Excellent,Low,High,1,Yes,14,Bachelor’s Degree,Married,0,Mid,Medium,88,No,No,No,Excellent,High,2028-12-27,2036-09-10,
+29439,37,Female,15.0,Technology,8174,Fair,Low,Low,1,Yes,13,High School,Single,4,Mid,Medium,57,No,No,No,Good,High,2029-01-03,2036-09-23,Unknown
+5954,45,Male,7.0,Media,5719,Fair,Medium,Below Average,1,Yes,96,Associate Degree,Married,1,Entry,Medium,13,Yes,No,No,Poor,Low,2029-01-10,2036-10-06,471
+44804,26,Male,10.0,Healthcare,7201,Poor,High,Low,0,No,75,PhD,Single,4,Senior,Medium,13,No,No,No,Poor,Low,2029-01-17,2036-10-19,472
+7028,21,Female,7.0,Education,3886,Fair,Very High,Average,0,No,8,Bachelor’s Degree,Single,1,Senior,Large,60,No,No,No,Good,Medium,,2036-11-01,473
+48351,48,Male,27.0,Finance,11758,Excellent,Very High,Average,3,Yes,57,Bachelor’s Degree,Single,2,Senior,Large,41,No,No,No,Good,High,2029-01-31,2036-11-14,474
+5103,27,Male,2.0,Media,5786,Good,Very High,Average,2,Yes,50,Master’s Degree,Married,2,Mid,Medium,16,Yes,No,No,Poor,Low,2029-02-07,2036-11-27,Unknown
+29414,36,Male,10.0,Healthcare,7944,Fair,Medium,Average,0,No,56,Master’s Degree,Married,0,Entry,Small,62,No,No,No,Good,Very High,2029-02-14,,
+16425,22,Male,6.0,Healthcare,9140,Excellent,Very High,Low,2,No,53,High School,Married,0,Entry,Small,50,Yes,No,No,Excellent,Medium,2029-02-21,2036-12-23,2024-01-02
+43025,21,Male,13.0,Media,5279,Fair,High,Average,1,Yes,15,Master’s Degree,Married,2,Entry,Medium,92,No,No,No,Poor,Medium,2029-02-28,2037-01-05,478
+43459,47,Female,39.0,Healthcare,9278,Excellent,High,Average,2,No,6,High School,Married,0,Entry,Large,65,No,No,No,Fair,High,2029-03-07,2037-01-18,479
+34353,48,Female,32.0,Education,4142,Good,High,Average,1,No,21,High School,Married,2,Mid,Large,70,No,No,Yes,Good,Medium,2029-03-14,2037-01-31,Unknown
+39402,52,Male,23.0,Technology,8327,Excellent,Low,Below Average,1,,50,Master’s Degree,Single,0,Entry,Medium,65,Yes,No,Yes,Good,Low,2029-03-21,2037-02-13,481
+15042,45,Male,19.0,Technology,6341,Good,Very High,Average,0,Yes,58,Bachelor’s Degree,Divorced,3,Senior,Small,50,Yes,No,No,Fair,Low,2029-03-28,2037-02-26,482
+5147,43,Female,21.0, ,8642,Excellent,High,Average,2,No,1,Associate Degree,Married,3,Entry,Medium,30,No,No,No,Fair,High,2029-04-04,2037-03-11,
+46402,30,Male,7.0,Technology,5790,Excellent,High,High,0,No,13,Bachelor’s Degree,Married,0,Mid,Medium,33,No,No,No,Good,High,,2037-03-24,484
+7168,51,Male,12.0,Healthcare,8478,Good,Medium,Average,1,Yes,68,Associate Degree,Married,0,Mid,Medium,26,No,Yes,Yes,Poor,Very High,2029-04-18,2037-04-06,Unknown
+56244,53,Female,15.0,Technology,8685,Fair,High,Below Average,4,No,49,Master’s Degree,Single,1,Entry,Medium,59,No,No,No,Poor,High,2029-04-25,2037-04-19,2024-01-11
+13660,55,Female,12.0,Finance,8569,Fair,Medium,Low,0,No,77,Master’s Degree,Single,4,Entry,Medium,69,No,No,No,Poor,Low,2029-05-02,2037-05-02,487
+21185,32,Male,18.0,Education,3827,Poor,High,Low,1,No,14,Associate Degree,Married,1,Senior,Small,50,Yes,No,No,Poor,High,2029-05-09,2037-05-15,488
+58245,30,Male,10.0,Healthcare,8402,Excellent,High,Average,1,Yes,5,Master’s Degree,Married,1,Mid,Medium,32,Yes,No,No,Good,High,2029-05-16,2037-05-28,489
+69077,50,Female,13.0,Finance,3047,Fair,Medium,Average,0,No,39,Bachelor’s Degree,Single,3,Entry,Large,39,No,No,No,Fair,High,2029-05-23,2037-06-10,
+18776,51,Male,7.0,Finance,9609,Excellent,Medium,Average,1,No,34,Bachelor’s Degree,Married,0,Mid,Large,11,No,No,No,Excellent,Medium,2029-05-30,2037-06-23,491
+18501,34,Female,23.0,Healthcare,6717,Fair,Medium,Below Average,2,Yes,16,Bachelor’s Degree,Single,0,Senior,Medium,83,No,No,No,Good,Low,2029-06-06,2037-07-06,492
+18113,40,Male,8.0,Healthcare,8252,Fair,Low,Average,4,Yes,,Bachelor’s Degree,Married,0,Senior,Medium,37,No,No,No,Good,Low,2029-06-13,,493
+43182,27,Female,12.0,Education,4089,Good,High,Average,3,No,59,High School,Married,5,Entry,Small,46,No,No,No,Fair,Low,2029-06-20,2037-08-01,494
+9315,32,Female,21.0,Healthcare,7217,Excellent,Medium,Average,4,Yes,42,Bachelor’s Degree,Divorced,0,Senior,Medium,55,Yes,No,No,Fair,Low,,2037-08-14,2024-01-20
+13854,37,Male,,Education,5613,Good,High,Average,0,No,85,High School,Married,3,Mid,Medium,88,Yes,No,No,Good,High,2029-07-04,2037-08-27,496
+38501,37,Male,5.0,Technology,10237,Fair,Very High,Average,2,No,97,Bachelor’s Degree,Married,3,Mid,Medium,47,Yes,No,No,Good,Low,2029-07-11,2037-09-09,
+47546,50,Female,15.0,Education,4882,Good,Medium,Below Average,2,No,53,Bachelor’s Degree,Single,5,Entry,Medium,16,No,No,No,Good,High,2029-07-18,2037-09-22,498
+197,49,Male,4.0,Technology,10094,Fair,Medium,Average,1,No,55,High School,Married,0,Mid,Medium,66,No,No,No,Good,High,2029-07-25,2037-10-05,499

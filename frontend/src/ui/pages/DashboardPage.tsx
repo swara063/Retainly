@@ -89,12 +89,11 @@ export default function DashboardPage() {
   const results = hasValidResults ? s.results : {};
 
   return (
-    <PageShell title="Retainly" subtitle="Retention Command Center for HR Teams">
+    <PageShell>
       <section className="heroNew">
         <div className="heroText">
-          <div className="eyebrow">Retainly</div>
           <h1>Retention Command Center for HR Teams</h1>
-          <p className="subtitle">Upload HR data, run the multi-agent analysis, and review the high-level retention summary.</p>
+          <p className="subtitle">Upload HR data, run multi-agent retention analysis, and review employee risk, hotspots, actions, reports, and chatbot insights.</p>
           <div className="pillRow">
             <span className="pill">Upload CSV</span>
             <span className="pill">Run analysis</span>

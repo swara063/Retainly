@@ -1,14 +1,17 @@
 import React from 'react';
 
-export function PageShell({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
+export function PageShell({ title, subtitle, children }: { title?: string; subtitle?: string; children: React.ReactNode }) {
+  const showHeader = Boolean(title || subtitle);
   return (
     <div className="pageShell">
-      <div className="pageHeader">
-        <div>
-          <h2>{title}</h2>
-          {subtitle ? <p className="muted">{subtitle}</p> : null}
+      {showHeader ? (
+        <div className="pageHeader">
+          <div>
+            {title ? <h2>{title}</h2> : null}
+            {subtitle ? <p className="muted">{subtitle}</p> : null}
+          </div>
         </div>
-      </div>
+      ) : null}
       {children}
     </div>
   );

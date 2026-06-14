@@ -139,6 +139,7 @@ class AttritionPipeline:
             target_col = mapping.get("target")
             artifacts = context.get("model_artifacts") or {}
             pipe = artifacts.get("pipeline")
+            precomputed_scores = artifacts.get("y_proba")
 
             if df is not None and pipe is not None:
                 try:
@@ -154,6 +155,7 @@ class AttritionPipeline:
                         target_col=target_col,
                         pipeline=pipe,
                         top_features=((results.get("explainability") or {}).get("top_features") or []),
+                        precomputed_scores=precomputed_scores,
                     )
                     results["employee_risk"] = employee_risk
                 except Exception as exc:
@@ -168,6 +170,7 @@ class AttritionPipeline:
                         pipeline=pipe,
                         top_features=((results.get("explainability") or {}).get("top_features") or []),
                         model_confidence_label=confidence_label,
+                        precomputed_scores=precomputed_scores,
                     )
                     results["employee_risk_records"] = employee_records
                     if identifier_warnings:

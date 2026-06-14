@@ -220,13 +220,17 @@ def build_employee_risk(
     target_col: str | None,
     pipeline: Any,
     top_features: list[dict[str, Any]] | None,
+    precomputed_scores: list[float] | None = None,
 ) -> list[dict[str, Any]]:
-    X = df.drop(columns=[target_col], errors="ignore") if target_col else df.copy()
-    try:
-        proba = pipeline.predict_proba(X)[:, 1]
-    except Exception:
-        proba = pipeline.predict(X)
-    scores = pd.Series(proba).astype(float).clip(0, 1)
+    if precomputed_scores is not None:
+        scores = pd.Series(precomputed_scores).astype(float).clip(0, 1)
+    else:
+        X = df.drop(columns=[target_col], errors="ignore") if target_col else df.copy()
+        try:
+            proba = pipeline.predict_proba(X)[:, 1]
+        except Exception:
+            proba = pipeline.predict(X)
+        scores = pd.Series(proba).astype(float).clip(0, 1)
 
     global_top = []
     if isinstance(top_features, list):
@@ -265,6 +269,7 @@ def build_employee_risk_records(
     model_confidence_label: str | None = None,
     employee_id_column: str | None = None,
     employee_name_column: str | None = None,
+    precomputed_scores: list[float] | None = None,
 ) -> tuple[list[dict[str, Any]], list[str]]:
     identity = detect_employee_identity_columns(df)
     employee_id_column = employee_id_column or identity["employee_id_column"]
@@ -273,12 +278,15 @@ def build_employee_risk_records(
     if not employee_id_column and not employee_name_column:
         warnings.append("No employee identifier found. Showing row-based references.")
 
-    X = df.drop(columns=[target_col], errors="ignore") if target_col else df.copy()
-    try:
-        proba = pipeline.predict_proba(X)[:, 1]
-    except Exception:
-        proba = pipeline.predict(X)
-    scores = pd.Series(proba).astype(float).clip(0, 1)
+    if precomputed_scores is not None:
+        scores = pd.Series(precomputed_scores).astype(float).clip(0, 1)
+    else:
+        X = df.drop(columns=[target_col], errors="ignore") if target_col else df.copy()
+        try:
+            proba = pipeline.predict_proba(X)[:, 1]
+        except Exception:
+            proba = pipeline.predict(X)
+        scores = pd.Series(proba).astype(float).clip(0, 1)
 
     top_feature_names: list[str] = []
     if isinstance(top_features, list):

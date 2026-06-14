@@ -5,9 +5,11 @@ import pandas as pd
 from app.agents.base import BaseAgent
 from app.services.pretrained_model_service import (
     align_frame_to_model,
+    heuristic_risk_score,
     load_pretrained_metadata,
     load_pretrained_model,
     pretrained_model_exists,
+    score_with_fallback,
 )
 from typing import Any
 from sklearn.calibration import CalibratedClassifierCV
@@ -579,14 +581,16 @@ class MLEngineerAgent(BaseAgent):
             metadata = load_pretrained_metadata()
             update_progress("aligning data to model features")
             score_df = df.drop(columns=[target], errors="ignore")
-            score_df = align_frame_to_model(score_df, model)
+            score_df = align_frame_to_model(score_df, model, metadata)
             update_progress("scoring employees")
             try:
-                proba = model.predict_proba(score_df)[:, 1]
+                proba, fallback_rows = score_with_fallback(df.drop(columns=[target], errors="ignore"), model, metadata)
             except Exception:
-                pred = model.predict(score_df)
-                proba = np.asarray(pred, dtype=float)
+                fallback_rows = len(score_df)
+                proba = np.asarray([heuristic_risk_score(df.drop(columns=[target], errors="ignore").iloc[index]) for index in range(len(score_df))], dtype=float)
             proba = np.asarray(proba, dtype=float).clip(0, 1)
+            if fallback_rows:
+                self.logger.add("Model Scoring", "warning", f"Used transparent fallback scoring for {fallback_rows} row(s).")
             update_progress("building employee risk ranking")
             best_pipe = model
             y_pred = (proba >= 0.5).astype(int)
