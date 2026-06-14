@@ -68,11 +68,11 @@ export default function EmployeesPage() {
 
   const filters = explorer.available_filters || { departments: [], job_roles: [], risk_bands: [], employee_labels: [] };
   if (!s.datasetId) {
-    return <div className="page"><div className="card"><h2>At-Risk Employees</h2><Empty title="Run analysis to view employee risk ranking." text=" " /></div></div>;
+    return <div className="page"><div className="card"><h2>At-Risk Employees</h2><Empty title="Run analysis to view employee risk ranking." text="Simple ranking and profile view will appear here after analysis." /></div></div>;
   }
 
   if (!s.results) {
-    return <div className="page"><div className="card"><h2>At-Risk Employees</h2><Empty title="Run analysis to view employee risk ranking." text=" " /></div></div>;
+    return <div className="page"><div className="card"><h2>At-Risk Employees</h2><Empty title="Run analysis to view employee risk ranking." text="Simple ranking and profile view will appear here after analysis." /></div></div>;
   }
 
   return (

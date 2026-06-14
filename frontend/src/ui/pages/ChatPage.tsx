@@ -162,7 +162,7 @@ export default function ChatPage() {
             className="chatInput"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={hasValidResults ? 'Ask about the current analysis' : 'Retainly chatbot becomes available after analysis is complete.'}
+            placeholder={hasValidResults ? 'Ask about the current analysis' : 'Ask a general Retainly question'}
             onKeyDown={(e) => { if (e.key === 'Enter') send(); }}
           />
           <button className="primary" onClick={send} disabled={sending}>Send</button>
