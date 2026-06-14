@@ -67,16 +67,12 @@ export default function EmployeesPage() {
   }, [selected, s.datasetId, set]);
 
   const filters = explorer.available_filters || { departments: [], job_roles: [], risk_bands: [], employee_labels: [] };
-  const highCount = Array.isArray(s.results?.employee_risk_records)
-    ? s.results.employee_risk_records.filter((r: any) => ['High', 'Critical'].includes(String(r.risk_band))).length
-    : 0;
-
   if (!s.datasetId) {
-    return <div className="page"><div className="card"><h2>At-Risk Employees</h2><Empty title="Upload and run analysis first" text="This page will become a searchable employee risk list sorted from most at-risk to least at-risk." /></div></div>;
+    return <div className="page"><div className="card"><h2>At-Risk Employees</h2><Empty title="Run analysis to view employee risk ranking." text=" " /></div></div>;
   }
 
   if (!s.results) {
-    return <div className="page"><div className="card"><h2>At-Risk Employees</h2><Empty title="Analysis results are not ready yet" text="Run retention analysis from Home. Once complete, employee search and ranking will appear here automatically." /></div></div>;
+    return <div className="page"><div className="card"><h2>At-Risk Employees</h2><Empty title="Run analysis to view employee risk ranking." text=" " /></div></div>;
   }
 
   return (
@@ -86,7 +82,6 @@ export default function EmployeesPage() {
           <h2>At-Risk Employee Explorer</h2>
           <p className="muted">Search by employee name or ID, filter by team signals, and open a supportive retention profile.</p>
         </div>
-        <div className="chip">{highCount || explorer.total || 0} priority employees</div>
       </div>
 
       <div className="grid two">

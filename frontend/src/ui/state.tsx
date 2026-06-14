@@ -66,7 +66,8 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   React.useEffect(() => {
     let cancelled = false;
     async function hydrate() {
-      if (!state.datasetId || state.results || state.loading) return;
+      if (!state.datasetId || !(state.phase === 'analyzing' || state.phase === 'completed')) return;
+      if (state.results || state.loading) return;
       try {
         const [results, logs] = await Promise.all([
           fetchJson(`${API_BASE}/analysis/${state.datasetId}/results`),
