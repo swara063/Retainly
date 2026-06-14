@@ -21,6 +21,31 @@ function buildLocalAnswer(question: string, results: any): string {
   const topRole = segments.find((r: any) => String(r.segment_name) === 'JobRole');
   const actions = Array.isArray(results?.retention_plan) ? results.retention_plan : [];
 
+  if (!results) {
+    if (q.includes('what is retainly')) {
+      return 'Retainly is an HR retention intelligence app that scores employee attrition risk, surfaces hotspots, and helps HR plan supportive interventions.';
+    }
+    if (q.includes('multi-agent') || q.includes('workflow')) {
+      return 'Retainly uses a multi-agent workflow to handle upload checks, data analysis, model selection, explainability, fairness review, insights, and report generation.';
+    }
+    if (q.includes('what kind of csv') || q.includes('upload')) {
+      return 'Upload a CSV with employee-level HR data. A labeled attrition/outcome column is best for evaluation; if it is missing, Retainly can still score risk.';
+    }
+    if (q.includes('accuracy metrics') || q.includes('no accuracy')) {
+      return 'If the uploaded dataset is unlabeled, Retainly cannot calculate accuracy-style metrics. It focuses on risk scoring, ranking, hotspots, and action planning.';
+    }
+    if (q.includes('validated') || q.includes('how is the model validated') || q.includes('where is the validation notebook')) {
+      return 'Retainly’s workflow is validated separately in the research notebook using labeled benchmark attrition datasets. You can open the notebook in Colab from the Validation page.';
+    }
+    if (q.includes('difference between website and notebook')) {
+      return 'The website is the HR product for risk scoring and planning. The notebook is the separate validation workspace used to reproduce benchmark training, metrics, charts, and review results.';
+    }
+    if (q.includes('firing')) {
+      return 'No. Retainly is a decision-support tool for retention planning only and should not be used as the sole basis for firing or any automatic employment action.';
+    }
+    return 'Ask general questions about Retainly, the workflow, datasets, validation, or how to use the app. Dataset-specific answers become available after analysis.';
+  }
+
   if (q.includes('which employees') || q.includes('most at risk')) {
     if (!topEmployees.length) return 'No employee risk list is available in this analysis.';
     return `Highest-risk employees: ${topEmployees.map((r: any) => r.employee_label || r.employee_id || `Row ${r.row_index}`).join(', ')}.`;
@@ -40,6 +65,24 @@ function buildLocalAnswer(question: string, results: any): string {
   if (q.includes('can this be used for firing')) {
     return 'No. Retainly is a decision-support tool for retention planning only. It should not be used as the sole basis for firing or any automatic employment decision.';
   }
+  if (q.includes('employee ') || q.match(/\b\d+\b/) || q.includes('name')) {
+    const needle = q.replace(/[^\w\s]/g, ' ').trim();
+    const found = employees.find((r: any) => {
+      const hay = `${r.employee_id || ''} ${r.employee_name || ''} ${r.display_label || ''}`.toLowerCase();
+      return needle.split(/\s+/).filter(Boolean).some((part) => hay.includes(part));
+    });
+    if (!found) return 'I could not find that employee in the latest analysis results.';
+    const factors = Array.isArray(found.top_risk_factors) ? found.top_risk_factors.join('; ') : '—';
+    return [
+      `EmployeeID / EmployeeName: ${found.employee_id || '—'} / ${found.employee_name || found.display_label || '—'}`,
+      `risk_score: ${Math.round(Number(found.risk_score || 0) * 100)}%`,
+      `risk_band: ${found.risk_band || '—'}`,
+      `department: ${found.department || '—'}`,
+      `role: ${found.job_role || '—'}`,
+      `top factors: ${factors}`,
+      `suggested support action: ${found.recommended_support_action || 'Review with the manager and plan a supportive check-in.'}`,
+    ].join('\n');
+  }
   if (q.includes('role')) {
     return topRole ? `The role needing attention most is ${topRole.group}, with average risk around ${Math.round(Number(topRole.average_predicted_risk || 0) * 100)}%.` : 'No role hotspot is available in this analysis.';
   }
@@ -53,7 +96,6 @@ export default function ChatPage() {
   const [input, setInput] = React.useState('');
   const [sending, setSending] = React.useState(false);
   const [msgs, setMsgs] = React.useState<Msg[]>([]);
-  const [usedGroq, setUsedGroq] = React.useState(false);
 
   React.useEffect(() => {
     setMsgs([]);
@@ -61,32 +103,30 @@ export default function ChatPage() {
 
   async function send() {
     const q = input.trim();
-    if (!q || !hasValidResults || !s.datasetId) return;
+    if (!q) return;
     setInput('');
     setMsgs((m) => [...m, { role: 'user', text: q }, { role: 'assistant', text: 'Thinking…' }]);
     setSending(true);
     try {
-      const data = await fetchJson<{ answer?: string; sources?: string[]; groq_used?: boolean }>(`${API_BASE}/chat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: q, dataset_id: s.datasetId, results: s.results }),
-      });
-      const answer = String(data?.answer || buildLocalAnswer(q, s.results));
-      setUsedGroq(Boolean(data?.groq_used));
+      const canUseDataset = hasValidResults && s.datasetId;
+      const payload = canUseDataset ? { question: q, dataset_id: s.datasetId, results: s.results } : { question: q, dataset_id: null, results: null };
+      let answer = buildLocalAnswer(q, canUseDataset ? s.results : null);
+      if (canUseDataset) {
+        try {
+          const data = await fetchJson<{ answer?: string }>(`${API_BASE}/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          answer = String(data?.answer || answer);
+        } catch {
+          answer = buildLocalAnswer(q, s.results);
+        }
+      }
       setMsgs((m) => {
         const copy = [...m];
         const last = copy[copy.length - 1];
         if (last?.role === 'assistant' && last.text === 'Thinking…') copy[copy.length - 1] = { role: 'assistant', text: answer };
-        return copy;
-      });
-    } catch {
-      setUsedGroq(false);
-      setMsgs((m) => {
-        const copy = [...m];
-        const last = copy[copy.length - 1];
-        if (last?.role === 'assistant' && last.text === 'Thinking…') {
-          copy[copy.length - 1] = { role: 'assistant', text: buildLocalAnswer(q, s.results) };
-        }
         return copy;
       });
     } finally {
@@ -101,13 +141,13 @@ export default function ChatPage() {
       <div className="pageHeader">
         <div>
           <h2>Chatbot</h2>
-          <p className="muted">Dataset Q&amp;A only after analysis.</p>
+          <p className="muted">Ask general questions about Retainly, the workflow, datasets, validation, or how to use the app. Dataset-specific answers become available after analysis.</p>
         </div>
         <div className={riskChip(fairness)}>Fairness: {String(fairness)}</div>
       </div>
-      {!hasValidResults ? (
-        <div className="card"><b>Retainly chatbot becomes available after analysis is complete.</b></div>
-      ) : null}
+      <div className="card" style={{ marginBottom: 12 }}>
+        <b>{hasValidResults ? 'Dataset-specific answers are available for the latest analysis.' : 'Ask general questions about Retainly, the workflow, datasets, validation, or how to use the app. Dataset-specific answers become available after analysis.'}</b>
+      </div>
       <div className="chat">
         <div className="chatLog">
           {msgs.map((m, i) => (
@@ -124,12 +164,10 @@ export default function ChatPage() {
             onChange={(e) => setInput(e.target.value)}
             placeholder={hasValidResults ? 'Ask about the current analysis' : 'Retainly chatbot becomes available after analysis is complete.'}
             onKeyDown={(e) => { if (e.key === 'Enter') send(); }}
-            disabled={!hasValidResults}
           />
-          <button className="primary" onClick={send} disabled={!hasValidResults || sending}>Send</button>
+          <button className="primary" onClick={send} disabled={sending}>Send</button>
         </div>
       </div>
-      {usedGroq ? null : hasValidResults ? <div className="panelHint" style={{ marginTop: 12 }}>Retainly fallback chatbot is active.</div> : null}
     </div>
   );
 }
