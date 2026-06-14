@@ -48,8 +48,10 @@ export default function ValidationPage() {
           text="Run the notebook in Colab to reproduce baseline-vs-Retainly training, metrics, charts, top drivers, and responsible-AI review."
         >
           <div className="btnRow" style={{ marginTop: 12 }}>
-            <a className="download" href="https://colab.research.google.com/github/swara063/Retainly/blob/main/notebooks/retainly_dataset_comparison.ipynb" target="_blank" rel="noreferrer">Open notebook in Colab</a>
+            <a className="download" href="https://colab.research.google.com/github/swara063/Retainly/blob/main/notebooks/retainly_dataset_comparison.ipynb" target="_blank" rel="noreferrer">Open reproducible source notebook in Colab</a>
             <a className="download secondary" href="https://github.com/swara063/Retainly/blob/main/notebooks/retainly_dataset_comparison.ipynb" target="_blank" rel="noreferrer">View notebook source on GitHub</a>
+            <a className="download secondary" href="https://github.com/swara063/Retainly/blob/main/notebooks/retainly_dataset_comparison_executed.ipynb" target="_blank" rel="noreferrer">View executed validation notebook</a>
+            <a className="download secondary" href="https://github.com/swara063/Retainly/blob/main/project_docs/retainly_validation_report.html" target="_blank" rel="noreferrer">View validation report</a>
           </div>
           <div className="panelHint" style={{ marginTop: 12 }}>
             Colab opens the notebook source. To reproduce results, run all cells after adding the benchmark datasets. For a submitted proof artifact, upload an executed notebook or exported PDF.
