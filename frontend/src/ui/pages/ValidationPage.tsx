@@ -1,6 +1,24 @@
 import React from 'react';
 import { EmptyState, PageShell, SectionCard } from '../components/PageLayout';
 
+const charts = [
+  {
+    title: 'Core metric comparison',
+    src: 'https://raw.githubusercontent.com/swara063/Retainly/main/research_outputs/dataset_comparison_core_metrics.png',
+    explanation: 'Compares baseline models and Retainly on Accuracy, Precision, Recall, F1, ROC-AUC, and PR-AUC. For attrition, Recall, F1, and PR-AUC are especially important because leavers are usually the minority class.',
+  },
+  {
+    title: 'Top-k prioritization metrics',
+    src: 'https://raw.githubusercontent.com/swara063/Retainly/main/research_outputs/dataset_comparison_topk_metrics.png',
+    explanation: 'Shows how well each approach identifies actual leavers within the highest-risk employee groups. This matters because HR teams usually act on a prioritized risk list.',
+  },
+  {
+    title: 'Final decision-support score',
+    src: 'https://raw.githubusercontent.com/swara063/Retainly/main/research_outputs/dataset_comparison_final_score.png',
+    explanation: 'Combines predictive performance with platform capabilities such as explainability, responsible-AI review, employee prioritization, and HR action planning.',
+  },
+];
+
 function ChartBlock({ title, src, explanation }: { title: string; src: string; explanation: string }) {
   const [failed, setFailed] = React.useState(false);
   return (
@@ -51,24 +69,9 @@ export default function ValidationPage() {
         <h3>Charts with explanation</h3>
         <p className="muted" style={{ marginTop: 8 }}>These visual summaries explain how the validation evidence should be read.</p>
       </div>
-
-      <ChartBlock
-        title="Core Metrics"
-        src="https://raw.githubusercontent.com/swara063/Retainly/main/research_outputs/dataset_comparison_core_metrics.png"
-        explanation="Compares standard baseline models against Retainly on accuracy, precision, recall, F1, ROC-AUC, and PR-AUC. Retainly should be interpreted mainly through recall, F1, and PR-AUC because attrition data is imbalanced."
-      />
-
-      <ChartBlock
-        title="Top-k Metrics"
-        src="https://raw.githubusercontent.com/swara063/Retainly/main/research_outputs/dataset_comparison_topk_metrics.png"
-        explanation="Shows how well each approach identifies actual leavers within the highest-risk employee groups. This is important because HR teams usually act on prioritized risk lists."
-      />
-
-      <ChartBlock
-        title="Final Score"
-        src="https://raw.githubusercontent.com/swara063/Retainly/main/research_outputs/dataset_comparison_final_score.png"
-        explanation="Combines predictive performance with decision-support capabilities such as explainability, responsible-AI review, employee prioritization, and HR action planning."
-      />
+      {charts.map((chart) => (
+        <ChartBlock key={chart.title} title={chart.title} src={chart.src} explanation={chart.explanation} />
+      ))}
     </PageShell>
   );
 }
