@@ -23,12 +23,12 @@ function ChartBlock({ title, src, explanation }: { title: string; src: string; e
   const [failed, setFailed] = React.useState(false);
   return (
     <SectionCard title={title} subtitle={explanation}>
-      <div style={{ marginTop: 12 }}>
+      <div style={{ marginTop: 12, display: 'flex', justifyContent: 'center' }}>
         {!failed ? (
           <img
             src={src}
             alt={title}
-            style={{ width: '100%', borderRadius: 12, border: '1px solid #e2e8f0' }}
+            style={{ width: '100%', maxWidth: 760, borderRadius: 12, border: '1px solid #e2e8f0', display: 'block' }}
             onError={() => setFailed(true)}
           />
         ) : (
@@ -59,13 +59,13 @@ export default function ValidationPage() {
           <a className="download secondary" href="https://github.com/swara063/Retainly/blob/main/research_outputs/dataset_comparison_results.csv" target="_blank" rel="noreferrer">View results CSV</a>
           <a className="download secondary" href="https://github.com/swara063/Retainly/blob/main/research_outputs/dataset_comparison_summary.json" target="_blank" rel="noreferrer">View summary JSON</a>
           <a className="download secondary" href="https://github.com/swara063/Retainly/tree/main/research_outputs" target="_blank" rel="noreferrer">View charts folder</a>
-          <a className="download secondary" href="#charts-explained">View charts with explanation</a>
+          <a className="download secondary" href="#validation-charts">View charts with explanation</a>
         </div>
       </SectionCard>
 
       <SectionCard title="How to interpret" subtitle="Baseline models are normal classifiers. Retainly is a multi-agent workflow that adds preprocessing, model selection, threshold tuning, explainability, responsible-AI review, employee prioritization, and HR action planning." />
 
-      <div id="charts-explained" className="card sectionCard">
+      <div id="validation-charts" className="card sectionCard">
         <h3>Charts with explanation</h3>
         <p className="muted" style={{ marginTop: 8 }}>These visual summaries explain how the validation evidence should be read.</p>
       </div>
