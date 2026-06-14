@@ -2,10 +2,10 @@
 
 Retainly is split into two clear parts:
 
-- Website: an HR risk-scoring product for employee ranking, hotspots, action planning, chatbot guidance, and report download.
+- Website: an HR risk-scoring product for current employee data. It supports employee ranking, hotspots, action planning, chatbot guidance, and report download.
 - Notebook/scripts: the separate validation workflow that compares Retainly against baseline models using labeled benchmark attrition datasets.
 
-The website is designed for current HR data and decision support. It does not run the baseline-vs-Retainly benchmark comparison; that lives only in the validation notebook and scripts.
+The website is only for HR risk scoring and retention planning on live/current datasets. It does not train the benchmark models or present baseline-vs-Retainly comparison results as part of the HR platform; those live only in the notebook and scripts.
 
 ## What the website does
 
