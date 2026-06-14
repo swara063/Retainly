@@ -643,11 +643,11 @@ class MLEngineerAgent(BaseAgent):
             update_progress("pretrained scoring completed")
             return context
 
-        update_progress("training candidate models")
-        self.log("running", "Training Logistic Regression, Random Forest, and Gradient Boosting models.")
-        df = df.dropna(subset=[target]) if has_target else df
+        update_progress("pretrained model unavailable")
+        self.log("failed", "Pretrained model missing for website scoring.")
         if not has_target:
-            raise ValueError("No attrition target found and pretrained model is unavailable.")
+            raise ValueError("Pretrained model is unavailable. Run scripts/train_pretrained_model.py before website analysis.")
+        raise ValueError("Website analysis is configured for pretrained scoring only. Run scripts/train_pretrained_model.py before analysis.")
         X = df.drop(columns=[target])
         y_raw = df[target]
         y, target_meta = self._normalize_target(y_raw)

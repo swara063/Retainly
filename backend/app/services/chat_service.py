@@ -230,6 +230,10 @@ def fallback_hr_answer(question: str, results: dict[str, Any] | None = None) -> 
             for a in plan[:5]:
                 lines.append(f"- {a.get('title')}: {a.get('recommended_action')} Timeline: {a.get('timeline')}. Success metric: {a.get('success_metric', 'track improvement after intervention')}.")
             return "\n".join(lines)
+        return (
+            "Run retention analysis to generate the action plan first. "
+            "Once results are available, I can summarize the highest-priority HR actions and timelines."
+        )
     if "hotspot" in q or "department" in q or "role" in q:
         if hotspots:
             lines = ["Based on hotspot analysis, attrition risk is concentrated in:"]
@@ -244,6 +248,10 @@ def fallback_hr_answer(question: str, results: dict[str, Any] | None = None) -> 
             f"Among the top 20% highest-risk employees, Retainly captured {_pct(metrics.get('recall_at_top_20_percent'))} of observed attrition cases. "
             "Start with the action plan and employee explorer for practical HR follow-up."
         )
+    return (
+        f"Based on the latest Retainly analysis, {exec_sum.get('rows_analyzed', 'the uploaded')} employees were reviewed. "
+        "I can help with employee risk, hotspots, action planning, validation notes, and responsible-use guidance."
+    )
 
 
 async def groq_chat(question: str, results: dict[str, Any] | None = None) -> str:

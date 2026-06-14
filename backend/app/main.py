@@ -26,3 +26,8 @@ app.include_router(router, prefix="/api")
 @app.get("/")
 def health_check():
     return {"service": "Attrition Intelligence Platform", "status": "running"}
+
+
+@app.get("/api/health")
+def api_health_check():
+    return {"status": "ok", "product": "Retainly"}

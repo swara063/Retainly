@@ -1,11 +1,8 @@
 """
-End-to-end API demo for the Attrition Intelligence Platform.
+Website-oriented API smoke test for Retainly.
 
 Usage:
-  python scripts/demo_api.py --csv sample_data/sample_hr_attrition.csv
-
-Prereqs:
-  - Backend running at http://localhost:8000
+  python scripts/demo_api.py --csv sample_data/retainly_demo_unlabeled.csv
 """
 
 from __future__ import annotations
@@ -13,38 +10,50 @@ from __future__ import annotations
 import argparse
 import json
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
 
-API = "http://localhost:8000/api"
+DEFAULT_API = "http://127.0.0.1:8000/api"
 
 
 def http_json(url: str, method: str = "GET", body: bytes | None = None, headers: dict[str, str] | None = None):
-    req = urllib.request.Request(url, data=body, method=method)
-    for k, v in (headers or {}).items():
-        req.add_header(k, v)
-    with urllib.request.urlopen(req) as resp:
-        data = resp.read()
-        return json.loads(data.decode("utf-8"))
+    request = urllib.request.Request(url, data=body, method=method)
+    for key, value in (headers or {}).items():
+        request.add_header(key, value)
+    with urllib.request.urlopen(request) as response:
+        return json.loads(response.read().decode("utf-8"))
 
 
-def post_multipart_csv(url: str, csv_path: Path):
+def wait_for_results(api: str, dataset_id: str, attempts: int = 10, delay: float = 1.0) -> dict:
+    last_error: Exception | None = None
+    for _ in range(attempts):
+        try:
+            return http_json(f"{api}/analysis/{dataset_id}/results")
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            if exc.code != 404:
+                raise
+            time.sleep(delay)
+    if last_error:
+        raise last_error
+    raise RuntimeError("Results were not available after polling.")
+
+
+def post_csv(url: str, csv_path: Path) -> dict:
     boundary = "----retainlyboundary"
     content = csv_path.read_bytes()
-    filename = csv_path.name
-    parts: list[bytes] = []
-    parts.append(f"--{boundary}\r\n".encode())
-    parts.append(
-        (
-            f'Content-Disposition: form-data; name="file"; filename="{filename}"\r\n'
-            f"Content-Type: text/csv\r\n\r\n"
-        ).encode()
+    body = b"".join(
+        [
+            f"--{boundary}\r\n".encode(),
+            f'Content-Disposition: form-data; name="file"; filename="{csv_path.name}"\r\n'.encode(),
+            b"Content-Type: text/csv\r\n\r\n",
+            content,
+            b"\r\n",
+            f"--{boundary}--\r\n".encode(),
+        ]
     )
-    parts.append(content)
-    parts.append(b"\r\n")
-    parts.append(f"--{boundary}--\r\n".encode())
-    body = b"".join(parts)
     return http_json(
         url,
         method="POST",
@@ -54,79 +63,67 @@ def post_multipart_csv(url: str, csv_path: Path):
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--api", default=API, help="Base API URL (default: http://localhost:8000/api)")
-    ap.add_argument("--csv", required=True, help="Path to HR CSV")
-    ap.add_argument("--async", dest="async_mode", action="store_true", help="Run analysis in background")
-    args = ap.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--api", default=DEFAULT_API, help="Base API URL")
+    parser.add_argument("--csv", required=True, help="Path to unlabeled website demo CSV")
+    args = parser.parse_args()
 
-    base = args.api.rstrip("/")
+    api = args.api.rstrip("/")
     csv_path = Path(args.csv).expanduser().resolve()
     if not csv_path.exists():
         raise SystemExit(f"CSV not found: {csv_path}")
 
-    print("1) Uploading dataset…")
-    upload = post_multipart_csv(f"{base}/datasets/upload", csv_path)
+    started = time.time()
+    print("1) Checking backend health...")
+    root = http_json(api.replace("/api", "/"))
+    health = http_json(f"{api}/health")
+    print(f"   root={root}")
+    print(f"   health={health}")
+
+    print("2) Uploading CSV...")
+    upload = post_csv(f"{api}/datasets/upload", csv_path)
     dataset_id = upload["dataset_id"]
-    print(f"   dataset_id={dataset_id} rows={upload.get('rows')} cols={len(upload.get('columns', []))}")
+    print(f"   upload_success=yes dataset_id={dataset_id} rows={upload.get('rows')}")
 
-    print("2) Running analysis…")
-    run_url = f"{base}/analysis/{dataset_id}/run"
-    if args.async_mode:
-        run = http_json(f"{run_url}?async_mode=true", method="POST", body=b"")
-        print(f"   status={run.get('status')} (background)")
-        print("   polling results…")
-        for _ in range(120):
-            try:
-                _ = http_json(f"{base}/analysis/{dataset_id}/results")
-                break
-            except Exception:
-                time.sleep(1)
-        else:
-            raise SystemExit("Timed out waiting for results.")
-    else:
-        run = http_json(run_url, method="POST", body=b"")
-        print(f"   status={run.get('status')}")
+    print("3) Starting analysis...")
+    http_json(f"{api}/analysis/{dataset_id}/run?async_mode=true", method="POST", body=b"")
 
-    print("3) Fetching results…")
-    results = http_json(f"{base}/analysis/{dataset_id}/results")
-    model = results.get("model", {})
-    metrics = (model.get("metrics") or {})
-    print(f"   selected_model={model.get('selected_model')}")
-    if metrics:
-        cleaned: dict[str, float | str] = {}
-        for k, v in metrics.items():
-            if isinstance(v, (int, float)):
-                cleaned[k] = round(float(v), 4)
-            else:
-                cleaned[k] = v
-        print(f"   metrics={cleaned}")
+    completed = False
+    last_progress = {}
+    for _ in range(120):
+        last_progress = http_json(f"{api}/analysis/{dataset_id}/progress")
+        state = str(last_progress.get("status", ""))
+        if state == "completed":
+            completed = True
+            break
+        if state == "failed":
+            raise SystemExit(f"Analysis failed: {last_progress.get('error') or last_progress.get('current_step')}")
+        time.sleep(1)
 
-    print("4) Fetching logs…")
-    logs = http_json(f"{base}/analysis/{dataset_id}/logs")
-    hr_timeline = logs.get("hr_timeline", []) if isinstance(logs, dict) else []
-    diagnostics = logs.get("developer_diagnostics", []) if isinstance(logs, dict) else logs
-    print(f"   hr_timeline_steps={len(hr_timeline)} developer_log_entries={len(diagnostics)}")
-    if diagnostics:
-        last = diagnostics[-1]
-        print(f"   last={last.get('agent')} {last.get('status')}: {last.get('message')}")
+    if not completed:
+        raise SystemExit("Analysis did not complete within 120 seconds.")
 
-    comparison = results.get("research_comparison") or model.get("research_comparison") or {}
-    if comparison:
-        print("5) Baseline vs Retainly agents:")
-        baseline_metrics = (comparison.get("baseline") or {}).get("metrics") or {}
-        agents = (comparison.get("retainly_multi_agent") or {}).get("metrics") or {}
-        deltas = comparison.get("metric_deltas") or {}
-        for key in ["recall", "f1", "roc_auc", "pr_auc", "recall_at_top_20_percent"]:
-            print(f"   {key}: baseline={baseline_metrics.get(key)} retainly={agents.get(key)} delta={deltas.get(key)}")
-        print(f"   verdict={comparison.get('verdict')}")
+    print("4) Fetching results...")
+    results = wait_for_results(api, dataset_id)
+    employee_risk = results.get("employee_risk") or []
+    action_plan = results.get("retention_plan") or results.get("action_plan") or []
+    report_url = results.get("report_url") or f"/api/analysis/{dataset_id}/report"
 
-    llm = results.get("llm_insights") or {}
-    print(f"6) LLM narrative: {llm.get('status', 'not_available')}")
+    print("5) Checking chatbot...")
+    chat = http_json(
+        f"{api}/chat",
+        method="POST",
+        body=json.dumps({"question": "What should HR do first?", "dataset_id": dataset_id}).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+    )
 
-    print("7) Report URL (download in browser):")
-    print(f"   {base}/analysis/{dataset_id}/report")
-
+    elapsed = round(time.time() - started, 1)
+    print(f"analysis_completed={'yes' if completed else 'no'}")
+    print(f"elapsed_seconds={elapsed}")
+    print(f"employee_risk_count={len(employee_risk)}")
+    print(f"action_plan_count={len(action_plan)}")
+    print(f"report_url={report_url}")
+    print(f"chatbot_answer_works={'yes' if bool(chat.get('answer')) else 'no'}")
     return 0
 
 

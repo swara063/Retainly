@@ -19,7 +19,7 @@ from app.services.result_enrichment import (
     build_retention_plan,
     build_risk_segments,
 )
-from app.storage.local_store import dataset_path, mapping_path, result_path, progress_path, save_json, load_json
+from app.storage.local_store import dataset_path, mapping_path, result_path, progress_path, save_json, load_json, report_path
 
 class AttritionPipeline:
     def __init__(self, dataset_id: str):
@@ -133,8 +133,6 @@ class AttritionPipeline:
                 "pretrained_model_available": True,
                 "validation_summary_available": False,
             }
-            write_progress(len(self.agents), "completed", "Analysis completed")
-
             # Enriched, HR-useful outputs (keeps existing keys intact)
             df = context.get("dataframe")
             mapping = context.get("column_mapping") or {}
@@ -226,8 +224,11 @@ class AttritionPipeline:
             except Exception:
                 pass
             check_timeout("Report generation")
+            pdf_path = build_pdf_report(self.dataset_id, results)
+            if report_path(self.dataset_id).exists() or pdf_path:
+                results["report_url"] = f"/api/analysis/{self.dataset_id}/report"
             save_json(result_path(self.dataset_id), results)
-            build_pdf_report(self.dataset_id, results)
+            write_progress(len(self.agents), "completed", "Analysis completed")
             self.logger.add("Pipeline", "completed", "Pipeline completed and report generated.")
             return results
         except Exception as exc:

@@ -76,15 +76,16 @@ Groq is used in two places:
 
 If no key is configured, the app still works with deterministic fallback text.
 
-## Demo proof
+## Backend demo
 
 With backend running:
 
 ```bash
-./backend/.conda/bin/python scripts/demo_api.py --csv sample_data/retainly_demo_hr.csv
+python scripts/make_unlabeled_demo.py
+python scripts/demo_api.py --csv sample_data/retainly_demo_unlabeled.csv
 ```
 
-The output prints selected model metrics, agent logs, baseline-vs-Retainly metric deltas, LLM narrative status, and the PDF report URL.
+The demo uploads an unlabeled employee CSV, runs pretrained risk scoring, and confirms that employee risk rows, hotspots, action-plan output, chatbot answers, and the PDF report are produced.
 
 ## Render deployment
 

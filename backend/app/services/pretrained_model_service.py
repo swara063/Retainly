@@ -30,11 +30,22 @@ def load_pretrained_metadata() -> dict[str, Any]:
     return json.loads(PRETRAINED_METADATA_PATH.read_text(encoding="utf-8"))
 
 
+def _feature_name_list(value: Any) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, (list, tuple)):
+        return [str(item) for item in value]
+    try:
+        return [str(item) for item in list(value)]
+    except Exception:
+        return []
+
+
 def align_frame_to_model(df: pd.DataFrame, model: Any) -> pd.DataFrame:
-    expected = list(getattr(model, "feature_names_in_", []) or [])
+    expected = _feature_name_list(getattr(model, "feature_names_in_", None))
     if not expected:
         preprocessor = getattr(model, "named_steps", {}).get("preprocessor") if hasattr(model, "named_steps") else None
-        expected = list(getattr(preprocessor, "feature_names_in_", []) or [])
+        expected = _feature_name_list(getattr(preprocessor, "feature_names_in_", None))
     if not expected:
         return df.copy()
     aligned = df.copy()
@@ -42,4 +53,3 @@ def align_frame_to_model(df: pd.DataFrame, model: Any) -> pd.DataFrame:
         if column not in aligned.columns:
             aligned[column] = pd.NA
     return aligned[expected]
-
