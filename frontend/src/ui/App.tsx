@@ -20,12 +20,12 @@ function TopBar() {
         </div>
       </Link>
       <nav className="topActions" aria-label="Retainly navigation">
-        <a className="link" href="#upload">Home</a>
-        <a className="link" href="#employees">Employees</a>
-        <a className="link" href="#hotspots">Hotspots</a>
-        <a className="link" href="#action-plan">Action Plan</a>
-        <a className="link" href="#analysis">Agents</a>
-        <a className="link" href="#report">Report</a>
+        <Link className="link" to="/">Home</Link>
+        <Link className="link" to="/employees">Employees</Link>
+        <Link className="link" to="/hotspots">Hotspots</Link>
+        <Link className="link" to="/action-plan">Action Plan</Link>
+        <Link className="link" to="/agents">Agents</Link>
+        <Link className="link" to="/report">Report</Link>
         <Link className="link" to="/help">Chatbot</Link>
       </nav>
     </header>

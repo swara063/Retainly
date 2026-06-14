@@ -26,7 +26,7 @@ export type AppState = {
   modelTrust: any | null;
   loading: boolean;
   uploadPct: number;
-  phase: 'idle' | 'uploading' | 'analyzing';
+  phase: 'idle' | 'uploaded' | 'uploading' | 'analyzing' | 'completed' | 'failed';
   error: string;
   progress: AnalysisProgress | null;
 };
@@ -49,27 +49,6 @@ const initialState: AppState = {
   progress: null,
 };
 
-function loadInitialState(): AppState {
-  try {
-    const raw = window.localStorage.getItem('retainly_last_run');
-    if (!raw) return initialState;
-    const saved = JSON.parse(raw);
-    return {
-      ...initialState,
-      datasetId: String(saved.datasetId || ''),
-      columns: Array.isArray(saved.columns) ? saved.columns : [],
-      rows: typeof saved.rows === 'number' ? saved.rows : null,
-      hrTimeline: Array.isArray(saved.hrTimeline) ? saved.hrTimeline : [],
-      developerDiagnostics: Array.isArray(saved.developerDiagnostics) ? saved.developerDiagnostics : [],
-      results: saved.results || null,
-      modelTrust: saved.modelTrust || saved.results?.model_trust || null,
-      progress: saved.progress || null,
-    };
-  } catch {
-    return initialState;
-  }
-}
-
 export const AppStateContext = React.createContext<AppState>(initialState);
 export const AppDispatchContext = React.createContext<React.Dispatch<React.SetStateAction<AppState>>>(() => {});
 
@@ -82,30 +61,7 @@ export function useAppDispatch() {
 }
 
 export function AppStateProvider({ children }: { children: React.ReactNode }) {
-  const [state, setState] = React.useState<AppState>(() => loadInitialState());
-
-  React.useEffect(() => {
-    if (!state.datasetId) return;
-    try {
-      const compactResults = state.results ? {
-        ...state.results,
-        employee_risk_records: Array.isArray(state.results.employee_risk_records) ? state.results.employee_risk_records.slice(0, 200) : state.results.employee_risk_records,
-        employee_risk: Array.isArray(state.results.employee_risk) ? state.results.employee_risk.slice(0, 200) : state.results.employee_risk,
-      } : null;
-      window.localStorage.setItem('retainly_last_run', JSON.stringify({
-        datasetId: state.datasetId,
-        columns: state.columns,
-        rows: state.rows,
-        hrTimeline: state.hrTimeline,
-        developerDiagnostics: state.developerDiagnostics,
-        results: compactResults,
-        modelTrust: state.modelTrust,
-        progress: state.progress,
-      }));
-    } catch {
-      // Local storage can fill up; the app can still work from in-memory state.
-    }
-  }, [state.datasetId, state.columns, state.rows, state.hrTimeline, state.developerDiagnostics, state.results, state.progress]);
+  const [state, setState] = React.useState<AppState>(initialState);
 
   React.useEffect(() => {
     let cancelled = false;
@@ -117,12 +73,15 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
           fetchJson(`${API_BASE}/analysis/${state.datasetId}/logs`).catch(() => ({ hr_timeline: [], developer_diagnostics: [] })),
         ]);
         if (cancelled) return;
+        const hasValidEmployeeRisk = Array.isArray((results as any)?.employee_risk);
         setState((p) => ({
           ...p,
           results,
           modelTrust: (results as any)?.model_trust || p.modelTrust,
           hrTimeline: Array.isArray((logs as any).hr_timeline) ? (logs as any).hr_timeline : p.hrTimeline,
           developerDiagnostics: Array.isArray((logs as any).developer_diagnostics) ? (logs as any).developer_diagnostics : p.developerDiagnostics,
+          phase: (results as any)?.status === 'completed' ? 'completed' : p.phase,
+          error: hasValidEmployeeRisk || (results as any)?.status !== 'completed' ? p.error : 'Analysis completed but employee risk results are missing. Please check backend output.',
         }));
       } catch {
         // No completed run available yet.

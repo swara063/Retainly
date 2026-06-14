@@ -16,13 +16,11 @@ export default function ChatPage() {
   const s = useAppState();
   const [input, setInput] = React.useState('');
   const [sending, setSending] = React.useState(false);
-  const [msgs, setMsgs] = React.useState<Msg[]>([
-    { role: 'assistant', text: 'Hi — I’m Retainly Help. Ask me to explain results in plain HR language.' },
-  ]);
+  const [msgs, setMsgs] = React.useState<Msg[]>([]);
 
   async function send() {
     const q = input.trim();
-    if (!q) return;
+    if (!q || !hasValidResults) return;
     setInput('');
     setMsgs((m) => [...m, { role: 'user', text: q }, { role: 'assistant', text: 'Thinking…' }]);
     setSending(true);
@@ -51,7 +49,9 @@ export default function ChatPage() {
     }
   }
 
-  const fairness = s.results?.fairness?.overall_risk || '—';
+  const hasUploadedDataset = Boolean(s.datasetId || s.file);
+  const hasValidResults = s.phase === 'completed' && s.results?.status === 'completed' && Array.isArray(s.results?.employee_risk);
+  const fairness = hasValidResults ? (s.results?.fairness?.overall_risk || '—') : '—';
 
   return (
     <div className="page">
@@ -62,6 +62,7 @@ export default function ChatPage() {
         </div>
         <div className={riskChip(fairness)} title="Current fairness risk (from the latest run)">Fairness: {String(fairness)}</div>
       </div>
+      <div className="card" style={{ marginBottom: 12 }}><b>{hasValidResults ? 'Retainly Help is ready.' : (hasUploadedDataset ? 'Run analysis first to use the chatbot.' : 'Upload HR data and run retention analysis to view this section.')}</b></div>
       <div className="chat">
         <div className="chatLog">
           {msgs.map((m, i) => (
@@ -86,12 +87,13 @@ export default function ChatPage() {
             className="chatInput"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask: “What does risk capture mean?”, “What does fairness risk mean?”, “Top drivers?”"
+            placeholder={hasValidResults ? 'Ask about the current analysis' : 'Run analysis first to ask questions'}
             onKeyDown={(e) => {
               if (e.key === 'Enter') send();
             }}
+            disabled={!hasValidResults}
           />
-          <button className="primary" onClick={send} disabled={sending}>Send</button>
+          <button className="primary" onClick={send} disabled={sending || !hasValidResults}>Send</button>
         </div>
       </div>
     </div>

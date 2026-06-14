@@ -3,12 +3,14 @@ import { useAppState } from '../state';
 
 export default function AgentsPage() {
   const s = useAppState();
-  if (!s.datasetId) {
+  const hasUploadedDataset = Boolean(s.datasetId || s.file);
+  const hasValidResults = s.phase === 'completed' && s.results?.status === 'completed' && Array.isArray(s.results?.employee_risk);
+  if (!hasValidResults) {
     return (
       <div className="page">
         <div className="card">
           <h3>Agents</h3>
-          <p className="muted">Run an analysis first.</p>
+          <p className="muted">{hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.'}</p>
         </div>
       </div>
     );
@@ -47,7 +49,7 @@ export default function AgentsPage() {
           <pre className="pre">{JSON.stringify(s.developerDiagnostics || [], null, 2)}</pre>
         </details>
       </div>
-      {s.results && (
+      {hasValidResults && (
         <div className="grid two">
           <div className="card">
             <h3>Data Analyst output (EDA)</h3>

@@ -11,22 +11,22 @@ export default function RunPage() {
 
   async function uploadOnly() {
     if (!s.file) return alert('Choose a CSV file first.');
-    set((p) => ({ ...p, error: '', results: null, hrTimeline: [], developerDiagnostics: [], datasetId: '', columns: [], loading: true, phase: 'uploading', uploadPct: 0 }));
+    set((p) => ({ ...p, error: '', results: null, modelTrust: null, hrTimeline: [], developerDiagnostics: [], progress: null, selectedEmployee: null, selectedEmployeeDetail: null, datasetId: '', columns: [], loading: true, phase: 'uploading', uploadPct: 0 }));
     try {
       const data = await uploadCsvWithProgress(s.file, (pct) => set((p) => ({ ...p, uploadPct: pct })));
       if (!data?.dataset_id) throw new Error('Upload succeeded but no dataset_id returned.');
-      set((p) => ({ ...p, datasetId: data.dataset_id, columns: data.columns || [], rows: typeof data.rows === 'number' ? data.rows : p.rows, uploadPct: 100 }));
+      set((p) => ({ ...p, datasetId: data.dataset_id, columns: data.columns || [], rows: typeof data.rows === 'number' ? data.rows : p.rows, uploadPct: 100, phase: 'uploaded' }));
     } catch (e: any) {
-      set((p) => ({ ...p, error: e?.message || 'Upload failed.' }));
+      set((p) => ({ ...p, error: e?.message || 'Upload failed.', phase: 'failed' }));
     } finally {
-      set((p) => ({ ...p, loading: false, phase: 'idle' }));
+      set((p) => ({ ...p, loading: false }));
       setTimeout(() => set((p) => ({ ...p, uploadPct: 0 })), 700);
     }
   }
 
   async function analyze() {
     if (!s.file) return alert('Choose a CSV file first.');
-    set((p) => ({ ...p, error: '', results: null, hrTimeline: [], developerDiagnostics: [], loading: true, phase: 'analyzing' }));
+    set((p) => ({ ...p, error: '', results: null, modelTrust: null, hrTimeline: [], developerDiagnostics: [], progress: null, loading: true, phase: 'analyzing' }));
     try {
       let id = s.datasetId;
       if (!id) {
@@ -60,7 +60,8 @@ export default function RunPage() {
           const data = await resultsRes.value.json().catch(() => ({}));
           if (data?.status === 'failed') throw new Error(data?.error || 'Analysis failed on the backend.');
           if (data?.status === 'completed') {
-            set((p) => ({ ...p, results: data }));
+            const missingEmployeeRisk = !Array.isArray(data?.employee_risk);
+            set((p) => ({ ...p, results: data, modelTrust: data?.model_trust || p.modelTrust, phase: 'completed', error: missingEmployeeRisk ? 'Analysis completed but employee risk results are missing. Please check backend output.' : '' }));
             completed = true;
             break;
           }
@@ -69,9 +70,9 @@ export default function RunPage() {
       }
       if (!completed) throw new Error('Analysis did not finish in time. Please try again with a smaller CSV or check the backend logs.');
     } catch (e: any) {
-      set((p) => ({ ...p, error: e?.message || 'Analysis failed.' }));
+      set((p) => ({ ...p, error: e?.message || 'Analysis failed.', phase: 'failed' }));
     } finally {
-      set((p) => ({ ...p, loading: false, phase: 'idle' }));
+      set((p) => ({ ...p, loading: false }));
       setTimeout(() => set((p) => ({ ...p, uploadPct: 0 })), 700);
     }
   }

@@ -9,8 +9,10 @@ function Metric({ label, value }: { label: string; value: string }) {
 
 export default function OverviewPage() {
   const s = useAppState();
-  if (!s.results) {
-    return <div className="page"><div className="card"><b>Run analysis first to view your hotspots.</b></div></div>;
+  const hasUploadedDataset = Boolean(s.datasetId || s.file);
+  const hasValidResults = s.phase === 'completed' && s.results?.status === 'completed' && Array.isArray(s.results?.employee_risk);
+  if (!hasValidResults) {
+    return <div className="page"><div className="card"><b>{hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.'}</b></div></div>;
   }
 
   const exec = s.results.executive_summary || {};

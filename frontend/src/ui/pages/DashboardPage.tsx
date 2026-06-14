@@ -67,15 +67,15 @@ export default function DashboardPage() {
   async function uploadOnly(fileOverride?: File | null) {
     const file = fileOverride || s.file;
     if (!file) return;
-    set((p) => ({ ...p, error: '', results: null, hrTimeline: [], developerDiagnostics: [], loading: true, phase: 'uploading', uploadPct: 0 }));
+    set((p) => ({ ...p, error: '', results: null, modelTrust: null, hrTimeline: [], developerDiagnostics: [], progress: null, loading: true, phase: 'uploading', uploadPct: 0 }));
     try {
       const data = await uploadCsvWithProgress(file, (pct) => set((p) => ({ ...p, uploadPct: pct })));
       if (!data?.dataset_id) throw new Error('Upload succeeded but no dataset id was returned.');
-      set((p) => ({ ...p, datasetId: data.dataset_id, columns: data.columns || [], rows: typeof data.rows === 'number' ? data.rows : null, uploadPct: 100 }));
+      set((p) => ({ ...p, datasetId: data.dataset_id, columns: data.columns || [], rows: typeof data.rows === 'number' ? data.rows : null, uploadPct: 100, phase: 'uploaded' }));
     } catch (e: any) {
-      set((p) => ({ ...p, error: e?.message || 'Upload failed.' }));
+      set((p) => ({ ...p, error: e?.message || 'Upload failed.', phase: 'failed' }));
     } finally {
-      set((p) => ({ ...p, loading: false, phase: 'idle' }));
+      set((p) => ({ ...p, loading: false }));
       window.setTimeout(() => set((p) => ({ ...p, uploadPct: 0 })), 600);
     }
   }
@@ -85,7 +85,7 @@ export default function DashboardPage() {
     if (!s.datasetId && s.file) await uploadOnly();
     const id = s.datasetId || '';
     if (!id) return;
-    set((p) => ({ ...p, error: '', results: null, hrTimeline: [], developerDiagnostics: [], loading: true, phase: 'analyzing' }));
+    set((p) => ({ ...p, error: '', results: null, modelTrust: null, hrTimeline: [], developerDiagnostics: [], progress: null, loading: true, phase: 'analyzing' }));
     try {
       await fetchJson(`${API_BASE}/analysis/${id}/run?async_mode=true`, { method: 'POST' });
       const startedAt = Date.now();
@@ -102,26 +102,33 @@ export default function DashboardPage() {
         }
         if (resultsRes.status === 'fulfilled' && resultsRes.value.ok) {
           const data = await resultsRes.value.json().catch(() => ({}));
-          set((p) => ({ ...p, results: data }));
-          break;
+          if (data?.status === 'failed') throw new Error(data?.error || 'Analysis failed on the backend.');
+          if (data?.status === 'completed') {
+            const missingEmployeeRisk = !Array.isArray(data?.employee_risk);
+            set((p) => ({ ...p, results: data, modelTrust: data?.model_trust || p.modelTrust, phase: 'completed', error: missingEmployeeRisk ? 'Analysis completed but employee risk results are missing. Please check backend output.' : '' }));
+            break;
+          }
         }
         await sleep(900);
       }
     } catch (e: any) {
-      set((p) => ({ ...p, error: e?.message || 'Analysis failed.' }));
+      set((p) => ({ ...p, error: e?.message || 'Analysis failed.', phase: 'failed' }));
     } finally {
-      set((p) => ({ ...p, loading: false, phase: 'idle' }));
+      set((p) => ({ ...p, loading: false }));
     }
   }
 
-  const results = s.results || {};
+  const hasUploadedDataset = Boolean(s.datasetId || s.file);
+  const isAnalysisComplete = s.phase === 'completed' && s.results?.status === 'completed';
+  const hasValidResults = isAnalysisComplete && Array.isArray(s.results?.employee_risk);
+  const results = hasValidResults ? s.results : {};
   const modelTrust = results.model_trust || s.modelTrust || {};
   const exec = results.executive_summary || {};
   const topRiskSegments = Array.isArray(results.risk_segments) ? [...results.risk_segments].sort((a, b) => Number(b.average_predicted_risk || 0) - Number(a.average_predicted_risk || 0)) : [];
   const topRisk = topRiskSegments[0];
   const recommendations: string[] = results.recommendations || [];
   const employeeFilters = employeeExplorer?.available_filters || { departments: [], job_roles: [], risk_bands: [], employee_labels: [] };
-  const dashboardReady = Boolean(s.results);
+  const dashboardReady = hasValidResults;
 
   return (
     <div className="dashboard">
@@ -139,7 +146,7 @@ export default function DashboardPage() {
         </div>
         <div className="heroAside card">
           <b>Workflow</b>
-          <AgentTimeline items={s.hrTimeline.length ? s.hrTimeline : [{ step: 'Project Manager Agent', status: 'waiting', message: 'Run analysis to begin.' }]} />
+          <AgentTimeline items={dashboardReady ? s.hrTimeline : [{ step: 'Project Manager Agent', status: 'waiting', message: 'Upload HR data and run retention analysis to view this section.' }]} />
         </div>
 </section>
 
@@ -198,7 +205,7 @@ export default function DashboardPage() {
               <StatCard label="Top risk driver" value={String((results.explainability?.top_features || [])[0]?.feature || '—')} />
               <StatCard label="Data quality score" value={String(results.data_quality?.data_quality_score ?? '—')} />
             </div>
-            <div className="panelHint" style={{ marginTop: 12 }}>{results.dataset_mode === 'unlabeled_scoring' ? 'This dataset does not include actual attrition outcomes, so evaluation metrics cannot be calculated for this upload. Retainly is using the pretrained attrition model to estimate risk.' : (results.confidence_summary?.plain_english || 'Run analysis to view your retention dashboard.')}</div>
+            <div className="panelHint" style={{ marginTop: 12 }}>{!hasUploadedDataset ? 'Upload HR data and run retention analysis to view this section.' : s.phase === 'uploaded' ? 'Upload complete. Run retention analysis to generate risk scores.' : !hasValidResults ? 'Run analysis first to view this section.' : (results.dataset_mode === 'unlabeled_scoring' ? 'This dataset does not include actual attrition outcomes, so evaluation metrics cannot be calculated for this upload. Retainly is using the pretrained attrition model to estimate risk.' : (results.confidence_summary?.plain_english || 'Run analysis to view your retention dashboard.'))}</div>
           </div>
         </div>
       </section>
@@ -221,7 +228,7 @@ export default function DashboardPage() {
       <section id="employees">
         <SectionTitle icon={<Users size={18} />} title="Employee Explorer" subtitle="Sorted highest risk first, with search and profile view." />
         {!dashboardReady ? (
-          <div className="card"><b>Run analysis first to view this section.</b></div>
+          <div className="card"><b>{hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.'}</b></div>
         ) : (
           <div className="grid two">
             <div className="card">
@@ -279,11 +286,11 @@ export default function DashboardPage() {
         <div className="grid two">
           <div className="card">
             <h3>Department / role hotspots</h3>
-            {topRiskSegments.length ? topRiskSegments.slice(0, 5).map((r: any) => <div className="panelHint" key={`${r.segment_name}-${r.group}`}><b>{r.segment_name}:</b> {r.group} ({Math.round(Number(r.average_predicted_risk || 0) * 100)}%)</div>) : <div className="panelHint">Run analysis first to view this section.</div>}
+            {dashboardReady && topRiskSegments.length ? topRiskSegments.slice(0, 5).map((r: any) => <div className="panelHint" key={`${r.segment_name}-${r.group}`}><b>{r.segment_name}:</b> {r.group} ({Math.round(Number(r.average_predicted_risk || 0) * 100)}%)</div>) : <div className="panelHint">{hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.'}</div>}
           </div>
           <div className="card">
             <h3>Top 3 recommended actions</h3>
-            {recommendations.length ? recommendations.slice(0, 3).map((item, index) => <div className="panelHint" key={index}>{item}</div>) : <div className="panelHint">Run analysis first to view this section.</div>}
+            {dashboardReady && recommendations.length ? recommendations.slice(0, 3).map((item, index) => <div className="panelHint" key={index}>{item}</div>) : <div className="panelHint">{hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.'}</div>}
             <div className="btnRow single" style={{ marginTop: 12 }}><a className="download secondary" href="#action-plan">View full action plan</a></div>
           </div>
         </div>
@@ -292,7 +299,7 @@ export default function DashboardPage() {
       <section id="action-plan">
         <SectionTitle icon={<Sparkles size={18} />} title="Action Plan" subtitle="Supportive actions and next steps." />
         <div className="card">
-          {recommendations.length ? recommendations.slice(0, 5).map((item, index) => <div className="panelHint" key={index}>{item}</div>) : <div className="panelHint">Run analysis first to view this section.</div>}
+          {dashboardReady && recommendations.length ? recommendations.slice(0, 5).map((item, index) => <div className="panelHint" key={index}>{item}</div>) : <div className="panelHint">{hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.'}</div>}
         </div>
       </section>
 
@@ -300,13 +307,13 @@ export default function DashboardPage() {
         <SectionTitle icon={<FileText size={18} />} title="Report" subtitle="Download the PDF report." />
         <div className="card reportCta">
           <div><b>Download PDF report</b><div className="muted">Includes the executive summary, hotspots, action plan, and responsible-use notes.</div></div>
-          <a className={`download ${s.datasetId ? '' : 'disabledLink'}`} href={s.datasetId ? `${API_BASE}/analysis/${s.datasetId}/report` : undefined as any}><FileText size={18} /> Download PDF report</a>
+          <a className={`download ${dashboardReady ? '' : 'disabledLink'}`} href={dashboardReady ? `${API_BASE}/analysis/${s.datasetId}/report` : undefined as any}><FileText size={18} /> Download PDF report</a>
         </div>
       </section>
 
       <section id="ask">
         <SectionTitle icon={<Search size={18} />} title="Chatbot" subtitle="Ask Retainly only if it is working." />
-        <div className="card"><div className="panelHint">{dashboardReady ? 'Open the Chatbot tab to ask questions about the current analysis.' : 'Run analysis first to view this section.'}</div></div>
+        <div className="card"><div className="panelHint">{dashboardReady ? 'Open the Chatbot tab to ask questions about the current analysis.' : (hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.')}</div></div>
       </section>
     </div>
   );
