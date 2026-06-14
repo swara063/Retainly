@@ -118,7 +118,7 @@ class AttritionPipeline:
             results["dataset_mode"] = (context.get("column_mapping") or {}).get("dataset_mode") or ("labeled_training" if (context.get("column_mapping") or {}).get("target") else "unlabeled_scoring")
             results["target_column"] = (context.get("column_mapping") or {}).get("target")
             results["can_evaluate_model"] = bool(results["dataset_mode"] == "labeled_training")
-            results["pretrained_model_used"] = bool(results["dataset_mode"] == "unlabeled_scoring" and context.get("model", {}).get("selected_model"))
+            results["pretrained_model_used"] = bool(results["dataset_mode"] == "unlabeled_scoring" and context.get("model_artifacts"))
             results["model_trust"] = {
                 "status": "Validated" if results["pretrained_model_used"] or results["can_evaluate_model"] else "Review recommended",
                 "model_basis": "Pretrained attrition-risk model",
@@ -208,7 +208,7 @@ class AttritionPipeline:
                 results["executive_summary"] = {
                     "rows_analyzed": int(df.shape[0]),
                     "columns_analyzed": int(df.shape[1]),
-                    "selected_model": (results.get("model") or {}).get("selected_model"),
+                    "selected_model": (results.get("model") or {}).get("selected_model") or "Retainly pretrained attrition-risk model",
                     "recommended_use": "Decision-support for HR planning, manager coaching, and workforce risk review.",
                     "confidence_summary": results.get("confidence_summary") or ((results.get("model") or {}).get("confidence_summary") or {}),
                 }

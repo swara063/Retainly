@@ -86,6 +86,7 @@ def build_context_snippet(results: dict[str, Any] | None) -> str:
         return "No analysis results available yet."
     model = results.get("model") or {}
     metrics = model.get("metrics") or {}
+    model_label = model.get("selected_model") or "Retainly pretrained attrition-risk model"
     fairness = results.get("fairness") or {}
     explain = results.get("explainability") or {}
     exec_sum = results.get("executive_summary") or {}
@@ -113,7 +114,7 @@ def build_context_snippet(results: dict[str, Any] | None) -> str:
         f"- Attrition detection quality (PR-AUC): {_fmt(metrics.get('pr_auc'))}\n"
         f"- Top 10% risk capture: {_pct(metrics.get('recall_at_top_10_percent'))}; attrition rate in top 10%: {_pct(metrics.get('attrition_rate_in_top_10_percent'))}\n"
         f"- Top 20% risk capture: {_pct(metrics.get('recall_at_top_20_percent'))}; attrition rate in top 20%: {_pct(metrics.get('attrition_rate_in_top_20_percent'))}\n"
-        f"- Selected model for method notes: {_fmt(model.get('selected_model'))}\n"
+        f"- Selected model for method notes: {_fmt(model_label)}\n"
         f"- Action plan summary: {_compact_list(plan, limit=3)}\n"
         f"- Hotspots summary: {_compact_list(hotspots, limit=4)}\n"
         f"- Top HR signals/drivers: {_compact_list(top_features, limit=5)}\n"
@@ -164,7 +165,7 @@ def build_source_notes(results: dict[str, Any] | None) -> list[str]:
     if dq:
         notes.append(f"Based on data quality review: score {dq.get('data_quality_score', '—')} with warnings if present.")
     if model:
-        notes.append(f"Based on the selected model method notes: {model.get('selected_model', '—')} and HR-facing risk-screening metrics.")
+        notes.append(f"Based on the selected model method notes: {model.get('selected_model') or 'Retainly pretrained attrition-risk model'} and HR-facing risk-screening metrics.")
     return notes[:8]
 
 
@@ -181,6 +182,7 @@ def fallback_hr_answer(question: str, results: dict[str, Any] | None = None) -> 
     exec_sum = results.get("executive_summary") or {}
     model = results.get("model") or {}
     metrics = model.get("metrics") or {}
+    model_label = model.get("selected_model") or "Retainly pretrained attrition-risk model"
     fairness = results.get("fairness") or {}
     hotspots = [x for x in (results.get("risk_segments") or []) if isinstance(x, dict)]
     plan = [x for x in (results.get("retention_plan") or []) if isinstance(x, dict)]
@@ -234,13 +236,14 @@ def fallback_hr_answer(question: str, results: dict[str, Any] | None = None) -> 
             for h in hotspots[:5]:
                 lines.append(f"- {h.get('segment_name')} = {h.get('group')}: priority {h.get('priority')}, average risk {_fmt(h.get('average_predicted_risk'))}.")
             return "\n".join(lines)
-    return (
-        f"Based on the latest Retainly analysis: {exec_sum.get('rows_analyzed', 'the uploaded')} employees were analyzed, "
-        f"observed attrition rate is {_pct(exec_sum.get('attrition_rate'))}, risk capture rate is {_pct(metrics.get('recall'))}, "
-        f"and fairness review status is {fairness.get('overall_risk', 'reviewed')}. "
-        f"Among the top 20% highest-risk employees, Retainly captured {_pct(metrics.get('recall_at_top_20_percent'))} of observed attrition cases. "
-        "Start with the action plan and employee explorer for practical HR follow-up."
-    )
+        return (
+            f"Based on the latest Retainly analysis: {exec_sum.get('rows_analyzed', 'the uploaded')} employees were analyzed, "
+            f"observed attrition rate is {_pct(exec_sum.get('attrition_rate'))}, risk capture rate is {_pct(metrics.get('recall'))}, "
+            f"and fairness review status is {fairness.get('overall_risk', 'reviewed')}. "
+            f"Model basis: {model_label}. "
+            f"Among the top 20% highest-risk employees, Retainly captured {_pct(metrics.get('recall_at_top_20_percent'))} of observed attrition cases. "
+            "Start with the action plan and employee explorer for practical HR follow-up."
+        )
 
 
 async def groq_chat(question: str, results: dict[str, Any] | None = None) -> str:

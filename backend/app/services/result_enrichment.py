@@ -164,7 +164,8 @@ def build_executive_summary(*, df: pd.DataFrame, target_col: str | None, results
     roc_auc = _safe_float(metrics.get("roc_auc"))
 
     fairness_risk = (results.get("fairness") or {}).get("overall_risk", "—")
-    selected_model = (results.get("model") or {}).get("selected_model", "—")
+    model = results.get("model") or {}
+    selected_model = model.get("selected_model") or "Retainly pretrained attrition-risk model"
 
     attrition_rate = None
     if target_col and target_col in df.columns:
