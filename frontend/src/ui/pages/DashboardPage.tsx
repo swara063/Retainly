@@ -137,10 +137,9 @@ export default function DashboardPage() {
       </SectionCard>
 
       {!hasValidResults ? (
-        <EmptyState
-          title="Upload HR data and run retention analysis to view the command center summary."
-          description={hasUploadedDataset ? (s.phase === 'uploaded' ? 'Upload complete. Run Multi-Agent Analysis to generate the summary.' : 'Run analysis first to view the command center summary.') : 'The Home page stays empty until a file is uploaded and analysis completes.'}
-        />
+        <div className="panelHint" style={{ marginTop: 2 }}>
+          {hasUploadedDataset ? (s.phase === 'uploaded' ? 'Upload complete. Run Multi-Agent Analysis to generate the summary.' : 'Run analysis first to view the command center summary.') : 'Upload HR data and run retention analysis to view the command center summary.'}
+        </div>
       ) : (
         <>
           <SectionCard title="Command Center Summary" subtitle="High-level summary after analysis.">
@@ -152,7 +151,7 @@ export default function DashboardPage() {
           </SectionCard>
           <SectionCard title="Top 3 actions" subtitle="Action priorities only.">
             <div className="grid one" style={{ marginTop: 12 }}>
-              {(Array.isArray(results.recommendations) && results.recommendations.length ? results.recommendations.slice(0, 3) : ['Run analysis first to view this section.']).map((item: string, index: number) => (
+              {(Array.isArray(results.recommendations) && results.recommendations.length ? results.recommendations.slice(0, 3) : []).map((item: string, index: number) => (
                 <div className="panelHint" key={index}>{item}</div>
               ))}
             </div>

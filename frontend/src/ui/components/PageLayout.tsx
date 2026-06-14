@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 export function PageShell({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
@@ -29,12 +28,11 @@ export function SectionCard({ title, subtitle, children }: { title: string; subt
   );
 }
 
-export function EmptyState({ title, description, homeHref = '/' }: { title: string; description: string; homeHref?: string }) {
+export function EmptyState({ title, description }: { title: string; description: string }) {
   return (
     <div className="emptyState">
       <b>{title}</b>
       <p className="muted">{description}</p>
-      <Link className="download secondary" to={homeHref}>Go to Home</Link>
     </div>
   );
 }
