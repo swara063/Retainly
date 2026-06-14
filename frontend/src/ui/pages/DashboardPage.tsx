@@ -66,6 +66,9 @@ export default function DashboardPage() {
               completed = true;
               break;
             }
+          } else if ((resultsRes.value.status || 0) === 404) {
+            // Results are often not ready yet while the backend is still running.
+            // Keep polling quietly instead of surfacing a premature warning.
           } else if ((resultsRes.value.status || 0) >= 400) {
             const err = await resultsRes.value.json().catch(() => ({}));
             throw new Error((err as any)?.detail || (err as any)?.message || 'Analysis failed on the backend.');
