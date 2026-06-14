@@ -88,7 +88,11 @@ class AttritionPipeline:
         try:
             for idx, agent in enumerate(self.agents):
                 write_progress(idx, "running", steps[idx][1])
+                if isinstance(agent, MLEngineerAgent):
+                    context["progress_writer"] = lambda message, status="running", _idx=idx: write_progress(_idx, status, message)
                 context = agent.run(context)
+                if isinstance(agent, MLEngineerAgent):
+                    context.pop("progress_writer", None)
                 if dataset_rows is None and isinstance(context.get("dataset_profile"), dict):
                     dataset_rows = context["dataset_profile"].get("rows")
                 check_timeout(steps[idx][0])

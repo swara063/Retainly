@@ -559,23 +559,35 @@ class MLEngineerAgent(BaseAgent):
         return (numeric > med).astype(int).to_numpy(), {"classes": unique, "positive_class": f"> {med:g}"}
 
     def run(self, context: dict) -> dict:
+        progress_writer = context.get("progress_writer")
+
+        def update_progress(message: str) -> None:
+            try:
+                if callable(progress_writer):
+                    progress_writer(message)
+            except Exception:
+                pass
+
         df = context["dataframe"].copy()
         mapping = context["column_mapping"]
         target = mapping.get("target")
         has_target = bool(target and target in df.columns)
         if pretrained_model_exists():
+            update_progress("loading pretrained model")
             self.log("running", "Scoring employees with the pretrained Retainly model.")
             model = load_pretrained_model()
             metadata = load_pretrained_metadata()
+            update_progress("aligning data to model features")
             score_df = df.drop(columns=[target], errors="ignore")
             score_df = align_frame_to_model(score_df, model)
+            update_progress("scoring employees")
             try:
                 proba = model.predict_proba(score_df)[:, 1]
             except Exception:
                 pred = model.predict(score_df)
                 proba = np.asarray(pred, dtype=float)
             proba = np.asarray(proba, dtype=float).clip(0, 1)
-            risk_scores = pd.Series(proba)
+            update_progress("building employee risk ranking")
             best_pipe = model
             y_pred = (proba >= 0.5).astype(int)
             cm = []
@@ -628,8 +640,10 @@ class MLEngineerAgent(BaseAgent):
             context["explainability"] = explainability
             context["research_comparison"] = None
             self.log("completed", f"Pretrained scoring completed for {len(df)} employees.")
+            update_progress("pretrained scoring completed")
             return context
 
+        update_progress("training candidate models")
         self.log("running", "Training Logistic Regression, Random Forest, and Gradient Boosting models.")
         df = df.dropna(subset=[target]) if has_target else df
         if not has_target:
@@ -670,6 +684,7 @@ class MLEngineerAgent(BaseAgent):
         fitted = {}
         test_probas = {}
         for name, estimator in models.items():
+            update_progress(f"evaluating {name}")
             pipe = Pipeline([("preprocessor", preprocessor), ("model", estimator)])
             model_for_eval = _fit_calibrated_model(pipe, X_train, y_train)
             # Always evaluate with probabilities if available for threshold tuning.
@@ -733,6 +748,7 @@ class MLEngineerAgent(BaseAgent):
                 self.logger.add("Calibration", "warning", f"{name}: {metrics['calibration']['warning']}")
 
         if len(test_probas) >= 2:
+            update_progress("building ensemble blend")
             ensemble_proba = np.mean(np.vstack([p for p in test_probas.values()]), axis=0)
             ens_thr, ens_pred, ens_thr_meta = _tune_threshold(y_test, ensemble_proba)
             try:
@@ -786,6 +802,7 @@ class MLEngineerAgent(BaseAgent):
             ),
             reverse=True,
         )[0]
+        update_progress("generating explainability summary")
         best_pipe, y_pred, y_proba = fitted[best["model_type"]]
         cm = confusion_matrix(y_test, y_pred).tolist()
         try:
@@ -873,4 +890,5 @@ class MLEngineerAgent(BaseAgent):
             "completed",
             f"Selected {best['model_type']} (HR score) with risk capture={best['recall']:.3f}, review efficiency={best['precision']:.3f}, top-20 capture={(best.get('recall_at_top_20_percent') or 0):.3f}.",
         )
+        update_progress("model selection and explainability completed")
         return context
