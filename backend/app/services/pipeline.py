@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+import time
+
 from app.agents.project_manager import ProjectManagerAgent
 from app.agents.column_mapper import ColumnMapperAgent
 from app.agents.data_analyst import DataAnalystAgent
@@ -67,12 +71,27 @@ class AttritionPipeline:
             }
             save_json(progress_path(self.dataset_id), payload)
 
+        start_time = time.monotonic()
+        small_dataset_timeout = 180.0
+        dataset_rows = None
+
+        def check_timeout(stage_name: str):
+            nonlocal dataset_rows
+            elapsed = time.monotonic() - start_time
+            if dataset_rows is not None:
+                if int(dataset_rows) <= 5000 and elapsed > small_dataset_timeout:
+                    raise TimeoutError(f"Analysis exceeded {int(small_dataset_timeout)} seconds for a standard-sized dataset. Please try a smaller CSV or review backend performance.")
+            self.logger.add("Timing", "info", f"{stage_name} completed in {elapsed:.1f}s")
+
         write_progress(0, "running")
         context = {"dataset_id": self.dataset_id, "dataset_path": dataset_path(self.dataset_id)}
         try:
             for idx, agent in enumerate(self.agents):
                 write_progress(idx, "running", steps[idx][1])
                 context = agent.run(context)
+                if dataset_rows is None and isinstance(context.get("dataset_profile"), dict):
+                    dataset_rows = context["dataset_profile"].get("rows")
+                check_timeout(steps[idx][0])
                 if isinstance(agent, ProjectManagerAgent) and self.user_mapping:
                     # Inject user-confirmed mapping right after dataframe is loaded.
                     context["column_mapping"] = self.user_mapping
@@ -184,6 +203,7 @@ class AttritionPipeline:
                 except Exception as exc:
                     self.logger.add("DataQuality", "failed", str(exc))
                     results["data_quality"] = {"error": str(exc)}
+                check_timeout("Responsible-use review")
             elif df is not None:
                 results["executive_summary"] = {
                     "rows_analyzed": int(df.shape[0]),
@@ -201,13 +221,15 @@ class AttritionPipeline:
                     results["model_trust"]["validation_note"] = "Benchmark validation completed. Detailed metrics are available in the research notebook."
             except Exception:
                 pass
+            check_timeout("Report generation")
             save_json(result_path(self.dataset_id), results)
             build_pdf_report(self.dataset_id, results)
             self.logger.add("Pipeline", "completed", "Pipeline completed and report generated.")
             return results
         except Exception as exc:
             self.logger.add("Pipeline", "failed", str(exc))
-            write_progress(len(self.agents), "failed", str(exc))
+            write_progress(len(steps), "failed", str(exc))
+            self.logger.add("Timing", "failed", f"Pipeline failed after {time.monotonic() - start_time:.1f}s")
             failure = {"dataset_id": self.dataset_id, "status": "failed", "error": str(exc)}
             save_json(result_path(self.dataset_id), failure)
             raise

@@ -199,6 +199,7 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
     f1 = metrics.get("f1")
     roc_auc = metrics.get("roc_auc")
     pr_auc = metrics.get("pr_auc")
+    selected_model = (model.get("selected_model") if isinstance(model, dict) else None) or "Retainly pretrained attrition-risk model"
     reliability = metrics.get("model_reliability_label") or exec_sum.get("model_reliability_label") or "—"
 
     fairness_risk = exec_sum.get("fairness_risk") or fairness.get("overall_risk") or "—"
@@ -348,15 +349,15 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
     story.append(_p("Metrics", h2))
     metric_rows = [
         ("Selected model", selected_model),
-            ("Risk capture rate", _fmt_num(recall)),
-            ("Review efficiency", _fmt_num(metrics.get("precision"))),
-            ("F1 balance score", _fmt_num(f1)),
-            ("Ranking quality", _fmt_num(roc_auc)),
-            ("Attrition detection quality", _fmt_num(pr_auc)),
-            ("Top 10% risk capture", _fmt_num(metrics.get("recall_at_top_10_percent"))),
-            ("Top 20% risk capture", _fmt_num(metrics.get("recall_at_top_20_percent"))),
-            ("Attrition rate in top 10%", _fmt_pct(metrics.get("attrition_rate_in_top_10_percent"))),
-            ("Attrition rate in top 20%", _fmt_pct(metrics.get("attrition_rate_in_top_20_percent"))),
+        ("Risk capture rate", _fmt_num(recall)),
+        ("Review efficiency", _fmt_num(metrics.get("precision"))),
+        ("F1 balance score", _fmt_num(f1)),
+        ("Ranking quality", _fmt_num(roc_auc)),
+        ("Attrition detection quality", _fmt_num(pr_auc)),
+        ("Top 10% risk capture", _fmt_num(metrics.get("recall_at_top_10_percent"))),
+        ("Top 20% risk capture", _fmt_num(metrics.get("recall_at_top_20_percent"))),
+        ("Attrition rate in top 10%", _fmt_pct(metrics.get("attrition_rate_in_top_10_percent"))),
+        ("Attrition rate in top 20%", _fmt_pct(metrics.get("attrition_rate_in_top_20_percent"))),
         ("Class balance (test positive rate)", _fmt_pct(((metrics.get("class_balance") or {}).get("test") or {}).get("positive_rate"))),
     ]
     story.append(_kv_table(metric_rows, col_widths=[2.6 * inch, 3.6 * inch]))

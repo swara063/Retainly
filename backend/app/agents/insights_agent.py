@@ -104,16 +104,20 @@ class InsightsAgent(BaseAgent):
         self.log("running", "Generating management-ready insights and recommended interventions.")
         insights: list[str] = []
         recs: list[str] = []
-        model = context["model"]
+        model = context.get("model") or {}
+        model_label = str(model.get("selected_model") or "Retainly pretrained attrition-risk model")
         top_features = context["explainability"].get("top_features", [])
         if top_features:
             top = top_features[0]["feature"]
             insights.append(f"Key driver (most predictive feature): {top}.")
             recs.append(f"Action: investigate what is driving changes in {top} and whether HR policy/process improvements can address it.")
-        metrics = model["metrics"]
-        insights.append(f"Selected model: {model['selected_model']}.")
-        insights.extend(self._metric_sentence(metrics))
-        if float(metrics.get("recall") or 0.0) < 0.70:
+        metrics = model.get("metrics") or {}
+        insights.append(f"Model basis: {model_label}.")
+        if metrics:
+            insights.extend(self._metric_sentence(metrics))
+        else:
+            insights.append("Risk scoring was generated from the pretrained attrition-risk workflow.")
+        if float(metrics.get("recall") or 0.0) < 0.70 and metrics:
             recs.append("Action: treat risk scores as directional screening, validate with HR context, and improve data quality/features over time.")
         else:
             recs.append("Action: use risk flags to prioritize retention conversations and check-ins; avoid automated decisions.")
