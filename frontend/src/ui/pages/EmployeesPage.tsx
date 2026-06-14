@@ -2,6 +2,7 @@ import React from 'react';
 import { Search, Users } from 'lucide-react';
 import { API_BASE, fetchJson } from '../api';
 import { useAppDispatch, useAppState } from '../state';
+import { EmptyState, PageShell, SectionCard } from '../components/PageLayout';
 
 function toneForBand(band: string) {
   const b = String(band || '').toLowerCase();
@@ -68,15 +69,15 @@ export default function EmployeesPage() {
 
   const filters = explorer.available_filters || { departments: [], job_roles: [], risk_bands: [], employee_labels: [] };
   if (!s.datasetId) {
-    return <div className="page"><div className="card"><h2>At-Risk Employees</h2><Empty title="Run analysis to view employee risk ranking." text="Simple ranking and profile view will appear here after analysis." /></div></div>;
+    return <PageShell title="Employees" subtitle="Employee search, ranking, and profile only."><EmptyState title="Run analysis to view employee risk ranking." description="Simple ranking and profile view will appear here after analysis." /></PageShell>;
   }
 
   if (!s.results) {
-    return <div className="page"><div className="card"><h2>At-Risk Employees</h2><Empty title="Run analysis to view employee risk ranking." text="Simple ranking and profile view will appear here after analysis." /></div></div>;
+    return <PageShell title="Employees" subtitle="Employee search, ranking, and profile only."><EmptyState title="Run analysis to view employee risk ranking." description="Simple ranking and profile view will appear here after analysis." /></PageShell>;
   }
 
   return (
-    <div className="page">
+    <PageShell title="Employees" subtitle="Employee search, ranking, and profile only.">
       <div className="pageHeader">
         <div>
           <h2>At-Risk Employee Explorer</h2>
@@ -157,6 +158,6 @@ export default function EmployeesPage() {
           ) : <Empty title="Select an employee" text="Click any row to see the individual support profile, reasons, and suggested HR talking points." />}
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 }

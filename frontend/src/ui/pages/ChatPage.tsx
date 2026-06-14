@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppState } from '../state';
+import { PageShell } from '../components/PageLayout';
 import { API_BASE, fetchJson } from '../api';
 
 type Msg = { role: 'user' | 'assistant'; text: string };
@@ -137,7 +138,7 @@ export default function ChatPage() {
   const fairness = hasValidResults ? (s.results?.fairness?.overall_risk || '—') : '—';
 
   return (
-    <div className="page">
+    <PageShell title="Chatbot" subtitle="General Q&A before analysis; dataset-specific Q&A after analysis.">
       <div className="pageHeader">
         <div>
           <h2>Chatbot</h2>
@@ -168,6 +169,6 @@ export default function ChatPage() {
           <button className="primary" onClick={send} disabled={sending}>Send</button>
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 }

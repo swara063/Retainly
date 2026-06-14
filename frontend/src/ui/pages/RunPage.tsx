@@ -2,6 +2,7 @@ import React from 'react';
 import { Download } from 'lucide-react';
 import { API_BASE } from '../api';
 import { useAppState } from '../state';
+import { EmptyState, PageShell } from '../components/PageLayout';
 
 function Empty({ text }: { text: string }) {
   return <div className="card"><div className="panelHint">{text}</div></div>;
@@ -11,11 +12,11 @@ export default function RunPage() {
   const s = useAppState();
   const hasValidResults = s.phase === 'completed' && s.results?.status === 'completed' && Array.isArray(s.results?.employee_risk);
   if (!hasValidResults) {
-    return <div className="page"><h2>Report</h2><Empty text="Run analysis to generate a report." /></div>;
+    return <PageShell title="Report" subtitle="Download and export options."><EmptyState title="Run analysis to generate a report." description="The report downloads will appear after analysis completes." /></PageShell>;
   }
 
   return (
-    <div className="page">
+    <PageShell title="Report" subtitle="Download and export options.">
       <div className="pageHeader">
         <div>
           <h2>Report</h2>
@@ -34,6 +35,6 @@ export default function RunPage() {
           <a href="https://github.com/swara063/Retainly/blob/main/notebooks/retainly_dataset_comparison.ipynb" target="_blank" rel="noreferrer">Open validation notebook</a>
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 }

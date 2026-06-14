@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppState } from '../state';
+import { EmptyState, PageShell } from '../components/PageLayout';
 
 function Empty({ text }: { text: string }) {
   return <div className="card"><div className="panelHint">{text}</div></div>;
@@ -10,11 +11,11 @@ export default function AgentsPage() {
   const hasUploadedDataset = Boolean(s.datasetId || s.file);
   const hasValidResults = s.phase === 'completed' && s.results?.status === 'completed' && Array.isArray(s.results?.employee_risk);
   if (!hasValidResults) {
-    return <div className="page"><h2>Agents</h2><Empty text={hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.'} /></div>;
+    return <PageShell title="Agents" subtitle="Workflow timeline and collapsed diagnostics."><EmptyState title="Run analysis first to view this section." description={hasUploadedDataset ? 'Workflow timeline will appear after analysis completes.' : 'Upload HR data to begin workflow analysis.'} /></PageShell>;
   }
 
   return (
-    <div className="page">
+    <PageShell title="Agents" subtitle="Workflow timeline and collapsed diagnostics.">
       <div className="pageHeader">
         <div>
           <h2>Agents</h2>
@@ -40,6 +41,6 @@ export default function AgentsPage() {
           <pre className="pre">{JSON.stringify(s.developerDiagnostics || [], null, 2)}</pre>
         </details>
       </div>
-    </div>
+    </PageShell>
   );
 }

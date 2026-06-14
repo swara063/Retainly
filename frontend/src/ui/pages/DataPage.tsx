@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppState } from '../state';
+import { EmptyState, PageShell, SectionCard } from '../components/PageLayout';
 
 function Empty({ text }: { text: string }) {
   return <div className="card"><div className="panelHint">{text}</div></div>;
@@ -10,7 +11,7 @@ export default function DataPage() {
   const hasUploadedDataset = Boolean(s.datasetId || s.file);
   const hasValidResults = s.phase === 'completed' && s.results?.status === 'completed' && Array.isArray(s.results?.employee_risk);
   if (!hasValidResults) {
-    return <div className="page"><h2>Action Plan</h2><Empty text={hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.'} /></div>;
+    return <PageShell title="Action Plan" subtitle="Only HR action cards."><EmptyState title="Run analysis first to view this section." description={hasUploadedDataset ? 'Action cards will appear after analysis completes.' : 'Upload HR data to generate the action plan.'} /></PageShell>;
   }
 
   const recommendations: string[] = s.results.recommendations || [];
@@ -18,7 +19,7 @@ export default function DataPage() {
   const priorities = ['High', 'Medium', 'Low'];
 
   return (
-    <div className="page">
+    <PageShell title="Action Plan" subtitle="Only HR action cards.">
       <div className="pageHeader">
         <div>
           <h2>Action Plan</h2>
@@ -40,6 +41,6 @@ export default function DataPage() {
           </div>
         ))}
       </div>
-    </div>
+    </PageShell>
   );
 }

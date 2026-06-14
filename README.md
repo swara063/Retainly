@@ -1,24 +1,19 @@
 # Retainly
 
-A full-stack, explainable, ethically-aware multi-agent HR attrition analytics platform designed as an M.Tech major project. Retainly lets a user upload an HR CSV dataset, automatically maps columns, performs EDA, trains multiple machine-learning models, compares a plain baseline against the multi-agent workflow, evaluates fairness, generates employee risk rankings, uses Groq for optional HR narrative/chat support, and produces a downloadable report.
+Retainly is split into two clear parts:
 
-## Why this is major-project grade
+- Website: an HR risk-scoring product for employee ranking, hotspots, action planning, chatbot guidance, and report download.
+- Notebook/scripts: the separate validation workflow that compares Retainly against baseline models using labeled benchmark attrition datasets.
 
-This is not just a classifier. It is structured as an end-to-end decision-support platform with:
+The website is designed for current HR data and decision support. The validation notebook and scripts are used for proof, benchmark comparison, and research artifacts.
 
-- Multi-agent pipeline architecture
-- Baseline model vs Retainly agent-workflow comparison
-- Automated dataset validation and column mapping
-- EDA and visual analytics
-- Multiple ML model comparison
-- Feature importance and explainability
-- Fairness and bias analysis
-- Transparent execution timeline
-- PDF/HTML report generation
-- React dashboard
-- FastAPI backend
-- Sample synthetic dataset generator
-- Clean documentation for implementation, viva, and dissertation writing
+## What the website does
+
+Retainly’s web app lets a user upload HR CSV data, automatically map columns, score retention risk, review the agent workflow, inspect employee rankings and hotspots, read action recommendations, ask the chatbot questions, and download a report.
+
+## What the notebook/scripts do
+
+The research notebook and scripts are kept separate from the HR website. They run the benchmark comparison, generate validation outputs, and support the method-proof artifact for the project.
 
 ## Repository layout
 

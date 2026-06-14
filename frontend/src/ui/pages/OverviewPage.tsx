@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppState } from '../state';
+import { EmptyState, PageShell, SectionCard } from '../components/PageLayout';
 
 function Empty({ text }: { text: string }) {
   return <div className="card"><div className="panelHint">{text}</div></div>;
@@ -10,7 +11,7 @@ export default function OverviewPage() {
   const hasUploadedDataset = Boolean(s.datasetId || s.file);
   const hasValidResults = s.phase === 'completed' && s.results?.status === 'completed' && Array.isArray(s.results?.employee_risk);
   if (!hasValidResults) {
-    return <div className="page"><h2>Hotspots</h2><Empty text={hasUploadedDataset ? 'Run analysis first to view this section.' : 'Upload HR data and run retention analysis to view this section.'} /></div>;
+    return <PageShell title="Hotspots" subtitle="Risk concentration by department, role, workload, satisfaction, and tenure."><EmptyState title="Run analysis first to view this section." description={hasUploadedDataset ? 'Hotspot analysis will appear after analysis completes.' : 'Upload HR data to begin hotspot analysis.'} /></PageShell>;
   }
 
   const topRiskSegments = Array.isArray(s.results.risk_segments) ? [...s.results.risk_segments].sort((a, b) => Number(b.average_predicted_risk || 0) - Number(a.average_predicted_risk || 0)) : [];
@@ -24,7 +25,7 @@ export default function OverviewPage() {
   ].filter((item) => item.value);
 
   return (
-    <div className="page">
+    <PageShell title="Hotspots" subtitle="Risk concentration by department, role, workload, satisfaction, and tenure.">
       <div className="pageHeader">
         <div>
           <h2>Hotspots</h2>
@@ -51,6 +52,6 @@ export default function OverviewPage() {
           <div className="panelHint">Review the segment groupings above to understand where retention support is concentrated.</div>
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 }
