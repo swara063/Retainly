@@ -9,6 +9,7 @@ import DataPage from './pages/DataPage';
 import AgentsPage from './pages/AgentsPage';
 import ChatPage from './pages/ChatPage';
 import RunPage from './pages/RunPage';
+import ValidationPage from './pages/ValidationPage';
 
 function TopBar() {
   return (
@@ -28,6 +29,7 @@ function TopBar() {
         <Link className="link" to="/agents">Agents</Link>
         <Link className="link" to="/report">Report</Link>
         <Link className="link" to="/help">Chatbot</Link>
+        <Link className="link" to="/validation">Validation</Link>
       </nav>
     </header>
   );
@@ -47,6 +49,7 @@ export default function App() {
             <Route path="/agents" element={<AgentsPage />} />
             <Route path="/help" element={<ChatPage />} />
             <Route path="/report" element={<RunPage />} />
+            <Route path="/validation" element={<ValidationPage />} />
           </Routes>
           <footer className="footer">
             <div className="muted">Retainly is a decision-support tool for retention planning. Use results for supportive HR action, not as the sole basis for employment decisions.</div>

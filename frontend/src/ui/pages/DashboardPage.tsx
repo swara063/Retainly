@@ -136,12 +136,7 @@ export default function DashboardPage() {
           Retainly’s multi-agent workflow is validated separately using labeled benchmark attrition datasets. The website applies that validated workflow to current HR data for risk scoring and retention planning.
         </div>
         <div className="btnRow" style={{ marginTop: 12 }}>
-          <a className="download secondary" href="https://colab.research.google.com/github/swara063/Retainly/blob/main/notebooks/retainly_dataset_comparison.ipynb" target="_blank" rel="noreferrer">Open validation notebook in Colab</a>
-          <a className="download secondary" href="https://github.com/swara063/Retainly/blob/main/notebooks/retainly_dataset_comparison.ipynb" target="_blank" rel="noreferrer">View notebook source on GitHub</a>
-          <a className="download secondary" href="https://github.com/swara063/Retainly/tree/main/research_outputs" target="_blank" rel="noreferrer">View research outputs</a>
-        </div>
-        <div className="panelHint" style={{ marginTop: 12 }}>
-          Run all cells in Colab to generate the live benchmark tables, model results, charts, and outputs.
+          <a className="download secondary" href="/validation">View validation proof</a>
         </div>
       </section>
 
