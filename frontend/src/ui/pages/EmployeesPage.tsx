@@ -11,6 +11,19 @@ function toneForBand(band: string) {
   return 'low';
 }
 
+function priorityLevelLabel(item: any) {
+  return item?.priority_level || item?.risk_band || 'Monitor';
+}
+
+function priorityOptionLabel(value: string) {
+  const normalized = String(value || '').toLowerCase();
+  if (normalized === 'critical') return 'Urgent review';
+  if (normalized === 'high') return 'High priority';
+  if (normalized === 'medium') return 'Watchlist';
+  if (normalized === 'low') return 'Monitor';
+  return value;
+}
+
 function Empty({ title, text }: { title: string; text: string }) {
   return <div className="emptyPreview"><b>{title}</b><p className="muted">{text}</p></div>;
 }
@@ -100,7 +113,7 @@ export default function EmployeesPage() {
           <div className="grid three" style={{ marginTop: 12 }}>
             <label><div className="muted tiny">Department</div><select value={department} onChange={(e) => setDepartment(e.target.value)}><option value="">All</option>{(filters.departments || []).map((v: string) => <option key={v} value={v}>{v}</option>)}</select></label>
             <label><div className="muted tiny">Job role</div><select value={jobRole} onChange={(e) => setJobRole(e.target.value)}><option value="">All</option>{(filters.job_roles || []).map((v: string) => <option key={v} value={v}>{v}</option>)}</select></label>
-            <label><div className="muted tiny">Risk band</div><select value={riskBand} onChange={(e) => setRiskBand(e.target.value)}><option value="">All</option>{(filters.risk_bands || ['Low', 'Medium', 'High', 'Critical']).map((v: string) => <option key={v} value={v}>{v}</option>)}</select></label>
+            <label><div className="muted tiny">Priority level</div><select value={riskBand} onChange={(e) => setRiskBand(e.target.value)}><option value="">All</option>{(filters.risk_bands || ['Low', 'Medium', 'High', 'Critical']).map((v: string) => <option key={v} value={v}>{priorityOptionLabel(v)}</option>)}</select></label>
           </div>
           <div className="btnRow single" style={{ marginTop: 12 }}>
             <label className="muted tiny">Sort<select value={sort} onChange={(e) => setSort(e.target.value as 'risk_desc' | 'risk_asc')}><option value="risk_desc">Most at-risk first</option><option value="risk_asc">Least at-risk first</option></select></label>
@@ -112,8 +125,8 @@ export default function EmployeesPage() {
 
         <div className="card">
           <div className="panelTitle"><Users size={18} /><div><b>How to use this page</b><div className="muted">Supportive intervention, not punitive action.</div></div></div>
-          <div className="panelHint" style={{ marginTop: 12 }}><b>Recommended use:</b> Start with the highest risk bands, validate with HR context, and plan stay interviews, workload review, manager coaching, or growth-path support.</div>
-          <div className="panelHint"><b>Privacy note:</b> Results are row-level decision-support signals. Do not use them as the sole basis for employment action.</div>
+          <div className="panelHint" style={{ marginTop: 12 }}><b>Recommended use:</b> Start with the highest priority levels, validate with HR context, and plan stay interviews, workload review, manager coaching, or growth-path support.</div>
+          <div className="panelHint"><b>Privacy note:</b> Results are row-level retention risk signals. Do not use them as the sole basis for employment action.</div>
         </div>
       </div>
 
@@ -122,15 +135,15 @@ export default function EmployeesPage() {
           <h3>Employees ranked by retention risk</h3>
           <div style={{ overflowX: 'auto' }}>
             <table className="table">
-              <thead><tr><th>Employee</th><th>Department</th><th>Role</th><th>Risk score</th><th>Risk band</th><th>Priority rank</th><th>Top factors</th></tr></thead>
+              <thead><tr><th>Employee</th><th>Department</th><th>Role</th><th>Risk signal</th><th>Priority level</th><th>Priority rank</th><th>Top factors</th></tr></thead>
               <tbody>
                 {(explorer.records || []).length ? explorer.records.map((item: any) => (
                   <tr key={item.row_index} className={selected?.row_index === item.row_index ? 'selectedRow' : ''} onClick={() => setSelected(item)} style={{ cursor: 'pointer' }}>
                     <td><b>{item.display_label}</b></td>
                     <td>{item.department || '—'}</td>
                     <td>{item.job_role || '—'}</td>
-                    <td>{Number(item.risk_percent || 0).toFixed(0)}%</td>
-                    <td><span className={`priorityTag ${toneForBand(item.risk_band)}`}>{item.risk_band}</span></td>
+                    <td>{Math.round(Number(item.risk_score || 0) * 100)}</td>
+                    <td><span className={`priorityTag ${toneForBand(item.risk_band)}`}>{priorityLevelLabel(item)}</span></td>
                     <td>{item.priority_tier || '—'}</td>
                     <td>{(item.top_risk_factors || []).slice(0, 2).join('; ') || '—'}</td>
                   </tr>
@@ -149,12 +162,14 @@ export default function EmployeesPage() {
                 <div className="statCard"><span>Name / ID</span><b>{String(detail.employee?.employee_name || detail.employee?.employee_id || detail.employee?.display_label || '—')}</b></div>
                 <div className="statCard"><span>Department</span><b>{String(detail.employee?.department || '—')}</b></div>
                 <div className="statCard"><span>Role</span><b>{String(detail.employee?.job_role || '—')}</b></div>
-                <div className="statCard"><span>Risk score</span><b>{Number(detail.employee?.risk_percent || 0).toFixed(0)}%</b></div>
+                <div className="statCard"><span>Risk signal</span><b>{Math.round(Number(detail.employee?.risk_score || 0) * 100)}</b></div>
+                <div className="statCard"><span>Priority level</span><b>{String(priorityLevelLabel(detail.employee))}</b></div>
                 <div className="statCard"><span>Priority rank</span><b>{String(detail.employee?.priority_tier || '—')}</b></div>
               </div>
               <div className="panelHint"><b>Why this employee needs attention:</b> {detail.employee?.top_risk_factors?.join('; ') || 'Review with manager context.'}</div>
               <div className="panelHint"><b>Recommended HR support:</b> {detail.recommended_support_action}</div>
               <div className="panelHint"><b>Talking points:</b> {(detail.manager_hr_talking_points || []).join(' ')}</div>
+              <div className="panelHint"><b>What this means:</b> This does not mean the employee will definitely leave. It means they show a combination of retention-risk signals that should be reviewed supportively.</div>
               <div className="panelHint"><b>Ethical reminder:</b> {detail.ethical_note}</div>
             </>
           ) : <Empty title="Select an employee" text="Click any row to see the individual support profile, reasons, and suggested HR talking points." />}

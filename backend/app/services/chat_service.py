@@ -209,7 +209,12 @@ def fallback_hr_answer(question: str, results: dict[str, Any] | None = None) -> 
         if top:
             lines = ["Based on the employee risk explorer, these are the highest-priority employees for supportive HR follow-up:"]
             for r in top:
-                lines.append(f"- {r.get('employee_label') or r.get('employee_id') or ('Row '+str(r.get('row_index')))}: {round(float(r.get('risk_score') or 0)*100)}% risk, band {r.get('risk_band')}. Suggested action: {r.get('recommended_action')}")
+                lines.append(
+                    f"- {r.get('employee_label') or r.get('employee_id') or ('Row '+str(r.get('row_index')))}: "
+                    f"retention risk signal {round(float(r.get('risk_score') or 0)*100)}, "
+                    f"priority level {r.get('priority_level') or r.get('risk_band')}. "
+                    f"Suggested action: {r.get('recommended_action')}"
+                )
             lines.append("Use this for stay interviews, workload review, and support planning — not punitive decisions.")
             return "\n".join(lines)
     if "fair" in q or "bias" in q:

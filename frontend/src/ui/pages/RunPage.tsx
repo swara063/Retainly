@@ -29,7 +29,7 @@ export default function RunPage() {
           <a className="download" href={`${API_BASE}/analysis/${s.datasetId}/report`}><Download size={18} /> PDF report</a>
           <a className="download secondary" href={`${API_BASE}/analysis/${s.datasetId}/results.json`}><Download size={18} /> Results JSON</a>
         </div>
-        <div className="panelHint" style={{ marginTop: 12 }}>This report is for retention-support planning, not automatic employment decisions.</div>
+        <div className="panelHint" style={{ marginTop: 12 }}>This report is for retention-support planning, not automatic employment decisions. Retention risk signal is a directional model score for retention planning, not a guaranteed probability of resignation.</div>
         <div className="panelHint" style={{ marginTop: 8 }}>
           Research validation notebook available separately.{' '}
           <a href="https://github.com/swara063/Retainly/blob/main/notebooks/retainly_dataset_comparison.ipynb" target="_blank" rel="noreferrer">Open validation notebook</a>

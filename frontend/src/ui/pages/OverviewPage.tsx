@@ -45,17 +45,19 @@ function HotspotCard({ item }: { item: any }) {
         <div className="statMini"><span>Average risk</span><b>{Math.round(risk * 100)}%</b></div>
         <div className="statMini"><span>Employees</span><b>{String(item?.employee_count || 0)}</b></div>
       </div>
-      <div className="actionField">
-        <b>How derived</b>
-        <p>{segmentDerivation(String(item?.segment_name || ''), String(item?.group || ''))}</p>
-      </div>
-      <div className="actionField">
-        <b>Why it matters</b>
-        <p>{hotspotWhy(String(item?.segment_name || ''), String(item?.group || ''), risk)}</p>
-      </div>
-      <div className="actionField">
-        <b>Suggested HR response</b>
-        <p>{hotspotResponse(String(item?.segment_name || ''), String(item?.group || ''))}</p>
+      <div className="hotspotBody">
+        <div className="hotspotDetail">
+          <b>How derived</b>
+          <p>{segmentDerivation(String(item?.segment_name || ''), String(item?.group || ''))}</p>
+        </div>
+        <div className="hotspotDetail">
+          <b>Why it matters</b>
+          <p>{hotspotWhy(String(item?.segment_name || ''), String(item?.group || ''), risk)}</p>
+        </div>
+        <div className="hotspotDetail">
+          <b>Suggested HR response</b>
+          <p>{hotspotResponse(String(item?.segment_name || ''), String(item?.group || ''))}</p>
+        </div>
       </div>
     </div>
   );

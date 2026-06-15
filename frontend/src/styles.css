@@ -529,14 +529,15 @@ li{ margin: 8px 0; color:#334155; }
 }
 .actionCompactCard p{ margin: 6px 0 0; color:#334155; line-height: 1.5; }
 .chipRow{ display:flex; gap:10px; flex-wrap:wrap; }
-.hotspotList{ display:grid; gap: 14px; }
+.hotspotList{ display:grid; gap: 16px; }
 .hotspotCard{
   border: 1px solid rgba(15,23,42,.08);
-  background: rgba(255,255,255,.72);
-  border-radius: 18px;
-  padding: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,.84), rgba(248,250,255,.72));
+  border-radius: 20px;
+  padding: 18px;
   display:grid;
-  gap: 12px;
+  gap: 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
 }
 .hotspotHead{
   display:flex;
@@ -544,25 +545,48 @@ li{ margin: 8px 0; color:#334155; }
   justify-content:space-between;
   gap: 12px;
 }
-.hotspotHead h4{ margin:0 0 4px; font-size: 16px; }
+.hotspotHead h4{ margin:0 0 4px; font-size: 17px; letter-spacing: -.2px; }
 .hotspotMetaGrid{
   display:grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 .statMini{
   border: 1px solid rgba(15,23,42,.08);
-  background: rgba(255,255,255,.78);
-  border-radius: 14px;
-  padding: 10px 12px;
+  background: rgba(255,255,255,.92);
+  border-radius: 16px;
+  padding: 12px 14px;
 }
 .statMini span{
   display:block;
   font-size: 11px;
   color:#64748b;
   font-weight:800;
+  text-transform: uppercase;
+  letter-spacing: .5px;
 }
-.statMini b{ display:block; margin-top: 4px; }
+.statMini b{ display:block; margin-top: 6px; font-size: 17px; letter-spacing: -.3px; }
+.hotspotBody{
+  display:grid;
+  gap: 10px;
+}
+.hotspotDetail{
+  border: 1px solid rgba(15,23,42,.08);
+  background: rgba(249,250,255,.88);
+  border-radius: 16px;
+  padding: 14px;
+}
+.hotspotDetail b{
+  display:block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  letter-spacing: .2px;
+}
+.hotspotDetail p{
+  margin: 0;
+  color:#334155;
+  line-height: 1.55;
+}
 .spotRow{
   display:flex;
   justify-content:space-between;

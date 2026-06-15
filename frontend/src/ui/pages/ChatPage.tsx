@@ -76,8 +76,9 @@ function buildLocalAnswer(question: string, results: any): string {
     const factors = Array.isArray(found.top_risk_factors) ? found.top_risk_factors.join('; ') : '—';
     return [
       `EmployeeID / EmployeeName: ${found.employee_id || '—'} / ${found.employee_name || found.display_label || '—'}`,
-      `risk_score: ${Math.round(Number(found.risk_score || 0) * 100)}%`,
-      `risk_band: ${found.risk_band || '—'}`,
+      `risk_signal: ${Math.round(Number(found.risk_score || 0) * 100)}`,
+      `priority_level: ${found.priority_level || found.risk_band || '—'}`,
+      `priority_rank: ${found.priority_tier || '—'}`,
       `department: ${found.department || '—'}`,
       `role: ${found.job_role || '—'}`,
       `top factors: ${factors}`,

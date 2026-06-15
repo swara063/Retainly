@@ -125,6 +125,19 @@ def _fmt_pct(x: Any, digits: int = 1) -> str:
         return "—"
 
 
+def _priority_level_label(value: Any) -> str:
+    band = str(value or "").strip().lower()
+    if band == "critical":
+        return "Urgent review"
+    if band == "high":
+        return "High priority"
+    if band == "medium":
+        return "Watchlist"
+    if band == "low":
+        return "Monitor"
+    return str(value or "—")
+
+
 def _fmt_num(x: Any, digits: int = 3) -> str:
     try:
         v = float(x)
@@ -237,9 +250,9 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
     story.append(section_rule)
     story.append(_p("Executive Summary", h1))
     if can_evaluate_model:
-        story.append(_kv_table([("Employees analyzed", employees_analyzed),("Columns analyzed", columns_analyzed),("Priority employees", (exec_sum.get("high_risk_employees") or results.get("employee_risk_high_count") or 0)),("Highest-risk department", exec_sum.get("highest_risk_department") or "—"),("Highest-risk role", exec_sum.get("highest_risk_role") or "—"),("Prediction reliability", reliability),("Model basis", model_trust.get("model_basis") or "Pretrained attrition-risk model"),("Training source", model_trust.get("training_source") or "Benchmark attrition datasets configured in research_datasets/"),("Suitable use", model_trust.get("suitable_use") or "Retention prioritization and HR planning"),("Not suitable for", model_trust.get("not_suitable_for") or "Automatic firing, punitive decisions, or final employment decisions"),("Fairness review", fairness_risk)], col_widths=[2.3 * inch, 3.9 * inch]))
+        story.append(_kv_table([("Employees analyzed", employees_analyzed),("Columns analyzed", columns_analyzed),("Priority watchlist", (exec_sum.get("high_risk_employees") or results.get("employee_risk_high_count") or 0)),("Highest-risk department", exec_sum.get("highest_risk_department") or "—"),("Highest-risk role", exec_sum.get("highest_risk_role") or "—"),("Prediction reliability", reliability),("Model basis", model_trust.get("model_basis") or "Pretrained attrition-risk model"),("Training source", model_trust.get("training_source") or "Benchmark attrition datasets configured in research_datasets/"),("Suitable use", model_trust.get("suitable_use") or "Retention prioritization and HR planning"),("Not suitable for", model_trust.get("not_suitable_for") or "Automatic firing, punitive decisions, or final employment decisions"),("Fairness review", fairness_risk)], col_widths=[2.3 * inch, 3.9 * inch]))
     else:
-        story.append(_kv_table([("Dataset mode", dataset_mode),("Employees analyzed", employees_analyzed),("Columns analyzed", columns_analyzed),("Priority employees", (exec_sum.get("high_risk_employees") or results.get("employee_risk_high_count") or 0)),("Highest-risk department", exec_sum.get("highest_risk_department") or "—"),("Highest-risk role", exec_sum.get("highest_risk_role") or "—"),("Prediction reliability", reliability),("Fairness review", fairness_risk)], col_widths=[2.3 * inch, 3.9 * inch]))
+        story.append(_kv_table([("Dataset mode", dataset_mode),("Employees analyzed", employees_analyzed),("Columns analyzed", columns_analyzed),("Priority watchlist", (exec_sum.get("high_risk_employees") or results.get("employee_risk_high_count") or 0)),("Highest-risk department", exec_sum.get("highest_risk_department") or "—"),("Highest-risk role", exec_sum.get("highest_risk_role") or "—"),("Prediction reliability", reliability),("Fairness review", fairness_risk)], col_widths=[2.3 * inch, 3.9 * inch]))
     story.append(Spacer(1, 10))
     story.append(_p(f"<b>Recommended use:</b> {recommended_use}", body))
 
@@ -317,14 +330,14 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
         top_records = sorted(employee_records, key=lambda row: (float(row.get("risk_score") or 0), float(row.get("risk_percentile") or 0)), reverse=True)[:10]
         story.append(
             _table(
-                ["Employee", "Department", "Role", "Risk score", "Risk band", "Priority rank", "Top factors", "Suggested support action"],
+                ["Employee", "Department", "Role", "Risk signal", "Priority level", "Priority rank", "Top factors", "Suggested support action"],
                 [
                     [
                         row.get("display_label") or row.get("employee_name") or row.get("employee_id"),
                         row.get("department") or "—",
                         row.get("job_role") or "—",
-                        _fmt_pct(row.get("risk_score"), 0),
-                        row.get("risk_band") or "—",
+                        str(int(round(float(row.get("risk_score") or 0) * 100))),
+                        row.get("priority_level") or _priority_level_label(row.get("risk_band")),
                         row.get("priority_tier") or "—",
                         "; ".join((row.get("top_risk_factors") or [])[:2]) or "—",
                         row.get("recommended_support_action") or "—",
@@ -335,7 +348,7 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
             )
         )
         story.append(Spacer(1, 8))
-        story.append(_p("Priority rank is relative to this uploaded dataset. It is not the same as attrition probability.", small))
+        story.append(_p("Retention risk signal is a directional model score for retention planning. It is not a guaranteed probability of resignation. Priority rank is relative to this uploaded dataset.", small))
     else:
         story.append(_p("No employee-level priority list available.", small))
 

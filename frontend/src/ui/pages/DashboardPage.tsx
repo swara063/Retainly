@@ -156,7 +156,7 @@ export default function DashboardPage() {
           <SectionCard title="Command Center Summary" subtitle="High-level summary after analysis.">
             <div className="summaryGrid" style={{ marginTop: 12 }}>
               <StatCard label="Employees analyzed" value={String(s.rows ?? '—')} />
-              <StatCard label="Priority employees" value={String(execSummary.high_risk_employees ?? 0)} tone="warn" />
+              <StatCard label="Priority watchlist" value={String(execSummary.high_risk_employees ?? 0)} tone="warn" />
               <StatCard label="Highest-risk department" value={String(execSummary.highest_risk_department || '—')} />
               <StatCard label="Highest-risk role" value={String(execSummary.highest_risk_role || '—')} />
               <StatCard label="Top risk driver" value={String(execSummary.top_risk_driver || '—')} />
@@ -164,8 +164,8 @@ export default function DashboardPage() {
             </div>
             <div className="panelHint" style={{ marginTop: 12 }}>
               {Number(execSummary.high_risk_employees || 0) === 0
-                ? 'This upload shows moderate absolute risk. Retainly has ranked the highest-watchlist employees and highlighted segments for supportive HR review.'
-                : 'This upload contains employees or segments needing prioritized retention support.'}
+                ? 'Risk is moderate overall. Use priority rank to review the highest watchlist employees first.'
+                : 'Retainly found a priority watchlist for supportive HR review.'}
             </div>
           </SectionCard>
           <SectionCard title="Top 3 actions" subtitle="Action priorities only.">

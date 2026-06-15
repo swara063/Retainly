@@ -27,6 +27,17 @@ def _risk_band(score: float) -> str:
     return "Low"
 
 
+def _priority_level(band: str) -> str:
+    normalized = str(band or "").strip().lower()
+    if normalized == "critical":
+        return "Urgent review"
+    if normalized == "high":
+        return "High priority"
+    if normalized == "medium":
+        return "Watchlist"
+    return "Monitor"
+
+
 def _priority_tier(percentile: float) -> str:
     if percentile >= 95.0:
         return "Top 5%"
@@ -66,20 +77,15 @@ def _display_scores_and_bands(scores: pd.Series) -> pd.DataFrame:
 
 def _risk_fields_from_scores(raw_scores: pd.Series, display_scores: pd.Series | None = None) -> pd.DataFrame:
     clean_raw = pd.to_numeric(raw_scores, errors="coerce").fillna(0.0).clip(0, 1)
-    clean_display = (
-        pd.to_numeric(display_scores, errors="coerce").reindex(clean_raw.index).fillna(clean_raw).clip(0, 1)
-        if display_scores is not None
-        else clean_raw
-    )
     if clean_raw.empty:
         return _display_scores_and_bands(clean_raw)
-    percentile = clean_display.rank(method="average", pct=True).clip(0, 1) * 100.0
+    percentile = clean_raw.rank(method="average", pct=True).clip(0, 1) * 100.0
     return pd.DataFrame(
         {
             "raw_model_score": clean_raw.astype(float),
             "risk_percentile": percentile.astype(float),
-            "display_risk_score": clean_display.astype(float),
-            "risk_band": clean_display.map(lambda value: _risk_band(float(value))),
+            "display_risk_score": clean_raw.astype(float),
+            "risk_band": clean_raw.map(lambda value: _risk_band(float(value))),
             "priority_tier": percentile.map(lambda value: _priority_tier(float(value))),
         },
         index=clean_raw.index,
@@ -347,9 +353,11 @@ def build_employee_risk(
             {
                 "row_index": row_number,
                 "risk_score": float(row_meta["display_risk_score"]),
+                "risk_signal": int(round(float(row_meta["display_risk_score"]) * 100.0)),
                 "raw_model_score": float(row_meta["raw_model_score"]),
                 "risk_percentile": float(row_meta["risk_percentile"]),
                 "risk_band": str(row_meta["risk_band"]),
+                "priority_level": _priority_level(str(row_meta["risk_band"])),
                 "priority_tier": str(row_meta["priority_tier"]),
                 "top_risk_factors": top_risk_factors,
             }
@@ -438,10 +446,12 @@ def build_employee_risk_records(
                 "department": dept_value,
                 "job_role": role_value,
                 "risk_score": float(row_meta["display_risk_score"]),
+                "risk_signal": int(round(float(row_meta["display_risk_score"]) * 100.0)),
                 "raw_model_score": float(row_meta["raw_model_score"]),
                 "risk_percentile": float(row_meta["risk_percentile"]),
                 "risk_percent": float(row_meta["display_risk_score"] * 100.0),
                 "risk_band": risk_band,
+                "priority_level": _priority_level(risk_band),
                 "priority_tier": str(row_meta["priority_tier"]),
                 "top_risk_factors": factors[:5],
                 "protective_factors": protective_factors[:5],
