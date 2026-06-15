@@ -10,10 +10,31 @@ function StatCard({ label, value, tone }: { label: string; value: string; tone?:
   return <div className={`statCard ${tone || 'neutral'}`}><span>{label}</span><b>{value}</b></div>;
 }
 
+function normalizeAgentLabel(value: string) {
+  if (value === 'Fairness Auditor Agent') return 'Insights Agent';
+  if (value === 'Report Agent') return 'Insights Agent';
+  return value;
+}
+
+function normalizeStepLabel(value: string) {
+  const lower = String(value || '').toLowerCase();
+  if (lower.includes('fairness')) return 'generating HR guidance';
+  if (lower.includes('report')) return 'exporting report';
+  return value;
+}
+
 export default function DashboardPage() {
   const s = useAppState();
   const set = useAppDispatch();
   const progress = s.progress || { percent: 0, status: 'idle', current_agent: '', current_step: '' };
+  const displayProgress = {
+    ...progress,
+    current_agent: normalizeAgentLabel(String(progress.current_agent || '')),
+    current_step: normalizeStepLabel(String(progress.current_step || '')),
+    steps: Array.isArray(progress.steps)
+      ? progress.steps.filter((step) => ['Project Manager Agent', 'Data Analyst Agent', 'ML Engineer Agent', 'Insights Agent'].includes(String(step.name || '')))
+      : progress.steps,
+  };
 
   async function uploadCurrentFile() {
     if (!s.file) throw new Error('Choose a CSV file first.');
@@ -125,7 +146,7 @@ export default function DashboardPage() {
           </div>
         </label>
         {s.phase === 'uploading' ? <ProgressBar pct={s.uploadPct} label={`${s.uploadPct}% uploaded`} /> : null}
-        {progress && progress.status && progress.status !== 'idle' ? <div style={{ marginTop: 12 }}><ProgressBar pct={Number(progress.percent || 0)} label={`${progress.current_agent || 'Running'} • ${progress.current_step || progress.status}`} /></div> : null}
+        {progress && progress.status && progress.status !== 'idle' ? <div style={{ marginTop: 12 }}><ProgressBar pct={Number(progress.percent || 0)} label={`${displayProgress.current_agent || 'Running'} • ${displayProgress.current_step || progress.status}`} /></div> : null}
         <div className="btnRow" style={{ marginTop: 12 }}>
           <button className="primary" onClick={() => void analyze()} disabled={!s.file || s.loading}>{hasValidResults ? 'Run analysis again' : 'Run Multi-Agent Analysis'}</button>
           <button onClick={() => void uploadCurrentFile()} disabled={!s.file || s.loading}>Re-upload</button>
@@ -156,7 +177,7 @@ export default function DashboardPage() {
           <SectionCard title="Command Center Summary" subtitle="High-level summary after analysis.">
             <div className="summaryGrid" style={{ marginTop: 12 }}>
               <StatCard label="Employees analyzed" value={String(s.rows ?? '—')} />
-              <StatCard label="Priority watchlist" value={String(execSummary.high_risk_employees ?? 0)} tone="warn" />
+              <StatCard label="Immediate attention" value={String(execSummary.high_risk_employees ?? 0)} tone="warn" />
               <StatCard label="Highest-risk department" value={String(execSummary.highest_risk_department || '—')} />
               <StatCard label="Highest-risk role" value={String(execSummary.highest_risk_role || '—')} />
               <StatCard label="Top risk driver" value={String(execSummary.top_risk_driver || '—')} />
@@ -164,8 +185,8 @@ export default function DashboardPage() {
             </div>
             <div className="panelHint" style={{ marginTop: 12 }}>
               {Number(execSummary.high_risk_employees || 0) === 0
-                ? 'Risk is moderate overall. Use priority rank to review the highest watchlist employees first.'
-                : 'Retainly found a priority watchlist for supportive HR review.'}
+                ? 'No employees are currently tagged for immediate attention. Use priority rank to review the next highest risk groups.'
+                : 'Retainly found employees tagged for immediate attention. Review them first with supportive HR context.'}
             </div>
           </SectionCard>
           <SectionCard title="Top 3 actions" subtitle="Action priorities only.">

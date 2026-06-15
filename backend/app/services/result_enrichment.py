@@ -262,7 +262,7 @@ def build_executive_summary(*, df: pd.DataFrame, target_col: str | None, results
         "Do not use this output as the sole basis for employment decisions."
     )
 
-    high_risk_employees = len([row for row in employee_risk if str(row.get("risk_band")) in {"High", "Critical"}])
+    urgent_review_employees = len([row for row in employee_risk if str(row.get("priority_level")) == "Urgent review"])
     highest_department = next((segment.get("group") for segment in risk_segments if segment.get("segment_name") == "Department" and _is_valid_group_label(segment.get("group"))), None)
     highest_role = next((segment.get("group") for segment in risk_segments if segment.get("segment_name") == "JobRole" and _is_valid_group_label(segment.get("group"))), None)
     top_risk_driver = None
@@ -302,7 +302,7 @@ def build_executive_summary(*, df: pd.DataFrame, target_col: str | None, results
         "attrition_rate_in_top_20_percent": _safe_float(metrics.get("attrition_rate_in_top_20_percent")),
         "model_reliability_label": reliability,
         "fairness_risk": fairness_risk,
-        "high_risk_employees": high_risk_employees,
+        "high_risk_employees": urgent_review_employees,
         "highest_risk_department": highest_department,
         "highest_risk_role": highest_role,
         "top_risk_driver": top_risk_driver,

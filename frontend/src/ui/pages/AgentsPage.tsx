@@ -40,6 +40,12 @@ function summarizeAgent(name: string) {
       output: 'Employee risk scores, bands, and relative priority ranking.',
     };
   }
+  if (name === 'Insights Agent') {
+    return {
+      did: 'Converted risk scores into employee profiles, hotspots, action guidance, report content, and chatbot context.',
+      output: 'Action plan, report summary, and chatbot-ready context.',
+    };
+  }
   return {
     did: 'Converted risk scores into employee profiles, hotspots, action guidance, report content, and chatbot context.',
     output: 'Action plan, report summary, and chatbot-ready context.',
@@ -60,7 +66,7 @@ export default function AgentsPage() {
     const related = diagnostics.filter((item: any) => {
       const agent = String(item?.agent || '');
       if (name === 'Data Analyst Agent') return agent === 'Data Analyst Agent' || agent === 'Column Mapper Agent';
-      if (name === 'Insights Agent') return agent === 'Insights Agent' || agent === 'Fairness Auditor Agent';
+      if (name === 'Insights Agent') return agent === 'Insights Agent';
       return agent === name;
     });
     const started = related.find((item: any) => String(item?.status) === 'running')?.timestamp;
