@@ -103,13 +103,14 @@ export default function ChatPage() {
         'What hotspots were found?',
         'What should HR do first?',
         'Explain the action plan.',
+        'What does the report say?',
         'Can this be used for firing?',
       ]
     : [
         'What is Retainly?',
-        'How does the multi-agent workflow work?',
         'What kind of CSV should I upload?',
         'How is the model validated?',
+        'Can this be used for firing?',
       ];
 
   React.useEffect(() => {
@@ -160,7 +161,7 @@ export default function ChatPage() {
         </div>
         <div className={riskChip(fairness)}>Fairness: {String(fairness)}</div>
       </div>
-      <div className="card" style={{ marginBottom: 12 }}>
+      <div className="card chatIntroCard" style={{ marginBottom: 12 }}>
         <b>{hasValidResults ? 'Dataset-specific answers are available for the latest analysis.' : 'Ask general questions about Retainly, the workflow, datasets, validation, or how to use the app. Dataset-specific answers become available after analysis.'}</b>
       </div>
       <div className="chipRow" style={{ marginBottom: 12 }}>
@@ -172,7 +173,7 @@ export default function ChatPage() {
       </div>
       <div className="chat compact">
         <div className="chatLog">
-          {!msgs.length ? <div className="panelHint">Ask about employees, hotspots, actions, report findings, validation, or responsible use.</div> : null}
+          {!msgs.length ? <div className="chatStarter"><b>Start here</b><p>Ask about employees, hotspots, actions, report findings, validation, or responsible use.</p></div> : null}
           {msgs.map((m, i) => (
             <div className={`msg ${m.role}`} key={i}>
               <div className="who">{m.role === 'user' ? 'You' : 'Retainly'}</div>

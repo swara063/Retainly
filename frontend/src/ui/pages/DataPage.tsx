@@ -29,13 +29,16 @@ export default function DataPage() {
           <SectionCard key={index} title={String(item.title || `Action ${index + 1}`)} subtitle="Supportive HR action card">
             <div className="actionMetaRow">
               <span className={`priorityTag ${String(item.priority || 'Medium').toLowerCase() === 'high' ? 'high' : String(item.priority || 'Medium').toLowerCase() === 'medium' ? 'medium' : 'low'}`}>{String(item.priority || 'Medium')}</span>
-              <span className="muted tiny">Target group: {String(item.target_segment || 'Review highest-risk segments')}</span>
+              <div className="actionTitleBlock">
+                <div className="muted tiny">Target group</div>
+                <b>{String(item.target_segment || 'Review highest-risk segments')}</b>
+              </div>
             </div>
             <div className="actionCardGrid">
               <div className="actionField"><b>Why it matters</b><p>{String(item.reason || item.why_it_matters || 'Review this segment with HR context.')}</p></div>
               <div className="actionField"><b>Recommended action</b><p>{String(item.recommended_action || 'Use this recommendation as a supportive retention intervention.')}</p></div>
               <div className="actionField"><b>Timeline</b><p>{String(item.timeline || '30 days')}</p></div>
-              <div className="actionField"><b>Success metric</b><p>{String(item.success_metric || 'Fewer high-risk employees in the next review cycle.')}</p></div>
+              <div className="actionField"><b>Timeline & success metric</b><p>{String(item.success_metric || 'Fewer high-risk employees in the next review cycle.')}</p></div>
             </div>
           </SectionCard>
         ))}

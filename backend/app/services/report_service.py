@@ -334,6 +334,8 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
                 col_widths=[1.0 * inch, 0.85 * inch, 0.85 * inch, 0.7 * inch, 0.7 * inch, 0.8 * inch, 1.3 * inch, 1.7 * inch],
             )
         )
+        story.append(Spacer(1, 8))
+        story.append(_p("Priority rank is relative to this uploaded dataset. It is not the same as attrition probability.", small))
     else:
         story.append(_p("No employee-level priority list available.", small))
 

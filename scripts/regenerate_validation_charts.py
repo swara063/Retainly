@@ -56,8 +56,8 @@ def generate_topk_chart(df: pd.DataFrame) -> Path:
     recall_df = plot_df[["Recall @ top 10%", "Recall @ top 20%"]]
     lift_df = plot_df[["Lift @ top 10%", "Lift @ top 20%"]]
 
-    fig, axes = plt.subplots(1, 2, figsize=(9, 4.5), dpi=140)
-    recall_df.T.plot(kind="bar", ax=axes[0], width=0.72, color=["#94a3b8", "#4f46e5"])
+    fig, axes = plt.subplots(1, 2, figsize=(8.5, 4), dpi=150)
+    recall_df.T.plot(kind="bar", ax=axes[0], width=0.68, color=["#334155", "#4f46e5"])
     axes[0].set_title("Top-k recall")
     axes[0].set_ylabel("Average score")
     axes[0].set_xlabel("")
@@ -65,7 +65,7 @@ def generate_topk_chart(df: pd.DataFrame) -> Path:
     axes[0].legend(title="", loc="upper left")
     axes[0].set_ylim(0, max(0.1, float(recall_df.to_numpy().max()) * 1.25))
 
-    lift_df.T.plot(kind="bar", ax=axes[1], width=0.72, color=["#94a3b8", "#4f46e5"])
+    lift_df.T.plot(kind="bar", ax=axes[1], width=0.68, color=["#334155", "#4f46e5"])
     axes[1].set_title("Top-k lift")
     axes[1].set_ylabel("Average score")
     axes[1].set_xlabel("")
@@ -75,6 +75,7 @@ def generate_topk_chart(df: pd.DataFrame) -> Path:
     for ax in axes:
         for container in ax.containers:
             ax.bar_label(container, labels=[f"{bar.get_height():.2f}" for bar in container], padding=3, fontsize=8)
+        ax.tick_params(axis="x", labelrotation=0)
     plt.tight_layout()
     fig.savefig(TOPK_PNG, format="png")
     plt.close(fig)

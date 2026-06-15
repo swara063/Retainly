@@ -162,13 +162,20 @@ export default function DashboardPage() {
               <StatCard label="Top risk driver" value={String(execSummary.top_risk_driver || '—')} />
               <StatCard label="Data quality score" value={String(results.data_quality?.data_quality_score ?? '—')} />
             </div>
-            {Number(execSummary.high_risk_employees || 0) === 0 ? <div className="panelHint" style={{ marginTop: 12 }}>This dataset appears moderate-risk overall; review the highest-ranked Medium employees as a watchlist.</div> : null}
+            <div className="panelHint" style={{ marginTop: 12 }}>
+              {Number(execSummary.high_risk_employees || 0) === 0
+                ? 'This upload shows moderate absolute risk. Retainly has ranked the highest-watchlist employees and highlighted segments for supportive HR review.'
+                : 'This upload contains employees or segments needing prioritized retention support.'}
+            </div>
           </SectionCard>
           <SectionCard title="Top 3 actions" subtitle="Action priorities only.">
             <div className="grid one" style={{ marginTop: 12 }}>
               {topActions.map((item: any, index: number) => (
-                <div className="actionField" key={index}>
-                  <b>{item.title || `Action ${index + 1}`}</b>
+                <div className="actionCompactCard" key={index}>
+                  <div className="actionCompactHead">
+                    <b>{item.title || `Action ${index + 1}`}</b>
+                    <span className={`priorityTag ${String(item.priority || 'Medium').toLowerCase() === 'high' ? 'high' : String(item.priority || 'Medium').toLowerCase() === 'medium' ? 'medium' : 'low'}`}>{String(item.priority || 'Medium')}</span>
+                  </div>
                   <p><b>Target group:</b> {item.target_segment || 'Priority group'}</p>
                   <p><b>Recommended action:</b> {item.recommended_action || 'Plan a supportive HR intervention.'}</p>
                 </div>
