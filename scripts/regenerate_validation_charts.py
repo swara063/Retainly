@@ -38,6 +38,23 @@ def _approach_means(df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
     return grouped
 
 
+def _annotate_zero_markers(ax, values, x_positions, color, label):
+    for x_pos, value in zip(x_positions, values):
+        if abs(float(value)) < 1e-12:
+            ax.scatter([x_pos], [0], s=42, facecolors="white", edgecolors=color, linewidths=1.8, zorder=5)
+            ax.annotate(
+                f"{label}: 0.00",
+                xy=(x_pos, 0),
+                xytext=(0, 16),
+                textcoords="offset points",
+                ha="center",
+                va="bottom",
+                fontsize=8,
+                color=color,
+                arrowprops={"arrowstyle": "-", "color": color, "lw": 1},
+            )
+
+
 def generate_topk_chart(df: pd.DataFrame) -> Path:
     metric_columns = [
         "recall_at_top_10_percent",
@@ -56,26 +73,39 @@ def generate_topk_chart(df: pd.DataFrame) -> Path:
     recall_df = plot_df[["Recall @ top 10%", "Recall @ top 20%"]]
     lift_df = plot_df[["Lift @ top 10%", "Lift @ top 20%"]]
 
+    baseline_color = "#334155"
+    retainly_color = "#4f46e5"
     fig, axes = plt.subplots(1, 2, figsize=(8.5, 4), dpi=150)
-    recall_df.T.plot(kind="bar", ax=axes[0], width=0.68, color=["#334155", "#4f46e5"])
+
+    recall_plot = recall_df.T.plot(kind="bar", ax=axes[0], width=0.62, color=[baseline_color, retainly_color])
     axes[0].set_title("Top-k recall")
     axes[0].set_ylabel("Average score")
     axes[0].set_xlabel("")
     axes[0].grid(axis="y", alpha=0.2)
     axes[0].legend(title="", loc="upper left")
-    axes[0].set_ylim(0, max(0.1, float(recall_df.to_numpy().max()) * 1.25))
+    axes[0].set_ylim(0, max(0.12, float(recall_df.to_numpy().max()) * 1.28))
 
-    lift_df.T.plot(kind="bar", ax=axes[1], width=0.68, color=["#334155", "#4f46e5"])
+    lift_plot = lift_df.T.plot(kind="bar", ax=axes[1], width=0.62, color=[baseline_color, retainly_color])
     axes[1].set_title("Top-k lift")
     axes[1].set_ylabel("Average score")
     axes[1].set_xlabel("")
     axes[1].grid(axis="y", alpha=0.2)
     axes[1].legend([], [], frameon=False)
-    axes[1].set_ylim(0, max(0.1, float(lift_df.to_numpy().max()) * 1.18))
-    for ax in axes:
+    axes[1].set_ylim(0, max(0.12, float(lift_df.to_numpy().max()) * 1.20))
+
+    for ax, frame in [(axes[0], recall_df), (axes[1], lift_df)]:
         for container in ax.containers:
             ax.bar_label(container, labels=[f"{bar.get_height():.2f}" for bar in container], padding=3, fontsize=8)
         ax.tick_params(axis="x", labelrotation=0)
+        baseline_values = frame.loc["Baseline"].tolist()
+        retainly_values = frame.loc["Retainly"].tolist()
+        centers = [tick for tick in ax.get_xticks()]
+        baseline_x = [center - 0.155 for center in centers]
+        retainly_x = [center + 0.155 for center in centers]
+        _annotate_zero_markers(ax, baseline_values, baseline_x, baseline_color, "Baseline")
+        _annotate_zero_markers(ax, retainly_values, retainly_x, retainly_color, "Retainly")
+
+    fig.suptitle("Top-k prioritization metrics", fontsize=11, y=1.02)
     plt.tight_layout()
     fig.savefig(TOPK_PNG, format="png")
     plt.close(fig)
