@@ -64,6 +64,28 @@ def _display_scores_and_bands(scores: pd.Series) -> pd.DataFrame:
     )
 
 
+def _risk_fields_from_scores(raw_scores: pd.Series, display_scores: pd.Series | None = None) -> pd.DataFrame:
+    clean_raw = pd.to_numeric(raw_scores, errors="coerce").fillna(0.0).clip(0, 1)
+    clean_display = (
+        pd.to_numeric(display_scores, errors="coerce").reindex(clean_raw.index).fillna(clean_raw).clip(0, 1)
+        if display_scores is not None
+        else clean_raw
+    )
+    if clean_raw.empty:
+        return _display_scores_and_bands(clean_raw)
+    percentile = clean_display.rank(method="average", pct=True).clip(0, 1) * 100.0
+    return pd.DataFrame(
+        {
+            "raw_model_score": clean_raw.astype(float),
+            "risk_percentile": percentile.astype(float),
+            "display_risk_score": clean_display.astype(float),
+            "risk_band": clean_display.map(lambda value: _risk_band(float(value))),
+            "priority_tier": percentile.map(lambda value: _priority_tier(float(value))),
+        },
+        index=clean_raw.index,
+    )
+
+
 def detect_employee_identity_columns(df: pd.DataFrame) -> dict[str, str | None]:
     normalized = {c: str(c).lower().replace(" ", "").replace("_", "") for c in df.columns}
     id_candidates = ["employeeid", "empid", "employeenumber", "staffid", "workerid", "personid", "id"]
@@ -290,6 +312,7 @@ def build_employee_risk(
     pipeline: Any,
     top_features: list[dict[str, Any]] | None,
     precomputed_scores: list[float] | None = None,
+    display_scores: list[float] | None = None,
 ) -> list[dict[str, Any]]:
     if precomputed_scores is not None:
         scores = pd.Series(precomputed_scores).astype(float).clip(0, 1)
@@ -309,7 +332,7 @@ def build_employee_risk(
                 global_top.append(name)
     global_top = global_top[:5]
 
-    calibrated = _display_scores_and_bands(scores)
+    calibrated = _risk_fields_from_scores(scores, pd.Series(display_scores) if display_scores is not None else None)
     out: list[dict[str, Any]] = []
     for idx, score in scores.items():
         row_meta = calibrated.loc[idx]
@@ -344,6 +367,7 @@ def build_employee_risk_records(
     employee_id_column: str | None = None,
     employee_name_column: str | None = None,
     precomputed_scores: list[float] | None = None,
+    display_scores: list[float] | None = None,
 ) -> tuple[list[dict[str, Any]], list[str]]:
     identity = detect_employee_identity_columns(df)
     employee_id_column = employee_id_column or identity["employee_id_column"]
@@ -370,7 +394,7 @@ def build_employee_risk_records(
                 top_feature_names.append(name)
     top_feature_names = top_feature_names[:5]
 
-    calibrated = _display_scores_and_bands(scores)
+    calibrated = _risk_fields_from_scores(scores, pd.Series(display_scores) if display_scores is not None else None)
     records: list[dict[str, Any]] = []
     has_low_confidence = str(model_confidence_label or "").lower() in {"directional", "needs more data"}
     for idx, score in scores.items():

@@ -19,6 +19,7 @@ from app.services.result_enrichment import (
     build_retention_plan,
     build_risk_segments,
 )
+from app.services.pretrained_model_service import heuristic_risk_score
 from app.storage.local_store import dataset_path, mapping_path, result_path, progress_path, save_json, load_json, report_path
 
 class AttritionPipeline:
@@ -142,6 +143,14 @@ class AttritionPipeline:
             artifacts = context.get("model_artifacts") or {}
             pipe = artifacts.get("pipeline")
             precomputed_scores = artifacts.get("y_proba")
+            display_scores = None
+            if df is not None and results["dataset_mode"] == "unlabeled_scoring":
+                try:
+                    score_df = df.drop(columns=[target_col], errors="ignore") if target_col else df
+                    display_scores = [heuristic_risk_score(score_df.iloc[index]) for index in range(len(score_df))]
+                except Exception as exc:
+                    self.logger.add("DisplayRiskScore", "warning", f"Falling back to raw model score display: {exc}")
+                    display_scores = None
 
             if df is not None and pipe is not None:
                 try:
@@ -158,6 +167,7 @@ class AttritionPipeline:
                         pipeline=pipe,
                         top_features=((results.get("explainability") or {}).get("top_features") or []),
                         precomputed_scores=precomputed_scores,
+                        display_scores=display_scores,
                     )
                     results["employee_risk"] = employee_risk
                 except Exception as exc:
@@ -173,6 +183,7 @@ class AttritionPipeline:
                         top_features=((results.get("explainability") or {}).get("top_features") or []),
                         model_confidence_label=confidence_label,
                         precomputed_scores=precomputed_scores,
+                        display_scores=display_scores,
                     )
                     results["employee_risk_records"] = employee_records
                     if identifier_warnings:
