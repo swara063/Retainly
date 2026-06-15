@@ -72,6 +72,9 @@ def generate_topk_chart(df: pd.DataFrame) -> Path:
     axes[1].grid(axis="y", alpha=0.2)
     axes[1].legend([], [], frameon=False)
     axes[1].set_ylim(0, max(0.1, float(lift_df.to_numpy().max()) * 1.18))
+    for ax in axes:
+        for container in ax.containers:
+            ax.bar_label(container, labels=[f"{bar.get_height():.2f}" for bar in container], padding=3, fontsize=8)
     plt.tight_layout()
     fig.savefig(TOPK_PNG, format="png")
     plt.close(fig)

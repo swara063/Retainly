@@ -162,16 +162,15 @@ export default function DashboardPage() {
               <StatCard label="Top risk driver" value={String(execSummary.top_risk_driver || '—')} />
               <StatCard label="Data quality score" value={String(results.data_quality?.data_quality_score ?? '—')} />
             </div>
-            {Number(execSummary.high_risk_employees || 0) === 0 ? <div className="panelHint" style={{ marginTop: 12 }}>This dataset appears lower-risk overall; review Medium segment trends.</div> : null}
+            {Number(execSummary.high_risk_employees || 0) === 0 ? <div className="panelHint" style={{ marginTop: 12 }}>This dataset appears moderate-risk overall; review the highest-ranked Medium employees as a watchlist.</div> : null}
           </SectionCard>
           <SectionCard title="Top 3 actions" subtitle="Action priorities only.">
             <div className="grid one" style={{ marginTop: 12 }}>
               {topActions.map((item: any, index: number) => (
-                <div className="panelHint" key={index}>
-                  <b>{item.title || `Action ${index + 1}`}</b><br />
-                  <b>Target segment:</b> {item.target_segment || 'Priority group'}<br />
-                  <b>Why it matters:</b> {item.reason || item.why_it_matters || 'Review this segment with HR context.'}<br />
-                  <b>Recommended action:</b> {item.recommended_action || 'Plan a supportive HR intervention.'}
+                <div className="actionField" key={index}>
+                  <b>{item.title || `Action ${index + 1}`}</b>
+                  <p><b>Target group:</b> {item.target_segment || 'Priority group'}</p>
+                  <p><b>Recommended action:</b> {item.recommended_action || 'Plan a supportive HR intervention.'}</p>
                 </div>
               ))}
             </div>

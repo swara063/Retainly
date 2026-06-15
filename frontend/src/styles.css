@@ -240,8 +240,9 @@ details summary{ cursor: pointer; font-weight: 800; color:#334155; }
   display:flex;
   flex-direction:column;
   gap: 12px;
-  min-height: 340px;
+  min-height: 260px;
 }
+.chat.compact{ min-height: 260px; }
 .chatLog{
   flex: 1;
   overflow:auto;
@@ -249,8 +250,8 @@ details summary{ cursor: pointer; font-weight: 800; color:#334155; }
   border-radius: 18px;
   border: 1px solid rgba(15,23,42,.08);
   background: rgba(255,255,255,.65);
-  min-height: 220px;
-  max-height: 420px;
+  min-height: 160px;
+  max-height: 320px;
 }
 .msg{ display:flex; gap: 10px; margin: 10px 0; }
 .msg .who{ width: 78px; font-weight: 950; color:#22314f; }
@@ -485,6 +486,12 @@ li{ margin: 8px 0; color:#334155; }
 .priorityTag.high{ color:#7a2e2e; background: rgba(239,68,68,.10); border-color: rgba(239,68,68,.18); }
 .priorityTag.medium{ color:#7a4a10; background: rgba(245,158,11,.10); border-color: rgba(245,158,11,.18); }
 .priorityTag.low{ color:#14532d; background: rgba(34,197,94,.10); border-color: rgba(34,197,94,.18); }
+.actionMetaRow{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+.actionCardGrid{ display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:12px; }
+.actionField{ border: 1px solid rgba(15,23,42,.08); background: rgba(248,250,252,.9); border-radius: 16px; padding: 14px; }
+.actionField b{ display:block; margin-bottom:6px; }
+.actionField p{ margin:0; color:#334155; line-height:1.5; }
+.chipRow{ display:flex; gap:10px; flex-wrap:wrap; }
 .spotRow{
   display:flex;
   justify-content:space-between;
@@ -503,7 +510,7 @@ li{ margin: 8px 0; color:#334155; }
 @media (max-width: 980px){
   main{ padding: 18px; }
   .topActions{ flex-wrap: wrap; justify-content:flex-end; }
-  .heroNew, .grid.three, .grid.two, .metrics, .metricGrid, .grid.four, .summaryGrid{ grid-template-columns: 1fr; }
+  .heroNew, .grid.three, .grid.two, .metrics, .metricGrid, .grid.four, .summaryGrid, .actionCardGrid{ grid-template-columns: 1fr; }
   .agentTimeline{ grid-template-columns: 1fr; }
   h1{ font-size: 38px; }
 }

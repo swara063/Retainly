@@ -122,7 +122,7 @@ export default function EmployeesPage() {
           <h3>Employees ranked by retention risk</h3>
           <div style={{ overflowX: 'auto' }}>
             <table className="table">
-              <thead><tr><th>Employee</th><th>Department</th><th>Role</th><th>Risk</th><th>Band</th><th>Top factors</th></tr></thead>
+              <thead><tr><th>Employee</th><th>Department</th><th>Role</th><th>Risk score</th><th>Risk band</th><th>Priority rank</th><th>Top factors</th></tr></thead>
               <tbody>
                 {(explorer.records || []).length ? explorer.records.map((item: any) => (
                   <tr key={item.row_index} className={selected?.row_index === item.row_index ? 'selectedRow' : ''} onClick={() => setSelected(item)} style={{ cursor: 'pointer' }}>
@@ -131,9 +131,10 @@ export default function EmployeesPage() {
                     <td>{item.job_role || '—'}</td>
                     <td>{Number(item.risk_percent || 0).toFixed(0)}%</td>
                     <td><span className={`priorityTag ${toneForBand(item.risk_band)}`}>{item.risk_band}</span></td>
+                    <td>{item.priority_tier || '—'}</td>
                     <td>{(item.top_risk_factors || []).slice(0, 2).join('; ') || '—'}</td>
                   </tr>
-                )) : <tr><td colSpan={6}><Empty title="No matching employees found" text="Clear the search or filters to see the full ranking." /></td></tr>}
+                )) : <tr><td colSpan={7}><Empty title="No matching employees found" text="Clear the search or filters to see the full ranking." /></td></tr>}
               </tbody>
             </table>
           </div>
@@ -149,6 +150,7 @@ export default function EmployeesPage() {
                 <div className="statCard"><span>Department</span><b>{String(detail.employee?.department || '—')}</b></div>
                 <div className="statCard"><span>Role</span><b>{String(detail.employee?.job_role || '—')}</b></div>
                 <div className="statCard"><span>Risk score</span><b>{Number(detail.employee?.risk_percent || 0).toFixed(0)}%</b></div>
+                <div className="statCard"><span>Priority rank</span><b>{String(detail.employee?.priority_tier || '—')}</b></div>
               </div>
               <div className="panelHint"><b>Why this employee needs attention:</b> {detail.employee?.top_risk_factors?.join('; ') || 'Review with manager context.'}</div>
               <div className="panelHint"><b>Recommended HR support:</b> {detail.recommended_support_action}</div>

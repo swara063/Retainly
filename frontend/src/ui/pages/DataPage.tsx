@@ -26,17 +26,18 @@ export default function DataPage() {
       </div>
       <div className="grid one">
         {actionCards.map((item: any, index: number) => (
-          <div className="card" key={index}>
-            <div className="panelTitle">
-              <b>Priority {String(item.priority || 'Medium')}</b>
-              <div className="muted">Target group, why it matters, action, timeline, success metric</div>
+          <SectionCard key={index} title={String(item.title || `Action ${index + 1}`)} subtitle="Supportive HR action card">
+            <div className="actionMetaRow">
+              <span className={`priorityTag ${String(item.priority || 'Medium').toLowerCase() === 'high' ? 'high' : String(item.priority || 'Medium').toLowerCase() === 'medium' ? 'medium' : 'low'}`}>{String(item.priority || 'Medium')}</span>
+              <span className="muted tiny">Target group: {String(item.target_segment || 'Review highest-risk segments')}</span>
             </div>
-            <div className="panelHint"><b>Target group:</b> {String(item.target_segment || 'Review highest-risk segments')}</div>
-            <div className="panelHint"><b>Why it matters:</b> {String(item.reason || item.why_it_matters || 'Review this segment with HR context.')}</div>
-            <div className="panelHint"><b>Action:</b> {String(item.recommended_action || 'Use this recommendation as a supportive retention intervention.')}</div>
-            <div className="panelHint"><b>Timeline:</b> {String(item.timeline || '30 days')}</div>
-            <div className="panelHint"><b>Success metric:</b> {String(item.success_metric || 'Fewer high-risk employees in the next review cycle.')}</div>
-          </div>
+            <div className="actionCardGrid">
+              <div className="actionField"><b>Why it matters</b><p>{String(item.reason || item.why_it_matters || 'Review this segment with HR context.')}</p></div>
+              <div className="actionField"><b>Recommended action</b><p>{String(item.recommended_action || 'Use this recommendation as a supportive retention intervention.')}</p></div>
+              <div className="actionField"><b>Timeline</b><p>{String(item.timeline || '30 days')}</p></div>
+              <div className="actionField"><b>Success metric</b><p>{String(item.success_metric || 'Fewer high-risk employees in the next review cycle.')}</p></div>
+            </div>
+          </SectionCard>
         ))}
       </div>
     </PageShell>

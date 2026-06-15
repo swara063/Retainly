@@ -97,13 +97,27 @@ export default function ChatPage() {
   const [input, setInput] = React.useState('');
   const [sending, setSending] = React.useState(false);
   const [msgs, setMsgs] = React.useState<Msg[]>([]);
+  const suggestedQuestions = hasValidResults
+    ? [
+        'Which employees are most at risk?',
+        'What hotspots were found?',
+        'What should HR do first?',
+        'Explain the action plan.',
+        'Can this be used for firing?',
+      ]
+    : [
+        'What is Retainly?',
+        'How does the multi-agent workflow work?',
+        'What kind of CSV should I upload?',
+        'How is the model validated?',
+      ];
 
   React.useEffect(() => {
     setMsgs([]);
   }, [s.datasetId]);
 
-  async function send() {
-    const q = input.trim();
+  async function send(prefilled?: string) {
+    const q = (prefilled ?? input).trim();
     if (!q) return;
     setInput('');
     setMsgs((m) => [...m, { role: 'user', text: q }, { role: 'assistant', text: 'Thinking…' }]);
@@ -149,9 +163,16 @@ export default function ChatPage() {
       <div className="card" style={{ marginBottom: 12 }}>
         <b>{hasValidResults ? 'Dataset-specific answers are available for the latest analysis.' : 'Ask general questions about Retainly, the workflow, datasets, validation, or how to use the app. Dataset-specific answers become available after analysis.'}</b>
       </div>
-      <div className="chat">
+      <div className="chipRow" style={{ marginBottom: 12 }}>
+        {suggestedQuestions.map((question) => (
+          <button key={question} className="ghostToggle" type="button" onClick={() => send(question)} disabled={sending}>
+            {question}
+          </button>
+        ))}
+      </div>
+      <div className="chat compact">
         <div className="chatLog">
-          {!msgs.length ? <div className="panelHint">Ask about the current analysis, priority employees, departments needing attention, top actions, validation, or responsible use.</div> : null}
+          {!msgs.length ? <div className="panelHint">Ask about employees, hotspots, actions, report findings, validation, or responsible use.</div> : null}
           {msgs.map((m, i) => (
             <div className={`msg ${m.role}`} key={i}>
               <div className="who">{m.role === 'user' ? 'You' : 'Retainly'}</div>
@@ -164,10 +185,10 @@ export default function ChatPage() {
             className="chatInput"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={hasValidResults ? 'Ask about the current analysis' : 'Ask a general Retainly question'}
+            placeholder="Ask about employees, hotspots, actions, report findings, validation, or responsible use."
             onKeyDown={(e) => { if (e.key === 'Enter') send(); }}
           />
-          <button className="primary" onClick={send} disabled={sending}>Send</button>
+          <button className="primary" onClick={() => void send()} disabled={sending}>Send</button>
         </div>
       </div>
     </PageShell>

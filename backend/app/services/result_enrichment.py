@@ -18,37 +18,47 @@ def _safe_float(x: Any) -> float | None:
 
 
 def _risk_band(score: float) -> str:
-    if score >= 0.80:
+    if score >= 0.75:
         return "Critical"
-    if score >= 0.65:
+    if score >= 0.60:
         return "High"
     if score >= 0.35:
         return "Medium"
     return "Low"
 
 
+def _priority_tier(percentile: float) -> str:
+    if percentile >= 95.0:
+        return "Top 5%"
+    if percentile >= 80.0:
+        return "Top 20%"
+    if percentile >= 50.0:
+        return "Watchlist"
+    return "General"
+
+
 def _display_scores_and_bands(scores: pd.Series) -> pd.DataFrame:
     clean_scores = pd.to_numeric(scores, errors="coerce").fillna(0.0).clip(0, 1)
     if clean_scores.empty:
-        return pd.DataFrame({"raw_model_score": [], "risk_percentile": [], "display_risk_score": [], "risk_band": []})
-    percentile = clean_scores.rank(method="first", pct=True).clip(0, 1)
-    display_score = percentile
-
-    def band_for_percentile(value: float) -> str:
-        if value > 0.95:
-            return "Critical"
-        if value > 0.80:
-            return "High"
-        if value > 0.50:
-            return "Medium"
-        return "Low"
+        return pd.DataFrame(
+            {
+                "raw_model_score": [],
+                "risk_percentile": [],
+                "display_risk_score": [],
+                "risk_band": [],
+                "priority_tier": [],
+            }
+        )
+    percentile = clean_scores.rank(method="average", pct=True).clip(0, 1) * 100.0
+    display_score = clean_scores
 
     return pd.DataFrame(
         {
             "raw_model_score": clean_scores.astype(float),
             "risk_percentile": percentile.astype(float),
             "display_risk_score": display_score.astype(float),
-            "risk_band": percentile.map(lambda value: band_for_percentile(float(value))),
+            "risk_band": display_score.map(lambda value: _risk_band(float(value))),
+            "priority_tier": percentile.map(lambda value: _priority_tier(float(value))),
         },
         index=clean_scores.index,
     )
@@ -76,6 +86,11 @@ def _safe_display_value(value: Any) -> str | None:
         return None
     text = str(value).strip()
     return text or None
+
+
+def _is_valid_group_label(value: Any) -> bool:
+    text = str(value or "").strip()
+    return bool(text) and text.lower() not in {"nan", "none", "unknown"}
 
 
 def _plain_support_action(factors: list[str], band: str) -> str:
@@ -220,8 +235,8 @@ def build_executive_summary(*, df: pd.DataFrame, target_col: str | None, results
     )
 
     high_risk_employees = len([row for row in employee_risk if str(row.get("risk_band")) in {"High", "Critical"}])
-    highest_department = next((segment.get("group") for segment in risk_segments if segment.get("segment_name") == "Department"), None)
-    highest_role = next((segment.get("group") for segment in risk_segments if segment.get("segment_name") == "JobRole"), None)
+    highest_department = next((segment.get("group") for segment in risk_segments if segment.get("segment_name") == "Department" and _is_valid_group_label(segment.get("group"))), None)
+    highest_role = next((segment.get("group") for segment in risk_segments if segment.get("segment_name") == "JobRole" and _is_valid_group_label(segment.get("group"))), None)
     top_risk_driver = None
     if isinstance(top_features, list) and top_features:
         first = top_features[0]
@@ -312,6 +327,7 @@ def build_employee_risk(
                 "raw_model_score": float(row_meta["raw_model_score"]),
                 "risk_percentile": float(row_meta["risk_percentile"]),
                 "risk_band": str(row_meta["risk_band"]),
+                "priority_tier": str(row_meta["priority_tier"]),
                 "top_risk_factors": top_risk_factors,
             }
         )
@@ -402,6 +418,7 @@ def build_employee_risk_records(
                 "risk_percentile": float(row_meta["risk_percentile"]),
                 "risk_percent": float(row_meta["display_risk_score"] * 100.0),
                 "risk_band": risk_band,
+                "priority_tier": str(row_meta["priority_tier"]),
                 "top_risk_factors": factors[:5],
                 "protective_factors": protective_factors[:5],
                 "recommended_support_action": _plain_support_action(factors, risk_band),
@@ -522,11 +539,12 @@ def build_retention_plan(
     def pick_segment(names: list[str], fallback: str) -> str:
         for name in names:
             for seg in segs_sorted:
-                if str(seg.get("segment_name", "")).lower() == name.lower():
+                if str(seg.get("segment_name", "")).lower() == name.lower() and _is_valid_group_label(seg.get("group")):
                     return f"{seg.get('segment_name')} = {seg.get('group')}"
         if segs_sorted:
-            seg = segs_sorted[0]
-            return f"{seg.get('segment_name')} = {seg.get('group')}"
+            for seg in segs_sorted:
+                if _is_valid_group_label(seg.get("group")):
+                    return f"{seg.get('segment_name')} = {seg.get('group')}"
         return fallback
 
     def pick_segment_with_group(segment_name: str, matcher, fallback: str) -> str:
@@ -534,6 +552,8 @@ def build_retention_plan(
             if str(seg.get("segment_name", "")).lower() != segment_name.lower():
                 continue
             group_value = str(seg.get("group") or "")
+            if not _is_valid_group_label(group_value):
+                continue
             if matcher(group_value):
                 return f"{seg.get('segment_name')} = {seg.get('group')}"
         return fallback
