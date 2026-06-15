@@ -8,11 +8,6 @@ const charts = [
     explanation: 'Compares baseline models and Retainly on Accuracy, Precision, Recall, F1, ROC-AUC, and PR-AUC. For attrition, Recall, F1, and PR-AUC are especially important because leavers are usually the minority class.',
   },
   {
-    title: 'Top-k prioritization metrics',
-    src: 'https://raw.githubusercontent.com/swara063/Retainly/main/research_outputs/dataset_comparison_topk_metrics.png',
-    explanation: 'Shows how well each approach identifies actual leavers within the highest-risk employee groups. This matters because HR teams usually act on a prioritized risk list.',
-  },
-  {
     title: 'Final decision-support score',
     src: 'https://raw.githubusercontent.com/swara063/Retainly/main/research_outputs/dataset_comparison_final_score.png',
     explanation: 'Combines predictive performance with platform capabilities such as explainability, responsible-AI review, employee prioritization, and HR action planning.',
