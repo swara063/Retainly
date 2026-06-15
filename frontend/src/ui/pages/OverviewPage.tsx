@@ -79,27 +79,30 @@ export default function OverviewPage() {
 
   return (
     <PageShell title="Hotspots" subtitle="Risk concentration by department, role, workload, satisfaction, and tenure.">
-      <div className="pageHeader">
-        <div>
-          <h2>Hotspots</h2>
-          <p className="muted">Segment-level retention risk only.</p>
+      <div className="hotspotPage">
+        <div className="pageHeader">
+          <div>
+            <h2>Hotspots</h2>
+            <p className="muted">Segment-level retention risk only.</p>
+          </div>
         </div>
-      </div>
-      <div className="grid two">
-        <SectionCard title="Department hotspots" subtitle="Average risk, team size, why it matters, and supportive HR response.">
-          <div className="hotspotList">{departments.length ? departments.map((r: any) => <HotspotCard key={`${r.segment_name}-${r.group}`} item={r} />) : <Empty text="No department hotspot data available." />}</div>
-        </SectionCard>
-        <SectionCard title="Role hotspots" subtitle="Role-level concentration and recommended supportive follow-up.">
-          <div className="hotspotList">{roles.length ? roles.map((r: any) => <HotspotCard key={`${r.segment_name}-${r.group}`} item={r} />) : <Empty text="No role hotspot data available." />}</div>
-        </SectionCard>
-      </div>
-      <div className="grid two" style={{ marginTop: 16 }}>
-        <SectionCard title="Workload / overtime patterns" subtitle="Patterns derived from overtime or workload-related groupings.">
-          <div className="hotspotList">{workloadPatterns.length ? workloadPatterns.map((item: any) => <HotspotCard key={`${item.segment_name}-${item.group}`} item={item} />) : <Empty text="No workload or overtime pattern available." />}</div>
-        </SectionCard>
-        <SectionCard title="Satisfaction / tenure patterns" subtitle="Experience patterns that help explain where retention support is concentrated.">
-          <div className="hotspotList">{experiencePatterns.length ? experiencePatterns.map((item: any) => <HotspotCard key={`${item.segment_name}-${item.group}`} item={item} />) : <div className="panelHint">Review the segment groupings above to understand where retention support is concentrated.</div>}</div>
-        </SectionCard>
+        <div className="panelHint hotspotIntro">Each panel below is a separate hotspot section. Review them independently: department, role, workload, and tenure/satisfaction.</div>
+        <div className="grid two">
+          <SectionCard title="Department hotspots" subtitle="Average risk, team size, why it matters, and supportive HR response.">
+            <div className="hotspotList">{departments.length ? departments.map((r: any) => <HotspotCard key={`${r.segment_name}-${r.group}`} item={r} />) : <Empty text="No department hotspot data available." />}</div>
+          </SectionCard>
+          <SectionCard title="Role hotspots" subtitle="Role-level concentration and recommended supportive follow-up.">
+            <div className="hotspotList">{roles.length ? roles.map((r: any) => <HotspotCard key={`${r.segment_name}-${r.group}`} item={r} />) : <Empty text="No role hotspot data available." />}</div>
+          </SectionCard>
+        </div>
+        <div className="grid two">
+          <SectionCard title="Workload / overtime patterns" subtitle="Patterns derived from overtime or workload-related groupings.">
+            <div className="hotspotList">{workloadPatterns.length ? workloadPatterns.map((item: any) => <HotspotCard key={`${item.segment_name}-${item.group}`} item={item} />) : <Empty text="No workload or overtime pattern available." />}</div>
+          </SectionCard>
+          <SectionCard title="Satisfaction / tenure patterns" subtitle="Experience patterns that help explain where retention support is concentrated.">
+            <div className="hotspotList">{experiencePatterns.length ? experiencePatterns.map((item: any) => <HotspotCard key={`${item.segment_name}-${item.group}`} item={item} />) : <div className="panelHint">Review the segment groupings above to understand where retention support is concentrated.</div>}</div>
+          </SectionCard>
+        </div>
       </div>
     </PageShell>
   );

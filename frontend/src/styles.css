@@ -530,6 +530,8 @@ li{ margin: 8px 0; color:#334155; }
 .actionCompactCard p{ margin: 6px 0 0; color:#334155; line-height: 1.5; }
 .chipRow{ display:flex; gap:10px; flex-wrap:wrap; }
 .hotspotList{ display:grid; gap: 16px; }
+.hotspotPage{ display:flex; flex-direction:column; gap: 16px; }
+.hotspotIntro{ margin: 0; }
 .hotspotCard{
   border: 1px solid rgba(15,23,42,.08);
   background: linear-gradient(180deg, rgba(255,255,255,.84), rgba(248,250,255,.72));
@@ -544,6 +546,7 @@ li{ margin: 8px 0; color:#334155; }
   align-items:flex-start;
   justify-content:space-between;
   gap: 12px;
+  flex-wrap: wrap;
 }
 .hotspotHead h4{ margin:0 0 4px; font-size: 17px; letter-spacing: -.2px; }
 .hotspotMetaGrid{
@@ -673,6 +676,7 @@ li{ margin: 8px 0; color:#334155; }
   gap: 12px;
 }
 .sectionCard{ width: 100%; }
+.hotspotPage .sectionCard{ height: 100%; }
 .sectionCardHeader{ margin-bottom: 10px; }
 .emptyState{
   display:flex;
