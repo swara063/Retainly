@@ -17,12 +17,8 @@ export default function OverviewPage() {
   const topRiskSegments = Array.isArray(s.results.risk_segments) ? [...s.results.risk_segments].sort((a, b) => Number(b.average_predicted_risk || 0) - Number(a.average_predicted_risk || 0)) : [];
   const departments = topRiskSegments.filter((r: any) => String(r.segment_name) === 'Department').slice(0, 5);
   const roles = topRiskSegments.filter((r: any) => String(r.segment_name) === 'JobRole').slice(0, 5);
-  const patterns = [
-    { label: 'Overtime', value: topRiskSegments.find((r: any) => /over/i.test(String(r.group || '')))?.group },
-    { label: 'Job satisfaction', value: topRiskSegments.find((r: any) => /satisfaction/i.test(String(r.group || '')))?.group },
-    { label: 'Tenure', value: topRiskSegments.find((r: any) => /year|tenure/i.test(String(r.group || '')))?.group },
-    { label: 'Work-life balance', value: topRiskSegments.find((r: any) => /work.?life/i.test(String(r.group || '')))?.group },
-  ].filter((item) => item.value);
+  const workloadPatterns = topRiskSegments.filter((r: any) => String(r.segment_name) === 'OverTime').slice(0, 3);
+  const experiencePatterns = topRiskSegments.filter((r: any) => ['JobSatisfaction', 'YearsAtCompany'].includes(String(r.segment_name))).slice(0, 4);
 
   return (
     <PageShell title="Hotspots" subtitle="Risk concentration by department, role, workload, satisfaction, and tenure.">
@@ -45,11 +41,11 @@ export default function OverviewPage() {
       <div className="grid two" style={{ marginTop: 16 }}>
         <div className="card">
           <h3>Workload / overtime patterns</h3>
-          {patterns.length ? patterns.map((item) => <div className="panelHint" key={item.label}><b>{item.label}:</b> {String(item.value)}</div>) : <Empty text="No workload or overtime pattern available." />}
+          {workloadPatterns.length ? workloadPatterns.map((item: any) => <div className="panelHint" key={`${item.segment_name}-${item.group}`}><b>{item.segment_name}:</b> {String(item.group)} — {Math.round(Number(item.average_predicted_risk || 0) * 100)}%</div>) : <Empty text="No workload or overtime pattern available." />}
         </div>
         <div className="card">
           <h3>Satisfaction / tenure patterns</h3>
-          <div className="panelHint">Review the segment groupings above to understand where retention support is concentrated.</div>
+          {experiencePatterns.length ? experiencePatterns.map((item: any) => <div className="panelHint" key={`${item.segment_name}-${item.group}`}><b>{item.segment_name}:</b> {String(item.group)} — {Math.round(Number(item.average_predicted_risk || 0) * 100)}%</div>) : <div className="panelHint">Review the segment groupings above to understand where retention support is concentrated.</div>}
         </div>
       </div>
     </PageShell>

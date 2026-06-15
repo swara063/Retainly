@@ -58,12 +58,14 @@ class AttritionPipeline:
         def write_progress(index: int, status: str, message: str = ""):
             total = len(steps)
             current = steps[min(index, total - 1)] if total else ("Pipeline", "")
+            if status == "completed":
+                current = ("Completed", "Analysis completed")
             payload = {
                 "dataset_id": self.dataset_id,
                 "status": status,
-                "percent": int(round((index / max(total, 1)) * 100)),
+                "percent": 100 if status == "completed" else int(round((index / max(total, 1)) * 100)),
                 "current_agent": current[0],
-                "current_step": message or current[1],
+                "current_step": "Analysis completed" if status == "completed" else (message or current[1]),
                 "elapsed_seconds": 0,
                 "estimated_total_seconds": 0,
                 "estimated_remaining_seconds": 0,
@@ -208,6 +210,18 @@ class AttritionPipeline:
                 except Exception as exc:
                     self.logger.add("DataQuality", "failed", str(exc))
                     results["data_quality"] = {"error": str(exc)}
+                try:
+                    exec_summary = build_executive_summary(df=df, target_col=target_col, results=results)
+                    results["executive_summary"] = exec_summary
+                    results["employee_risk_high_count"] = int(exec_summary.get("high_risk_employees") or 0)
+                except Exception as exc:
+                    self.logger.add("ExecutiveSummaryRefresh", "failed", str(exc))
+                if isinstance(results.get("retention_plan"), list):
+                    results["recommendations"] = [
+                        item.get("recommended_action") or item.get("title")
+                        for item in results["retention_plan"]
+                        if isinstance(item, dict) and (item.get("recommended_action") or item.get("title"))
+                    ][:8]
                 check_timeout("Responsible-use review")
             elif df is not None:
                 results["executive_summary"] = {

@@ -211,7 +211,8 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
 
     retention_plan = results.get("retention_plan") or []
     dq = results.get("data_quality") or {}
-    leaderboard = []
+    leaderboard = model.get("leaderboard") or []
+    employee_records = [record for record in (results.get("employee_risk_records") or []) if isinstance(record, dict)]
 
     story: list[Any] = []
 
@@ -298,7 +299,7 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
 
     # 4) Retention Action Plan
     story.append(section_rule)
-    story.append(_p("Retention Action Plan", h1))
+    story.append(_p("What HR Should Do Next", h1))
     if isinstance(retention_plan, list) and retention_plan:
         for a in retention_plan[:8]:
             if not isinstance(a, dict):
@@ -309,90 +310,97 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
     else:
         story.append(_p("No retention plan available. Run analysis to generate action recommendations.", small))
 
-    # 5) Research comparison
-    research = results.get("research_comparison") or model.get("research_comparison") or {}
+    # 5) Employee Priority Summary
     story.append(section_rule)
-    story.append(_p("Baseline vs Retainly Agent Workflow", h1))
-    if isinstance(research, dict) and research:
-        base = ((research.get("baseline") or {}).get("metrics") or {})
-        retainly = ((research.get("retainly_multi_agent") or {}).get("metrics") or {})
-        deltas = research.get("metric_deltas") or {}
-        rows = []
-        for key, label in [
-            ("recall", "Recall"),
-            ("f1", "F1"),
-            ("roc_auc", "ROC-AUC"),
-            ("pr_auc", "PR-AUC"),
-            ("recall_at_top_20_percent", "Recall @ top 20%"),
-        ]:
-            rows.append([label, _fmt_num(base.get(key)), _fmt_num(retainly.get(key)), _fmt_num(deltas.get(key))])
-        story.append(_table(["Metric", "Plain baseline", "Retainly agents", "Lift"], rows, col_widths=[1.6 * inch, 1.2 * inch, 1.2 * inch, 0.9 * inch]))
-        if research.get("verdict"):
-            story.append(Spacer(1, 8))
-            story.append(_p(f"<b>Interpretation:</b> {research.get('verdict')}", body))
-        if isinstance(research.get("agent_contributions"), list):
-            for item in research.get("agent_contributions", [])[:5]:
-                if isinstance(item, dict):
-                    story.append(_p(f"<b>{item.get('agent')}:</b> {item.get('contribution')}", small))
+    story.append(_p("Employee Priority Summary", h1))
+    if employee_records:
+        top_records = sorted(employee_records, key=lambda row: (float(row.get("risk_score") or 0), float(row.get("risk_percentile") or 0)), reverse=True)[:10]
+        story.append(
+            _table(
+                ["Employee", "Department", "Role", "Risk band", "Top factors", "Suggested support action"],
+                [
+                    [
+                        row.get("display_label") or row.get("employee_name") or row.get("employee_id"),
+                        row.get("department") or "—",
+                        row.get("job_role") or "—",
+                        row.get("risk_band") or "—",
+                        "; ".join((row.get("top_risk_factors") or [])[:2]) or "—",
+                        row.get("recommended_support_action") or "—",
+                    ]
+                    for row in top_records
+                ],
+                col_widths=[1.2 * inch, 1.0 * inch, 1.0 * inch, 0.8 * inch, 1.6 * inch, 2.2 * inch],
+            )
+        )
     else:
-        story.append(_p("Run analysis to generate baseline-vs-agent comparison evidence.", small))
+        story.append(_p("No employee-level priority list available.", small))
 
-    llm = results.get("llm_insights") or {}
-    if isinstance(llm, dict) and llm.get("summary"):
-        story.append(Spacer(1, 10))
-        story.append(_p("LLM HR Narrative", h2))
-        story.append(_p(str(llm.get("summary")), body))
-
-    # 5) Model & Method Notes
+    # 6) Model & Method Notes
     story.append(section_rule)
     story.append(_p("Model & Method Notes", h1))
-    story.append(_p("Metrics", h2))
-    metric_rows = [
-        ("Selected model", selected_model),
-        ("Risk capture rate", _fmt_num(recall)),
-        ("Review efficiency", _fmt_num(metrics.get("precision"))),
-        ("F1 balance score", _fmt_num(f1)),
-        ("Ranking quality", _fmt_num(roc_auc)),
-        ("Attrition detection quality", _fmt_num(pr_auc)),
-        ("Top 10% risk capture", _fmt_num(metrics.get("recall_at_top_10_percent"))),
-        ("Top 20% risk capture", _fmt_num(metrics.get("recall_at_top_20_percent"))),
-        ("Attrition rate in top 10%", _fmt_pct(metrics.get("attrition_rate_in_top_10_percent"))),
-        ("Attrition rate in top 20%", _fmt_pct(metrics.get("attrition_rate_in_top_20_percent"))),
-        ("Class balance (test positive rate)", _fmt_pct(((metrics.get("class_balance") or {}).get("test") or {}).get("positive_rate"))),
-    ]
-    story.append(_kv_table(metric_rows, col_widths=[2.6 * inch, 3.6 * inch]))
+    if can_evaluate_model:
+        story.append(_p("Metrics", h2))
+        metric_rows = [
+            ("Selected model", selected_model),
+            ("Risk capture rate", _fmt_num(recall)),
+            ("Review efficiency", _fmt_num(metrics.get("precision"))),
+            ("F1 balance score", _fmt_num(f1)),
+            ("Ranking quality", _fmt_num(roc_auc)),
+            ("Attrition detection quality", _fmt_num(pr_auc)),
+            ("Top 10% risk capture", _fmt_num(metrics.get("recall_at_top_10_percent"))),
+            ("Top 20% risk capture", _fmt_num(metrics.get("recall_at_top_20_percent"))),
+            ("Attrition rate in top 10%", _fmt_pct(metrics.get("attrition_rate_in_top_10_percent"))),
+            ("Attrition rate in top 20%", _fmt_pct(metrics.get("attrition_rate_in_top_20_percent"))),
+            ("Class balance (test positive rate)", _fmt_pct(((metrics.get("class_balance") or {}).get("test") or {}).get("positive_rate"))),
+        ]
+        story.append(_kv_table(metric_rows, col_widths=[2.6 * inch, 3.6 * inch]))
+    else:
+        story.append(
+            _kv_table(
+                [
+                    ("Mode", "Unlabeled HR risk scoring"),
+                    ("Model basis", model_trust.get("model_basis") or "Pretrained Retainly attrition-risk model"),
+                    ("Output", "Directional risk ranking, hotspots, action plan, and employee prioritization"),
+                    ("Validation", "Benchmark validation is maintained separately in the Validation page and notebook."),
+                    ("Suitable use", model_trust.get("suitable_use") or "Retention planning and supportive HR outreach"),
+                    ("Not suitable for", model_trust.get("not_suitable_for") or "Automatic employment decisions"),
+                ],
+                col_widths=[2.4 * inch, 3.8 * inch],
+            )
+        )
 
     calib_warning = ((metrics.get("calibration") or {}).get("warning") if isinstance(metrics, dict) else None)
-    if calib_warning:
+    if calib_warning and can_evaluate_model:
         story.append(Spacer(1, 8))
         story.append(_p(f"<b>Calibration note:</b> {calib_warning} This does not invalidate the model; it just means probability scores should be read as approximate.", muted))
 
-    story.append(Spacer(1, 10))
-    story.append(_p("Confusion matrix (test set)", h2))
-    cm = model.get("confusion_matrix")
-    if isinstance(cm, list) and cm and isinstance(cm[0], list):
-        try:
-            cm_rows = [[str(x) for x in r] for r in cm]
-            cm_table = _table(["Pred 0", "Pred 1"], cm_rows, col_widths=[1.0 * inch, 1.0 * inch])
-            story.append(cm_table)
-        except Exception:
+    if can_evaluate_model:
+        story.append(Spacer(1, 10))
+        story.append(_p("Confusion matrix (test set)", h2))
+        cm = model.get("confusion_matrix")
+        if isinstance(cm, list) and cm and isinstance(cm[0], list):
+            try:
+                cm_rows = [[str(x) for x in r] for r in cm]
+                cm_table = _table(["Pred 0", "Pred 1"], cm_rows, col_widths=[1.0 * inch, 1.0 * inch])
+                story.append(cm_table)
+            except Exception:
+                story.append(_p("Confusion matrix will appear when the selected model returns matrix output.", small))
+        else:
             story.append(_p("Confusion matrix will appear when the selected model returns matrix output.", small))
-    else:
-        story.append(_p("Confusion matrix will appear when the selected model returns matrix output.", small))
 
-    story.append(Spacer(1, 10))
-    story.append(_p("Leaderboard (HR score ordering)", h2))
-    if isinstance(leaderboard, list) and leaderboard:
-        rows = []
-        for m in leaderboard[:6]:
-            if not isinstance(m, dict):
-                continue
-            rows.append([m.get("model_type"), _fmt_num(m.get("recall")), _fmt_num(m.get("pr_auc")), _fmt_num(m.get("roc_auc")), _fmt_num(m.get("f1"))])
-        story.append(_table(["Model", "Recall", "PR-AUC", "ROC-AUC", "F1"], rows, col_widths=[1.5 * inch, 0.9 * inch, 0.9 * inch, 0.9 * inch, 0.7 * inch]))
-    else:
-        story.append(_p("Model leaderboard will appear when multiple model summaries are returned.", small))
+        story.append(Spacer(1, 10))
+        story.append(_p("Leaderboard (HR score ordering)", h2))
+        if isinstance(leaderboard, list) and leaderboard:
+            rows = []
+            for m in leaderboard[:6]:
+                if not isinstance(m, dict):
+                    continue
+                rows.append([m.get("model_type"), _fmt_num(m.get("recall")), _fmt_num(m.get("pr_auc")), _fmt_num(m.get("roc_auc")), _fmt_num(m.get("f1"))])
+            story.append(_table(["Model", "Recall", "PR-AUC", "ROC-AUC", "F1"], rows, col_widths=[1.5 * inch, 0.9 * inch, 0.9 * inch, 0.9 * inch, 0.7 * inch]))
+        else:
+            story.append(_p("Model leaderboard will appear when multiple model summaries are returned.", small))
 
-    # 6) Explainability
+    # 7) Explainability
     story.append(_p("Explainability", h1))
     top_feats = (explain.get("top_features") or []) if isinstance(explain, dict) else []
     story.append(_p("Top predictive features", h2))
@@ -409,10 +417,23 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
             )
             rows.append([feat, _fmt_num(abs(float(imp)) if imp is not None else None), interpretation])
         story.append(_table(["Feature", "Importance", "Plain-English interpretation"], rows, col_widths=[1.7 * inch, 0.8 * inch, 3.5 * inch]))
-    else:
+    elif can_evaluate_model:
         story.append(_p("No explainability output available.", small))
+    else:
+        story.append(_p("Top signals are expressed in employee factors, segment hotspots, and action priorities rather than technical model diagnostics.", small))
 
-    # 7) Fairness & Responsible AI
+    # 8) Agent Workflow
+    story.append(section_rule)
+    story.append(_p("Agent Workflow", h1))
+    workflow_rows = [
+        ["Project Manager Agent", "Orchestrates the workflow, validates completion, and tracks stages."],
+        ["Data Analyst Agent", "Checks data quality and profiles departments, roles, workload, satisfaction, and tenure patterns."],
+        ["ML Engineer Agent", "Loads the pretrained Retainly model and scores employee risk for website analysis."],
+        ["Insights Agent", "Converts risk scores into employee profiles, hotspots, actions, report content, and chatbot context."],
+    ]
+    story.append(_table(["Agent", "Role in website analysis"], workflow_rows, col_widths=[2.0 * inch, 4.9 * inch]))
+
+    # 9) Fairness & Responsible AI
     story.append(section_rule)
     story.append(_p("Fairness & Responsible AI", h1))
     audited = (fairness.get("audited_attributes") or fairness.get("attributes") or []) if isinstance(fairness, dict) else []
@@ -433,7 +454,7 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
         )
     )
 
-    # 8) Appendix
+    # 10) Appendix
     story.append(section_rule)
     story.append(_p("Appendix", h1))
     story.append(_p("Dataset quality warnings", h2))

@@ -110,35 +110,28 @@ class InsightsAgent(BaseAgent):
         if top_features:
             top = top_features[0]["feature"]
             insights.append(f"Key driver (most predictive feature): {top}.")
-            recs.append(f"Action: investigate what is driving changes in {top} and whether HR policy/process improvements can address it.")
+            recs.append(f"Action: investigate what is driving changes in {top} and turn the finding into a targeted HR intervention.")
         metrics = model.get("metrics") or {}
         insights.append(f"Model basis: {model_label}.")
         if metrics:
             insights.extend(self._metric_sentence(metrics))
         else:
             insights.append("Risk scoring was generated from the pretrained attrition-risk workflow.")
-        if float(metrics.get("recall") or 0.0) < 0.70 and metrics:
-            recs.append("Action: treat risk scores as directional screening, validate with HR context, and improve data quality/features over time.")
-        else:
-            recs.append("Action: use risk flags to prioritize retention conversations and check-ins; avoid automated decisions.")
+        recs.append("Action: prioritize stay interviews and manager check-ins for the highest-risk employees and teams.")
         fairness = context.get("fairness", {})
         if fairness.get("overall_risk") in ["Moderate", "High"]:
             insights.append(f"Fairness audit: {fairness['overall_risk']} risk detected (group-level gaps present).")
-            recs.append("Action: review group-wise error rates, validate data quality for sensitive attributes, and include fairness safeguards in any downstream process.")
+            recs.append("Action: review group-level differences before scaling interventions and confirm that actions stay supportive and equitable.")
         else:
             insights.append("No severe group-level bias was detected in the available audit attributes.")
         eda = context.get("eda", {})
         target_dist = eda.get("target_distribution", {})
         if target_dist:
             insights.append(f"Attrition distribution in your data: {target_dist}.")
-        recs.append("Action: combine model signals with manager context, workload, compensation bands, and engagement feedback; measure outcomes of interventions.")
-        recs.append("Action: set up a monthly monitoring loop (drift + fairness + performance) so the model stays trustworthy over time.")
         llm_brief = _generate_llm_hr_brief(context)
         context["llm_insights"] = llm_brief
         if llm_brief.get("summary"):
             insights.append(f"LLM HR narrative: {llm_brief['summary']}")
-        elif llm_brief.get("status") == "not_configured":
-            insights.append("LLM HR narrative not generated because GROQ_API_KEY is not configured.")
         context["insights"] = insights
         context["recommendations"] = recs
         self.log("completed", "Insight generation completed.")

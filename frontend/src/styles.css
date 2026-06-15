@@ -240,8 +240,7 @@ details summary{ cursor: pointer; font-weight: 800; color:#334155; }
   display:flex;
   flex-direction:column;
   gap: 12px;
-  height: calc(100vh - 240px);
-  min-height: 520px;
+  min-height: 340px;
 }
 .chatLog{
   flex: 1;
@@ -250,6 +249,8 @@ details summary{ cursor: pointer; font-weight: 800; color:#334155; }
   border-radius: 18px;
   border: 1px solid rgba(15,23,42,.08);
   background: rgba(255,255,255,.65);
+  min-height: 220px;
+  max-height: 420px;
 }
 .msg{ display:flex; gap: 10px; margin: 10px 0; }
 .msg .who{ width: 78px; font-weight: 950; color:#22314f; }

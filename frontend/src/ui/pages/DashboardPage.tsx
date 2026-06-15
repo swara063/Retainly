@@ -62,7 +62,14 @@ export default function DashboardPage() {
             if (data?.status === 'failed') throw new Error(data?.error || 'Analysis failed on the backend.');
             if (data?.status === 'completed') {
               const missingEmployeeRisk = !Array.isArray(data?.employee_risk);
-              set((p) => ({ ...p, results: data, modelTrust: data?.model_trust || p.modelTrust, phase: 'completed', error: missingEmployeeRisk ? 'Analysis completed but employee risk results are missing. Please check backend output.' : '' }));
+              set((p) => ({
+                ...p,
+                results: data,
+                modelTrust: data?.model_trust || p.modelTrust,
+                phase: 'completed',
+                progress: { ...(p.progress || {}), status: 'completed', percent: 100, current_agent: 'Completed', current_step: 'Analysis completed' },
+                error: missingEmployeeRisk ? 'Analysis completed but employee risk results are missing. Please check backend output.' : '',
+              }));
               completed = true;
               break;
             }
@@ -87,6 +94,8 @@ export default function DashboardPage() {
   const hasUploadedDataset = Boolean(s.datasetId);
   const hasValidResults = s.phase === 'completed' && s.results?.status === 'completed' && Array.isArray(s.results?.employee_risk);
   const results = hasValidResults ? s.results : {};
+  const execSummary = (results as any).executive_summary || {};
+  const topActions = Array.isArray((results as any).retention_plan) ? (results as any).retention_plan.slice(0, 3) : [];
 
   return (
     <PageShell>
@@ -118,7 +127,7 @@ export default function DashboardPage() {
         {s.phase === 'uploading' ? <ProgressBar pct={s.uploadPct} label={`${s.uploadPct}% uploaded`} /> : null}
         {progress && progress.status && progress.status !== 'idle' ? <div style={{ marginTop: 12 }}><ProgressBar pct={Number(progress.percent || 0)} label={`${progress.current_agent || 'Running'} • ${progress.current_step || progress.status}`} /></div> : null}
         <div className="btnRow" style={{ marginTop: 12 }}>
-          <button className="primary" onClick={() => void analyze()} disabled={!s.file || s.loading}>Run Multi-Agent Analysis</button>
+          <button className="primary" onClick={() => void analyze()} disabled={!s.file || s.loading}>{hasValidResults ? 'Run analysis again' : 'Run Multi-Agent Analysis'}</button>
           <button onClick={() => void uploadCurrentFile()} disabled={!s.file || s.loading}>Re-upload</button>
         </div>
         {s.error ? <div className="panelError"><AlertTriangle size={16} /> {s.error}</div> : null}
@@ -147,14 +156,23 @@ export default function DashboardPage() {
           <SectionCard title="Command Center Summary" subtitle="High-level summary after analysis.">
             <div className="summaryGrid" style={{ marginTop: 12 }}>
               <StatCard label="Employees analyzed" value={String(s.rows ?? '—')} />
-              <StatCard label="High-risk employees" value={String((results.employee_risk || []).filter((r: any) => ['High', 'Critical'].includes(String(r.risk_band))).length || '—')} tone="warn" />
+              <StatCard label="Priority employees" value={String(execSummary.high_risk_employees ?? 0)} tone="warn" />
+              <StatCard label="Highest-risk department" value={String(execSummary.highest_risk_department || '—')} />
+              <StatCard label="Highest-risk role" value={String(execSummary.highest_risk_role || '—')} />
+              <StatCard label="Top risk driver" value={String(execSummary.top_risk_driver || '—')} />
               <StatCard label="Data quality score" value={String(results.data_quality?.data_quality_score ?? '—')} />
             </div>
+            {Number(execSummary.high_risk_employees || 0) === 0 ? <div className="panelHint" style={{ marginTop: 12 }}>This dataset appears lower-risk overall; review Medium segment trends.</div> : null}
           </SectionCard>
           <SectionCard title="Top 3 actions" subtitle="Action priorities only.">
             <div className="grid one" style={{ marginTop: 12 }}>
-              {(Array.isArray(results.recommendations) && results.recommendations.length ? results.recommendations.slice(0, 3) : []).map((item: string, index: number) => (
-                <div className="panelHint" key={index}>{item}</div>
+              {topActions.map((item: any, index: number) => (
+                <div className="panelHint" key={index}>
+                  <b>{item.title || `Action ${index + 1}`}</b><br />
+                  <b>Target segment:</b> {item.target_segment || 'Priority group'}<br />
+                  <b>Why it matters:</b> {item.reason || item.why_it_matters || 'Review this segment with HR context.'}<br />
+                  <b>Recommended action:</b> {item.recommended_action || 'Plan a supportive HR intervention.'}
+                </div>
               ))}
             </div>
           </SectionCard>

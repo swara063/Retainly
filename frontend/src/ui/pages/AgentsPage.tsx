@@ -23,6 +23,19 @@ export default function AgentsPage() {
         </div>
         <div className="chip">{s.hrTimeline?.length || 0} steps</div>
       </div>
+      <div className="grid two">
+        {[
+          ['Project Manager Agent', 'Orchestrates workflow, validates completion, and tracks stage progress.'],
+          ['Data Analyst Agent', 'Checks data quality and profiles departments, roles, workload, satisfaction, and tenure patterns.'],
+          ['ML Engineer Agent', 'Loads the pretrained Retainly model and scores employee risk for website analysis.'],
+          ['Insights Agent', 'Turns risk scores into employee profiles, hotspots, action plan, report content, and chatbot context.'],
+        ].map(([title, text]) => (
+          <div className="card" key={title}>
+            <h3>{title}</h3>
+            <div className="panelHint">{text}</div>
+          </div>
+        ))}
+      </div>
       <div className="card">
         <table className="table">
           <thead><tr><th>Step</th><th>Status</th><th>Message</th></tr></thead>

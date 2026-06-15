@@ -94,7 +94,7 @@ def _sanitize_numeric_series(series: pd.Series, default: Any = 0.0) -> pd.Series
     if pd.api.types.is_datetime64_any_dtype(series):
         numeric = _datetime_to_ordinal(series)
     else:
-        cleaned = series.replace(r"^\s*$", pd.NA, regex=True)
+        cleaned = series.astype("object").replace(r"^\s*$", pd.NA, regex=True)
         numeric = pd.to_numeric(cleaned, errors="coerce")
         if float(numeric.notna().mean() or 0.0) < 0.35:
             dt_numeric = _datetime_to_ordinal(cleaned)

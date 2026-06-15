@@ -27,6 +27,33 @@ def _risk_band(score: float) -> str:
     return "Low"
 
 
+def _display_scores_and_bands(scores: pd.Series) -> pd.DataFrame:
+    clean_scores = pd.to_numeric(scores, errors="coerce").fillna(0.0).clip(0, 1)
+    if clean_scores.empty:
+        return pd.DataFrame({"raw_model_score": [], "risk_percentile": [], "display_risk_score": [], "risk_band": []})
+    percentile = clean_scores.rank(method="first", pct=True).clip(0, 1)
+    display_score = percentile
+
+    def band_for_percentile(value: float) -> str:
+        if value > 0.95:
+            return "Critical"
+        if value > 0.80:
+            return "High"
+        if value > 0.50:
+            return "Medium"
+        return "Low"
+
+    return pd.DataFrame(
+        {
+            "raw_model_score": clean_scores.astype(float),
+            "risk_percentile": percentile.astype(float),
+            "display_risk_score": display_score.astype(float),
+            "risk_band": percentile.map(lambda value: band_for_percentile(float(value))),
+        },
+        index=clean_scores.index,
+    )
+
+
 def detect_employee_identity_columns(df: pd.DataFrame) -> dict[str, str | None]:
     normalized = {c: str(c).lower().replace(" ", "").replace("_", "") for c in df.columns}
     id_candidates = ["employeeid", "empid", "employeenumber", "staffid", "workerid", "personid", "id"]
@@ -166,6 +193,9 @@ def build_executive_summary(*, df: pd.DataFrame, target_col: str | None, results
     fairness_risk = (results.get("fairness") or {}).get("overall_risk", "—")
     model = results.get("model") or {}
     selected_model = model.get("selected_model") or "Retainly pretrained attrition-risk model"
+    employee_risk = results.get("employee_risk") or []
+    risk_segments = [segment for segment in (results.get("risk_segments") or []) if isinstance(segment, dict)]
+    top_features = (results.get("explainability") or {}).get("top_features") or []
 
     attrition_rate = None
     if target_col and target_col in df.columns:
@@ -189,6 +219,26 @@ def build_executive_summary(*, df: pd.DataFrame, target_col: str | None, results
         "Do not use this output as the sole basis for employment decisions."
     )
 
+    high_risk_employees = len([row for row in employee_risk if str(row.get("risk_band")) in {"High", "Critical"}])
+    highest_department = next((segment.get("group") for segment in risk_segments if segment.get("segment_name") == "Department"), None)
+    highest_role = next((segment.get("group") for segment in risk_segments if segment.get("segment_name") == "JobRole"), None)
+    top_risk_driver = None
+    if isinstance(top_features, list) and top_features:
+        first = top_features[0]
+        if isinstance(first, dict):
+            top_risk_driver = first.get("feature")
+    if not top_risk_driver:
+        record_factors: list[str] = []
+        for row in (results.get("employee_risk_records") or [])[:50]:
+            if isinstance(row, dict):
+                for factor in row.get("top_risk_factors") or []:
+                    if isinstance(factor, str) and factor.strip() and factor.strip() != "—":
+                        record_factors.append(factor.strip())
+        if record_factors:
+            counts = pd.Series(record_factors).value_counts()
+            if not counts.empty:
+                top_risk_driver = str(counts.index[0])
+
     return {
         "rows_analyzed": int(df.shape[0]),
         "columns_analyzed": int(df.shape[1]),
@@ -209,6 +259,10 @@ def build_executive_summary(*, df: pd.DataFrame, target_col: str | None, results
         "attrition_rate_in_top_20_percent": _safe_float(metrics.get("attrition_rate_in_top_20_percent")),
         "model_reliability_label": reliability,
         "fairness_risk": fairness_risk,
+        "high_risk_employees": high_risk_employees,
+        "highest_risk_department": highest_department,
+        "highest_risk_role": highest_role,
+        "top_risk_driver": top_risk_driver,
         "recommended_use": recommended_use,
         "confidence_summary": _confidence_summary(reliability, validation_note),
     }
@@ -240,8 +294,10 @@ def build_employee_risk(
                 global_top.append(name)
     global_top = global_top[:5]
 
+    calibrated = _display_scores_and_bands(scores)
     out: list[dict[str, Any]] = []
     for idx, score in scores.items():
+        row_meta = calibrated.loc[idx]
         top_risk_factors = []
         for col in global_top[:3]:
             if col in df.columns:
@@ -252,8 +308,10 @@ def build_employee_risk(
         out.append(
             {
                 "row_index": row_number,
-                "risk_score": float(score),
-                "risk_band": _risk_band(float(score)),
+                "risk_score": float(row_meta["display_risk_score"]),
+                "raw_model_score": float(row_meta["raw_model_score"]),
+                "risk_percentile": float(row_meta["risk_percentile"]),
+                "risk_band": str(row_meta["risk_band"]),
                 "top_risk_factors": top_risk_factors,
             }
         )
@@ -296,9 +354,11 @@ def build_employee_risk_records(
                 top_feature_names.append(name)
     top_feature_names = top_feature_names[:5]
 
+    calibrated = _display_scores_and_bands(scores)
     records: list[dict[str, Any]] = []
     has_low_confidence = str(model_confidence_label or "").lower() in {"directional", "needs more data"}
     for idx, score in scores.items():
+        row_meta = calibrated.loc[idx]
         row = df.iloc[int(idx)]
         dept_col = _find_column(df, ["department", "dept", "team", "businessunit", "function"])
         role_col = _find_column(df, ["jobrole", "role", "position", "designation", "title"])
@@ -322,7 +382,7 @@ def build_employee_risk_records(
                 protective_factors.append(label)
             elif label.lower().startswith("competitive compensation") and any("monthlyincome" in str(c).lower().replace(" ", "").replace("_", "") and _safe_float(row.get(c)) is not None and _safe_float(row.get(c)) >= np.nanmedian(pd.to_numeric(df[c], errors="coerce")) for c in df.columns if pd.api.types.is_numeric_dtype(df[c])):
                 protective_factors.append(label)
-        risk_band = _risk_band(float(score))
+        risk_band = str(row_meta["risk_band"])
         raw_fields = _safe_raw_fields(row, [c for c in [employee_id_column, employee_name_column, dept_col, role_col] if c] + top_feature_names[:3])
         if has_low_confidence:
             ethical_note = "Use as directional guidance. Use for supportive retention outreach, not punitive action."
@@ -337,8 +397,10 @@ def build_employee_risk_records(
                 "display_label": display_label if employee_id_column or employee_name_column else f"Row {row_number + 1}",
                 "department": dept_value,
                 "job_role": role_value,
-                "risk_score": float(score),
-                "risk_percent": float(score * 100.0),
+                "risk_score": float(row_meta["display_risk_score"]),
+                "raw_model_score": float(row_meta["raw_model_score"]),
+                "risk_percentile": float(row_meta["risk_percentile"]),
+                "risk_percent": float(row_meta["display_risk_score"] * 100.0),
                 "risk_band": risk_band,
                 "top_risk_factors": factors[:5],
                 "protective_factors": protective_factors[:5],
@@ -467,6 +529,15 @@ def build_retention_plan(
             return f"{seg.get('segment_name')} = {seg.get('group')}"
         return fallback
 
+    def pick_segment_with_group(segment_name: str, matcher, fallback: str) -> str:
+        for seg in segs_sorted:
+            if str(seg.get("segment_name", "")).lower() != segment_name.lower():
+                continue
+            group_value = str(seg.get("group") or "")
+            if matcher(group_value):
+                return f"{seg.get('segment_name')} = {seg.get('group')}"
+        return fallback
+
     fairness_note = "Use for supportive retention planning, not punitive individual decisions. Review fairness signals before acting."
     if isinstance(fairness_risk, str) and "low" in fairness_risk.lower():
         fairness_note = "Continue fairness monitoring and focus actions on workplace support, not sensitive identity attributes."
@@ -475,7 +546,7 @@ def build_retention_plan(
     candidates = [
         {
             "title": "Reduce burnout in workload-heavy teams",
-            "target_segment": pick_segment(["OverTime", "Department"], "Employees with sustained overtime"),
+            "target_segment": pick_segment_with_group("OverTime", lambda value: value.strip().lower() in {"yes", "true", "1"}, pick_segment(["Department"], "Employees with sustained overtime")),
             "reason": "Workload pressure is a common preventable reason for attrition." + driver_hint,
             "recommended_action": "Run manager-led workload reviews, rebalance staffing, and schedule stay interviews for affected teams.",
             "priority": "High",
@@ -508,7 +579,7 @@ def build_retention_plan(
         },
         {
             "title": "Improve satisfaction and engagement signals",
-            "target_segment": pick_segment(["JobSatisfaction", "WorkLifeBalance"], "Employees with low satisfaction or work-life balance"),
+            "target_segment": pick_segment_with_group("JobSatisfaction", lambda value: value.strip().lower() in {"low", "1", "2"}, pick_segment(["JobSatisfaction", "WorkLifeBalance"], "Employees with low satisfaction or work-life balance")),
             "reason": "Low satisfaction and poor work-life balance are actionable employee-experience signals.",
             "recommended_action": "Run a focused pulse survey, then address the top two pain points through manager coaching and policy/process cleanup.",
             "priority": "Medium",
@@ -519,7 +590,7 @@ def build_retention_plan(
         },
         {
             "title": "Strengthen early-tenure retention",
-            "target_segment": pick_segment(["YearsAtCompany"], "Early-tenure employees"),
+            "target_segment": pick_segment_with_group("YearsAtCompany", lambda value: value.strip().lower() in {"<1 year", "1–3 years"}, "Early-tenure employees"),
             "reason": "Early-tenure exits are often preventable with onboarding support and quicker manager feedback loops.",
             "recommended_action": "Add 30/60/90-day check-ins, buddy support, and structured manager feedback for early-tenure employees.",
             "priority": "Medium",
@@ -551,14 +622,14 @@ def build_retention_plan(
             "ethical_note": fairness_note,
         },
         {
-            "title": "Track retention outcomes monthly",
-            "target_segment": "All priority segments",
-            "reason": "A one-time model run is less useful than a recurring HR review loop.",
-            "recommended_action": "Create a monthly Retainly review with HRBPs: hotspots, interventions launched, fairness notes, and measured outcomes.",
+            "title": "Review commute and flexibility friction",
+            "target_segment": "Employees with long commute or low flexibility signals",
+            "reason": "Commute strain and rigid work patterns often push otherwise stable employees to explore alternatives.",
+            "recommended_action": "Check whether schedule flexibility, hybrid options, or location-support adjustments are possible for priority groups.",
             "priority": "Low",
-            "timeline": "Monthly",
-            "success_metric": "Monthly review completed and intervention outcomes tracked for each priority segment.",
-            "expected_business_impact": "Turns attrition analysis into a sustainable retention operating rhythm.",
+            "timeline": "3-6 weeks",
+            "success_metric": "Priority employees with commute-related risk receive a documented flexibility review.",
+            "expected_business_impact": "Improves retention in groups where friction is practical and quickly addressable.",
             "ethical_note": fairness_note,
         },
     ]

@@ -53,15 +53,25 @@ def generate_topk_chart(df: pd.DataFrame) -> Path:
         "lift_at_top_20_percent": "Lift @ top 20%",
     }
     plot_df = grouped.set_index("approach")[list(rename_map.keys())].rename(columns=rename_map)
+    recall_df = plot_df[["Recall @ top 10%", "Recall @ top 20%"]]
+    lift_df = plot_df[["Lift @ top 10%", "Lift @ top 20%"]]
 
-    fig, ax = plt.subplots(figsize=(8, 4), dpi=140)
-    plot_df.T.plot(kind="bar", ax=ax, width=0.72, color=["#94a3b8", "#4f46e5"])
-    ax.set_title("Top-k prioritization metrics")
-    ax.set_ylabel("Average score")
-    ax.set_xlabel("")
-    ax.grid(axis="y", alpha=0.2)
-    ax.legend(title="", loc="upper left")
-    ax.set_ylim(0, max(0.1, float(plot_df.to_numpy().max()) * 1.18))
+    fig, axes = plt.subplots(1, 2, figsize=(9, 4.5), dpi=140)
+    recall_df.T.plot(kind="bar", ax=axes[0], width=0.72, color=["#94a3b8", "#4f46e5"])
+    axes[0].set_title("Top-k recall")
+    axes[0].set_ylabel("Average score")
+    axes[0].set_xlabel("")
+    axes[0].grid(axis="y", alpha=0.2)
+    axes[0].legend(title="", loc="upper left")
+    axes[0].set_ylim(0, max(0.1, float(recall_df.to_numpy().max()) * 1.25))
+
+    lift_df.T.plot(kind="bar", ax=axes[1], width=0.72, color=["#94a3b8", "#4f46e5"])
+    axes[1].set_title("Top-k lift")
+    axes[1].set_ylabel("Average score")
+    axes[1].set_xlabel("")
+    axes[1].grid(axis="y", alpha=0.2)
+    axes[1].legend([], [], frameon=False)
+    axes[1].set_ylim(0, max(0.1, float(lift_df.to_numpy().max()) * 1.18))
     plt.tight_layout()
     fig.savefig(TOPK_PNG, format="png")
     plt.close(fig)

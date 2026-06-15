@@ -151,6 +151,7 @@ export default function ChatPage() {
       </div>
       <div className="chat">
         <div className="chatLog">
+          {!msgs.length ? <div className="panelHint">Ask about the current analysis, priority employees, departments needing attention, top actions, validation, or responsible use.</div> : null}
           {msgs.map((m, i) => (
             <div className={`msg ${m.role}`} key={i}>
               <div className="who">{m.role === 'user' ? 'You' : 'Retainly'}</div>
