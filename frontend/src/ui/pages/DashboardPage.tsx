@@ -117,6 +117,10 @@ export default function DashboardPage() {
   const results = hasValidResults ? s.results : {};
   const execSummary = (results as any).executive_summary || {};
   const topActions = Array.isArray((results as any).retention_plan) ? (results as any).retention_plan.slice(0, 3) : [];
+  const employeeRecords = Array.isArray((results as any).employee_risk_records) ? (results as any).employee_risk_records : [];
+  const urgentPriorityCount = employeeRecords.filter((record: any) => ['high priority', 'urgent review'].includes(String(record?.priority_level || '').toLowerCase())).length;
+  const watchlistPriorityCount = employeeRecords.filter((record: any) => String(record?.priority_level || '').toLowerCase() === 'watchlist').length;
+  const priorityWatchlistCount = urgentPriorityCount > 0 ? urgentPriorityCount : watchlistPriorityCount;
 
   return (
     <PageShell>
@@ -177,17 +181,18 @@ export default function DashboardPage() {
           <SectionCard title="Command Center Summary" subtitle="High-level summary after analysis.">
             <div className="summaryGrid" style={{ marginTop: 12 }}>
               <StatCard label="Employees analyzed" value={String(s.rows ?? '—')} />
-              <StatCard label="Immediate attention" value={String(execSummary.high_risk_employees ?? 0)} tone="warn" />
+              <StatCard label="Priority watchlist" value={String(priorityWatchlistCount)} tone="warn" />
               <StatCard label="Highest-risk department" value={String(execSummary.highest_risk_department || '—')} />
               <StatCard label="Highest-risk role" value={String(execSummary.highest_risk_role || '—')} />
               <StatCard label="Top risk driver" value={String(execSummary.top_risk_driver || '—')} />
               <StatCard label="Data quality score" value={String(results.data_quality?.data_quality_score ?? '—')} />
             </div>
             <div className="panelHint" style={{ marginTop: 12 }}>
-              {Number(execSummary.high_risk_employees || 0) === 0
-                ? 'No employees are currently tagged for immediate attention. Use priority rank to review the next highest risk groups.'
-                : 'Retainly found employees tagged for immediate attention. Review them first with supportive HR context.'}
+              {priorityWatchlistCount === 0
+                ? 'No employees are currently flagged for urgent review. Use priority rank to review the highest watchlist employees first.'
+                : 'Retainly found employees in the priority watchlist. Review them first with supportive HR context.'}
             </div>
+            <div className="panelHint" style={{ marginTop: 8 }}><b>How this is calculated:</b> Risk signal is a directional retention-risk score. Priority level is based on the risk signal band. Priority rank shows relative order within this upload and is not the same as attrition probability.</div>
           </SectionCard>
           <SectionCard title="Top 3 actions" subtitle="Action priorities only.">
             <div className="grid one" style={{ marginTop: 12 }}>

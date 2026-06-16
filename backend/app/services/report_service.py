@@ -21,7 +21,8 @@ def _p(text: str, style: ParagraphStyle) -> Paragraph:
 
 
 def _wrap_cell(value: Any, style: ParagraphStyle) -> Paragraph:
-    return _p("—" if value is None else str(value), style)
+    text = "Not available" if value is None or str(value).strip() in {"", "—"} else str(value)
+    return _p(text, style)
 
 
 def _kv_table(rows: list[tuple[str, Any]], *, col_widths: list[float], header: tuple[str, str] = ("Item", "Value")) -> Table:
@@ -54,8 +55,8 @@ def _kv_table(rows: list[tuple[str, Any]], *, col_widths: list[float], header: t
 
 def _table(headers: list[str], rows: list[list[Any]], *, col_widths: list[float]) -> Table:
     styles = getSampleStyleSheet()
-    head_style = ParagraphStyle("TableHeadCell", parent=styles["BodyText"], fontSize=9.2, leading=11, textColor=colors.white)
-    body_style = ParagraphStyle("TableBodyCell", parent=styles["BodyText"], fontSize=8.7, leading=10.5, textColor=colors.HexColor("#0F172A"))
+    head_style = ParagraphStyle("TableHeadCell", parent=styles["BodyText"], fontSize=8.4, leading=9.8, textColor=colors.white)
+    body_style = ParagraphStyle("TableBodyCell", parent=styles["BodyText"], fontSize=7.8, leading=9.5, textColor=colors.HexColor("#0F172A"), wordWrap="CJK")
     data = [[_p(str(h), head_style) for h in headers]]
     for r in rows:
         data.append([_wrap_cell(v, body_style) for v in r])
@@ -66,12 +67,14 @@ def _table(headers: list[str], rows: list[list[Any]], *, col_widths: list[float]
                 ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#0F172A")),
                 ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
                 ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-                ("FONTSIZE", (0, 0), (-1, 0), 9.5),
-                ("BOTTOMPADDING", (0, 0), (-1, 0), 9),
-                ("TOPPADDING", (0, 0), (-1, 0), 9),
+                ("FONTSIZE", (0, 0), (-1, 0), 8.4),
+                ("BOTTOMPADDING", (0, 0), (-1, 0), 7),
+                ("TOPPADDING", (0, 0), (-1, 0), 7),
                 ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#CBD5E1")),
                 ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#F8FAFC")]),
-                ("FONTSIZE", (0, 1), (-1, -1), 8.4),
+                ("FONTSIZE", (0, 1), (-1, -1), 7.8),
+                ("LEFTPADDING", (0, 0), (-1, -1), 5),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 5),
                 ("VALIGN", (0, 0), (-1, -1), "TOP"),
             ]
         )
@@ -262,14 +265,24 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
     story.append(_p("Top department risks", h2))
     dept_rows = _top_segments(results, "Department")
     if dept_rows:
+        dept_headers = ["Department", "Employees", "Avg risk signal", "Priority"]
+        dept_data = [
+            [r.get("group"), r.get("employee_count"), _fmt_num(r.get("average_predicted_risk")), r.get("priority")]
+            for r in dept_rows
+        ]
+        dept_widths = [2.4 * inch, 0.9 * inch, 1.2 * inch, 1.0 * inch]
+        if can_evaluate_model:
+            dept_headers.insert(2, "Attrition rate")
+            dept_data = [
+                [r.get("group"), r.get("employee_count"), _fmt_pct(r.get("attrition_rate")), _fmt_num(r.get("average_predicted_risk")), r.get("priority")]
+                for r in dept_rows
+            ]
+            dept_widths = [1.8 * inch, 0.8 * inch, 1.0 * inch, 1.2 * inch, 0.9 * inch]
         story.append(
             _table(
-                ["Department", "Employees", "Attrition rate", "Avg predicted risk", "Priority"],
-                [
-                    [r.get("group"), r.get("employee_count"), _fmt_pct(r.get("attrition_rate")), _fmt_num(r.get("average_predicted_risk")), r.get("priority")]
-                    for r in dept_rows
-                ],
-                col_widths=[1.6 * inch, 0.9 * inch, 1.1 * inch, 1.3 * inch, 0.9 * inch],
+                dept_headers,
+                dept_data,
+                col_widths=dept_widths,
             )
         )
     else:
@@ -279,14 +292,24 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
     story.append(_p("Top job-role risks", h2))
     role_rows = _top_segments(results, "JobRole")
     if role_rows:
+        role_headers = ["Job role", "Employees", "Avg risk signal", "Priority"]
+        role_data = [
+            [r.get("group"), r.get("employee_count"), _fmt_num(r.get("average_predicted_risk")), r.get("priority")]
+            for r in role_rows
+        ]
+        role_widths = [2.6 * inch, 0.9 * inch, 1.2 * inch, 1.0 * inch]
+        if can_evaluate_model:
+            role_headers.insert(2, "Attrition rate")
+            role_data = [
+                [r.get("group"), r.get("employee_count"), _fmt_pct(r.get("attrition_rate")), _fmt_num(r.get("average_predicted_risk")), r.get("priority")]
+                for r in role_rows
+            ]
+            role_widths = [2.0 * inch, 0.8 * inch, 1.0 * inch, 1.2 * inch, 0.9 * inch]
         story.append(
             _table(
-                ["Job role", "Employees", "Attrition rate", "Avg predicted risk", "Priority"],
-                [
-                    [r.get("group"), r.get("employee_count"), _fmt_pct(r.get("attrition_rate")), _fmt_num(r.get("average_predicted_risk")), r.get("priority")]
-                    for r in role_rows
-                ],
-                col_widths=[2.1 * inch, 0.8 * inch, 1.0 * inch, 1.3 * inch, 0.9 * inch],
+                role_headers,
+                role_data,
+                col_widths=role_widths,
             )
         )
     else:
@@ -298,15 +321,25 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
     for seg in ("OverTime", "JobSatisfaction", "YearsAtCompany"):
         pick = _top_segments(results, seg, limit=3)
         for r in pick:
-            pattern_rows.append([seg, r.get("group"), r.get("employee_count"), _fmt_pct(r.get("attrition_rate")), _fmt_num(r.get("average_predicted_risk")), r.get("priority")])
+            if can_evaluate_model:
+                pattern_rows.append([seg, r.get("group"), r.get("employee_count"), _fmt_pct(r.get("attrition_rate")), _fmt_num(r.get("average_predicted_risk")), r.get("priority")])
+            else:
+                pattern_rows.append([seg, r.get("group"), r.get("employee_count"), _fmt_num(r.get("average_predicted_risk")), r.get("priority")])
     if pattern_rows:
+        pattern_headers = ["Segment", "Group", "Employees", "Avg risk signal", "Priority"]
+        pattern_widths = [1.2 * inch, 2.0 * inch, 0.8 * inch, 1.2 * inch, 0.9 * inch]
+        if can_evaluate_model:
+            pattern_headers = ["Segment", "Group", "Employees", "Attrition rate", "Avg risk signal", "Priority"]
+            pattern_widths = [1.1 * inch, 1.6 * inch, 0.7 * inch, 0.9 * inch, 1.1 * inch, 0.8 * inch]
         story.append(
             _table(
-                ["Segment", "Group", "Employees", "Attrition rate", "Avg predicted risk", "Priority"],
+                pattern_headers,
                 pattern_rows,
-                col_widths=[1.2 * inch, 1.7 * inch, 0.8 * inch, 1.0 * inch, 1.2 * inch, 0.9 * inch],
+                col_widths=pattern_widths,
             )
         )
+    elif not can_evaluate_model:
+        story.append(_p("Label unavailable for this upload, so attrition-rate columns are omitted. Hotspots use directional risk signal instead.", small))
     else:
         story.append(_p("No overtime/satisfaction/tenure patterns available.", small))
 
@@ -333,18 +366,18 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
                 ["Employee", "Department", "Role", "Risk signal", "Priority level", "Priority rank", "Top factors", "Suggested support action"],
                 [
                     [
-                        row.get("display_label") or row.get("employee_name") or row.get("employee_id"),
-                        row.get("department") or "—",
-                        row.get("job_role") or "—",
+                        row.get("display_label") or row.get("employee_name") or row.get("employee_id") or "Employee row",
+                        row.get("department") or "Not available",
+                        row.get("job_role") or "Not available",
                         str(int(round(float(row.get("risk_score") or 0) * 100))),
                         row.get("priority_level") or _priority_level_label(row.get("risk_band")),
-                        row.get("priority_tier") or "—",
-                        "; ".join((row.get("top_risk_factors") or [])[:2]) or "—",
-                        row.get("recommended_support_action") or "—",
+                        row.get("priority_tier") or "Rank unavailable",
+                        "; ".join((row.get("top_risk_factors") or [])[:2]) or "Review with HR context",
+                        row.get("recommended_support_action") or "Plan supportive manager check-in",
                     ]
                     for row in top_records
                 ],
-                col_widths=[1.0 * inch, 0.85 * inch, 0.85 * inch, 0.7 * inch, 0.7 * inch, 0.8 * inch, 1.3 * inch, 1.7 * inch],
+                col_widths=[0.85 * inch, 0.75 * inch, 0.75 * inch, 0.55 * inch, 0.75 * inch, 0.65 * inch, 1.15 * inch, 1.45 * inch],
             )
         )
         story.append(Spacer(1, 8))
@@ -378,6 +411,7 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
                     ("Mode", "Unlabeled HR risk scoring"),
                     ("Model basis", model_trust.get("model_basis") or "Pretrained Retainly attrition-risk model"),
                     ("Output", "Directional risk ranking, hotspots, action plan, and employee prioritization"),
+                    ("Label availability", "Attrition labels were not available for this upload, so attrition-rate columns are omitted."),
                     ("Validation", "Benchmark validation is maintained separately in the Validation page and notebook."),
                     ("Suitable use", model_trust.get("suitable_use") or "Retention planning and supportive HR outreach"),
                     ("Not suitable for", model_trust.get("not_suitable_for") or "Automatic employment decisions"),
@@ -484,21 +518,18 @@ def build_pdf_report(dataset_id: str, results: dict) -> str:
 
     story.append(Spacer(1, 8))
     story.append(_p("Agent execution timeline (recent)", h2))
-    timeline = _agent_timeline(dataset_id)
+    timeline = _agent_timeline(dataset_id, limit=8)
     if timeline:
-        for l in timeline:
-            story.append(
-                _kv_table(
-                    [
-                        ("Timestamp", l.get("timestamp")),
-                        ("Agent", l.get("agent")),
-                        ("Status", l.get("status")),
-                        ("Message", l.get("message")),
-                    ],
-                    col_widths=[1.25 * inch, 5.35 * inch],
-                )
-            )
-            story.append(Spacer(1, 6))
+        timeline_rows = [
+            [
+                l.get("timestamp") or "Time unavailable",
+                l.get("agent") or "Agent",
+                l.get("status") or "Status unavailable",
+                l.get("message") or "Step completed",
+            ]
+            for l in timeline
+        ]
+        story.append(_table(["Time", "Agent", "Status", "Key step"], timeline_rows, col_widths=[1.35 * inch, 1.25 * inch, 0.85 * inch, 3.15 * inch]))
     else:
         story.append(_p("No agent timeline available.", small))
 
