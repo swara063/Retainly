@@ -1,0 +1,37 @@
+dataset,driver,importance
+employee_attrition_datasettrain,Monthly: Income,0.1492217564080306
+employee_attrition_datasettrain,Hourly: Rate,0.1349359754335537
+employee_attrition_datasettrain,Training hours last year,0.11091303161014285
+employee_attrition_datasettrain,Distance from home,0.08900288752473508
+employee_attrition_datasettrain,Work-life balance,0.04967760735837067
+employee_attrition_datasettrain,Absenteeism,0.047249297858876486
+employee_attrition_datasettrain,Years in current role,0.04463519147734387
+employee_attrition_datasettrain,Years at company,0.04338306827604128
+employee_attrition_datasettrain,Years since last promotion,0.03729172157756669
+employee_attrition_datasettrain,Job: Satisfaction,0.02777677911065695
+employee_attrition_datasettrain,Performance: Rating,0.022825787819615428
+employee_attrition_datasettrain,Relationship with Manager,0.01967982590168639
+ibm_hr_attrition,Job level,0.04052235272363104
+ibm_hr_attrition,Overtime: No,0.038758992681853704
+ibm_hr_attrition,Overtime: Yes,0.037085855401755116
+ibm_hr_attrition,Monthly income,0.036512402078494315
+ibm_hr_attrition,Job satisfaction,0.03634594144021649
+ibm_hr_attrition,Environment satisfaction,0.03625710644951453
+ibm_hr_attrition,Relationship Satisfaction,0.035814028168466655
+ibm_hr_attrition,Years with current manager,0.03135588362896994
+ibm_hr_attrition,Distance from home,0.029713129908191072
+ibm_hr_attrition,Years in current role,0.028116779632450593
+ibm_hr_attrition,Years at company,0.027741697926872515
+ibm_hr_attrition,Job role: Laboratory Technician,0.027188626544879805
+synthetic_employee_attrition_74498train,Job level: Senior,0.22554538568716123
+synthetic_employee_attrition_74498train,Remote work: Yes,0.09879298328943663
+synthetic_employee_attrition_74498train,Job level: Entry,0.09709454401100145
+synthetic_employee_attrition_74498train,Remote work: No,0.0750078678648951
+synthetic_employee_attrition_74498train,Work-life balance: Fair,0.06264886838385084
+synthetic_employee_attrition_74498train,Distance from home,0.05114141167509173
+synthetic_employee_attrition_74498train,Number of promotions,0.0504689606770617
+synthetic_employee_attrition_74498train,Work-life balance: Poor,0.04606402194379443
+synthetic_employee_attrition_74498train,Job level: Mid,0.03762353767902492
+synthetic_employee_attrition_74498train,Years at company,0.028465148642029762
+synthetic_employee_attrition_74498train,Work-life balance: Excellent,0.01575255738348487
+synthetic_employee_attrition_74498train,Monthly income,0.011645821534805673

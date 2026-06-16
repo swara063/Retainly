@@ -79,10 +79,6 @@ export default function AgentsPage() {
   return (
     <PageShell title="Agents" subtitle="Workflow timeline and collapsed diagnostics.">
       <div className="pageHeader">
-        <div>
-          <h2>Agents</h2>
-          <p className="muted">Workflow transparency only.</p>
-        </div>
         <div className="chip">{s.hrTimeline?.length || 0} steps</div>
       </div>
       <div className="grid two">

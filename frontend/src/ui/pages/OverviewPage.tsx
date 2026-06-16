@@ -80,12 +80,6 @@ export default function OverviewPage() {
   return (
     <PageShell title="Hotspots" subtitle="Risk concentration by department, role, workload, satisfaction, and tenure.">
       <div className="hotspotPage">
-        <div className="pageHeader">
-          <div>
-            <h2>Hotspots</h2>
-            <p className="muted">Segment-level retention risk only.</p>
-          </div>
-        </div>
         <div className="panelHint hotspotIntro">Each panel below is a separate hotspot section. Review them independently: department, role, workload, and tenure/satisfaction.</div>
         <div className="grid two">
           <SectionCard title="Department hotspots" subtitle="Average risk, team size, why it matters, and supportive HR response.">

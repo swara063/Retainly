@@ -1,0 +1,13 @@
+dataset,message
+employee_attrition_datasettrain,Project Manager Agent: created a repeatable validation workflow and tracked each stage.
+employee_attrition_datasettrain,"Data Analyst Agent: detected the attrition target, removed ID/leakage/sensitive fields, and prepared features."
+employee_attrition_datasettrain,ML Engineer Agent: compared 5 candidate models and selected Gradient Boosting at threshold 0.22.
+employee_attrition_datasettrain,"Insights Agent: generated drivers, HR actions, charts, and Fair Use Check status: Safe for supportive HR review."
+ibm_hr_attrition,Project Manager Agent: created a repeatable validation workflow and tracked each stage.
+ibm_hr_attrition,"Data Analyst Agent: detected the attrition target, removed ID/leakage/sensitive fields, and prepared features."
+ibm_hr_attrition,ML Engineer Agent: compared 5 candidate models and selected Extra Trees Balanced at threshold 0.34.
+ibm_hr_attrition,"Insights Agent: generated drivers, HR actions, charts, and Fair Use Check status: Safe for supportive HR review."
+synthetic_employee_attrition_74498train,Project Manager Agent: created a repeatable validation workflow and tracked each stage.
+synthetic_employee_attrition_74498train,"Data Analyst Agent: detected the attrition target, removed ID/leakage/sensitive fields, and prepared features."
+synthetic_employee_attrition_74498train,ML Engineer Agent: compared 5 candidate models and selected Gradient Boosting at threshold 0.34.
+synthetic_employee_attrition_74498train,"Insights Agent: generated drivers, HR actions, charts, and Fair Use Check status: Safe for supportive HR review."

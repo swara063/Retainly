@@ -17,12 +17,6 @@ export default function RunPage() {
 
   return (
     <PageShell title="Report" subtitle="Download and export options.">
-      <div className="pageHeader">
-        <div>
-          <h2>Report</h2>
-          <p className="muted">Download and export only.</p>
-        </div>
-      </div>
       <div className="card">
         <h3>Downloads</h3>
         <div className="btnRow" style={{ marginTop: 12 }}>

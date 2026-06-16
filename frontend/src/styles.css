@@ -233,6 +233,137 @@ h1{ font-size: 34px; margin: 4px 0 8px; letter-spacing: -1px; line-height: 1.12;
 .chip.mod{ border-color: rgba(245, 158, 11, .28); background: rgba(245, 158, 11, .10); color:#7a4a10; }
 .chip.low{ border-color: rgba(34, 197, 94, .25); background: rgba(34, 197, 94, .10); color:#14532d; }
 
+.validationLead{
+  margin: 0;
+  color:#334155;
+  line-height: 1.65;
+  max-width: 960px;
+  font-weight: 650;
+}
+.validationButtonGrid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.validationButton{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(15,23,42,.10);
+  background: rgba(255,255,255,.78);
+  color:#26344f;
+  text-decoration:none;
+  font-weight: 900;
+}
+.validationButton.primary{
+  color:white;
+  background: linear-gradient(135deg, #3155d4, #6d4ce8);
+  box-shadow: 0 14px 30px rgba(49, 85, 212, .22);
+}
+.validationButton small{
+  display:block;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 750;
+  color: inherit;
+  opacity: .82;
+}
+.validationCardGrid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.validationMiniCard{
+  border: 1px solid rgba(15,23,42,.08);
+  background: rgba(255,255,255,.65);
+  border-radius: 16px;
+  padding: 14px;
+}
+.validationMiniCard h4,
+.validationTables h4{
+  margin: 0 0 8px;
+  letter-spacing: -.2px;
+}
+.validationMiniCard p{
+  margin: 0;
+  color:#5b677a;
+  line-height: 1.5;
+}
+.validationMetricGrid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.validationMetric{
+  border: 1px solid rgba(15,23,42,.08);
+  background: rgba(255,255,255,.65);
+  border-radius: 16px;
+  padding: 14px;
+}
+.validationMetricTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 8px;
+}
+.validationMetricValues{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+  color:#5b677a;
+  font-size: 12px;
+  font-weight: 850;
+}
+.validationMetricValues strong{
+  display:block;
+  margin-top: 3px;
+  color:#0f172a;
+  font-size: 18px;
+}
+.validationChartWrap{
+  margin-top: 14px;
+  display:flex;
+  justify-content:center;
+}
+.validationChart{
+  width:100%;
+  max-width:760px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  display:block;
+  background:white;
+}
+.validationTextGrid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.validationTextGrid p{
+  margin: 0;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(15,23,42,.08);
+  background: rgba(255,255,255,.62);
+  color:#334155;
+  line-height: 1.55;
+}
+.validationTables{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin-top: 14px;
+  overflow-x:auto;
+}
+
 details summary{ cursor: pointer; font-weight: 800; color:#334155; }
 .detailsBox{ margin-top: 10px; }
 
@@ -724,5 +855,5 @@ li{ margin: 8px 0; color:#334155; }
   .topActions{ justify-content:flex-start; flex-wrap: wrap; }
 }
 @media (max-width: 980px){
-  .heroNew, .grid.two, .grid.three, .metricGrid, .metrics, .agentTimeline{ grid-template-columns: 1fr; }
+  .heroNew, .grid.two, .grid.three, .metricGrid, .metrics, .agentTimeline, .validationButtonGrid, .validationCardGrid, .validationMetricGrid, .validationTextGrid{ grid-template-columns: 1fr; }
 }

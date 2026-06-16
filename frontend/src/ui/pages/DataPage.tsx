@@ -18,12 +18,6 @@ export default function DataPage() {
 
   return (
     <PageShell title="Action Plan" subtitle="Only HR action cards.">
-      <div className="pageHeader">
-        <div>
-          <h2>Action Plan</h2>
-          <p className="muted">Full HR action plan only.</p>
-        </div>
-      </div>
       <div className="grid one">
         {actionCards.map((item: any, index: number) => (
           <SectionCard key={index} title={String(item.title || `Action ${index + 1}`)} subtitle="Supportive HR action card">
